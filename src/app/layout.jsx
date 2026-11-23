@@ -51,6 +51,22 @@ export const metadata = {
     url: "https://volterasciences.com",
     siteName: "Voltera Sciences",
     type: "website",
+    images: [
+      {
+        url: "/brand/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Voltera Sciences - Premium Research Peptides",
+      },
+    ],
+  },
+
+  twitter: {
+    card: "summary_large_image",
+    title: "Voltera Sciences | Premium Research Peptides",
+    description:
+      "Purity. Precision. Performance. Premium research compounds by Voltera Sciences.",
+    images: ["/brand/og-image.png"],
   },
 };
 const headingFont = Russo_One({

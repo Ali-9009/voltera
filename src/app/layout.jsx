@@ -1,0 +1,88 @@
+import CartShell from "@/components/cart/CartShell";
+import FloatingCart from "@/components/FloatingCart";
+import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+import NewsletterPopup from "@/components/NewsletterPopup";
+import ResearcherGate from "@/components/ResearcherGate";
+
+import "@/styles/globals.css";
+
+import { DM_Sans, Russo_One } from "next/font/google";
+
+export const metadata = {
+  metadataBase: new URL("https://volterasciences.com"),
+
+  title: {
+    default: "Voltera Sciences | Premium Research Peptides",
+    template: "%s | Voltera Sciences",
+  },
+
+  description:
+    "Discover premium research peptides at Voltera Sciences. Explore laboratory-tested research compounds with independent third-party testing, verified purity, and COA documentation.",
+
+  applicationName: "Voltera Sciences",
+
+  keywords: [
+    "Voltera Sciences",
+    "Research Peptides",
+    "Premium Research Peptides",
+    "Laboratory Research",
+    "Research Compounds",
+    "Third-Party Tested Peptides",
+    "Certificate of Analysis",
+    "COA Verified Peptides",
+    "Scientific Research",
+    "Laboratory Tested Peptides",
+  ],
+
+  alternates: {
+    canonical: "/",
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+  },
+
+  openGraph: {
+    title: "Voltera Sciences | Premium Research Peptides",
+    description:
+      "Purity. Precision. Performance. Discover premium research compounds with independent third-party testing and verified COA documentation.",
+    url: "https://volterasciences.com",
+    siteName: "Voltera Sciences",
+    type: "website",
+  },
+};
+const headingFont = Russo_One({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-russo-one",
+  display: "swap",
+});
+
+const bodyFont = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-dm-sans",
+  display: "swap",
+});
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={`${headingFont.variable} ${bodyFont.variable}`}>
+      <body className="font-sans antialiased">
+        <CartShell>
+          <ResearcherGate />
+          <NewsletterPopup />
+          <FloatingCart />
+
+          <Header />
+
+          {children}
+
+          <Footer />
+        </CartShell>
+      </body>
+    </html>
+  );
+}

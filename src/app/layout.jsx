@@ -8,9 +8,11 @@ import ResearcherGate from "@/components/ResearcherGate";
 import "@/styles/globals.css";
 
 import { DM_Sans, Russo_One } from "next/font/google";
+const SITE_URL = "https://voltera-iota.vercel.app";
+const OG_IMAGE = `${SITE_URL}/brand/og-image.png`;
 
 export const metadata = {
-  metadataBase: new URL("https://volterasciences.com"),
+  metadataBase: new URL(SITE_URL),
 
   title: {
     default: "Voltera Sciences | Premium Research Peptides",
@@ -48,15 +50,17 @@ export const metadata = {
     title: "Voltera Sciences | Premium Research Peptides",
     description:
       "Purity. Precision. Performance. Discover premium research compounds with independent third-party testing and verified COA documentation.",
-    url: "https://volterasciences.com",
+    url: SITE_URL,
     siteName: "Voltera Sciences",
     type: "website",
+    locale: "en_US",
     images: [
       {
-        url: "/brand/og-image.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
         alt: "Voltera Sciences - Premium Research Peptides",
+        type: "image/png",
       },
     ],
   },
@@ -66,7 +70,18 @@ export const metadata = {
     title: "Voltera Sciences | Premium Research Peptides",
     description:
       "Purity. Precision. Performance. Premium research compounds by Voltera Sciences.",
-    images: ["/brand/og-image.png"],
+    images: [
+      {
+        url: OG_IMAGE,
+        width: 1200,
+        height: 630,
+        alt: "Voltera Sciences - Premium Research Peptides",
+      },
+    ],
+  },
+
+  icons: {
+    icon: "/favicon.ico",
   },
 };
 const headingFont = Russo_One({

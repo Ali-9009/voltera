@@ -25,18 +25,14 @@ function PromoItem({ promotion }) {
   return (
     <div className="flex shrink-0 items-center gap-5 pr-5 sm:gap-8 sm:pr-8 lg:gap-10 lg:pr-10">
       <div className="group flex shrink-0 items-center gap-3 sm:gap-4">
-        <span className="flex size-18 shrink-0 items-center justify-center rounded-xl border border-[#E8C77B]/30 bg-white/[0.07] transition-colors duration-300 group-hover:border-[#E8C77B]/60 group-hover:bg-white/10 sm:size-11">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-[#E8C77B]/30 bg-white/[0.07] transition-colors duration-300 group-hover:border-[#E8C77B]/60 group-hover:bg-white/10 sm:size-11">
           <lord-icon
             src={promotion.icon}
             trigger="loop(1500)"
             colors="primary:#E8C77B,secondary:#FFFFFF"
             stroke="regular"
             speed="0.8"
-            style={{
-              width: "37px",
-              height: "37px",
-              display: "block",
-            }}
+            className="h-7 w-7 sm:h-[34px] sm:w-[34px]"
             aria-hidden="true"
           />
         </span>

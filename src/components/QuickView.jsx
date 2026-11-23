@@ -121,7 +121,7 @@ export default function QuickView({ product, onClose }) {
           <X size={19} />
         </button>
 
-        <div className="grid gap-3 md:grid-cols-2">
+        <div className="grid md:grid-cols-2">
           <div className="border-primary/10 relative flex min-h-[280px] flex-col overflow-hidden rounded-[18px] border bg-[linear-gradient(145deg,#F7F9FD_0%,#EEF4FC_100%)] sm:min-h-[380px] md:min-h-[520px]">
             <div className="relative flex flex-1 items-center justify-center">
               {product.image ? (
@@ -159,15 +159,15 @@ export default function QuickView({ product, onClose }) {
                 {product.name}
               </h2>
 
-              <div className="mt-3 flex flex-wrap items-end gap-3">
-                <span className="font-heading text-primary text-[27px] leading-none sm:text-[25px]">
+              <div className="mt-2 flex flex-wrap items-end gap-3">
+                <span className="font-heading text-primary text-[22px] leading-none sm:text-[25px]">
                   {hasPrice ? formatMoney(unitPrice) : "—"}
                 </span>
               </div>
             </div>
 
-            <div className="border-primary/10 mt-3 border-t pt-3">
-              <div className="mb-3 flex items-center justify-between">
+            <div className="border-primary/10 mt-2 border-t pt-2">
+              <div className="mb-2 flex items-center justify-between">
                 <h3 className="text-primary font-sans text-[11px] font-bold tracking-[0.12em] uppercase">
                   Select Strength
                 </h3>
@@ -197,8 +197,8 @@ export default function QuickView({ product, onClose }) {
               </div>
             </div>
 
-            <div className="border-primary/10 mt-6 border-t pt-5">
-              <div className="mb-4 flex items-center justify-between gap-3">
+            <div className="border-primary/10 mt-3 border-t pt-2">
+              <div className="mb-2 flex items-center justify-between gap-3">
                 <div>
                   <h3 className="font-heading text-primary text-[16px]">
                     Bundle & Save
@@ -304,7 +304,7 @@ export default function QuickView({ product, onClose }) {
               </div>
             </div>
 
-            <div className="border-primary/10 mt-6 border-t pt-5">
+            <div className="border-primary/10 mt-3 border-t pt-3">
               <div className="flex w-full items-center gap-3">
                 <div className="border-primary/15 bg-primary-soft flex h-12 shrink-0 items-center rounded-full border px-1">
                   <button

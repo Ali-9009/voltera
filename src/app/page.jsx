@@ -107,7 +107,7 @@ export default function HomePage() {
                 </Link>
               </div>
 
-              <div className="mt-9 flex flex-wrap items-center justify-center gap-x-3 gap-y-4 sm:mt-11 sm:gap-x-5 lg:justify-start">
+              <div className="mt-9 hidden flex-wrap items-center justify-center gap-x-3 gap-y-4 sm:mt-11 sm:flex sm:gap-x-5 lg:justify-start">
                 {[
                   {
                     icon: ShieldCheck,

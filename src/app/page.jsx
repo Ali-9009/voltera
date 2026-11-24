@@ -106,22 +106,28 @@ export default function HomePage() {
 
               <div
                 data-hero-buttons
-                className="mt-7 flex flex-wrap items-center justify-center gap-3 lg:mt-8 lg:justify-start"
+                className="mt-7 flex flex-nowrap items-center justify-center gap-2 sm:gap-3 lg:mt-8 lg:justify-start"
               >
                 <Link
                   href="/shop"
-                  className="btn-hero-primary text-sm! sm:text-base!"
+                  className="btn-hero-primary h-10! min-w-0! gap-1.5! px-3! text-sm! whitespace-nowrap sm:h-12! sm:gap-3! sm:px-7! sm:text-base!"
                 >
                   Explore Collection
-                  <ArrowUpRight size={19} strokeWidth={2} />
+                  <ArrowUpRight
+                    strokeWidth={2}
+                    className="size-3.5 shrink-0 sm:size-[19px]"
+                  />
                 </Link>
 
                 <Link
                   href="/about"
-                  className="btn-hero-secondary border-accent-light/40! bg-primary-dark! text-sm! text-white! sm:text-base!"
+                  className="btn-hero-secondary border-accent-light/40! bg-primary-dark! h-10! min-w-0! gap-1.5! px-3! text-sm! whitespace-nowrap text-white! sm:h-12! sm:gap-3! sm:px-7! sm:text-base!"
                 >
                   Learn More
-                  <ArrowUpRight size={19} strokeWidth={1.8} />
+                  <ArrowUpRight
+                    strokeWidth={1.8}
+                    className="size-3.5 shrink-0 sm:size-[19px]"
+                  />
                 </Link>
               </div>
             </div>

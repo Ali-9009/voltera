@@ -208,39 +208,15 @@ export default function ResearchShowcase() {
   return (
     <section
       aria-labelledby="research-showcase-heading"
-      className="from-primary-soft to-primary-light/15 relative isolate overflow-hidden bg-linear-to-br via-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+      className="relative isolate overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8"
     >
-      <div
-        aria-hidden="true"
-        className="bg-primary-light/15 pointer-events-none absolute -top-40 -right-32 size-[550px] rounded-full blur-[120px]"
-      />
-
-      <div
-        aria-hidden="true"
-        className="bg-primary-light/10 pointer-events-none absolute -bottom-48 -left-32 size-[550px] rounded-full blur-[120px]"
-      />
-
-      <div
-        aria-hidden="true"
-        className="border-primary-light/15 pointer-events-none absolute top-1/4 -right-28 size-[450px] rounded-full border border-dashed"
-      />
-
-      <div
-        aria-hidden="true"
-        className="border-primary-light/10 pointer-events-none absolute bottom-10 -left-40 size-[420px] rounded-full border"
-      />
-
       <div className="relative mx-auto max-w-7xl">
         <header className="mx-auto max-w-[750px] text-center">
-         
-
           <h2
             id="research-showcase-heading"
             className="font-heading text-primary text-[clamp(28px,4.5vw,50px)] leading-[1.15] tracking-tight"
           >
-            Precision at
-         {" "}
-            <span className="text-secondary">Every Level.</span>
+            Precision at <span className="text-secondary">Every Level.</span>
           </h2>
 
           <p className="text-muted mx-auto mt-4 max-w-[580px] font-sans text-[13px] leading-[1.8] sm:text-[15px]">
@@ -268,8 +244,6 @@ export default function ResearchShowcase() {
         </div>
 
         <div className="relative mt-6 flex flex-col items-center gap-4 text-center lg:mt-8">
-         
-
           <Link href="/coa" className="btn-hero-primary">
             Explore COA Library
             <ArrowUpRight size={18} strokeWidth={1.8} />

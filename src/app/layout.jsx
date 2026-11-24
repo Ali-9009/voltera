@@ -9,7 +9,7 @@ import "@/styles/globals.css";
 
 import { DM_Sans, Russo_One } from "next/font/google";
 const SITE_URL = "https://voltera-iota.vercel.app";
-const OG_IMAGE = `${SITE_URL}/brand/og-image-v2.png`;
+const OG_IMAGE = `${SITE_URL}/brand/og-image-v3.png`;
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),

@@ -4,22 +4,20 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+
 import {
   Menu,
   X,
   Search,
   UserRound,
   ShoppingBag,
-  Sparkles,
   FlaskConical,
   ChevronRight,
-  Gift,
-  Tag,
-  Clock3,
 } from "lucide-react";
 
 import { useCart } from "@/context/CartContext";
 import HeaderSearch from "./HeaderSearch";
+import AnnouncementBar from "./AnnouncementBar";
 
 const navLinks = [
   { name: "Shop", href: "/shop" },
@@ -30,105 +28,6 @@ const navLinks = [
   { name: "Partner Program", href: "/partner-program" },
   { name: "Track Order", href: "/track-order" },
 ];
-
-import Marquee from "react-fast-marquee";
-
-function AnnouncementBar() {
-  const announcements = [
-    {
-      icon: Sparkles,
-      label: "EARLY BLACK FRIDAY SALE",
-      highlight: true,
-    },
-    {
-      icon: Gift,
-      label: "BUY ONE, GET ONE FREE",
-      description: "ON SELECT ITEMS",
-    },
-    {
-      icon: Tag,
-      label: "35% OFF",
-      description: "THE REST OF THE SITE",
-    },
-    {
-      icon: Clock3,
-      label: "SALE ENDS",
-      description: "MON, NOV 30 AT 11:59 PM PST",
-    },
-  ];
-
-  return (
-    <div className="bg-primary relative isolate w-full overflow-hidden py-3 text-white">
-      <div
-        aria-hidden="true"
-        className="from-primary-dark/50 to-primary-light/40 pointer-events-none absolute inset-0 bg-gradient-to-r via-transparent"
-      />
-
-      <div className="relative z-10">
-        <Marquee
-          speed={40}
-          gradient={false}
-          pauseOnHover
-          autoFill
-          className="overflow-hidden"
-        >
-          <div className="flex items-center">
-            {announcements.map((item, index) => {
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={`${item.label}-${index}`}
-                  className="flex shrink-0 items-center"
-                >
-                  <div className="flex items-center gap-2.5 px-6 sm:gap-3 sm:px-9">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10">
-                      <Icon
-                        size={14}
-                        strokeWidth={1.8}
-                        className="text-white"
-                        aria-hidden="true"
-                      />
-                    </span>
-
-                    <div className="flex items-center gap-2.5 whitespace-nowrap">
-                      <span
-                        className={`text-[10px] tracking-[0.07em] text-white sm:text-[11px] ${
-                          item.highlight
-                            ? "font-heading"
-                            : "font-sans font-bold"
-                        }`}
-                      >
-                        {item.label}
-                      </span>
-
-                      {item.description && (
-                        <span className="font-sans text-[10px] font-medium tracking-[0.035em] text-white/70 sm:text-[11px]">
-                          {item.description}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div
-                    aria-hidden="true"
-                    className="flex items-center gap-3 px-2"
-                  >
-                    <span className="h-px w-5 bg-white/20 sm:w-8" />
-
-                    <span className="h-1.5 w-1.5 rotate-45 border border-white/50 bg-white/20" />
-
-                    <span className="h-px w-5 bg-white/20 sm:w-8" />
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </Marquee>
-      </div>
-    </div>
-  );
-}
 
 function MobileSidebar({ open, onClose, pathname }) {
   useEffect(() => {
@@ -280,12 +179,12 @@ function MobileSidebar({ open, onClose, pathname }) {
 
 export default function Header() {
   const pathname = usePathname();
+
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
 
   const { openCart, itemCount, hydrated } = useCart();
-
   const cartCount = hydrated ? itemCount : 0;
 
   useEffect(() => {
@@ -295,9 +194,13 @@ export default function Header() {
 
     handleScroll();
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, {
+      passive: true,
+    });
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   useEffect(() => {
@@ -309,115 +212,117 @@ export default function Header() {
     <>
       <AnnouncementBar />
 
-      <header
-        className={`sticky top-0 z-50 w-full border-b transition-[background-color,backdrop-filter,box-shadow,border-color] duration-300 ${
-          scrolled
-            ? "border-primary/10 bg-white/95 shadow-[0_8px_30px_rgba(17,21,35,0.08)] backdrop-blur-xl"
-            : "border-primary/10 bg-white shadow-none"
-        }`}
-      >
-        <div
-          className={`mx-auto grid max-w-7xl grid-cols-[1fr_auto] items-center gap-4 px-4 transition-[padding] duration-300 sm:px-6 lg:grid-cols-[1fr_auto_1fr] lg:px-10 ${
-            scrolled ? "py-1" : "py-2"
-          }`}
-        >
-          <Link
-            href="/"
-            aria-label="Voltera Sciences home"
-            className="flex shrink-0 items-center"
+      <header className="sticky top-0 z-50 h-0 w-full">
+        <div className="px-3 pt-3 sm:px-5 lg:px-7">
+          <div
+            className={`border-primary/10 relative mx-auto w-full rounded-full border bg-white shadow-[0_10px_35px_rgba(3,13,39,0.12)] transition-[max-width,box-shadow] duration-500 ease-in-out ${
+              scrolled
+                ? "max-w-7xl shadow-[0_14px_45px_rgba(3,13,39,0.18)]"
+                : "max-w-[1500px]"
+            }`}
           >
-            <Image
-              src="/assets-v/voltera-black.png"
-              alt="Voltera Sciences"
-              width={200}
-              height={65}
-              priority
-              className={`w-auto origin-left object-contain transition-[height] duration-300 ${
-                scrolled ? "h-12" : "h-14"
-              }`}
-            />
-          </Link>
+            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2.5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">
+              <Link
+                href="/"
+                aria-label="Voltera Sciences home"
+                className="flex min-w-0 items-center"
+              >
+                <Image
+                  src="/assets-v/voltera-black.png"
+                  alt="Voltera Sciences"
+                  width={200}
+                  height={65}
+                  priority
+                  className="h-11 w-auto max-w-[125px] object-contain sm:max-w-48"
+                />
+              </Link>
 
-          <nav
-            aria-label="Main navigation"
-            className="hidden items-center justify-center gap-7 lg:flex xl:gap-10"
-          >
-            {navLinks.map((link) => {
-              const active = pathname === link.href;
+              <nav
+                aria-label="Main navigation"
+                className="border-primary/[0.06] hidden items-center justify-center gap-1 rounded-full border bg-[#F5F7FB] px-3 py-1.5 lg:flex xl:gap-2 xl:px-5"
+              >
+                {navLinks.map((link) => {
+                  const active = pathname === link.href;
 
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  aria-current={active ? "page" : undefined}
-                  className={`group relative font-sans text-sm font-medium whitespace-nowrap transition-colors duration-300 ${
-                    active ? "text-primary" : "hover:text-primary text-black"
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      aria-current={active ? "page" : undefined}
+                      className={`rounded-full px-3 py-2 font-sans text-[12px] font-medium whitespace-nowrap transition-colors duration-300 xl:px-4 xl:text-[13px] ${
+                        active
+                          ? "text-secondary-dark bg-white shadow-sm"
+                          : "text-primary hover:text-secondary-dark hover:bg-white"
+                      }`}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </nav>
+
+              <div className="flex items-center justify-end gap-1 sm:gap-2">
+                <button
+                  type="button"
+                  data-header-search-trigger
+                  onClick={() => {
+                    setSearchOpen((current) => !current);
+                    setMenuOpen(false);
+                  }}
+                  aria-label={searchOpen ? "Close search" : "Open search"}
+                  aria-expanded={searchOpen}
+                  aria-controls="header-search"
+                  className={`flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 sm:size-10 ${
+                    searchOpen
+                      ? "border-secondary/40 text-secondary-dark bg-[#FFF5E4]"
+                      : "border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark bg-[#F5F7FB] hover:bg-[#FFF5E4]"
                   }`}
                 >
-                  {link.name}
+                  {searchOpen ? (
+                    <X size={19} strokeWidth={1.8} />
+                  ) : (
+                    <Search size={19} strokeWidth={1.8} />
+                  )}
+                </button>
 
-                  <span
-                    className={`bg-primary absolute -bottom-2 left-0 h-[2px] rounded-full transition-all duration-300 ${
-                      active ? "w-full" : "w-0 group-hover:w-full"
-                    }`}
-                  />
+                <Link
+                  href="/account"
+                  aria-label="My account"
+                  className="border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark flex size-9 shrink-0 items-center justify-center rounded-full border bg-[#F5F7FB] transition-colors duration-300 hover:bg-[#FFF5E4] sm:size-10"
+                >
+                  <UserRound size={19} strokeWidth={1.8} />
                 </Link>
-              );
-            })}
-          </nav>
 
-          <div className="flex items-center justify-end gap-0.5 sm:gap-1">
-            <button
-              type="button"
-              data-header-search-trigger
-              onClick={() => {
-                setSearchOpen((current) => !current);
-                setMenuOpen(false);
-              }}
-              aria-label={searchOpen ? "Close search" : "Open search"}
-              aria-expanded={searchOpen}
-              aria-controls="header-search"
-              className="text-primary hover:bg-primary/5 flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 sm:h-11 sm:w-11"
-            >
-              {searchOpen ? <X size={21} /> : <Search size={21} />}
-            </button>
+                <button
+                  type="button"
+                  onClick={openCart}
+                  aria-label={`Open shopping cart, ${cartCount} items`}
+                  className="border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark relative flex size-9 shrink-0 items-center justify-center rounded-full border bg-[#F5F7FB] transition-colors duration-300 hover:bg-[#FFF5E4] sm:size-10"
+                >
+                  <ShoppingBag size={19} strokeWidth={1.8} />
 
-            <Link
-              href="/account"
-              aria-label="My account"
-              className="text-primary hover:bg-primary/5 flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 sm:h-11 sm:w-11"
-            >
-              <UserRound size={21} />
-            </Link>
+                  {cartCount > 0 && (
+                    <span className="bg-secondary absolute -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
+                      {cartCount > 99 ? "99+" : cartCount}
+                    </span>
+                  )}
+                </button>
 
-            <button
-              type="button"
-              onClick={openCart}
-              aria-label={`Open shopping cart, ${cartCount} items`}
-              className="text-primary hover:bg-primary/5 relative flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 sm:h-11 sm:w-11"
-            >
-              <ShoppingBag size={21} strokeWidth={1.8} />
-
-              {cartCount > 0 && (
-                <span className="bg-primary absolute -top-0.5 -right-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
-                  {cartCount > 99 ? "99+" : cartCount}
-                </span>
-              )}
-            </button>
-
-            <button
-              type="button"
-              onClick={() => {
-                setMenuOpen(true);
-                setSearchOpen(false);
-              }}
-              aria-label="Open navigation menu"
-              aria-expanded={menuOpen}
-              aria-controls="mobile-navigation"
-              className="text-primary hover:bg-primary/5 flex h-10 w-10 items-center justify-center rounded-full transition-colors duration-300 sm:h-11 sm:w-11 lg:hidden"
-            >
-              <Menu size={24} strokeWidth={1.8} />
-            </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenuOpen(true);
+                    setSearchOpen(false);
+                  }}
+                  aria-label="Open navigation menu"
+                  aria-expanded={menuOpen}
+                  aria-controls="mobile-navigation"
+                  className="border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark flex size-9 shrink-0 items-center justify-center rounded-full border bg-[#F5F7FB] transition-colors duration-300 hover:bg-[#FFF5E4] sm:size-10 lg:hidden"
+                >
+                  <Menu size={21} strokeWidth={1.8} />
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 

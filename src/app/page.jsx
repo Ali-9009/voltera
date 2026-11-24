@@ -9,16 +9,10 @@ import ProductVerification from "@/components/ProductVerification";
 import PromoMarquee from "@/components/PromoMarquee";
 import ResearchShowcase from "@/components/ResearchShowcase";
 import USShippingCoverage from "@/components/shipping/USShippingCoverage";
+import ShopByCategory from "@/components/ShopByCategory";
 import WhyChooseUs from "@/components/WhyChooseUs";
 
-import {
-  ArrowUpRight,
-  ShieldCheck,
-  FlaskConical,
-  Truck,
-  BadgeCheck,
-  Star,
-} from "lucide-react";
+import { ArrowUpRight, ShieldCheck, FlaskConical } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -27,10 +21,9 @@ export default function HomePage() {
     <main>
       <section
         aria-labelledby="hero-heading"
-        className="relative h-[calc(100svh-110px)] w-full overflow-hidden bg-[#EAF7FA] sm:h-[calc(100svh-115px)] lg:h-[calc(100svh-110px)]"
+        className="bg-primary-dark relative isolate min-h-[calc(100svh-48px)] w-full overflow-hidden lg:min-h-[calc(100svh-54px)]"
       >
-        <div className="absolute inset-0">
-          {/* MOBILE + TABLET */}
+        <div className="absolute inset-0 -z-20">
           <Image
             src="/assets-v/voltera-hero-mobile.png"
             alt=""
@@ -40,9 +33,8 @@ export default function HomePage() {
             className="object-cover object-bottom lg:hidden"
           />
 
-          {/* DESKTOP */}
           <Image
-            src="/assets-v/voltera-hero.png"
+            src="/assets-v/voltera-hero-1.png"
             alt=""
             fill
             priority
@@ -51,104 +43,86 @@ export default function HomePage() {
           />
         </div>
 
-        <div className="relative z-10 mx-auto h-full w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-full w-full flex-col items-center justify-start pt-12 text-center sm:pt-10 md:pt-12 lg:items-start lg:justify-center lg:py-0 lg:text-left">
-            <div className="relative z-30 w-full max-w-[580px] lg:max-w-[650px]">
-              {/* MAIN HEADING */}
+        <div className="relative mx-auto flex min-h-[calc(100svh-48px)] w-full max-w-7xl px-4 sm:px-6 lg:min-h-[calc(100svh-54px)] lg:px-8">
+          <div className="flex w-full flex-col items-center justify-start pt-36 pb-10 text-center sm:pt-40 lg:items-start lg:justify-center lg:pt-32 lg:pb-10 lg:text-left">
+            <div className="w-full max-w-[580px] lg:max-w-[620px]">
+              <div className="mb-5 flex items-center justify-center gap-3 sm:mb-6 sm:gap-4 lg:justify-start">
+                <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+                  <FlaskConical
+                    strokeWidth={1.8}
+                    className="text-primary-dark size-7 sm:size-9"
+                  />
+
+                  <p className="font-heading text-primary-dark text-[29px] leading-none tracking-tight italic sm:text-[36px]">
+                    10×
+                    <span className="ml-1.5 text-[21px] sm:ml-2 sm:text-[26px]">
+                      TESTED
+                    </span>
+                  </p>
+                </div>
+
+                <span
+                  aria-hidden="true"
+                  className="bg-primary-dark/30 h-9 w-px shrink-0 sm:h-10"
+                />
+
+                <span className="text-primary-dark max-w-[125px] text-left font-sans text-[10px] leading-relaxed font-bold tracking-wider uppercase sm:max-w-[150px] sm:text-[12px]">
+                  Precision Without Compromise
+                </span>
+              </div>
 
               <h1
                 id="hero-heading"
                 data-hero-heading
-                className="font-heading text-[clamp(2.3rem,9vw,3.4rem)] leading-[1.13] font-normal tracking-[-0.035em] text-white sm:text-[clamp(2.8rem,5vw,4rem)] lg:text-[clamp(3.2rem,4.3vw,4.6rem)]"
+                className="font-heading text-primary-dark text-[clamp(2.5rem,10vw,3.6rem)] leading-[1.08] font-normal tracking-[-0.035em] sm:text-[clamp(3rem,5.5vw,4.2rem)] lg:text-[clamp(3.4rem,4.5vw,4.6rem)]"
               >
                 Authenticity
                 <br />
-                Guaranteed.
+                <span className="bg-linear-to-b from-[#ffe4a1] via-[#d6a64f] to-[#a16b20] bg-clip-text text-transparent [-webkit-text-stroke:0.7px_#91601c]">
+                  Guaranteed.
+                </span>
               </h1>
 
-              {/* SUBTITLE */}
-
-              <div className="mt-5 flex items-center justify-center gap-3 lg:justify-start">
+              <div className="mt-5 hidden items-center gap-3 lg:flex">
                 <ShieldCheck
-                  size={22}
+                  size={28}
                   strokeWidth={1.8}
-                  className="shrink-0 text-white"
+                  className="text-primary-dark shrink-0"
                 />
 
-                <p className="font-sans text-[14px] font-semibold tracking-[0.015em] text-white sm:text-[17px]">
-                  With QR & Batch Verified COA
+                <p className="text-primary-dark font-sans text-[18px] font-bold italic">
+                  With QR & Batch-Verified COA
                 </p>
               </div>
 
-              {/* DESCRIPTION */}
-
               <p
                 data-hero-description
-                className="mx-auto mt-5 max-w-[530px] font-sans text-[13px] leading-[1.8] text-white/80 sm:mt-6 sm:text-[16px] lg:mx-0"
+                className="text-charcoal mx-auto mt-5 max-w-[540px] font-sans text-base leading-[1.6] sm:text-[17px] lg:mx-0 lg:mt-6 lg:text-[18px]"
               >
-                Discover premium research peptides backed by independent
-                laboratory testing, verified purity, and batch-specific
-                Certificates of Analysis. Precision and transparency in every
-                compound.
+                Premium research peptides backed by independent laboratory
+                testing, verified purity, and batch-specific Certificates of
+                Analysis. Precision in every compound.
               </p>
 
               <div
                 data-hero-buttons
-                className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:mt-8 lg:justify-start"
+                className="mt-7 flex flex-wrap items-center justify-center gap-3 lg:mt-8 lg:justify-start"
               >
-                <Link href="/shop" className="btn-hero-primary">
+                <Link
+                  href="/shop"
+                  className="btn-hero-primary text-sm! sm:text-base!"
+                >
                   Explore Collection
-                  <ArrowUpRight size={18} strokeWidth={2} />
+                  <ArrowUpRight size={19} strokeWidth={2} />
                 </Link>
 
-                <Link href="/about" className="btn-hero-secondary">
+                <Link
+                  href="/about"
+                  className="btn-hero-secondary border-accent-light/40! bg-primary-dark! text-sm! text-white! sm:text-base!"
+                >
                   Learn More
-                  <ArrowUpRight size={18} strokeWidth={1.8} />
+                  <ArrowUpRight size={19} strokeWidth={1.8} />
                 </Link>
-              </div>
-
-              <div className="mt-9 hidden flex-wrap items-center justify-center gap-x-3 gap-y-4 sm:mt-11 sm:flex sm:gap-x-5 lg:justify-start">
-                {[
-                  {
-                    icon: ShieldCheck,
-                    text: "99%+ Purity",
-                  },
-                  {
-                    icon: Truck,
-                    text: "Same-Day Shipping",
-                  },
-                  {
-                    icon: Star,
-                    text: "3rd Party Tested",
-                  },
-                ].map((item, index) => {
-                  const Icon = item.icon;
-
-                  return (
-                    <div key={item.text} className="flex items-center gap-3">
-                      {index > 0 && (
-                        <span
-                          aria-hidden="true"
-                          className="mr-1 hidden h-5 w-px bg-white/25 sm:block"
-                        />
-                      )}
-
-                      <div className="group flex items-center gap-2.5">
-                        <span className="flex size-8 shrink-0 items-center justify-center rounded-lg border border-[#C9953D]/25 bg-[#C9953D]/10 transition-colors duration-300 group-hover:bg-[#C9953D]/20">
-                          <Icon
-                            size={18}
-                            strokeWidth={1.8}
-                            className="text-[#E8C77B]"
-                          />
-                        </span>
-
-                        <span className="font-sans text-[11px] font-semibold tracking-[0.01em] whitespace-nowrap text-white sm:text-[13px]">
-                          {item.text}
-                        </span>
-                      </div>
-                    </div>
-                  );
-                })}
               </div>
             </div>
           </div>
@@ -157,6 +131,7 @@ export default function HomePage() {
 
       <PromoMarquee />
 
+      <ShopByCategory />
       <ProductGrid />
 
       <WhyChooseUs />
@@ -165,8 +140,8 @@ export default function HomePage() {
         aria-labelledby="collection-banner-heading"
         className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
       >
-        <div className="border-primary/10 bg-primary-soft relative mx-auto max-w-7xl overflow-hidden rounded-[24px] border sm:rounded-[32px]">
-          <picture className="absolute inset-0">
+        <div className="border-primary/10 bg-primary-soft relative isolate mx-auto max-w-7xl overflow-hidden rounded-[24px] border sm:rounded-[32px]">
+          <picture className="absolute inset-0 -z-20">
             <source
               media="(max-width: 767px)"
               srcSet="/assets-v/collection-banner-mobile.png"
@@ -179,44 +154,36 @@ export default function HomePage() {
             />
           </picture>
 
-          <div className="relative z-10 flex min-h-[650px] flex-col items-center px-5 pt-12 pb-8 text-center sm:px-10 md:min-h-[520px] md:items-start md:justify-center md:px-14 md:py-16 md:text-left lg:min-h-[560px] lg:px-20">
-            <div className="max-w-[530px]">
+          <div className="relative flex min-h-[600px] flex-col items-center px-5 pt-12 pb-8 text-center sm:px-10 md:min-h-[480px] md:items-start md:justify-center md:px-14 md:py-14 md:text-left lg:min-h-[540px] lg:px-20">
+            <div className="w-full max-w-[490px]">
+              <span className="text-primary-dark mb-4 hidden items-center gap-3 font-sans text-xs font-bold tracking-[0.18em] uppercase md:flex">
+                <span className="bg-primary-dark h-[2px] w-8" />
+                Explore Our Collection
+              </span>
+
               <h2
                 id="collection-banner-heading"
-                className="font-heading text-[clamp(30px,7vw,46px)] leading-[1.14] font-normal tracking-[-0.035em] text-white md:text-[clamp(36px,4vw,56px)]"
+                className="font-heading text-primary-dark text-[clamp(32px,8vw,46px)] leading-[1.15] font-normal tracking-[-0.035em] md:text-[clamp(38px,3.8vw,54px)]"
               >
-                Find the Right
-                <br className="hidden md:block" />
-                <span className="text-white"> Research Compound</span>
-                <br />
-                for Your Next Project.
+                Precision for
+                <br className="hidden md:block" /> Your Next
+                <br className="hidden md:block" />{" "}
+                <span className="text-primary-dark">Research.</span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[440px] font-sans text-[13px] leading-[1.8] text-white sm:text-[15px] md:mx-0">
-                Explore laboratory research compounds in multiple strengths,
-                compare available options, and access batch-specific quality
-                documentation with confidence.
+              <p className="text-charcoal mx-auto mt-5 max-w-[420px] font-sans text-base leading-[1.6] sm:text-[17px] md:mx-0">
+                Explore premium research compounds with verified purity,
+                multiple strengths, and batch-specific COAs.
               </p>
 
-              <div className="mt-7 flex flex-wrap items-center justify-center gap-3 md:justify-start">
-                <Link
-                  href="/shop"
-                  className="group border-secondary/40 text-primary inline-flex h-[50px] items-center justify-center gap-3 rounded-full border bg-[linear-gradient(135deg,#E8C77B_0%,#C9953D_65%,#A9792C_100%)] px-7 font-sans text-[13px] font-bold shadow-[0_6px_20px_rgba(201,149,61,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(201,149,61,0.4)] active:scale-[0.98] sm:h-[54px] sm:px-8 sm:text-[14px]"
-                >
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3 sm:mt-8 md:justify-start">
+                <Link href="/shop" className="btn-hero-primary">
                   Shop All Products
-                  <ArrowUpRight
-                    size={18}
-                    className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                  />
+                  <ArrowUpRight size={18} strokeWidth={2} />
                 </Link>
               </div>
             </div>
           </div>
-
-          <div
-            aria-hidden="true"
-            className="from-primary via-secondary to-primary-light pointer-events-none absolute inset-x-0 bottom-0 h-1 bg-linear-to-r"
-          />
         </div>
       </section>
 

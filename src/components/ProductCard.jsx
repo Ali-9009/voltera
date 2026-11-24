@@ -72,15 +72,10 @@ export default function ProductCard({ product, onQuickView }) {
   };
 
   return (
-    <article className="product-glow-card group relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-[22px] p-[3px] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_45px_rgba(7,85,143,0.12)] sm:rounded-[26px]">
-      {/* ALWAYS RUNNING GRADIENT BORDER */}
-      <div
-        aria-hidden="true"
-        className="product-glow-border pointer-events-none absolute inset-0 rounded-[inherit]"
-      />
+    <article className="product-glow-card group relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-[22px] sm:rounded-[26px]">
+      <div aria-hidden="true" className="product-glow-border" />
 
-      {/* CARD CONTENT */}
-      <div className="relative z-10 flex h-full min-w-0 flex-col rounded-[19px] bg-white p-1.5 sm:rounded-[23px] sm:p-2.5">
+      <div className="relative z-10 flex h-full min-w-0 flex-col rounded-[20px] bg-white p-1.5 sm:rounded-[24px] sm:p-2.5">
         <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[#EAF4F7] sm:rounded-[22px]">
           <Link
             href={`/products/${product.slug}`}
@@ -219,12 +214,11 @@ export default function ProductCard({ product, onQuickView }) {
               onClick={handleAddToCart}
               disabled={!canAdd || adding}
               aria-label={`Add ${product.name} to cart`}
-              className="group border-primary-light/20 hover:border-primary-light/40 relative mt-3 flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(120deg,#1746A2_0%,#071A43_65%,#030D27_100%)] px-3 font-sans text-[12px] font-semibold text-white shadow-[0_5px_16px_rgba(7,26,67,0.22)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_9px_25px_rgba(7,26,67,0.35)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:h-11 sm:text-[13px]"
+              aria-busy={adding}
+              className="btn-primary mt-3 h-10 w-full px-3 text-[12px] sm:h-11 sm:text-[13px]"
             >
-              <span className="pointer-events-none absolute inset-0 rounded-full bg-[linear-gradient(120deg,#2458B5_0%,#1746A2_45%,#071A43_100%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-disabled:opacity-0" />
-
               {adding ? (
-                <span className="relative z-10 flex items-center gap-2">
+                <span className="flex items-center gap-2">
                   <span
                     className="h-4 w-4 animate-spin rounded-full border-2 border-white/30 border-t-white"
                     aria-hidden="true"
@@ -232,7 +226,7 @@ export default function ProductCard({ product, onQuickView }) {
                   Adding...
                 </span>
               ) : (
-                <span className="relative z-10">
+                <span>
                   {!inStock
                     ? "Out of Stock"
                     : !hasPrice

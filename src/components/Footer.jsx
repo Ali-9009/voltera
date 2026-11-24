@@ -36,15 +36,9 @@ const footerLinks = [
       { label: "Privacy Policy", href: "/privacy-policy" },
       { label: "Terms & Conditions", href: "/terms-and-conditions" },
       { label: "Refund Policy", href: "/refund-policy" },
-      { label: "Research Disclaimer", href: "/research-disclaimer" },
+      { label: "Shipping Policy", href: "/shipping-policy" },
     ],
   },
-];
-
-const paymentMethods = [
-  { name: "Visa", Icon: Visa },
-  { name: "Mastercard", Icon: Mastercard },
-  { name: "PayPal", Icon: Paypal },
 ];
 
 const decorativeSquares = [
@@ -154,7 +148,7 @@ function FooterNavigation() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="group hover:text-accent-light inline-flex items-start gap-2 font-sans text-[12px] leading-[1.6] text-white/65 transition-colors duration-300 sm:text-[13px]"
+                  className="group hover:text-accent-light inline-flex items-start gap-2 font-sans text-[12px] leading-[1.6] text-white transition-colors duration-300 sm:text-sm"
                 >
                   <ArrowRight
                     size={13}
@@ -174,33 +168,94 @@ function FooterNavigation() {
 
 function FooterPayments() {
   return (
-    <div className="flex flex-col gap-5 border-t border-white/15 py-7 md:flex-row md:items-center md:justify-between">
+    <div className="flex flex-col items-center gap-5 border-t border-white/15 py-7 md:flex-row md:justify-between">
       <div className="flex items-center gap-3">
-        <span className="border-secondary/30 bg-secondary/10 text-accent-light flex size-10 shrink-0 items-center justify-center rounded-lg border">
-          <LockKeyhole size={19} strokeWidth={1.7} />
+        <span className="border-secondary/30 bg-secondary/10 text-accent-light flex size-11 shrink-0 items-center justify-center rounded-xl border">
+          <LockKeyhole size={20} strokeWidth={1.7} />
         </span>
 
         <div>
-          <h3 className="font-heading text-[14px] text-white">
+          <h3 className="font-heading text-[14px] text-white sm:text-[15px]">
             Secure Payment Options
           </h3>
 
-          <p className="mt-1 font-sans text-[11px] text-white/55">
+          <p className="mt-1 font-sans text-[11px] text-white/60 sm:text-[12px]">
             Available payment methods are confirmed at checkout.
           </p>
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
-        {paymentMethods.map(({ name, Icon }) => (
+      <div
+        role="group"
+        aria-label="Payment methods"
+        className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 md:justify-end"
+      >
+        {[
+          {
+            name: "Zelle",
+            logo: (
+              <span className="font-sans text-[23px] font-black tracking-[-0.08em] text-[#6D1ED4]">
+                Zelle
+              </span>
+            ),
+          },
+          {
+            name: "Venmo",
+            logo: (
+              <span className="flex items-center gap-1 text-[#008CFF]">
+                <span className="text-[20px] leading-none font-black italic">
+                  V
+                </span>
+
+                <span className="font-sans text-[13px] font-extrabold tracking-tight italic">
+                  venmo
+                </span>
+              </span>
+            ),
+          },
+          {
+            name: "Mastercard",
+            logo: (
+              <span className="flex flex-col items-center justify-center">
+                <span className="relative block h-[23px] w-[38px]">
+                  <span className="absolute top-0 left-0 size-[23px] rounded-full bg-[#EB001B]" />
+
+                  <span className="absolute top-0 right-0 size-[23px] rounded-full bg-[#F79E1B] mix-blend-multiply" />
+                </span>
+
+                <span className="mt-0.5 text-[7px] leading-none font-bold tracking-tight text-[#252525]">
+                  mastercard
+                </span>
+              </span>
+            ),
+          },
+          {
+            name: "Visa",
+            logo: (
+              <span className="font-sans text-[23px] leading-none font-black tracking-[-0.06em] text-[#1434CB] italic">
+                VISA
+              </span>
+            ),
+          },
+          {
+            name: "American Express",
+            logo: (
+              <span className="rounded-[4px] bg-[#006FCF] px-1.5 py-1.5 text-center font-sans text-[8px] leading-[1.05] font-black tracking-tight text-white">
+                AMERICAN
+                <br />
+                EXPRESS
+              </span>
+            ),
+          },
+        ].map(({ name, logo }) => (
           <div
             key={name}
             role="img"
             aria-label={name}
             title={name}
-            className="flex h-[44px] w-[72px] items-center justify-center overflow-hidden rounded-lg bg-white shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-transform duration-300 hover:-translate-y-1 sm:h-[48px] sm:w-[78px]"
+            className="hover:border-accent-light flex h-[40px] w-[61px] shrink-0 items-center justify-center overflow-hidden rounded-lg border border-white/80 bg-white shadow-[0_4px_12px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_5px_18px_rgba(214,166,79,0.25)] motion-reduce:transform-none motion-reduce:transition-none sm:h-[46px] sm:w-[80px]"
           >
-            <Icon width={68} height={44} />
+            {logo}
           </div>
         ))}
       </div>
@@ -214,7 +269,7 @@ export default function Footer() {
       <FooterBackground />
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 pt-14 sm:px-6 sm:pt-16 lg:px-8 lg:pt-20">
-        <div className="grid gap-12 pb-12 lg:grid-cols-[1.15fr_1.5fr] lg:gap-20 lg:pb-16">
+        <div className="grid gap-12 pb-10 lg:grid-cols-[1.15fr_1.5fr] lg:gap-20">
           <div className="max-w-[390px]">
             <Link
               href="/"
@@ -235,29 +290,6 @@ export default function Footer() {
               with clear product information and accessible quality
               documentation.
             </p>
-
-            <div className="mt-6 flex flex-wrap items-center gap-4">
-              <span className="text-accent-light inline-flex items-center gap-2 font-sans text-[11px] font-medium">
-                <FlaskConical size={16} strokeWidth={1.7} />
-                Research Focused
-              </span>
-
-              <span className="text-accent-light inline-flex items-center gap-2 font-sans text-[11px] font-medium">
-                <ShieldCheck size={16} strokeWidth={1.7} />
-                Quality Focused
-              </span>
-            </div>
-
-            <Link
-              href="/shop"
-              className="group text-accent-light mt-7 inline-flex items-center gap-2 font-sans text-[13px] font-semibold transition-colors duration-300 hover:text-white"
-            >
-              Explore Collection
-              <ArrowUpRight
-                size={17}
-                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
           </div>
 
           <FooterNavigation />
@@ -296,14 +328,24 @@ export default function Footer() {
 
         <FooterPayments />
 
-        <div className="flex flex-col items-center justify-between gap-3 border-t border-white/15 py-6 text-center sm:flex-row sm:text-left">
-          <p className="font-sans text-[11px] text-white/50 sm:text-[12px]">
+        <div className="flex flex-col items-center justify-between gap-4 border-t border-white/15 py-5 text-center sm:flex-row sm:text-left">
+          <p className="font-sans text-[11px] leading-relaxed text-white/60 sm:text-[12px]">
             © {new Date().getFullYear()} Voltera Sciences. All rights reserved.
           </p>
 
-          <p className="text-accent-light font-sans text-[10px] font-semibold tracking-[0.13em] uppercase sm:text-[11px]">
-            Purity • Precision • Performance
-          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-end sm:gap-4">
+            <span className="text-accent-light inline-flex items-center gap-2 font-sans text-[11px] font-medium sm:text-[12px]">
+              <FlaskConical size={16} strokeWidth={1.7} />
+              Research Focused
+            </span>
+
+            <span aria-hidden="true" className="bg-accent-light/25 h-4 w-px" />
+
+            <span className="text-accent-light inline-flex items-center gap-2 font-sans text-[11px] font-medium sm:text-[12px]">
+              <ShieldCheck size={16} strokeWidth={1.7} />
+              Quality Focused
+            </span>
+          </div>
         </div>
       </div>
     </footer>

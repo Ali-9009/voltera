@@ -1,324 +1,346 @@
 import Image from "next/image";
 import Link from "next/link";
 import {
- CloudSnow,
   ArrowUpRight,
-  ChevronRight,
   FlaskConical,
   FileCheck2,
   Microscope,
   ShieldCheck,
+  Target,
+  Layers3,
+  UsersRound,
   Check,
+  Fingerprint,
+  Ban,
+  Scale,
 } from "lucide-react";
-import { ScanLine, ArrowDownRight, Sparkles } from "lucide-react";
 import PageHero from "@/components/PageHero";
 
 export const metadata = {
-  title: "About Us | Spectrum Biosciences",
+  title: "About Us | Voltera Sciences",
   description:
-    "Discover Spectrum Biosciences and our approach to research products, product information, and laboratory documentation.",
+    "Discover Voltera Sciences and our commitment to research excellence, product quality, laboratory testing, and scientific transparency.",
 };
 
-const values = [
+const principles = [
   {
     number: "01",
-    icon: FlaskConical,
-    title: "Research Focused",
+    icon: Target,
+    title: "Our Mission",
+    subtitle: "Purpose Behind Every Compound",
     description:
-      "A thoughtfully selected collection of peptides intended for scientific and laboratory research applications.",
+      "We built Voltera Sciences because researchers deserve a better sourcing experience. One built on transparency, consistency and respect for the work being done. Our mission is simple. Provide research grade compounds that meet the highest standards of purity and documentation, and deliver a sourcing experience worthy of the research it supports.",
   },
   {
     number: "02",
-    icon: ShieldCheck,
-    title: "Quality Mindset",
+    icon: Layers3,
+    title: "How We Operate",
+    subtitle: "Structure. Clarity. Consistency.",
     description:
-      "An approach centered on product information, careful handling, and attention to detail.",
+      "We built Voltera Sciences the way we believe a research supply company should operate. With structure, transparency and respect for the work being done on the other end of every order. Clean product organization. Consistent labeling. Documentation you can actually find and verify. A straightforward process from start to finish. No noise. No confusion. Just research grade compounds organized for the people who need them most.",
   },
   {
     number: "03",
-    icon: Microscope,
-    title: "Scientific Exploration",
+    icon: UsersRound,
+    title: "Who We Serve",
+    subtitle: "Built Around Researchers",
     description:
-      "Supporting researchers with a variety of formulations and strengths for different laboratory requirements.",
-  },
-  {
-    number: "04",
-    icon: ScanLine,
-    title: "Clarity & Precision",
-    description:
-      "Clear product details and a straightforward shopping experience designed to simplify product selection.",
+      "Voltera Sciences was built for researchers who take their work seriously. Whether you are an independent researcher, part of a laboratory program or a qualified professional buyer. You know what you need, you know what good sourcing looks like and you don't have time for inflated claims or unnecessary friction. We built this for you. Straightforward sourcing, verified compounds and a buying experience that respects your time and your standards.",
   },
 ];
 
-export default function AboutUsPage() {
+const guidelines = [
+  {
+    icon: Ban,
+    title: "Restricted Applications",
+    description: "Not for human consumption, clinical use, or veterinary use.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "No Therapeutic Claims",
+    description:
+      "Not intended to diagnose, treat, cure, or prevent any disease.",
+  },
+  {
+    icon: Microscope,
+    title: "Professional Handling",
+    description:
+      "For handling only by researchers, laboratories, and qualified professionals.",
+  },
+  {
+    icon: Scale,
+    title: "Responsible Research",
+    description:
+      "All purchasing and use must remain within applicable research and legal standards.",
+  },
+];
+
+function PrincipleCard({ principle }) {
+  const Icon = principle.icon;
+
   return (
-    <main className="min-h-screen">
-      <PageHero
-        title="About Penguin"
-        highlight="Peptides."
-        description="At Penguin Peptides, we believe meaningful scientific progress begins with curiosity, precision, and access to reliable research materials."
-        icon="cloud"
+    <article className="group border-primary/10 hover:border-secondary/50 hover:shadow-primary/10 relative isolate flex min-w-0 flex-col overflow-hidden rounded-3xl border bg-white p-6 shadow-sm transition-all duration-500 hover:-translate-y-1 hover:shadow-xl sm:p-8">
+      <div
+        aria-hidden="true"
+        className="from-primary-light/10 pointer-events-none absolute inset-0 -z-10 bg-linear-to-bl via-transparent to-transparent"
       />
 
-      <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-10">
-        <div className="mx-auto max-w-7xl text-center">
-          {/* HEADING */}
+      <div
+        aria-hidden="true"
+        className="border-primary/10 bg-primary-soft/40 pointer-events-none absolute -top-16 -right-16 size-48 rotate-45 rounded-[32px] border transition-transform duration-500 group-hover:rotate-[60deg]"
+      />
 
-          <h2 className="section-heading mx-auto max-w-[850px]">
-            Inspired by <span className="text-secondary-dark">Discovery.</span>
-          </h2>
+      <div
+        aria-hidden="true"
+        className="border-secondary/20 pointer-events-none absolute -top-20 -right-5 size-44 rotate-45 rounded-[28px] border"
+      />
 
-          {/* CENTER DIVIDER */}
+      <div className="relative flex items-start justify-between">
+        <span className="border-secondary/40 from-primary-light via-accent to-primary text-accent-light shadow-primary/15 flex size-16 items-center justify-center rounded-2xl border bg-linear-to-br shadow-lg transition-transform duration-500 group-hover:scale-105">
+          <Icon size={30} strokeWidth={1.5} />
+        </span>
 
-          <div className="bg-secondary mx-auto mt-7 h-[3px] w-16 rounded-full" />
+        <span
+          aria-hidden="true"
+          className="font-heading text-[68px] leading-none text-transparent opacity-15 transition-opacity duration-300 [-webkit-text-stroke:1px_var(--color-primary)] group-hover:opacity-35"
+        >
+          {principle.number}
+        </span>
+      </div>
 
-          {/* HIGHLIGHT TEXT */}
+      <div className="relative mt-7">
+        <p className="text-secondary-dark text-xs font-bold tracking-widest uppercase">
+          {principle.subtitle}
+        </p>
 
-          <p className="font-heading text-primary mx-auto mt-8 max-w-230 text-[20px] leading-[1.45] font-semibold tracking-[-0.035em] sm:text-[26px] lg:text-[30px]">
-            Every breakthrough begins with curiosity, and every discovery
-            deserves a thoughtful approach.
-          </p>
+        <h3 className="font-heading text-primary mt-3 text-[24px] leading-tight sm:text-[27px]">
+          {principle.title}
+        </h3>
 
-          {/* DESCRIPTION */}
+        <div className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-12 rounded-full bg-linear-to-r transition-all duration-500 group-hover:w-24" />
 
-          <div className="text-md mx-auto mt-6 max-w-220 space-y-5 font-sans leading-[1.7] text-[#667F8B]">
-            <p>
-              At Penguin Peptides, we are dedicated to supporting scientific
-              exploration through a thoughtfully selected collection of research
-              peptides and specialized formulations.
-            </p>
+        <p className="text-charcoal/80 font-sans text-[15px] leading-[1.9] sm:text-base">
+          {principle.description}
+        </p>
+      </div>
 
-            <p>
-              We believe the research experience should be clear, accessible,
-              and straightforward. From exploring available compounds to
-              comparing strengths and understanding product information, our
-              goal is to help researchers make informed selections for their
-              laboratory needs.
-            </p>
-          </div>
-        </div>
-      </section>
+      <footer className="text-primary mt-auto flex items-center gap-2 pt-7 text-sm font-semibold">
+        <Check size={17} className="text-secondary-dark" />
+        The Voltera Standard
+      </footer>
 
-      <section className="bg-[#F5FAFC] px-4 py-12 sm:px-6 md:py-16 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          {/* SECTION HEADING */}
+      <span
+        aria-hidden="true"
+        className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-6 bottom-0 h-[3px] origin-center scale-x-0 rounded-full bg-linear-to-r transition-transform duration-500 group-hover:scale-x-100"
+      />
+    </article>
+  );
+}
 
-          <div className="mb-12 flex flex-col justify-between gap-6 lg:mb-16 lg:flex-row lg:items-end">
-            <div>
-              <h2 className="section-heading">
-                The Principles
-                <br />
-                <span className="text-secondary-dark">
-                  Behind Our Approach.
-                </span>
-              </h2>
-            </div>
+function GuidelineCard({ guideline }) {
+  const Icon = guideline.icon;
 
-            <p className="text-md max-w-[380px] leading-[1.9] text-[#667F8B]">
-              A research-focused approach built around clarity, thoughtful
-              service, and attention to detail.
-            </p>
-          </div>
+  return (
+    <article className="group hover:border-accent-light/50 flex items-start gap-4 rounded-2xl border border-white/15 bg-white/[0.07] p-5 transition-all duration-300 hover:bg-white/10 sm:p-6">
+      <span className="border-accent-light/30 bg-accent-light/10 text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border transition-transform duration-300 group-hover:scale-105">
+        <Icon size={24} strokeWidth={1.6} />
+      </span>
 
-          {/* VALUE CARDS */}
+      <div>
+        <h3 className="font-sans text-base font-bold text-white">
+          {guideline.title}
+        </h3>
 
-          <div className="grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-4">
-            {values.map((value) => {
-              const Icon = value.icon;
+        <p className="mt-2 text-[14px] leading-relaxed text-white/85 sm:text-[15px]">
+          {guideline.description}
+        </p>
+      </div>
+    </article>
+  );
+}
 
-              return (
-                <article
-                  key={value.number}
-                  className="group hover:border-secondary/30 relative flex min-w-0 flex-col overflow-hidden rounded-3xl border border-[#E2EDF2] bg-white p-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_40px_rgba(7,85,143,0.07)] sm:p-7"
-                >
-                  {/* ICON */}
+export default function AboutUsPage() {
+  return (
+    <main className="min-h-screen bg-white">
+      <PageHero
+        breadcrumb="About Us"
+        subtitle="Discover Our Story"
+        title="About"
+        highlight="Voltera Sciences."
+        description="A research supply brand built on transparency, consistency, and respect for the work being done."
+        mobileImage="/assets-v/voltera-about-mobile.png"
+        desktopImage="/assets-v/voltera-about.png"
+      />
 
-                  <div className="text-primary group-hover:bg-primary flex h-11 w-11 items-center justify-center rounded-[14px] bg-[#E6F9FB] transition-colors group-hover:text-white sm:h-14 sm:w-14 sm:rounded-[18px]">
-                    <Icon
-                      size={22}
-                      strokeWidth={1.7}
-                      className="sm:h-7 sm:w-7"
-                    />
-                  </div>
+      <section
+        aria-labelledby="about-heading"
+        className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8 lg:py-20"
+      >
+        <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-16">
+          <div className="min-w-0">
+            <span className="border-secondary/25 bg-secondary/10 text-secondary-dark mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold tracking-widest uppercase">
+              <Fingerprint size={17} strokeWidth={1.7} />
+              Who We Are
+            </span>
 
-                  {/* CONTENT */}
-
-                  <div className="mt-4">
-                    <h3 className="font-heading text-primary text-[15px] leading-[1.3] font-semibold tracking-[-0.03em] sm:text-[21px]">
-                      {value.title}
-                    </h3>
-
-                    <p className="mt-3 text-sm leading-[1.7] text-[#708692]">
-                      {value.description}
-                    </p>
-                  </div>
-
-                  {/* BOTTOM ACCENT */}
-
-                  <div className="mt-auto pt-7">
-                    <div className="bg-secondary h-[3px] w-8 rounded-full transition-all duration-300 group-hover:w-16" />
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      <section className="px-4 py-12 sm:px-6 md:py-16 lg:px-10">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-20">
-          {/* LEFT CONTENT */}
-
-          <div className="order-1 lg:order-2">
-            <h2 className="section-heading max-w-[570px]">
-              Built for{" "}
-              <span className="text-secondary-dark">Curious Minds.</span>
+            <h2 id="about-heading" className="section-heading">
+              Voltera <span className="text-secondary">Sciences.</span>
             </h2>
 
-            <p className="mt-4 max-w-[540px] text-sm leading-[1.7] text-[#667F8B]">
-              Penguin Peptides is a research-focused peptide supplier dedicated
-              to serving the scientific and laboratory research community.
+            <div className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r" />
+
+            <p className="font-heading text-primary text-[21px] leading-relaxed sm:text-[26px]">
+              Less noise. More clarity.
+              <br />
+              Research without compromise.
             </p>
 
-            <p className="mt-3 max-w-[540px] text-sm leading-[1.7] text-[#667F8B]">
-              We understand that every research project has unique requirements.
-              Our collection brings together different peptide formulations and
-              strengths, supported by accessible product information and a
-              straightforward ordering experience.
-            </p>
+            <div className="text-charcoal/80 mt-6 space-y-4 font-sans text-base leading-[1.9]">
+              <p>
+                Voltera Sciences exists because we saw a gap between what
+                researchers needed and what the market was offering. Too many
+                brands, too many claims, not enough proof.
+              </p>
 
-            <p className="mt-3 max-w-[540px] text-sm leading-[1.7] text-[#667F8B]">
-              Our goal is to make discovering and selecting research materials
-              simpler, clearer, and more convenient.
-            </p>
+              <p>
+                We built Voltera Sciences to be the exception. A research supply
+                brand where quality is verified, documentation is accessible and
+                the experience matches the standard of the work being done.
+              </p>
+            </div>
 
-            <Link
-              href="/shop"
-              className="group relative mt-8 inline-flex h-12 items-center justify-center gap-3 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
-            >
-              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link href="/shop" className="btn-primary h-12 px-6 text-sm">
+                Explore Collection
+                <ArrowUpRight size={18} />
+              </Link>
 
-              <span className="relative z-10">Discover Our Products</span>
-
-              <ArrowUpRight
-                size={17}
-                className="relative z-10 transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
-          </div>
-
-          {/* RIGHT VISUAL */}
-
-          <div className="relative order-2 lg:order-1">
-            <div className="relative min-h-[420px] overflow-hidden rounded-3xl bg-linear-to-br from-[#07558F] via-[#087BA5] to-[#04C1CA] p-6 sm:p-9">
-              {/* DECORATIVE CIRCLES */}
-
-              <div className="pointer-events-none absolute -top-20 -right-20 h-[330px] w-[330px] rounded-full border border-white/20" />
-
-              <div className="pointer-events-none absolute -right-10 -bottom-32 h-[400px] w-[400px] rounded-full border border-white/15" />
-
-              {/* TOP TEXT */}
-
-              <div className="relative z-10">
-                <p className="text-[10px] font-semibold tracking-[0.2em] text-white/70 uppercase">
-                  Our Philosophy
-                </p>
-
-                <h3 className="font-heading mt-5 max-w-[390px] text-[clamp(2rem,4vw,3.5rem)] leading-[1.1] font-semibold tracking-[-0.05em] text-white">
-                  Every discovery begins with a question.
-                </h3>
-              </div>
-
-              {/* DECORATIVE PRODUCT IMAGE */}
-
-              <div className="pointer-events-none absolute right-[-4%] bottom-[-9%] h-[300px] w-[230px] rotate-12 opacity-90 sm:right-[2%] sm:h-[380px] sm:w-[290px]">
-                <Image
-                  src="/assets/pp-1sm.png"
-                  alt=""
-                  fill
-                  sizes="(max-width: 640px) 230px, 290px"
-                  className="product-float object-contain drop-shadow-2xl"
+              <Link
+                href="/coa"
+                className="group border-primary/20 text-primary hover:border-secondary hover:bg-primary-soft inline-flex h-12 items-center justify-center gap-2 rounded-full border bg-white px-6 text-sm font-semibold transition-all duration-300"
+              >
+                View Certificates
+                <ArrowUpRight
+                  size={18}
+                  className="text-secondary-dark transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                 />
-              </div>
-
-              {/* BOTTOM DETAIL */}
-
-              <div className="absolute bottom-8 left-6 z-10 max-w-[200px] sm:bottom-10 sm:left-9">
-                <div className="mb-4 h-px w-14 bg-white/60" />
-
-                <p className="font-heading text-[14px] leading-6 font-medium text-white/90 sm:text-[16px]">
-                  Supporting scientific curiosity through thoughtful product
-                  selection.
-                </p>
-              </div>
+              </Link>
             </div>
           </div>
-        </div>
-      </section>
 
-      <section className="bg-white px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="relative order-2 min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:order-2 lg:min-h-[480px]">
+          <div className="group border-primary/10 bg-primary-soft shadow-primary/10 relative aspect-square w-full overflow-hidden rounded-[28px] border shadow-xl">
             <Image
-              src="/assets/about-penguin.png"
-              alt="Penguin Peptides research products"
+              src="/assets-v/voltera-about-section.png"
+              alt="Voltera Sciences research products"
               fill
               sizes="(max-width: 1023px) 100vw, 50vw"
-              className="object-cover"
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.03] motion-reduce:transform-none"
             />
-          </div>
 
-          <div className="order-1 min-w-0 lg:order-1">
-            <h2 className="font-heading text-primary text-[32px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[42px] lg:text-[48px]">
-              About Penguin Peptides
-            </h2>
-
-            <p className="mt-5 max-w-xl text-sm leading-8 text-[#617987] sm:text-[15px]">
-              At Penguin Peptides, our mission is to fuel scientific progress by
-              delivering top-tier peptides at prices that make research
-              accessible. We are committed to sourcing premium-grade peptides
-              from certified North American manufacturers who adhere to
-              stringent WHO/GMP and ISO 9001:2008 standards. By prioritizing
-              quality and affordability, we empower researchers to push the
-              boundaries of discovery without compromise.
-            </p>
+            <div
+              aria-hidden="true"
+              className="ring-secondary/20 pointer-events-none absolute inset-0 rounded-[28px] ring-1 ring-inset"
+            />
           </div>
         </div>
       </section>
 
-      <section className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
-          <div className="order-1 min-w-0 lg:order-2">
-            <h2 className="font-heading text-primary text-[32px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[42px] lg:text-[48px]">
-              Trusted Peptides, Secure Ordering, Exceptional Service
+      <section
+        aria-labelledby="principles-heading"
+        className="from-primary-soft via-surface to-primary-light/10 relative isolate overflow-hidden bg-linear-to-br px-4 py-12 sm:px-6 md:py-18 lg:px-8"
+      >
+        <div
+          aria-hidden="true"
+          className="bg-primary-light/10 pointer-events-none absolute -top-48 -right-48 -z-10 size-[500px] rounded-full blur-[100px]"
+        />
+
+        <div className="mx-auto max-w-7xl">
+          <header className="mx-auto mb-10 max-w-2xl text-center sm:mb-12">
+            <p className="text-secondary-dark mb-3 text-xs font-bold tracking-widest uppercase">
+              Our Foundation
+            </p>
+
+            <h2 id="principles-heading" className="section-heading">
+              What Defines <span className="text-secondary">Voltera.</span>
             </h2>
 
-            <p className="mt-5 max-w-xl text-sm leading-8 text-[#617987] sm:text-[15px]">
-              As a trusted U.S.-based supplier, we ensure every peptide
-              undergoes rigorous third-party testing for purity and reliability,
-              giving you confidence in your results. Our streamlined, secure
-              online platform makes ordering simple and discreet, with
-              cutting-edge SSL encryption safeguarding your data. At Penguin
-              Peptides, we blend exceptional customer service with competitive
-              pricing, offering a seamless experience for researchers seeking
-              high-purity peptides.
-            </p>
+            <div className="from-secondary-dark via-accent-light to-secondary-dark mx-auto my-5 h-[3px] w-20 rounded-full bg-linear-to-r" />
 
-            <p className="mt-5 max-w-xl text-sm leading-8 text-[#617987] sm:text-[15px]">
-              We’re proud to support the scientific community with dependable
-              products and unwavering dedication. Choose Penguin Peptides as
-              your partner in advancing knowledge, one breakthrough at a time.
+            <p className="text-muted text-base leading-relaxed">
+              Our purpose, our approach, and the research community we are built
+              to serve.
             </p>
+          </header>
+
+          <div className="grid gap-5 lg:grid-cols-3 lg:gap-6">
+            {principles.map((principle) => (
+              <PrincipleCard key={principle.number} principle={principle} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
+        aria-labelledby="research-heading"
+        className="px-4 py-12 sm:px-6 md:py-18 lg:px-8"
+      >
+        <div className="border-secondary/30 from-primary-light via-primary to-primary-dark shadow-primary/10 relative isolate mx-auto max-w-7xl overflow-hidden rounded-[28px] border bg-linear-to-br px-5 py-9 shadow-xl sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -top-48 -right-48 -z-10 size-[550px] rounded-full border border-white/10"
+          />
+
+          <div
+            aria-hidden="true"
+            className="border-accent-light/15 pointer-events-none absolute -top-32 -right-32 -z-10 size-[400px] rounded-full border"
+          />
+
+          <ShieldCheck
+            aria-hidden="true"
+            size={420}
+            strokeWidth={0.6}
+            className="pointer-events-none absolute -right-20 -bottom-30 -z-10 rotate-[-15deg] text-white/5"
+          />
+
+          <header className="mx-auto max-w-3xl text-center">
+            <span className="border-accent-light/30 bg-accent-light/10 text-accent-light mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold tracking-widest uppercase">
+              <ShieldCheck size={17} />
+              Research Guidelines
+            </span>
+
+            <h2
+              id="research-heading"
+              className="font-heading text-[clamp(28px,4vw,44px)] leading-tight text-white"
+            >
+              Research <span className="text-accent-light">Use Only.</span>
+            </h2>
+
+            <div className="via-accent-light mx-auto my-5 h-[3px] w-24 rounded-full bg-linear-to-r from-transparent to-transparent" />
+
+            <p className="font-sans text-[17px] leading-relaxed font-semibold text-white sm:text-xl">
+              All products are supplied strictly for laboratory and research use
+              only.
+            </p>
+          </header>
+
+          <div className="mt-9 grid gap-3 sm:grid-cols-2 sm:gap-5">
+            {guidelines.map((guideline) => (
+              <GuidelineCard key={guideline.title} guideline={guideline} />
+            ))}
           </div>
 
-          <div className="relative order-2 min-h-90 overflow-hidden rounded-[22px] bg-[linear-gradient(135deg,#FFFFFF_0%,#E8F7FA_100%)] sm:min-h-130 lg:order-1 lg:min-h-[480px]">
-            <Image
-              src="/assets/about-penguin-1.png"
-              alt="Penguin Peptides research products"
-              fill
-              sizes="(max-width: 1023px) 100vw, 50vw"
-              className="object-cover"
+          <div className="border-accent-light/25 bg-primary-dark/30 mt-8 flex items-start gap-3 rounded-xl border p-4 sm:p-5">
+            <FlaskConical
+              size={24}
+              strokeWidth={1.6}
+              className="text-accent-light mt-0.5 shrink-0"
             />
+
+            <p className="text-[15px] leading-[1.8] text-white/85">
+              Voltera Sciences presents all materials strictly in a research-use
+              context and does not make consumer, wellness, or therapeutic
+              claims.
+            </p>
           </div>
         </div>
       </section>

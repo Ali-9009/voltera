@@ -72,9 +72,13 @@ export default function ShopClient({ initialSearch = "" }) {
   return (
     <main className="min-h-screen">
       <PageHero
-        title="A Fresh Approach to"
-        highlight="Research."
-        description="Explore quality research compounds, thoughtfully presented with clear, accessible information."
+        breadcrumb="Shop"
+        subtitle="Shop Our Collection"
+        title="Find Your"
+        highlight="Favorites."
+        description="Explore our premium collection of research compounds, developed with a focus on quality, precision, and consistency."
+        mobileImage="/assets-v/voltera-shop-mobile.png"
+        desktopImage="/assets-v/voltera-shop.png"
       />
 
       <section

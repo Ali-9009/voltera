@@ -2,8 +2,8 @@ import { Suspense } from "react";
 import AccountClient from "@/components/account/AccountClient";
 
 export const metadata = {
-  title: "My Account | Spectrum Biosciences",
-  description: "Manage your Spectrum Biosciences account.",
+  title: "My Account | Voltera Sciences",
+  description: "Manage your Voltera Sciences account.",
 };
 
 export default async function AccountPage({ params }) {

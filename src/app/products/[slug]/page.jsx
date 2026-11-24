@@ -19,12 +19,12 @@ export async function generateMetadata({ params }) {
 
   if (!product) {
     return {
-      title: "Product Not Found | Spectrum Biosciences",
+      title: "Product Not Found | Voltera Sciences",
     };
   }
 
   return {
-    title: `${product.name} | Spectrum Biosciences`,
+    title: `${product.name} | Voltera Sciences`,
     description:
       product.description ||
       `${product.name} — For laboratory research use only.`,

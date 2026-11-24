@@ -166,35 +166,42 @@ function Strengths({ variants, index, setIndex }) {
 }
 
 function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
+  const maxDiscount = Math.max(
+    0,
+    ...PACK_OPTIONS.map((pack) => pack.discountPercent),
+  );
+
+  const badges = ["POPULAR", "MOST POPULAR", "BEST VALUE"];
+
   return (
     <section aria-labelledby="packs-title">
       <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
         <div>
-          <p className="text-secondary text-[11px] font-semibold tracking-[0.12em] uppercase">
+          <p className="text-secondary-dark text-[11px] font-semibold tracking-[0.12em] uppercase">
             More bottles. More savings.
           </p>
+
           <h2
             id="packs-title"
-            className="font-heading mt-1 text-[22px] font-medium tracking-tight text-[#29232D]"
+            className="font-heading text-primary mt-1 text-[22px] font-medium tracking-tight"
           >
             Bundle & Save
           </h2>
         </div>
+
         <span className="bg-primary rounded-full px-3 py-1.5 text-[11px] font-semibold text-white">
-          UP TO 20% OFF
+          UP TO {maxDiscount}% OFF
         </span>
       </div>
 
-      <div className="grid grid-cols-2 gap-1.5 sm:gap-2 md:grid-cols-4">
-        {PACK_OPTIONS.map((pack) => {
+      <div className="grid grid-cols-3 gap-2.5 pt-4 sm:gap-3">
+        {PACK_OPTIONS.map((pack, index) => {
           const selected = selectedPack === pack.quantity;
           const unavailable = pack.quantity > stock;
-          const bottleCount = pack.quantity === 2 ? 2 : 3;
-          const total = getPackPrice(
-            price,
-            pack.quantity,
-            pack.discountPercent,
-          );
+          const bottleCount = Math.min(pack.quantity, 3);
+
+          const discountedUnitPrice =
+            Math.round(price * (1 - pack.discountPercent / 100) * 100) / 100;
 
           return (
             <button
@@ -203,50 +210,59 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
               disabled={unavailable}
               aria-pressed={selected}
               onClick={() => setSelectedPack(selected ? null : pack.quantity)}
-              className={`group flex min-w-0 flex-col items-center justify-center gap-2 rounded-xl border px-2 py-3 text-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:px-3 ${
+              className={`group relative flex min-w-0 flex-col items-center rounded-[16px] border px-2 pt-4 pb-3 text-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:px-3 ${
                 selected
-                  ? "border-primary bg-primary-soft"
-                  : "hover:border-primary/40 border-[#EAE3EB] bg-white"
+                  ? "border-secondary bg-secondary/5 ring-secondary shadow-[0_4px_16px_rgba(201,149,61,0.12)] ring-1"
+                  : "border-border hover:border-secondary/60 hover:bg-secondary/5 bg-white"
               }`}
             >
-              <div className="relative h-15 w-[85px] shrink-0 sm:h-16 sm:w-[100px]">
-                {Array.from({ length: bottleCount }).map((_, index) => {
-                  const bottleWidth = 38;
-                  const bottleHeight = 75;
-                  const stepX = 17;
-                  const groupWidth = bottleWidth + (bottleCount - 1) * stepX;
+              <span
+                className={`absolute -top-3 left-1/2 flex h-6 -translate-x-1/2 items-center justify-center rounded-full px-2.5 font-sans text-[8px] font-extrabold tracking-wide whitespace-nowrap shadow-sm sm:px-3 sm:text-[10px] ${
+                  index === 0
+                    ? "bg-accent text-white"
+                    : index === 1
+                      ? "from-secondary-dark via-accent-light to-secondary-dark text-primary-dark bg-linear-to-r"
+                      : "bg-primary-dark text-white"
+                }`}
+              >
+                {badges[index] ?? "SAVE MORE"}
+              </span>
 
-                  return (
-                    <div
-                      key={index}
-                      className="absolute bottom-0"
-                      style={{
-                        width: `${bottleWidth * 0.8}px`,
-                        height: `${bottleHeight * 0.8}px`,
-                        left: `calc(50% - ${groupWidth / 2}px + ${index * stepX}px)`,
-                        zIndex: bottleCount - index,
-                      }}
-                    >
-                      <Image
-                        src="/pngs/quick-view.png"
-                        alt=""
-                        fill
-                        sizes="38px"
-                        className="object-contain drop-shadow-[0_3px_3px_rgba(45,15,55,0.12)] transition-transform duration-300 group-hover:-translate-y-0.5"
-                      />
-                    </div>
-                  );
-                })}
-              </div>
+              <span className="relative flex h-[70px] w-full items-center justify-center sm:h-[80px]">
+                {Array.from({ length: bottleCount }).map((_, index) => (
+                  <span
+                    key={index}
+                    className="absolute bottom-0 h-full w-[32px] sm:w-[40px]"
+                    style={{
+                      left: `calc(50% + ${
+                        (index - (bottleCount - 1) / 2) * 15
+                      }px)`,
+                      transform: "translateX(-50%)",
+                      zIndex: bottleCount - index,
+                    }}
+                  >
+                    <Image
+                      src="/pngs/quick-view.png"
+                      alt=""
+                      fill
+                      sizes="40px"
+                      className="object-contain drop-shadow-[0_3px_4px_rgba(18,51,107,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
+                    />
+                  </span>
+                ))}
+              </span>
 
-              <div className="flex min-w-0 flex-col items-center gap-1">
-                <p className="font-heading text-primary text-sm leading-tight font-semibold whitespace-nowrap">
-                  {pack.label}
-                </p>
-                <p className="text-xs font-semibold whitespace-nowrap text-emerald-600">
-                  {pack.discountPercent}% OFF
-                </p>
-              </div>
+              <span className="text-primary mt-2 font-sans text-[13px] leading-tight font-extrabold uppercase sm:text-[17px]">
+                {pack.label}
+              </span>
+
+              <span className="text-accent mt-2 font-sans text-[11px] font-extrabold tracking-wide sm:text-[13px]">
+                {pack.discountPercent}% OFF
+              </span>
+
+              <span className="text-muted mt-1.5 font-sans text-[11px] font-medium sm:text-[12px]">
+                {formatMoney(discountedUnitPrice)} each
+              </span>
             </button>
           );
         })}
@@ -566,26 +582,22 @@ export default function ProductDetails({ product }) {
 
   return (
     <main className="min-h-screen bg-white">
-      <section className="px-4 pt-6 pb-12 sm:px-6 lg:px-8 lg:pt-10 lg:pb-16">
+      <section className="px-4 pt-28 pb-12 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-16">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-10">
-            {/* PRODUCT GALLERY */}
             <div className="min-w-0 lg:sticky lg:top-[110px] lg:self-start">
-              <div>
-                <Gallery product={product} />
-              </div>
+              <Gallery product={product} />
             </div>
 
-            {/* PRODUCT INFORMATION */}
             <div className="min-w-0">
-              {/* CATEGORY */}
               <div className="mb-3 flex flex-wrap items-center gap-2">
-                <span className="text-secondary-dark text-xs font-semibold tracking-[0.18em] uppercase">
+                <span className="bg-secondary size-1.5 rounded-full" />
+
+                <span className="text-secondary-dark font-sans text-[11px] font-bold tracking-[0.15em] uppercase">
                   {product.category || "Research Compound"}
                 </span>
               </div>
 
-              {/* NAME AND PRICE */}
               <header>
                 <h1 className="font-heading text-primary text-[clamp(28px,3.2vw,45px)] leading-[1.12] tracking-[-0.025em]">
                   {product.name}
@@ -597,31 +609,97 @@ export default function ProductDetails({ product }) {
                   </p>
                 </div>
 
-                <p className="text-muted mt-4 max-w-xl font-sans text-[13px] leading-[1.8]">
+                <p className="text-muted mt-4 max-w-xl font-sans text-[13px] leading-[1.8] sm:text-[14px]">
                   {product.description ||
                     `${product.name} is intended for appropriate scientific and laboratory research.`}
                 </p>
               </header>
 
-              {/* PRODUCT INFORMATION TAGS */}
-              <div className="mt-5 flex flex-wrap gap-2">
-                <span className="border-primary/15 text-primary inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-xs font-semibold">
-                  <FileCheck2 size={16} className="text-secondary-dark" />
-                  Research Use Only
-                </span>
+              <div className="group border-secondary/30 from-primary via-accent to-primary-light shadow-primary/10 relative isolate mt-5 flex items-center gap-4 overflow-hidden rounded-[14px] border bg-linear-to-r px-4 py-4 shadow-lg sm:gap-5 sm:px-5">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -top-12 -right-10 size-36 rotate-45 rounded-[24px] border border-white/15 bg-white/5"
+                />
 
-                <span className="border-primary/15 text-primary inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-xs font-semibold">
-                  <Package size={16} className="text-secondary-dark" />
-                  Secure Packaging
-                </span>
+                <div
+                  aria-hidden="true"
+                  className="border-accent-light/20 pointer-events-none absolute -top-16 -right-3 size-36 rotate-45 rounded-[24px] border"
+                />
 
-                <span className="border-primary/15 text-primary inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-xs font-semibold">
-                  <Truck size={16} className="text-secondary-dark" />
-                  Shipping at Checkout
-                </span>
+                <FlaskConical
+                  aria-hidden="true"
+                  size={120}
+                  strokeWidth={0.8}
+                  className="pointer-events-none absolute -right-3 -bottom-10 rotate-[-15deg] text-white/10 transition-transform duration-500 group-hover:scale-110"
+                />
+
+                <div className="relative flex shrink-0 items-center gap-2.5 sm:gap-3">
+                  <FlaskConical
+                    size={30}
+                    strokeWidth={1.6}
+                    className="text-accent-light"
+                    aria-hidden="true"
+                  />
+
+                  <span className="font-heading text-accent-light text-[24px] leading-none tracking-tight italic sm:text-[32px]">
+                    10×
+                    <span className="ml-1.5 text-[16px] sm:text-[22px]">
+                      TESTED
+                    </span>
+                  </span>
+                </div>
+
+                <span
+                  aria-hidden="true"
+                  className="bg-accent-light/35 h-9 w-px shrink-0"
+                />
+
+                <div className="relative min-w-0">
+                  <p className="font-sans text-[11px] leading-tight font-bold text-white sm:text-[13px]">
+                    Precision Without Compromise
+                  </p>
+
+                  <p className="mt-1 font-sans text-[9px] leading-relaxed text-white/75 sm:text-[11px]">
+                    Independent Laboratory Analysis
+                  </p>
+                </div>
+
+                <span
+                  aria-hidden="true"
+                  className="via-accent-light absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-transparent to-transparent"
+                />
               </div>
 
-              {/* STRENGTH */}
+              <div className="mt-5 flex flex-wrap gap-2">
+                {[
+                  {
+                    icon: FileCheck2,
+                    label: "Research Use Only",
+                  },
+                  {
+                    icon: Package,
+                    label: "Secure Packaging",
+                  },
+                  {
+                    icon: Truck,
+                    label: "Shipping at Checkout",
+                  },
+                ].map(({ icon: Icon, label }) => (
+                  <span
+                    key={label}
+                    className="border-primary/10 bg-primary-soft/60 text-primary hover:border-secondary/40 inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-sans text-[10px] font-semibold transition-colors duration-300 sm:text-[11px]"
+                  >
+                    <Icon
+                      size={15}
+                      strokeWidth={1.7}
+                      className="text-secondary-dark"
+                    />
+
+                    {label}
+                  </span>
+                ))}
+              </div>
+
               <div className="border-primary/10 mt-6 border-t pt-5">
                 <Strengths
                   variants={variants}
@@ -630,8 +708,17 @@ export default function ProductDetails({ product }) {
                 />
               </div>
 
-              {/* BUNDLE OPTIONS */}
-              <div className="border-primary/10 mt-6 rounded-[18px] border bg-[#FAFBFE] p-4 sm:p-5">
+              <div className="border-primary/10 from-surface to-primary-soft relative isolate mt-6 overflow-hidden rounded-[18px] border bg-linear-to-br via-white p-4 sm:p-5">
+                <div
+                  aria-hidden="true"
+                  className="border-primary/5 bg-primary-light/5 pointer-events-none absolute -top-16 -right-16 -z-10 size-40 rotate-45 rounded-[28px] border"
+                />
+
+                <div
+                  aria-hidden="true"
+                  className="via-secondary/60 pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent"
+                />
+
                 <Packs
                   product={product}
                   price={unitPrice}
@@ -641,7 +728,6 @@ export default function ProductDetails({ product }) {
                 />
               </div>
 
-              {/* QUANTITY + ADD TO CART */}
               <div className="mt-6">
                 <div className="flex w-full min-w-0 items-center gap-2 sm:gap-3">
                   <div className="shrink-0">
@@ -657,88 +743,49 @@ export default function ProductDetails({ product }) {
                     type="button"
                     disabled={!canAdd}
                     onClick={handleAddToCart}
-                    className="group border-secondary/30 hover:border-secondary relative flex h-10 min-w-0 flex-1 items-center justify-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(135deg,#1746A2_0%,#071A43_60%,#030D27_100%)] px-3 font-sans text-[12px] font-semibold whitespace-nowrap text-white shadow-[0_8px_20px_rgba(7,26,67,0.14)] transition-all duration-300 hover:shadow-[0_12px_26px_rgba(7,26,67,0.22)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 sm:h-[52px] sm:px-4 sm:text-[13px]"
+                    className="btn-primary h-10 min-w-0 flex-1 px-3 text-[12px] whitespace-nowrap sm:h-[52px] sm:px-4 sm:text-[13px]"
                   >
-                    <span className="bg-primary-dark absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-disabled:opacity-0" />
+                    <ShoppingBag size={17} strokeWidth={1.8} />
 
-                    <ShoppingBag size={17} className="relative z-10 shrink-0" />
-
-                    <span className="relative z-10">
-                      {canAdd ? "Add to Cart" : "Unavailable"}
-                    </span>
+                    <span>{canAdd ? "Add to Cart" : "Unavailable"}</span>
                   </button>
                 </div>
 
                 {cartMessage && (
                   <p
                     role="status"
-                    className="border-primary/10 bg-primary-soft text-primary mt-3 rounded-xl border px-4 py-3 text-[12px] font-semibold"
+                    className="border-primary/10 bg-primary-soft text-primary mt-3 rounded-xl border px-4 py-3 font-sans text-[12px] font-semibold"
                   >
                     {cartMessage}
                   </p>
                 )}
               </div>
-
-              {/* QUICK SPECIFICATIONS */}
-              <section
-                aria-label="Product specifications"
-                className="border-primary/10 mt-6 overflow-hidden rounded-[16px] border bg-white"
-              >
-                <div className="border-primary/10 flex items-center justify-between border-b bg-[#FAFBFE] px-4 py-3">
-                  <h2 className="font-heading text-primary text-[14px]">
-                    Product Specifications
-                  </h2>
-
-                  <FileCheck2 size={17} className="text-secondary-dark" />
-                </div>
-
-                <dl className="divide-primary/10 divide-y px-4">
-                  {specificationRows.slice(0, 5).map((row) => (
-                    <div
-                      key={row.label}
-                      className="grid grid-cols-[110px_minmax(0,1fr)] gap-3 py-3 sm:grid-cols-[145px_minmax(0,1fr)]"
-                    >
-                      <dt className="text-muted text-sm">{row.label}</dt>
-
-                      <dd className="text-primary min-w-0 text-right text-sm break-words">
-                        {row.value}
-                      </dd>
-                    </div>
-                  ))}
-                </dl>
-              </section>
             </div>
           </div>
 
-          {/* LOWER PRODUCT SECTION */}
           <div className="border-primary/10 mt-12 border-t pt-10 lg:mt-16">
             <ProductResearchSection
               product={product}
               specificationRows={specificationRows}
               certificatePdf={certificatePdf}
             />
-
-            {/* <div className="mt-6">
-              <Assurance product={product} />
-            </div> */}
           </div>
         </div>
       </section>
 
-      {/* EXISTING PRODUCT SLIDER */}
-      <CardSlider />
+      <CardSlider currentProduct={product} />
 
-      {/* EXISTING MOBILE STICKY CART */}
       <div
-        className={`border-primary/10 fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+12px)] shadow-[0_-8px_30px_rgba(7,26,67,0.08)] backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`border-primary/10 fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+12px)] shadow-[0_-8px_30px_rgba(18,51,107,0.08)] backdrop-blur-xl transition-all duration-300 lg:hidden ${
           showStickyCart
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-full opacity-0"
         }`}
+        inert={!showStickyCart}
       >
         <div className="mx-auto flex max-w-xl items-center gap-3">
           <div className="min-w-0 flex-1">
-            <p className="text-muted truncate text-[11px]">
+            <p className="text-muted truncate font-sans text-[11px]">
               {variant?.label} · {totalBottles} bottles
             </p>
 
@@ -751,15 +798,13 @@ export default function ProductDetails({ product }) {
             type="button"
             disabled={!canAdd}
             onClick={handleAddToCart}
-            className="group border-secondary/30 relative flex h-12 items-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(135deg,#1746A2_0%,#071A43_60%,#030D27_100%)] px-4 text-xs font-semibold text-white disabled:cursor-not-allowed disabled:opacity-50 sm:px-5"
+            className="btn-primary h-12 shrink-0 px-4 text-xs sm:px-5"
           >
-            <span className="bg-primary-dark absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-disabled:opacity-0" />
+            <ShoppingBag size={17} strokeWidth={1.8} />
 
-            <ShoppingBag size={17} className="relative z-10" />
+            <span>Add to Cart</span>
 
-            <span className="relative z-10">Add to Cart</span>
-
-            <ArrowUpRight size={16} className="relative z-10" />
+            <ArrowUpRight size={16} strokeWidth={1.8} />
           </button>
         </div>
       </div>

@@ -1,375 +1,281 @@
 "use client";
 
-import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import Link from "next/link";
+import {
+  Fingerprint,
+  FlaskConical,
+  Scale,
+  Atom,
+  ShieldCheck,
+  Microscope,
+  Activity,
+  Droplets,
+  TestTube,
+  Biohazard,
+  ArrowUpRight,
+} from "lucide-react";
 
 const researchFeatures = [
   {
-    number: "01",
     title: "Identity",
-    description: "Compound identity verification.",
-    image: "/assets/identification.jpg",
+    description: "Compound verification",
+    icon: Fingerprint,
   },
   {
-    number: "02",
     title: "Purity",
-    description: "Advanced purity analysis.",
-    image: "/assets/purity.jpg",
+    description: "HPLC analysis",
+    icon: FlaskConical,
   },
   {
-    number: "03",
-    title: "Endotoxins",
-    description: "Laboratory endotoxin screening.",
-    image: "/assets/endotoxins.jpg",
-  },
-  {
-    number: "04",
     title: "Net Content",
-    description: "Precise content verification.",
-    image: "/assets/measurement.jpg",
+    description: "Peptide quantification",
+    icon: Scale,
+  },
+  {
+    title: "Arsenic",
+    description: "Trace metal screening",
+    icon: Atom,
+  },
+  {
+    title: "Cadmium",
+    description: "ICP-MS analysis",
+    icon: Microscope,
+  },
+  {
+    title: "Lead",
+    description: "Heavy metal screening",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Mercury",
+    description: "Trace metal analysis",
+    icon: Droplets,
+  },
+  {
+    title: "Chromium",
+    description: "ICP-MS screening",
+    icon: Activity,
+  },
+  {
+    title: "Sterility",
+    description: "PCR testing",
+    icon: TestTube,
+  },
+  {
+    title: "Endotoxins",
+    description: "USP <85> testing",
+    icon: Biohazard,
   },
 ];
 
-function ResearchFeature({ feature }) {
+const positions = [
+  { x: 50, y: 9 },
+  { x: 72, y: 16 },
+  { x: 87, y: 36 },
+  { x: 87, y: 61 },
+  { x: 72, y: 83 },
+  { x: 50, y: 91 },
+  { x: 28, y: 83 },
+  { x: 13, y: 61 },
+  { x: 13, y: 36 },
+  { x: 28, y: 16 },
+];
+
+function ResearchFeature({ feature, position }) {
+  const Icon = feature.icon;
+
   return (
     <article
-      data-research-feature
-      className="group hover:border-secondary/60 relative z-20 flex h-full min-w-0 flex-col overflow-hidden rounded-[18px] border border-white/15 bg-white/[0.07] p-3 shadow-[0_12px_35px_rgba(0,0,0,0.15)] backdrop-blur-xl transition-[border-color,background-color,box-shadow] duration-300 hover:bg-white/[0.11] hover:shadow-[0_18px_40px_rgba(0,0,0,0.25)] sm:p-4"
+      style={{
+        "--node-x": `${position.x}%`,
+        "--node-y": `${position.y}%`,
+      }}
+      className="group relative flex min-w-0 flex-col items-center text-center lg:absolute lg:top-[var(--node-y)] lg:left-[var(--node-x)] lg:w-[180px] lg:-translate-x-1/2 lg:-translate-y-1/2"
     >
-      <div
-        aria-hidden="true"
-        className="via-secondary/60 pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent"
-      />
+      <div className="relative flex size-[64px] items-center justify-center sm:size-[76px]">
+        <span
+          aria-hidden="true"
+          className="border-primary-light/20 group-hover:border-secondary/60 absolute inset-0 rounded-full border transition-all duration-500 group-hover:scale-110"
+        />
 
-      <div className="relative flex items-center justify-between">
-        <span className="text-accent-light/80 font-sans text-[9px] font-bold tracking-[0.15em] sm:text-[10px]">
-          ANALYSIS
-        </span>
+        <span
+          aria-hidden="true"
+          className="border-primary-light/20 absolute inset-[5px] rounded-full border border-dashed motion-safe:animate-[spin_25s_linear_infinite]"
+        />
 
-        <div className="flex items-center gap-1">
-          <span className="bg-secondary size-1.5 rounded-full" />
-          <span className="size-1 rounded-full bg-white/30" />
-          <span className="size-1 rounded-full bg-white/20" />
-        </div>
-      </div>
-
-      <div className="relative mx-auto mt-3 flex size-[110px] shrink-0 items-center justify-center sm:size-[125px] lg:size-[140px]">
-        <div className="border-secondary/50 pointer-events-none absolute inset-0 rounded-full border" />
-
-        <div className="pointer-events-none absolute inset-[5px] rounded-full border border-dashed border-white/25" />
-
-        <div className="border-secondary/60 bg-primary relative size-[calc(100%-16px)] shrink-0 overflow-hidden rounded-full border-[3px]">
-          <Image
-            src={feature.image}
-            alt={`${feature.title} laboratory research illustration`}
-            fill
-            sizes="(max-width: 639px) 94px, (max-width: 1023px) 109px, 124px"
-            className="rounded-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+        <span className="to-primary-light/15 text-primary group-hover:border-secondary group-hover:from-accent-light/40 group-hover:to-secondary/20 group-hover:text-secondary-dark relative flex size-[52px] items-center justify-center rounded-full border border-white bg-linear-to-br from-white shadow-[0_5px_15px_rgba(18,51,107,0.12)] transition-all duration-300 group-hover:bg-linear-to-br sm:size-[62px]">
+          <Icon
+            aria-hidden="true"
+            strokeWidth={1.7}
+            className="size-6 transition-transform duration-300 group-hover:scale-110 sm:size-7"
           />
-        </div>
-
-        <span className="border-primary bg-secondary absolute top-1/2 -right-1 z-10 size-3 -translate-y-1/2 rounded-full border-2 shadow-[0_0_12px_rgba(201,149,61,0.5)]" />
-      </div>
-
-      <div className="mt-3 text-center">
-        <h3 className="font-heading text-[12px] leading-[1.3] text-white sm:text-[15px] lg:text-[17px]">
-          {feature.title}
-        </h3>
-
-        {/* <p className="mx-auto mt-1.5 max-w-[220px] font-sans text-[10px] leading-[1.6] text-white/65 sm:text-[12px]">
-          {feature.description}
-        </p> */}
-      </div>
-
-      {/* <div className="mt-auto flex items-center justify-center gap-2 border-t border-white/10 pt-2">
-        <span className="bg-secondary size-1.5 rounded-full" />
-
-        <span className="font-sans text-[9px] font-semibold tracking-[0.1em] text-white/50 uppercase">
-          Research Analysis
         </span>
-      </div> */}
-    </article>
-  );
-}
 
-function CenterPortal() {
-  return (
-    <div
-      data-showcase-portal
-      className="relative mx-auto flex size-[250px] shrink-0 items-center justify-center sm:size-[300px] lg:size-[350px]"
-    >
-      <div
-        aria-hidden="true"
-        className="bg-primary-light/20 pointer-events-none absolute -inset-12 rounded-full blur-[65px]"
-      />
-
-      <div className="border-secondary/20 absolute inset-0 rounded-full border" />
-
-      <div className="showcase-orbit border-secondary/35 absolute inset-[10px] rounded-full border border-dashed" />
-
-      <div className="absolute inset-[25px] rounded-full border border-white/10" />
-
-      <div className="border-secondary/25 absolute inset-[40px] rounded-full border" />
-
-      <div className="border-secondary/35 absolute inset-[52px] rounded-full border bg-[radial-gradient(circle_at_40%_30%,#1746A2_0%,#071A43_55%,#030D27_100%)] shadow-[0_0_50px_rgba(23,70,162,0.25),inset_0_0_35px_rgba(0,0,0,0.2)]" />
-
-      <div className="absolute inset-[60px] rounded-full border border-white/10" />
-
-      <span className="bg-secondary absolute top-[10px] left-1/2 z-20 size-2 -translate-x-1/2 rounded-full shadow-[0_0_12px_rgba(201,149,61,0.5)]" />
-
-      <span className="bg-secondary absolute bottom-[10px] left-1/2 z-20 size-2 -translate-x-1/2 rounded-full shadow-[0_0_12px_rgba(201,149,61,0.5)]" />
-
-      <span className="bg-secondary absolute top-1/2 left-[10px] z-20 size-2 -translate-y-1/2 rounded-full" />
-
-      <span className="bg-secondary absolute top-1/2 right-[10px] z-20 size-2 -translate-y-1/2 rounded-full" />
-
-      <div className="relative z-30 flex h-[100px] w-[155px] items-center justify-center sm:h-[120px] sm:w-[185px] lg:h-[140px] lg:w-[210px]">
-        <Image
-          src="/assets-v/voltera-logo.png"
-          alt="Voltera Sciences"
-          fill
-          sizes="(max-width: 639px) 155px, (max-width: 1023px) 185px, 210px"
-          className="object-contain drop-shadow-[0_8px_20px_rgba(0,0,0,0.2)]"
+        <span
+          aria-hidden="true"
+          className="bg-secondary absolute top-0 right-1 size-2 rounded-full border border-white"
         />
       </div>
-    </div>
+
+      <h3 className="text-primary group-hover:text-secondary-dark mt-2.5 font-sans text-[13px] leading-tight font-extrabold transition-colors duration-300 sm:text-[15px]">
+        {feature.title}
+      </h3>
+
+      <p className="text-muted mt-1 font-sans text-[10px] leading-relaxed sm:text-[12px]">
+        {feature.description}
+      </p>
+    </article>
   );
 }
 
 function ResearchConnections() {
   return (
     <svg
-      viewBox="0 0 1200 480"
+      viewBox="0 0 1000 1000"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+      className="text-primary-light/35 pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
     >
-      <defs>
-        <linearGradient
-          id="volteraConnectionGradient"
-          x1="0%"
-          y1="0%"
-          x2="100%"
-          y2="100%"
-        >
-          <stop offset="0%" stopColor="#C9953D" stopOpacity="0.15" />
-          <stop offset="50%" stopColor="#E8C77B" stopOpacity="0.65" />
-          <stop offset="100%" stopColor="#C9953D" stopOpacity="0.15" />
-        </linearGradient>
-      </defs>
-
-      {[
-        "M 290 115 Q 410 115 475 190",
-        "M 910 115 Q 790 115 725 190",
-        "M 290 365 Q 410 365 475 290",
-        "M 910 365 Q 790 365 725 290",
-      ].map((path) => (
-        <path
-          key={path}
-          d={path}
-          stroke="url(#volteraConnectionGradient)"
-          strokeWidth="1.5"
+      {positions.map((position, index) => (
+        <line
+          key={index}
+          x1="500"
+          y1="500"
+          x2={position.x * 10}
+          y2={position.y * 10}
+          stroke="currentColor"
+          strokeWidth="1"
           strokeDasharray="5 7"
-          fill="none"
+          vectorEffect="non-scaling-stroke"
         />
       ))}
     </svg>
   );
 }
 
+function CenterPortal() {
+  return (
+    <div className="relative mx-auto flex size-[220px] items-center justify-center sm:size-[260px] lg:size-[290px]">
+      <span
+        aria-hidden="true"
+        className="bg-primary-light/10 absolute -inset-5 rounded-full blur-[45px]"
+      />
+
+      <span
+        aria-hidden="true"
+        className="border-primary-light/20 absolute inset-0 rounded-full border"
+      />
+
+      <span
+        aria-hidden="true"
+        className="border-secondary/40 absolute inset-3 rounded-full border border-dashed motion-safe:animate-[spin_40s_linear_infinite]"
+      />
+
+      <span
+        aria-hidden="true"
+        className="border-primary-light/15 absolute inset-7 rounded-full border"
+      />
+
+      <span
+        aria-hidden="true"
+        className="bg-secondary absolute top-0 left-1/2 size-2.5 -translate-x-1/2 rounded-full"
+      />
+
+      <span
+        aria-hidden="true"
+        className="bg-secondary absolute right-0 bottom-1/2 size-2.5 rounded-full"
+      />
+
+      <div className="relative flex size-[155px] flex-col items-center justify-center rounded-[24px] border border-white bg-white p-6 shadow-[0_15px_35px_rgba(18,51,107,0.15)] sm:size-[180px] lg:size-[195px]">
+        <div className="relative h-[85px] w-full sm:h-[105px]">
+          <Image
+            src="/assets-v/voltera-black.png"
+            alt="Voltera Sciences"
+            fill
+            sizes="150px"
+            className="object-contain"
+          />
+        </div>
+
+        <span className="from-secondary-dark via-accent-light to-secondary-dark mt-3 h-[2px] w-12 rounded-full bg-linear-to-r" />
+      </div>
+    </div>
+  );
+}
+
 export default function ResearchShowcase() {
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const ctx = gsap.context(() => {
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
-      if (reducedMotion) return;
-
-      const heading = section.querySelector("[data-showcase-heading]");
-      const portal = section.querySelector("[data-showcase-portal]");
-
-      const cards = gsap.utils.toArray(
-        section.querySelectorAll("[data-research-feature]"),
-      );
-
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: "top 78%",
-          once: true,
-        },
-      });
-
-      timeline.fromTo(
-        heading,
-        {
-          autoAlpha: 0,
-          y: 25,
-        },
-        {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.6,
-          ease: "power2.out",
-        },
-      );
-
-      timeline.fromTo(
-        portal,
-        {
-          autoAlpha: 0,
-          scale: 0.7,
-          rotation: -8,
-        },
-        {
-          autoAlpha: 1,
-          scale: 1,
-          rotation: 0,
-          duration: 0.8,
-          ease: "back.out(1.5)",
-        },
-        "-=0.25",
-      );
-
-      cards.forEach((card, index) => {
-        timeline.fromTo(
-          card,
-          {
-            autoAlpha: 0,
-            scale: 0.8,
-            y: 25,
-          },
-          {
-            autoAlpha: 1,
-            scale: 1,
-            y: 0,
-            duration: 0.55,
-            ease: "back.out(1.6)",
-          },
-          index === 0 ? "-=0.3" : "-=0.25",
-        );
-      });
-    }, section);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
     <section
-      ref={sectionRef}
       aria-labelledby="research-showcase-heading"
-      className="relative isolate overflow-hidden bg-[linear-gradient(135deg,#020817_0%,#071A43_50%,#102B65_100%)] px-4 py-10 sm:px-6 sm:py-12 lg:px-8 lg:py-14"
+      className="from-primary-soft to-primary-light/15 relative isolate overflow-hidden bg-linear-to-br via-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:55px_55px] opacity-[0.12]"
+        className="bg-primary-light/15 pointer-events-none absolute -top-40 -right-32 size-[550px] rounded-full blur-[120px]"
       />
 
       <div
         aria-hidden="true"
-        className="bg-primary-light/15 pointer-events-none absolute top-1/3 -left-60 size-[450px] rounded-full blur-[120px]"
+        className="bg-primary-light/10 pointer-events-none absolute -bottom-48 -left-32 size-[550px] rounded-full blur-[120px]"
       />
 
       <div
         aria-hidden="true"
-        className="bg-primary-light/20 pointer-events-none absolute -right-60 bottom-0 size-[450px] rounded-full blur-[120px]"
+        className="border-primary-light/15 pointer-events-none absolute top-1/4 -right-28 size-[450px] rounded-full border border-dashed"
       />
 
       <div
         aria-hidden="true"
-        className="via-secondary/60 pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent to-transparent"
+        className="border-primary-light/10 pointer-events-none absolute bottom-10 -left-40 size-[420px] rounded-full border"
       />
 
-      <div className="relative z-10 mx-auto max-w-[1250px]">
-        <header
-          data-showcase-heading
-          className="mx-auto max-w-[700px] text-center"
-        >
+      <div className="relative mx-auto max-w-7xl">
+        <header className="mx-auto max-w-[750px] text-center">
+         
+
           <h2
             id="research-showcase-heading"
-            className="font-heading text-[clamp(28px,4.5vw,50px)] leading-[1.15] text-white"
+            className="font-heading text-primary text-[clamp(28px,4.5vw,50px)] leading-[1.15] tracking-tight"
           >
             Precision at
-            <br />
-            <span className="text-accent-light">Every Level.</span>
+         {" "}
+            <span className="text-secondary">Every Level.</span>
           </h2>
 
-          <p className="mx-auto mt-4 max-w-[560px] font-sans text-[13px] leading-[1.75] text-white/65 sm:text-[15px]">
-            Explore the essential quality indicators behind research materials,
-            from compound identity and purity to batch-specific analysis.
+          <p className="text-muted mx-auto mt-4 max-w-[580px] font-sans text-[13px] leading-[1.8] sm:text-[15px]">
+            Explore the laboratory testing indicators behind compound identity,
+            purity, content, and batch-specific quality analysis.
           </p>
         </header>
 
-        <div className="relative mx-auto mt-8 max-w-[1200px] lg:mt-10 lg:h-[500px]">
+        <div className="relative mx-auto mt-10 max-w-[1050px] lg:mt-8 lg:h-[680px]">
           <ResearchConnections />
 
-          <div className="relative z-20 mb-8 flex justify-center lg:absolute lg:inset-0 lg:mb-0 lg:items-center">
+          <div className="relative mb-10 flex justify-center lg:absolute lg:inset-0 lg:mb-0 lg:items-center">
             <CenterPortal />
           </div>
 
-          <div className="relative z-30 grid grid-cols-2 gap-3 sm:gap-5 lg:absolute lg:inset-0 lg:grid-cols-[260px_1fr_260px] lg:grid-rows-2 lg:gap-x-4 lg:gap-y-6 xl:grid-cols-[280px_1fr_280px]">
-            {researchFeatures.map((feature, index) => {
-              const positions = [
-                "lg:col-start-1 lg:row-start-1",
-                "lg:col-start-3 lg:row-start-1",
-                "lg:col-start-1 lg:row-start-2",
-                "lg:col-start-3 lg:row-start-2",
-              ];
-
-              return (
-                <div
-                  key={feature.number}
-                  className={`${positions[index]} min-w-0`}
-                >
-                  <ResearchFeature feature={feature} />
-                </div>
-              );
-            })}
+          <div className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-5 lg:static">
+            {researchFeatures.map((feature, index) => (
+              <ResearchFeature
+                key={feature.title}
+                feature={feature}
+                position={positions[index]}
+              />
+            ))}
           </div>
         </div>
 
-        <div className="relative z-30 mt-8 flex justify-center">
-          <div className="border-secondary/25 flex items-center gap-3 rounded-full border bg-white/[0.06] px-5 py-3 backdrop-blur-md">
-            <span className="bg-secondary size-2 rounded-full" />
+        <div className="relative mt-6 flex flex-col items-center gap-4 text-center lg:mt-8">
+         
 
-            <span className="font-sans text-[10px] font-semibold tracking-[0.12em] text-white/80 uppercase sm:text-[11px]">
-              Science-Driven Research Standards
-            </span>
-          </div>
+          <Link href="/coa" className="btn-hero-primary">
+            Explore COA Library
+            <ArrowUpRight size={18} strokeWidth={1.8} />
+          </Link>
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes showcaseOrbit {
-          from {
-            transform: rotate(0deg);
-          }
-
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        .showcase-orbit {
-          animation: showcaseOrbit 45s linear infinite;
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .showcase-orbit {
-            animation: none;
-          }
-        }
-      `}</style>
     </section>
   );
 }

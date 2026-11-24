@@ -1,93 +1,59 @@
 "use client";
 
 import Link from "next/link";
-
 import {
   ArrowLeft,
-  ArrowRight,
   ArrowUpRight,
   ShoppingBag,
-  ShieldCheck,
   LockKeyhole,
-  FlaskConical,
-  PackageCheck,
   Trash2,
   ChevronRight,
   Sparkles,
 } from "lucide-react";
 
 import { formatCartMoney, useCart } from "@/context/CartContext";
-
 import CartLineItem from "@/components/cart/CartLineItem";
 import FreeShippingProgress from "@/components/cart/FreeShippingProgress";
 
-/* =====================================================
-   EMPTY CART
-===================================================== */
-
 function EmptyCart() {
   return (
-    <div className="relative flex min-h-[430px] flex-col items-center justify-center overflow-hidden rounded-[24px] bg-[linear-gradient(135deg,#FFFFFF_0%,#F0FAFC_50%,#E4F6FA_100%)] px-5 py-14 text-center sm:min-h-[480px]">
-      <div className="relative z-10 flex flex-col items-center">
-        {/* ICON */}
-
-        <div className="relative mb-7">
-          <div className="border-primary/10 flex h-[105px] w-[105px] items-center justify-center rounded-[30px] border bg-white shadow-[0_20px_55px_rgba(85,32,95,0.08)]">
-            <ShoppingBag size={43} strokeWidth={1.3} className="text-primary" />
-          </div>
-
-          <span className="bg-secondary absolute -top-2 -right-2 flex h-9 w-9 items-center justify-center rounded-full text-white shadow-lg">
-            <Sparkles size={17} />
-          </span>
-        </div>
-
-        {/* CONTENT */}
-
-        <span className="text-secondary mb-3 font-sans text-[10px] font-bold tracking-[0.18em] uppercase">
-          Your Research Collection Awaits
+    <div className="border-border via-primary-soft to-primary-light/15 flex min-h-[420px] flex-col items-center justify-center rounded-3xl border bg-linear-to-br from-white px-5 py-12 text-center sm:min-h-[480px]">
+      <div className="relative mb-7">
+        <span className="border-secondary/30 from-primary-light via-accent to-primary text-accent-light shadow-primary/15 flex size-24 items-center justify-center rounded-[26px] border bg-linear-to-br shadow-xl">
+          <ShoppingBag size={42} strokeWidth={1.4} />
         </span>
 
-        <h2 className="font-heading text-[clamp(26px,4vw,36px)] leading-tight font-bold tracking-[-0.055em] text-[#29232D]">
-          Your Cart Is Empty<span className="text-secondary">.</span>
-        </h2>
-
-        <p className="mt-4 max-w-[380px] font-sans text-[13px] leading-[1.9] text-[#817586] sm:text-[14px]">
-          Your next discovery starts here. Explore our research collection and
-          add products to your cart.
-        </p>
-
-        {/* CTA */}
-
-        <Link
-          href="/shop"
-          className="group relative mt-8 inline-flex items-center gap-6 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] p-2 pl-7 font-sans text-[12px] font-bold text-white shadow-[0_12px_30px_rgba(7,85,143,0.15)] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-[0_18px_40px_rgba(7,85,143,0.20)] active:scale-[0.98] sm:text-[13px]"
-        >
-          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
-
-          <span className="relative z-10">Explore Collection</span>
-
-          <span className="text-primary relative z-10 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white">
-            <ArrowUpRight
-              size={20}
-              className="transition-transform duration-300 ease-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
-          </span>
-        </Link>
+        <span className="border-accent-light from-accent-light to-secondary-dark text-primary-dark absolute -top-2 -right-2 flex size-9 items-center justify-center rounded-full border bg-linear-to-br shadow-md">
+          <Sparkles size={18} />
+        </span>
       </div>
+
+      <p className="text-secondary-dark mb-3 text-xs font-bold tracking-widest uppercase">
+        Your Research Collection Awaits
+      </p>
+
+      <h2 className="font-heading text-primary text-[clamp(26px,4vw,36px)] leading-tight">
+        Your Cart Is Empty<span className="text-secondary">.</span>
+      </h2>
+
+      <p className="text-muted mt-4 max-w-[400px] text-base leading-[1.8]">
+        Your next discovery starts here. Explore our research collection and add
+        products to your cart.
+      </p>
+
+      <Link href="/shop" className="btn-primary mt-7 h-12 gap-3 px-7 text-base">
+        Explore Collection
+        <ArrowUpRight size={19} />
+      </Link>
     </div>
   );
 }
-
-/* =====================================================
-   CART PAGE
-===================================================== */
 
 export default function CartPageClient() {
   const { items, itemCount, subtotal, hydrated, clearCart } = useCart();
 
   const hasItems = hydrated && items.length > 0;
 
-  // These values represent the discounts stored with each selected pack.
   const bundleSavings = items.reduce((total, item) => {
     const packSize = Number(item.packSize) || 1;
     const unitPrice = Number(item.unitPrice);
@@ -101,246 +67,213 @@ export default function CartPageClient() {
   }, 0);
 
   return (
-    <main className="min-h-screen pt-8 md:pt-10">
-      {/* ==========================================
-          PAGE HEADER
-      ========================================== */}
-
-      <section className="px-4 sm:px-6 lg:px-10">
+    <main className="bg-surface min-h-screen">
+      <header className="border-border from-primary-soft to-primary-soft border-b bg-linear-to-r via-white px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
         <div className="mx-auto max-w-7xl">
-          <nav aria-label="Breadcrumb" className="mb-7">
-            <ol className="flex items-center gap-2 font-sans text-xs text-[#96899A]">
-              <li>
-                <Link href="/" className="hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <ChevronRight size={14} />
-              </li>
-              <li className="text-primary font-semibold">Shopping Cart</li>
-            </ol>
+          <nav
+            aria-label="Breadcrumb"
+            className="text-muted mb-5 flex items-center gap-2 text-sm"
+          >
+            <Link href="/" className="hover:text-primary transition-colors">
+              Home
+            </Link>
+
+            <ChevronRight size={15} aria-hidden="true" />
+
+            <span aria-current="page" className="text-primary font-semibold">
+              Shopping Cart
+            </span>
           </nav>
 
-          <div className="flex flex-col justify-between gap-6 border-b border-[#EEE6EF] pb-8 sm:flex-row sm:items-end">
+          <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <span className="text-secondary mb-3 block font-sans text-[11px] font-semibold tracking-[0.14em] uppercase">
-                Spectrum Biosciences
-              </span>
+              <p className="text-secondary-dark mb-3 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
+                <span className="bg-secondary size-1.5 rounded-full" />
+                Voltera Sciences
+              </p>
+
               <h1 className="section-heading">
                 Shopping Cart<span className="text-secondary">.</span>
               </h1>
-              <p className="mt-3 font-sans text-sm text-[#817586]">
+
+              <div className="from-secondary-dark via-accent-light to-secondary-dark my-4 h-[3px] w-20 rounded-full bg-linear-to-r" />
+
+              <p aria-live="polite" className="text-muted text-base">
                 {!hydrated
                   ? "Loading your cart..."
                   : itemCount === 0
                     ? "Your cart is currently empty."
-                    : `${itemCount} ${itemCount === 1 ? "bottle" : "bottles"} in your cart`}
+                    : `${itemCount} ${
+                        itemCount === 1 ? "bottle" : "bottles"
+                      } in your cart`}
               </p>
             </div>
 
             <Link
               href="/shop"
-              className="group border-primary/20 text-primary hover:border-primary hover:bg-primary inline-flex w-fit items-center gap-2 rounded-full border px-5 py-3 font-sans text-[12px] font-semibold transition-all duration-300 hover:text-white"
+              className="group border-primary/20 text-primary hover:border-secondary hover:bg-primary-soft inline-flex h-11 w-fit items-center justify-center gap-2 rounded-full border bg-white px-5 text-sm font-semibold transition-all duration-300"
             >
               <ArrowLeft
-                size={16}
-                className="transition-transform duration-300 group-hover:-translate-x-1"
+                size={17}
+                className="transition-transform group-hover:-translate-x-1"
               />
               Continue Shopping
             </Link>
           </div>
         </div>
-      </section>
+      </header>
 
-      {/* ==========================================
-          CART CONTENT
-      ========================================== */}
+      <section className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-start gap-7 lg:grid-cols-[minmax(0,1fr)_390px] xl:gap-10">
+          <section aria-labelledby="cart-items-heading" className="min-w-0">
+            <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
+              <h2
+                id="cart-items-heading"
+                className="font-heading text-primary text-xl sm:text-2xl"
+              >
+                Selected Products
+              </h2>
 
-      <section className="px-4 py-8 sm:px-6 md:py-12 lg:px-10">
-        <div className="mx-auto max-w-7xl">
-          <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_390px] xl:gap-10">
-            {/* ======================================
-                LEFT SIDE - CART ITEMS
-            ====================================== */}
-
-            <section aria-label="Shopping cart items" className="min-w-0">
-              {/* SECTION HEADER */}
-
-              <div className="mb-5 flex items-center justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <h2 className="font-heading text-[22px] font-bold tracking-[-0.045em] text-[#29232D] sm:text-[25px]">
-                    Selected Products
-                  </h2>
-                </div>
-
-                {hasItems && (
-                  <button
-                    type="button"
-                    onClick={clearCart}
-                    className="group inline-flex items-center gap-2 font-sans text-[11px] font-semibold text-[#978A9A] transition-colors hover:text-red-500 sm:text-[12px]"
-                  >
-                    <Trash2 size={15} />
-                    Clear Cart
-                  </button>
-                )}
-              </div>
-
-              {/* CART PRODUCTS */}
-
-              {!hydrated ? (
-                <div className="rounded-[24px] border border-[#EEE6EF] bg-white p-6 sm:p-8">
-                  <div
-                    role="status"
-                    className="flex min-h-[220px] items-center justify-center font-sans text-[13px] text-[#817586]"
-                  >
-                    Loading your cart...
-                  </div>
-                </div>
-              ) : hasItems ? (
-                <div className="overflow-hidden rounded-[24px] border border-[#EEE6EF] bg-white px-4 shadow-[0_12px_35px_rgba(85,32,95,0.035)] sm:px-6">
-                  {items.map((item) => (
-                    <CartLineItem key={item.key} item={item} />
-                  ))}
-                </div>
-              ) : (
-                <EmptyCart />
+              {hasItems && (
+                <button
+                  type="button"
+                  onClick={clearCart}
+                  className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm font-semibold text-red-600 transition-colors hover:bg-red-100"
+                >
+                  <Trash2 size={16} />
+                  Clear Cart
+                </button>
               )}
-            </section>
+            </div>
 
-            {/* ======================================
-                RIGHT SIDE - ORDER SUMMARY
-            ====================================== */}
+            {!hydrated ? (
+              <div
+                role="status"
+                className="border-border text-muted flex min-h-[240px] items-center justify-center gap-3 rounded-2xl border bg-white text-base"
+              >
+                <span className="border-primary/15 border-t-primary size-5 animate-spin rounded-full border-2 motion-reduce:animate-none" />
+                Loading your cart...
+              </div>
+            ) : hasItems ? (
+              <div className="border-border overflow-hidden rounded-2xl border bg-white px-4 shadow-sm sm:px-6">
+                {items.map((item) => (
+                  <CartLineItem key={item.key} item={item} />
+                ))}
+              </div>
+            ) : (
+              <EmptyCart />
+            )}
+          </section>
 
-            <aside
-              aria-label="Order summary"
-              className="lg:sticky lg:top-[105px]"
-            >
-              <div className="overflow-hidden rounded-[26px] border border-[#EBE1EC] bg-white shadow-[0_20px_60px_rgba(85,32,95,0.07)]">
-                {/* SUMMARY HEADER */}
+          <aside
+            aria-label="Order summary"
+            className="min-w-0 lg:sticky lg:top-28"
+          >
+            <div className="border-primary/15 shadow-primary/5 overflow-hidden rounded-2xl border bg-white shadow-lg">
+              <header className="border-secondary/30 from-primary-light via-accent to-primary relative border-b bg-linear-to-r px-5 py-6 sm:px-6">
+                <div
+                  aria-hidden="true"
+                  className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 top-0 h-[3px] bg-linear-to-r"
+                />
 
-                <div className="flex items-center justify-between border-b border-[#EEE6EF] px-5 py-5 sm:px-6">
+                <div className="flex items-center gap-3">
+                  <span className="border-accent-light/30 text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border bg-white/10">
+                    <ShoppingBag size={24} strokeWidth={1.6} />
+                  </span>
+
                   <div>
-                    <h2 className="font-heading text-xl font-bold text-[#29232D]">
-                      Order summary
+                    <h2 className="font-heading text-xl text-white">
+                      Order Summary
                     </h2>
-                    <p className="mt-1 text-sm text-[#817586]">
+
+                    <p className="mt-1 text-sm text-white/85">
                       Review products before payment
                     </p>
                   </div>
                 </div>
+              </header>
 
-                {/* SUMMARY CONTENT */}
+              <div className="space-y-6 p-5 sm:p-6">
+                <FreeShippingProgress />
 
-                <div className="space-y-6 p-5 sm:p-7">
-                  {/* SHIPPING PROGRESS */}
-
-                  <FreeShippingProgress />
-
-                  {/* PRICE BREAKDOWN */}
-
-                  <div className="space-y-4 border-b border-[#EEE6EF] pb-6">
-                    <div className="flex items-center justify-between gap-4">
-                      <span className="font-sans text-[13px] text-[#817586]">
-                        Subtotal
-                      </span>
-
-                      <span className="font-sans text-[13px] font-bold text-[#29232D]">
-                        {formatCartMoney(subtotal)}
-                      </span>
-                    </div>
-
-                    {/* BUNDLE SAVINGS */}
-
-                    {bundleSavings > 0 && (
-                      <div className="flex items-center justify-between gap-4">
-                        <span className="text-secondary flex items-center gap-2 font-sans text-[12px] font-semibold">
-                          <Sparkles size={15} />
-                          Bundle Savings
-                        </span>
-
-                        <span className="text-secondary font-sans text-[13px] font-bold">
-                          -{formatCartMoney(bundleSavings)}
-                        </span>
-                      </div>
-                    )}
-
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="font-sans text-[13px] text-[#817586]">
-                        Shipping
-                      </span>
-
-                      <span className="max-w-[165px] text-right font-sans text-[12px] text-[#817586]">
-                        Calculated at checkout
-                      </span>
-                    </div>
-
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="font-sans text-[13px] text-[#817586]">
-                        Taxes
-                      </span>
-
-                      <span className="font-sans text-[12px] text-[#817586]">
-                        Calculated at checkout
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* TOTAL */}
-
+                <dl className="border-border space-y-4 border-b pb-6">
                   <div className="flex items-center justify-between gap-4">
-                    <div>
-                      <span className="font-heading text-base font-semibold text-[#29232D]">
-                        Total
-                      </span>
-                    </div>
+                    <dt className="text-muted text-base">Subtotal</dt>
 
-                    <strong className="font-heading text-primary text-[clamp(25px,3vw,32px)] font-extrabold tracking-[-0.06em]">
+                    <dd className="text-primary text-base font-bold">
                       {formatCartMoney(subtotal)}
-                    </strong>
+                    </dd>
                   </div>
 
-                  {/* CHECKOUT BUTTON */}
+                  {bundleSavings > 0 && (
+                    <div className="border-secondary/25 bg-secondary/10 flex items-center justify-between gap-3 rounded-xl border px-3 py-3">
+                      <dt className="text-secondary-dark flex items-center gap-2 text-sm font-semibold">
+                        <Sparkles size={17} />
+                        Bundle Savings
+                      </dt>
 
-                  <Link
-                    href={hasItems ? "/checkout" : "/shop"}
-                    className="group relative flex w-full items-center justify-between overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] p-2 pl-6 font-sans text-sm font-semibold text-white shadow-[0_8px_24px_rgba(0,0,0,0.12)] transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-[0_14px_32px_rgba(0,0,0,0.2)] active:scale-[0.98]"
-                  >
-                    <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
+                      <dd className="text-secondary-dark text-sm font-bold">
+                        -{formatCartMoney(bundleSavings)}
+                      </dd>
+                    </div>
+                  )}
 
-                    <span className="relative z-10 flex items-center gap-2">
-                      <LockKeyhole size={16} />
-                      {hasItems ? "Proceed to Checkout" : "Explore Products"}
-                    </span>
+                  {["Shipping", "Taxes"].map((label) => (
+                    <div
+                      key={label}
+                      className="flex items-start justify-between gap-4"
+                    >
+                      <dt className="text-muted text-[15px]">{label}</dt>
 
-                    <span className="text-primary relative z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white transition-transform duration-500 ease-out group-hover:rotate-45">
-                      <ArrowUpRight size={19} />
-                    </span>
-                  </Link>
+                      <dd className="text-muted text-right text-sm">
+                        Calculated at checkout
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
 
-                  {/* SECURE NOTE */}
+                <div className="border-primary/10 bg-primary-soft/60 flex items-center justify-between gap-4 rounded-xl border p-4">
+                  <span className="font-heading text-primary text-lg">
+                    Total
+                  </span>
 
-                  <p className="flex items-center justify-center gap-2 font-sans text-sm text-[#998D9C]">
-                    <LockKeyhole size={12} />
-                    Secure checkout · Research use only
-                  </p>
+                  <strong className="font-heading text-primary text-[clamp(26px,3vw,32px)]">
+                    {formatCartMoney(subtotal)}
+                  </strong>
                 </div>
+
+                <Link
+                  href={hasItems ? "/checkout" : "/shop"}
+                  className="btn-primary h-13 w-full gap-3 px-5 text-base"
+                >
+                  <LockKeyhole size={18} />
+
+                  {hasItems ? "Proceed to Checkout" : "Explore Products"}
+
+                  <ArrowUpRight size={19} />
+                </Link>
+
+                <p className="text-muted flex items-center justify-center gap-2 text-center text-xs font-medium sm:text-sm">
+                  <LockKeyhole
+                    size={15}
+                    className="text-secondary-dark shrink-0"
+                  />
+                  Secure checkout · Research use only
+                </p>
               </div>
+            </div>
 
-              {/* CONTINUE SHOPPING */}
-
-              <Link
-                href="/shop"
-                className="group text-primary hover:text-secondary mt-5 flex items-center justify-center gap-2 font-sans text-[12px] font-semibold transition-colors"
-              >
-                <ArrowLeft
-                  size={15}
-                  className="transition-transform group-hover:-translate-x-1"
-                />
-                Continue Shopping
-              </Link>
-            </aside>
-          </div>
+            <Link
+              href="/shop"
+              className="group text-primary hover:text-secondary-dark mt-5 flex items-center justify-center gap-2 text-sm font-semibold transition-colors"
+            >
+              <ArrowLeft
+                size={17}
+                className="transition-transform group-hover:-translate-x-1"
+              />
+              Continue Shopping
+            </Link>
+          </aside>
         </div>
       </section>
     </main>

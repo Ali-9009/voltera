@@ -57,7 +57,7 @@ export default function ShopHero() {
         <div className="relative z-10 grid items-center lg:grid-cols-[0.9fr_1.1fr]">
           <div className="relative z-20 flex flex-col justify-center px-5 pt-10 pb-4 sm:px-8 lg:py-12 lg:pl-12">
             <p className="text-secondary mb-3 text-xs font-bold tracking-[0.15em] uppercase">
-              Spectrum Biosciences
+              Voltera Sciences
             </p>
 
             <h1 className="section-heading">

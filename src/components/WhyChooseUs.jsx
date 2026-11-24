@@ -41,44 +41,83 @@ function FeatureCard({ feature }) {
   return (
     <article
       data-feature-card
-      className="group relative flex min-w-0 flex-col overflow-hidden rounded-[20px] border border-[#C9953D]/25 bg-[linear-gradient(135deg,#111B38_0%,#071A43_55%,#030D27_100%)] p-5 shadow-[0_8px_30px_rgba(7,26,67,0.12)] transition-[transform,border-color,box-shadow] duration-300 hover:-translate-y-1 hover:border-[#E8C77B]/60 hover:shadow-[0_18px_45px_rgba(7,26,67,0.25)] sm:p-7 lg:rounded-[24px] lg:p-8"
+      className="group border-secondary/30 from-primary-light via-primary to-primary-dark shadow-primary/10 hover:border-secondary hover:shadow-primary/20 relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-[18px] border bg-linear-to-br p-4 shadow-lg transition-[border-color,box-shadow] duration-300 hover:shadow-xl sm:rounded-[22px] sm:p-6"
     >
-      <span
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute top-0 right-0 h-32 w-32 rounded-full bg-[#1746A2]/20 blur-[55px]"
+        className="from-primary via-accent to-primary pointer-events-none absolute inset-0 -z-10 bg-linear-to-br opacity-0 transition-opacity duration-500 group-hover:opacity-100"
       />
 
-      <div className="relative z-10 flex items-start gap-4 sm:gap-5">
-        <div className="relative shrink-0">
-          <div className="flex size-14 items-center justify-center rounded-[16px] border border-[#E8C77B]/30 bg-[#C9953D]/10 transition-colors duration-300 group-hover:border-[#E8C77B]/60 group-hover:bg-[#C9953D]/15 sm:size-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-10 -right-10 size-36 rotate-45 rounded-[28px] border border-white/10 bg-white/5 transition-transform duration-500 group-hover:rotate-[55deg]"
+      />
+
+      <div
+        aria-hidden="true"
+        className="border-accent-light/20 pointer-events-none absolute -top-14 -right-3 size-36 rotate-45 rounded-[28px] border"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute -right-8 -bottom-8 opacity-[0.06] transition-transform duration-500 group-hover:scale-110"
+      >
+        <lord-icon
+          src={feature.icon}
+          colors="primary:#FFFFFF,secondary:#FFFFFF"
+          className="block size-32 sm:size-44"
+        />
+      </div>
+
+      <div className="relative mb-4 flex items-center justify-between sm:mb-6">
+        <div className="relative">
+          <span
+            aria-hidden="true"
+            className="border-accent-light/30 absolute inset-0 translate-x-1.5 translate-y-1.5 rounded-[14px] border sm:rounded-[18px]"
+          />
+
+          <div className="border-accent-light/40 group-hover:border-accent-light group-hover:from-secondary/25 relative flex size-12 items-center justify-center rounded-[14px] border bg-linear-to-br from-white/20 to-white/5 backdrop-blur-sm transition-all duration-300 group-hover:to-white/10 sm:size-16 sm:rounded-[18px]">
             <lord-icon
               src={feature.icon}
               trigger="loop(1800)"
-              colors="primary:#E8C77B,secondary:#FFFFFF"
+              colors="primary:#EFD28D,secondary:#FFFFFF"
               speed="0.8"
-              style={{
-                width: "42px",
-                height: "42px",
-                display: "block",
-              }}
+              className="block size-8 sm:size-11"
               aria-hidden="true"
             />
           </div>
         </div>
 
-        <div className="min-w-0 flex-1">
-          <h3 className="font-heading text-[15px] leading-[1.4] font-normal text-white sm:text-[18px] lg:text-[20px]">
-            {feature.title}
-          </h3>
-
-          <p className="mt-3 font-sans text-[12px] leading-[1.8] text-white/70 sm:text-[14px]">
-            {feature.description}
-          </p>
-        </div>
+        <span
+          aria-hidden="true"
+          className="font-heading group-hover:text-accent-light/30 text-[26px] leading-none text-white/15 transition-colors duration-300 sm:text-[36px]"
+        >
+          {String(feature.number).padStart(2, "0")}
+        </span>
       </div>
 
-      <div className="relative z-10 mt-7 flex items-center justify-between border-t border-white/10 pt-4">
-        <span className="font-sans text-[10px] font-semibold tracking-[0.16em] text-[#E8C77B] uppercase sm:text-[11px]">
+      <div className="relative flex-1">
+        <h3 className="font-heading text-[14px] leading-[1.4] font-normal text-white sm:text-[18px]">
+          {feature.title}
+        </h3>
+
+        <span
+          aria-hidden="true"
+          className="from-secondary-dark via-accent-light to-secondary-dark mt-3 block h-[2px] w-8 rounded-full bg-linear-to-r transition-all duration-500 group-hover:w-14"
+        />
+
+        <p className="mt-3 font-sans text-[11px] leading-[1.75] text-white/80 sm:text-[13px]">
+          {feature.description}
+        </p>
+      </div>
+
+      <div className="relative mt-5 flex items-center gap-2 border-t border-white/15 pt-3 sm:mt-6 sm:pt-4">
+        <span
+          aria-hidden="true"
+          className="bg-accent-light size-1.5 shrink-0 rotate-45"
+        />
+
+        <span className="text-accent-light font-sans text-[8px] font-bold tracking-[0.12em] uppercase sm:text-[10px]">
           Voltera Standard
         </span>
       </div>
@@ -177,7 +216,7 @@ export default function WhyChooseUs() {
 
         <div
           ref={gridRef}
-          className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6"
+          className="grid grid-cols-2 items-stretch gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5"
         >
           {features.map((feature) => (
             <FeatureCard key={feature.number} feature={feature} />

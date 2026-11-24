@@ -1,111 +1,101 @@
 import LegalPage from "@/components/LegalPage";
 
 export const metadata = {
-  title: "Privacy Policy | Spectrum Biosciences",
-  description: "Privacy information for Spectrum Biosciences.",
+  title: "Privacy Policy | Voltera Sciences",
+  description:
+    "Learn how Voltera Sciences collects, uses, protects, and manages your personal information, cookies, and privacy preferences.",
 };
 
 const sections = [
   {
-    title: "1. Introduction",
+    title: "Privacy Policy",
     paragraphs: [
-      "We value your privacy and are committed to protecting the personal information you share with us. This Privacy Policy explains how information is collected, used, stored, and protected when you visit our website, browse research products, or place an order.",
+      "Effective Date: April 26, 2026",
+      "Voltera Sciences respects your privacy and is committed to protecting your personal information. This Privacy Policy explains how we collect, use, store, and safeguard information when you visit our website, place an order, create an account, or communicate with us.",
     ],
   },
   {
-    title: "2. Information We Collect",
+    title: "1. Information We Collect",
     paragraphs: [
-      "We may collect certain information when you interact with our website, create an account, make a purchase, or contact our support team.",
+      "We may collect information you provide directly, including your name, email address, phone number, billing address, shipping address, account details, order history, and customer service communications.",
+      "We may also collect limited technical information such as IP address, browser type, device information, website activity, referral source, and cookie data to help improve website performance and security.",
     ],
-    items: [
-      "Personal information such as your name, email address, and phone number.",
-      "Billing addresses, shipping addresses, and order details.",
-      "Payment-related information processed through secure third-party payment providers.",
-      "Account information, preferences, and purchase history.",
-      "Messages, inquiries, and communications submitted through our website.",
-      "Technical information, including IP address, browser type, device information, and website usage data.",
+  },
+  {
+    title: "2. Payment Information",
+    paragraphs: [
+      "Payment information is processed securely by third-party payment providers. Voltera Sciences does not store full credit card numbers or sensitive payment credentials on our website servers.",
     ],
   },
   {
     title: "3. How We Use Your Information",
-    paragraphs: [
-      "The information collected may be used to process and fulfill orders, provide customer support, respond to inquiries, manage customer accounts, improve website functionality, prevent unauthorized transactions, and comply with applicable legal requirements.",
-      "Where permitted by law and based on your preferences, we may also use contact information to share updates about research products, new arrivals, and promotional offers.",
+    items: [
+      "To process, confirm, and fulfill orders",
+      "To send order updates, invoices, and shipping notifications",
+      "To provide customer support and respond to inquiries",
+      "To verify account activity and maintain website security",
+      "To improve website performance, content, and user experience",
+      "To comply with applicable legal, tax, and regulatory obligations",
     ],
   },
   {
-    title: "4. Information Sharing",
+    title: "4. Research Use Only Notice",
     paragraphs: [
-      "We do not sell personal information to third parties. Information may be shared with trusted service providers when necessary to operate our website and deliver services.",
+      "Voltera Sciences provides products intended strictly for laboratory research use only. Information collected during checkout may be used to help verify orders, support compliance procedures, prevent misuse, and maintain responsible business records.",
+      "Our products are not intended for human consumption, clinical use, diagnostic use, therapeutic use, veterinary use, or any household application. Customers are responsible for ensuring products are handled only by qualified individuals in appropriate research settings.",
+    ],
+  },
+  {
+    title: "5. Information Sharing",
+    paragraphs: [
+      "We do not sell or rent your personal information. We may share limited information only with trusted third-party service providers needed to operate our business.",
     ],
     items: [
-      "Payment processing providers for secure transactions.",
-      "Shipping and logistics providers for order fulfillment.",
-      "Website hosting and technical service providers.",
-      "Customer support and communication platforms.",
-      "Government or regulatory authorities when required by applicable law.",
+      "Payment processors",
+      "Shipping and fulfillment providers",
+      "Website hosting and security services",
+      "Email, SMS, and customer support platforms",
+      "Analytics and performance monitoring tools",
+    ],
+    afterItems: [
+      "We may also disclose information when required by law, legal process, fraud prevention, compliance review, or to protect the rights and safety of Voltera Sciences, our customers, or others.",
     ],
   },
   {
-    title: "5. Cookies and Website Analytics",
+    title: "6. Cookies and Tracking",
     paragraphs: [
-      "Our website may use cookies and similar technologies to maintain essential website functionality, remember preferences, support shopping cart features, and understand how visitors interact with our website.",
-      "You can manage or disable cookies through your browser settings. Certain website features may not function correctly when essential cookies are disabled.",
+      "Our website may use cookies, pixels, and similar technologies to remember preferences, support cart functionality, analyze traffic, measure performance, and improve the browsing experience.",
+      "You may disable cookies through your browser settings, but some website features may not function properly.",
     ],
   },
   {
-    title: "6. Data Security",
+    title: "7. Marketing Communications",
     paragraphs: [
-      "We take reasonable technical and organizational measures to help protect personal information against unauthorized access, loss, misuse, or disclosure.",
-      "Although we work to maintain a secure online environment, no method of electronic transmission or storage can be guaranteed to be completely secure.",
+      "If you choose to subscribe, we may send promotional emails, product updates, or company announcements. You may unsubscribe at any time by using the opt-out link included in our emails.",
     ],
   },
   {
-    title: "7. Data Retention",
+    title: "8. Data Security",
     paragraphs: [
-      "Personal information is retained only for as long as reasonably necessary to fulfill the purposes described in this policy, maintain business records, resolve disputes, and comply with applicable legal obligations.",
-      "When information is no longer required, reasonable steps may be taken to securely delete or anonymize it.",
+      "We use reasonable administrative, technical, and physical safeguards to help protect your information. However, no online transmission or storage system can be guaranteed to be completely secure.",
     ],
   },
   {
-    title: "8. Third-Party Services",
+    title: "9. Data Retention",
     paragraphs: [
-      "Our website may contain links to external websites or integrate third-party services, including payment processors, shipping providers, and analytics platforms.",
-      "These third parties may operate under their own privacy policies. We encourage visitors to review those policies before sharing personal information.",
+      "We retain personal information only as long as necessary for business, legal, accounting, tax, security, fraud prevention, and compliance purposes.",
     ],
   },
   {
-    title: "9. Your Privacy Rights",
+    title: "10. Your Privacy Rights",
     paragraphs: [
-      "Depending on your location and applicable privacy laws, you may have certain rights regarding your personal information, including requesting access, correction, deletion, or restrictions on its processing.",
-      "To submit a privacy-related request or ask questions about your information, please contact us through the contact page on our website.",
+      "Depending on your location, you may have the right to request access, correction, deletion, or restriction of your personal information. Some requests may be limited by legal, tax, compliance, or order recordkeeping requirements.",
     ],
   },
   {
-    title: "10. Research Product Information",
+    title: "11. Updates to This Policy",
     paragraphs: [
-      "Our website provides information about products intended for laboratory research and scientific applications. Information submitted in connection with product inquiries, purchases, or research-related communications may be processed for customer service, order management, and compliance purposes.",
-      "Research-related inquiries are handled in accordance with this Privacy Policy and applicable legal requirements.",
-    ],
-  },
-  {
-    title: "11. Children's Privacy",
-    paragraphs: [
-      "Our website and research products are not intended for children. We do not knowingly collect personal information from individuals under the age of 18.",
-      "If we become aware that personal information has been collected from a child, we will take appropriate steps to address the situation in accordance with applicable law.",
-    ],
-  },
-  {
-    title: "12. Changes to This Privacy Policy",
-    paragraphs: [
-      "We may update this Privacy Policy periodically to reflect changes in our services, website operations, legal requirements, or privacy practices.",
-      "Any updates will be published on this page. We encourage visitors to review this policy occasionally to stay informed about how their information is handled.",
-    ],
-  },
-  {
-    title: "13. Contact Us",
-    paragraphs: [
-      "If you have questions, concerns, or requests regarding this Privacy Policy or the handling of your personal information, please contact our support team through the contact page available on our website.",
+      "We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date. Continued use of our website means you accept the updated policy.",
     ],
   },
 ];
@@ -114,7 +104,7 @@ export default function PrivacyPolicyPage() {
   return (
     <LegalPage
       title="Privacy Policy"
-      description="Learn how personal information may be collected, used, and protected when interacting with Spectrum Biosciences."
+      description="Learn how personal information may be collected, used, and protected when interacting with Voltera Sciences."
       sections={sections}
     />
   );

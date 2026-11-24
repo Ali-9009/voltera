@@ -9,62 +9,7 @@ const config = {
   async redirects() {
     return [
       {
-        source: "/account",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/coa",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/shop",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/about",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/contact",
-        destination: "/",
-        permanent: false,
-      },
-      {
         source: "/partner-program",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/track-order",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/faqs",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/privacy-policy",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/terms-and-conditions",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/refund-policy",
-        destination: "/",
-        permanent: false,
-      },
-      {
-        source: "/research-disclaimer",
         destination: "/",
         permanent: false,
       },

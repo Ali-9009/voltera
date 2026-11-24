@@ -160,7 +160,7 @@ export default function CheckoutClient() {
         <header className="mb-9 flex flex-col justify-between gap-5 border-b border-[#EEE6EF] pb-8 sm:flex-row sm:items-end">
           <div>
             <p className="text-secondary mb-3 text-[11px] font-semibold tracking-[0.14em] uppercase">
-              Spectrum Biosciences
+              Voltera Sciences
             </p>
             <h1 className="section-heading">
               Checkout<span className="text-secondary">.</span>

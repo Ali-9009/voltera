@@ -122,7 +122,7 @@ export default function QuickView({ product, onClose }) {
         </button>
 
         <div className="grid md:grid-cols-2">
-          <div className="border-primary/10 relative flex min-h-[280px] flex-col overflow-hidden rounded-[18px] border bg-[linear-gradient(145deg,#F7F9FD_0%,#EEF4FC_100%)] sm:min-h-[380px] md:min-h-[520px]">
+          <div className="border-primary/10 relative flex min-h-60 flex-col overflow-hidden rounded-[18px] border bg-[linear-gradient(145deg,#F7F9FD_0%,#EEF4FC_100%)] sm:min-h-[380px] md:min-h-[520px]">
             <div className="relative flex flex-1 items-center justify-center">
               {product.image ? (
                 <Image
@@ -214,8 +214,8 @@ export default function QuickView({ product, onClose }) {
                 </span>
               </div>
 
-              <div className="flex flex-col gap-2.5">
-                {PACK_OPTIONS.map((item) => {
+              <div className="grid grid-cols-3 gap-2.5 pt-4 sm:gap-3">
+                {PACK_OPTIONS.map((item, index) => {
                   const selected = selectedPack === item.quantity;
 
                   const discountedUnitPrice =
@@ -223,11 +223,7 @@ export default function QuickView({ product, onClose }) {
                       unitPrice * (1 - item.discountPercent / 100) * 100,
                     ) / 100;
 
-                  const packTotal = getPackPrice(
-                    unitPrice,
-                    item.quantity,
-                    item.discountPercent,
-                  );
+                  const badges = ["POPULAR", "MOST POPULAR", "BEST VALUE"];
 
                   return (
                     <button
@@ -240,35 +236,36 @@ export default function QuickView({ product, onClose }) {
                       disabled={
                         variant?.inStock === false || item.quantity > stock
                       }
-                      className={`group relative flex w-full min-w-0 items-center gap-3 overflow-hidden rounded-[14px] border p-3 text-left transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:gap-4 sm:p-4 ${
+                      className={`group relative flex min-w-0 flex-col items-center rounded-[16px] border px-2 pt-4 pb-3 text-center transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 sm:px-3 ${
                         selected
-                          ? "border-secondary bg-[#FFF9EF] shadow-[0_6px_20px_rgba(201,149,61,0.1)]"
-                          : "border-primary/10 hover:border-secondary/50 bg-white hover:bg-[#FAFBFE]"
+                          ? "border-secondary bg-secondary/5 ring-secondary shadow-[0_4px_16px_rgba(201,149,61,0.12)] ring-1"
+                          : "border-border hover:border-secondary/60 hover:bg-secondary/5 bg-white"
                       }`}
                     >
                       <span
-                        className={`flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-colors ${
-                          selected
-                            ? "border-primary bg-primary"
-                            : "border-primary/25 bg-white"
+                        className={`absolute -top-3 left-1/2 flex h-6 -translate-x-1/2 items-center justify-center rounded-full px-2.5 font-sans text-[8px] font-extrabold tracking-wide whitespace-nowrap shadow-sm sm:px-3 sm:text-[10px] ${
+                          index === 0
+                            ? "bg-accent text-white"
+                            : index === 1
+                              ? "from-secondary-dark via-accent-light to-secondary-dark text-primary-dark bg-linear-to-r"
+                              : "bg-primary-dark text-white"
                         }`}
                       >
-                        {selected && (
-                          <span className="size-2 rounded-full bg-white" />
-                        )}
+                        {badges[index] ?? "SAVE MORE"}
                       </span>
 
-                      <span className="relative flex h-[62px] w-[62px] shrink-0 items-center justify-center rounded-xl sm:h-[70px] sm:w-[70px]">
+                      <span className="relative flex h-[70px] w-full items-center justify-center sm:h-[80px]">
                         {Array.from({
                           length: Math.min(item.quantity, 3),
                         }).map((_, index, bottles) => (
                           <span
                             key={index}
-                            className="absolute bottom-1.5 h-[54px] w-[30px] sm:h-[60px]"
+                            className="absolute bottom-0 h-full w-[32px] sm:w-[40px]"
                             style={{
-                              left: `calc(50% - ${
-                                15 + ((bottles.length - 1) * 11) / 2
-                              }px + ${index * 11}px)`,
+                              left: `calc(50% + ${
+                                (index - (bottles.length - 1) / 2) * 15
+                              }px)`,
+                              transform: "translateX(-50%)",
                               zIndex: bottles.length - index,
                             }}
                           >
@@ -276,27 +273,23 @@ export default function QuickView({ product, onClose }) {
                               src="/pngs/quick-view.png"
                               alt=""
                               fill
-                              sizes="30px"
-                              className="object-contain drop-shadow-[0_3px_4px_rgba(7,26,67,0.15)] transition-transform duration-300 group-hover:-translate-y-1"
+                              sizes="40px"
+                              className="object-contain drop-shadow-[0_3px_4px_rgba(18,51,107,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
                             />
                           </span>
                         ))}
                       </span>
 
-                      <span className="min-w-0 flex-1">
-                        <span className="font-heading text-primary block text-[13px] leading-tight sm:text-[15px]">
-                          {item.label}
-                        </span>
-
-                        <span className="text-secondary-dark mt-1.5 block font-sans text-[12px] font-bold">
-                          {item.discountPercent}% OFF
-                        </span>
+                      <span className="text-primary mt-2 font-sans text-[13px] leading-tight font-extrabold uppercase sm:text-[17px]">
+                        {item.label}
                       </span>
 
-                      <span className="shrink-0 text-right">
-                        <span className="font-heading text-primary block text-[15px] sm:text-[18px]">
-                          {formatMoney(discountedUnitPrice)}
-                        </span>
+                      <span className="text-accent mt-2 font-sans text-[11px] font-extrabold tracking-wide sm:text-[13px]">
+                        {item.discountPercent}% OFF
+                      </span>
+
+                      <span className="text-muted mt-1.5 font-sans text-[11px] font-medium sm:text-[12px]">
+                        {formatMoney(discountedUnitPrice)} each
                       </span>
                     </button>
                   );

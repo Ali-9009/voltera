@@ -124,22 +124,28 @@ return (
       onClick={openPopup}
       aria-label="Open Voltera Sciences newsletter"
       title="Research Updates"
-      className="group fixed bottom-5 left-5 z-[9998] flex h-15 w-15 items-center justify-center rounded-full border border-white/15 bg-[linear-gradient(135deg,#1B2030_0%,#111523_45%,#030B1D_100%)] text-white shadow-[0_8px_25px_rgba(17,21,35,0.25)] transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-[0_12px_32px_rgba(17,21,35,0.35)] active:scale-95 sm:bottom-7 sm:left-7"
+      className="group border-secondary/50 from-primary-light via-accent to-primary-light shadow-primary/20 hover:border-accent-light hover:shadow-primary/30 fixed bottom-5 left-5 isolate z-[9998] flex size-15 items-center justify-center rounded-full border bg-linear-to-br text-white shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-xl active:scale-95 sm:bottom-7 sm:left-7"
     >
       <span
         aria-hidden="true"
-        className="pointer-events-none absolute inset-[4px] rounded-full border border-white/10"
+        className="from-accent via-primary to-accent pointer-events-none absolute inset-0 -z-10 rounded-full bg-linear-to-br opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+      />
+
+      <span
+        aria-hidden="true"
+        className="border-accent-light/30 group-hover:border-accent-light/70 pointer-events-none absolute inset-[4px] rounded-full border transition-colors duration-300"
       />
 
       <Mail
         size={25}
         strokeWidth={1.8}
-        className="relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5"
+        className="text-accent-light relative z-10 transition-transform duration-300 group-hover:-translate-y-0.5"
       />
 
-      <span className="bg-primary absolute -top-1 -right-1 z-20 flex size-[17px] items-center justify-center rounded-full border-2 border-white">
-        <span className="size-1.5 rounded-full bg-white" />
-      </span>
+      <span
+        aria-hidden="true"
+        className="from-accent-light to-secondary-dark absolute -top-1 -right-1 z-20 size-[15px] rounded-full border-2 border-white bg-linear-to-br"
+      />
     </button>
 
     {isOpen && (
@@ -184,55 +190,58 @@ return (
           </button>
 
           <div className="relative z-10 px-5 pt-12 pb-8 sm:px-9 sm:pt-12 sm:pb-10">
-            <div className="relative">
+            <div className="relative isolate">
               <div
                 aria-hidden="true"
-                className="newsletter-float-left pointer-events-none absolute top-14 left-0 z-20 h-[90px] w-[62px] drop-shadow-[0_12px_14px_rgba(0,0,0,0.15)] sm:top-10 sm:left-2 sm:h-[120px] sm:w-[85px]"
+                className="newsletter-float-left pointer-events-none absolute top-14 -left-3 z-0 h-[65px] w-[45px] drop-shadow-[0_8px_12px_rgba(18,51,107,0.15)] sm:top-8 sm:-left-6 sm:h-[110px] sm:w-[75px]"
               >
                 <Image
                   src="/pngs/quick-view-2.png"
                   alt=""
                   fill
-                  sizes="85px"
+                  sizes="(max-width: 639px) 45px, 75px"
                   className="object-contain"
                 />
               </div>
 
               <div
                 aria-hidden="true"
-                className="newsletter-float-right pointer-events-none absolute top-16 right-0 z-20 h-[95px] w-[65px] drop-shadow-[0_12px_14px_rgba(0,0,0,0.15)] sm:top-12 sm:right-2 sm:h-[125px] sm:w-[90px]"
+                className="newsletter-float-right pointer-events-none absolute top-14 -right-3 z-0 h-[65px] w-[45px] drop-shadow-[0_8px_12px_rgba(18,51,107,0.15)] sm:top-8 sm:-right-6 sm:h-[110px] sm:w-[75px]"
               >
                 <Image
                   src="/pngs/quick-view.png"
                   alt=""
                   fill
-                  sizes="90px"
+                  sizes="(max-width: 639px) 45px, 75px"
                   className="object-contain"
                 />
               </div>
 
-              <div className="relative z-10 mx-auto max-w-[420px] text-center">
+              <div className="relative z-10 mx-auto text-center">
+                <span className="border-secondary/25 bg-secondary/10 text-secondary-dark inline-flex items-center gap-1.5 rounded-full border px-3 py-1.5 font-sans text-[9px] font-bold tracking-[0.12em] uppercase">
+                  <FlaskConical size={13} strokeWidth={1.8} />
+                  Stay Connected
+                </span>
+
                 <h2
                   id="newsletter-heading"
-                  className="font-heading mt-5 text-[24px] leading-[1.2] font-normal tracking-[-0.025em] text-black sm:text-[30px]"
+                  className="font-heading text-primary-dark mt-4 text-[23px] leading-[1.2] font-normal tracking-[-0.025em] sm:text-[30px]"
                 >
                   Join Our
-                  <span className="font-heading text-primary block">
-                    Research Community
-                  </span>
+                  <span className="text-primary block">Research Community</span>
                 </h2>
 
-                <div className="mt-5 flex items-center justify-center gap-3">
-                  <span className="to-primary/40 h-px w-12 bg-gradient-to-r from-transparent" />
+                <div className="mt-4 flex items-center justify-center gap-3">
+                  <span className="to-secondary/70 h-px w-12 bg-linear-to-r from-transparent" />
 
-                  <span className="bg-primary size-1.5 rotate-45" />
+                  <span className="bg-secondary size-1.5 rotate-45" />
 
-                  <span className="to-primary/40 h-px w-12 bg-gradient-to-l from-transparent" />
+                  <span className="to-secondary/70 h-px w-12 bg-linear-to-l from-transparent" />
                 </div>
 
                 <p
                   id="newsletter-description"
-                  className="mx-auto mt-5 max-w-[360px] font-sans text-[13px] leading-6 text-black/65 sm:text-[14px]"
+                  className="text-muted mx-auto mt-4 max-w-[300px] px-9 font-sans text-[12px] leading-[1.8] sm:max-w-[320px] sm:px-4 sm:text-[14px]"
                 >
                   Discover new research compounds, receive restock alerts, and
                   stay informed about exclusive Voltera Sciences updates.
@@ -296,14 +305,10 @@ return (
               <button
                 type="submit"
                 disabled={!agreed || !email.trim()}
-                className="group border-primary/20 relative mt-7 flex h-[54px] w-full items-center justify-center gap-3 overflow-hidden rounded-xl border bg-[linear-gradient(120deg,#1B2030_0%,#111523_50%,#030B1D_100%)] px-6 font-sans text-[13px] font-bold text-white shadow-[0_6px_20px_rgba(17,21,35,0.18)] transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_10px_30px_rgba(17,21,35,0.3)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 disabled:hover:shadow-none sm:text-sm"
+                className="btn-primary mt-7 h-[54px] w-full gap-3 px-6 text-[13px] sm:text-sm"
               >
-                <span className="relative z-10">Subscribe to Updates</span>
-
-                <ArrowRight
-                  size={18}
-                  className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
-                />
+                Subscribe to Updates
+                <ArrowRight size={18} strokeWidth={1.8} />
               </button>
 
               {notice && (

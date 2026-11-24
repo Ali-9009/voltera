@@ -71,16 +71,16 @@ export default function PromoMarquee() {
   return (
     <section
       aria-label="Voltera Sciences quality and service highlights"
-      className="relative z-30 w-full overflow-hidden border-y border-white/10 bg-[linear-gradient(110deg,#030D27_0%,#071A43_35%,#1746A2_65%,#071A43_100%)] py-3.5 sm:py-4"
+      className="bg-brand-gradient border-accent-light/20 relative z-30 w-full overflow-hidden border-y py-3.5 sm:py-4"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-white/[0.06] via-transparent to-black/10"
+        className="to-primary-dark/10 pointer-events-none absolute inset-0 bg-linear-to-b from-white/10 via-transparent"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#E8C77B]/40 to-transparent"
+        className="via-accent-light/60 pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent"
       />
 
       <div className="promo-marquee relative flex w-full items-center overflow-hidden">
@@ -102,44 +102,6 @@ export default function PromoMarquee() {
           ))}
         </div>
       </div>
-
-      <style jsx global>{`
-        @keyframes voltera-promo-scroll {
-          from {
-            transform: translate3d(0, 0, 0);
-          }
-
-          to {
-            transform: translate3d(-50%, 0, 0);
-          }
-        }
-
-        .promo-marquee-track {
-          animation: voltera-promo-scroll 34s linear infinite;
-          will-change: transform;
-        }
-
-        .promo-marquee:hover .promo-marquee-track {
-          animation-play-state: paused;
-        }
-
-        @media (max-width: 640px) {
-          .promo-marquee-track {
-            animation-duration: 24s;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .promo-marquee-track {
-            animation: none;
-            will-change: auto;
-          }
-
-          .promo-marquee {
-            overflow-x: auto;
-          }
-        }
-      `}</style>
     </section>
   );
 }

@@ -334,6 +334,7 @@ function ProductCard({ product }) {
     </article>
   );
 }
+
 export default function CardSlider({ currentProduct = null }) {
   const sortedProducts = useMemo(() => {
     const displayProducts = products.filter(
@@ -382,46 +383,60 @@ export default function CardSlider({ currentProduct = null }) {
           </p>
         </header>
 
-        <Swiper
-          modules={[Autoplay]}
-          loop={sliderProducts.length > 4}
-          speed={700}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          allowTouchMove
-          grabCursor
-          slidesPerView={2}
-          slidesPerGroup={1}
-          spaceBetween={12}
-          watchOverflow
-          breakpoints={{
-            640: {
-              slidesPerView: 2,
-              spaceBetween: 16,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 24,
-            },
-          }}
-          className="!overflow-hidden"
-          aria-label="Research peptide product slider"
-        >
-          {sliderProducts.map((product) => (
-            <SwiperSlide key={product.sliderKey} className="!h-auto">
-              <div className="h-full">
-                <ProductCard product={product} />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className="relative isolate">
+          <Swiper
+            modules={[Autoplay]}
+            loop={sliderProducts.length > 4}
+            speed={5000}
+            autoplay={
+              sliderProducts.length > 4
+                ? {
+                    delay: 0,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: false,
+                    waitForTransition: true,
+                  }
+                : false
+            }
+            allowTouchMove
+            grabCursor
+            slidesPerView={2}
+            slidesPerGroup={1}
+            spaceBetween={12}
+            watchOverflow
+            breakpoints={{
+              640: {
+                slidesPerView: 2,
+                spaceBetween: 16,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 24,
+              },
+            }}
+            onSwiper={(swiper) => {
+              if (
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches
+              ) {
+                swiper.autoplay?.stop();
+              }
+            }}
+            className="continuous-product-slider !overflow-hidden [mask-image:linear-gradient(to_right,transparent_0%,black_8px,black_calc(100%-8px),transparent_100%)] !py-3 lg:[mask-image:linear-gradient(to_right,transparent_0%,black_20px,black_calc(100%-20px),transparent_100%)]"
+            aria-label="Research peptide product slider"
+          >
+            {sliderProducts.map((product) => (
+              <SwiperSlide key={product.sliderKey} className="!h-auto">
+                <div className="h-full">
+                  <ProductCard product={product} />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
     </section>
   );

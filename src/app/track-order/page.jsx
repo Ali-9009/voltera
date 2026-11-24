@@ -7,7 +7,6 @@ import {
   ArrowRight,
   ArrowUpRight,
   Check,
-  CheckCircle2,
   Clock3,
   LockKeyhole,
   Mail,
@@ -55,14 +54,14 @@ const STEPS = [
   },
   {
     key: "packed",
-    label: "Packed",
+    label: "Order Packed",
     description: "Your order is prepared for shipping.",
     icon: PackageCheck,
   },
   {
     key: "shipped",
-    label: "Shipped",
-    description: "Your package is on its way.",
+    label: "On Its Way",
+    description: "Your package has been dispatched.",
     icon: Truck,
   },
   {
@@ -79,265 +78,228 @@ const STEPS = [
   },
 ];
 
-const statusLabels = {
-  placed: "Order Placed",
-  packed: "Order Packed",
-  shipped: "On Its Way",
-  out_for_delivery: "Out for Delivery",
-  delivered: "Delivered",
+const states = {
+  idle: {
+    title: "Ready to Track",
+    description:
+      "Enter your order number and billing email to view your shipment details.",
+    icon: Search,
+  },
+  loading: {
+    title: "Finding Your Order",
+    description: "Checking your order information.",
+    icon: Clock3,
+  },
+  missing: {
+    title: "Order Not Found",
+    description:
+      "Please check your order number and billing email, then try again.",
+    icon: Package,
+  },
 };
 
-function TrackingPhone({ phase, order, currentStep, progress }) {
+function TrackingPhone({ phase, order }) {
+  const currentStep = STEPS.findIndex((step) => step.key === order?.status);
+
+  const progress =
+    currentStep >= 0 ? (currentStep / (STEPS.length - 1)) * 100 : 0;
+
+  const state = states[phase];
+  const StateIcon = state?.icon || Search;
+
   return (
     <aside
       aria-label="Order tracking preview"
-      className="mx-auto w-full max-w-[390px] min-w-0 lg:max-w-none"
+      className="mx-auto w-full max-w-[400px]"
     >
-      <div className="relative rounded-[42px] border-[2px] border-[#07558F] bg-[#EAF3F7] p-[8px] shadow-[0_25px_65px_rgba(7,59,104,0.12)] sm:rounded-[48px]">
-        <div className="flex min-h-[630px] flex-col overflow-hidden rounded-[34px] border border-[#E0EAF0] bg-white sm:rounded-[40px] lg:min-h-[650px]">
-          <div className="bg-[linear-gradient(145deg,#FFFFFF_0%,#F2FAFC_100%)] px-5 pt-3 pb-5 sm:px-6">
-            <div className="mx-auto h-[18px] w-[90px] rounded-full border border-[#DFE6EA] bg-[#F5F7F8]" />
+      <div className="border-secondary/50 from-primary-light via-primary to-primary-dark relative rounded-[42px] border bg-linear-to-br p-2 shadow-[0_20px_60px_rgba(18,51,107,0.2)]">
+        <div className="flex min-h-[600px] flex-col overflow-hidden rounded-[34px] border border-white/20 bg-white">
+          <header className="from-primary-light via-accent to-primary relative isolate overflow-hidden bg-linear-to-br px-5 pt-3 pb-6 text-center">
+            <div
+              aria-hidden="true"
+              className="absolute -top-20 -right-20 -z-10 size-56 rounded-full border border-white/15"
+            />
 
-            <div className="mt-7">
-              <Link
-                href="/"
-                aria-label="Penguin Peptides homepage"
-                className="inline-block"
-              >
-                <Image
-                  src="/assets/penguin-logo.png"
-                  alt="Penguin Peptides"
-                  width={190}
-                  height={90}
-                  priority
-                  className="h-auto w-[155px] object-contain object-left sm:w-[180px]"
-                />
-              </Link>
-            </div>
+            <div
+              aria-hidden="true"
+              className="border-accent-light/20 absolute -top-12 -right-12 -z-10 size-40 rounded-full border"
+            />
 
-            <div className="mt-5 flex items-center justify-between gap-3">
-              <p className="text-[11px] font-semibold text-[#173B4A]">
-                Your order, connected.
-              </p>
+            <div className="bg-primary-dark/70 mx-auto h-4 w-22 rounded-full border border-white/10" />
 
-              <LockKeyhole
-                size={16}
-                strokeWidth={1.8}
-                className="text-primary shrink-0"
+            <Link
+              href="/"
+              aria-label="Voltera Sciences homepage"
+              className="mx-auto mt-5 flex w-fit items-center justify-center rounded-xl bg-white px-4 py-2"
+            >
+              <Image
+                src="/assets-v/voltera-black.png"
+                alt="Voltera Sciences"
+                width={120}
+                height={65}
+                className="h-auto w-[100px] object-contain"
               />
-            </div>
-          </div>
+            </Link>
 
-          <div className="h-[2px] w-full bg-[linear-gradient(90deg,var(--color-primary),var(--color-secondary))]" />
+            <p className="mt-4 text-sm font-semibold text-white">
+              Your Order. Every Step.
+            </p>
 
-          <div className="flex min-h-0 flex-1 flex-col">
-            {phase === "idle" && (
-              <div className="flex min-h-[410px] flex-1 flex-col items-center justify-center px-5 py-10 text-center">
-                <span className="bg-primary flex size-[62px] items-center justify-center rounded-full text-white shadow-[0_10px_24px_rgba(7,85,143,0.18)]">
-                  <Search size={27} strokeWidth={1.9} />
+            <p className="text-white mt-1 text-sm">
+              Voltera Shipment Tracking
+            </p>
+          </header>
+
+          <div className="from-secondary-dark via-accent-light to-secondary-dark h-[3px] bg-linear-to-r" />
+
+          <div aria-live="polite" className="flex min-h-0 flex-1 flex-col">
+            {phase !== "found" ? (
+              <div className="flex min-h-[380px] flex-1 flex-col items-center justify-center px-6 py-10 text-center">
+                <span className="border-secondary/30 from-primary-light via-accent to-primary text-accent-light shadow-primary/15 relative flex size-20 items-center justify-center rounded-[22px] border bg-linear-to-br shadow-lg">
+                  {phase === "loading" ? (
+                    <span className="border-t-accent-light size-8 animate-spin rounded-full border-[3px] border-white/25 motion-reduce:animate-none" />
+                  ) : (
+                    <StateIcon size={34} strokeWidth={1.5} />
+                  )}
                 </span>
 
-                <p className="text-secondary mt-7 text-[10px] font-bold tracking-[0.18em] uppercase">
-                  Order Tracking
-                </p>
-
-                <h3 className="font-heading text-primary mt-4 text-[25px] leading-tight font-bold tracking-[-0.04em]">
-                  Ready to track
+                <h3 className="font-heading text-primary mt-7 text-2xl">
+                  {state?.title}
                 </h3>
 
-                <p className="mt-4 max-w-[280px] text-[12px] leading-7 text-[#718A96]">
-                  Enter the two details used at checkout. Your order appears
-                  here when both match.
+                <p className="text-muted mt-3 max-w-[290px] text-sm leading-7">
+                  {state?.description}
                 </p>
 
-                <div className="mt-8 w-full max-w-[290px]">
-                  <div className="flex items-center gap-3 border-t border-[#E4EBEF] py-3">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-[#D7E4EA] text-[10px] font-medium text-[#718A96]">
-                      1
+                {phase === "idle" && (
+                  <div className="border-border bg-primary-soft/60 mt-7 w-full rounded-xl border px-4">
+                    {["Order Number", "Billing Email"].map((label, index) => (
+                      <div
+                        key={label}
+                        className="border-primary/10 flex items-center gap-3 border-b py-3.5 last:border-b-0"
+                      >
+                        <span className="border-secondary/30 text-primary flex size-7 shrink-0 items-center justify-center rounded-full border bg-white text-sm font-bold">
+                          {index + 1}
+                        </span>
+
+                        <span className="text-primary text-sm font-medium">
+                          {label}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ) : (
+              order && (
+                <div className="max-h-[570px] overflow-y-auto px-5 py-6">
+                  <div className="text-center">
+                    <span className="border-secondary/30 bg-secondary/10 text-secondary-dark inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-bold">
+                      <span className="bg-secondary size-2 rounded-full" />
+                      Shipment Status
                     </span>
 
-                    <p className="text-left text-[11px] font-medium text-[#617987]">
-                      Order number needed
-                    </p>
+                    <h3 className="font-heading text-primary mt-4 text-2xl">
+                      {STEPS[currentStep]?.label}
+                    </h3>
+
+                    <p className="text-muted mt-2 text-sm">Order #{order.id}</p>
                   </div>
 
-                  <div className="flex items-center gap-3 border-t border-[#E4EBEF] py-3">
-                    <span className="flex size-6 shrink-0 items-center justify-center rounded-full border border-[#D7E4EA] text-[10px] font-medium text-[#718A96]">
-                      2
-                    </span>
+                  <div className="border-border bg-primary-soft/60 mt-6 rounded-2xl border p-4">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-primary text-sm font-semibold">
+                        Shipment Progress
+                      </span>
 
-                    <p className="text-left text-[11px] font-medium text-[#617987]">
-                      Billing email needed
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
+                      <span className="font-heading text-primary text-lg">
+                        {Math.round(progress)}%
+                      </span>
+                    </div>
 
-            {phase === "loading" && (
-              <div className="flex min-h-[410px] flex-1 flex-col items-center justify-center px-5 py-10 text-center">
-                <div className="flex size-[68px] items-center justify-center rounded-full bg-[#EDF7FA]">
-                  <div className="border-t-primary h-9 w-9 animate-spin rounded-full border-[3px] border-[#D6EAF0]" />
-                </div>
-
-                <p className="text-secondary mt-7 text-[10px] font-bold tracking-[0.16em] uppercase">
-                  Order Tracking
-                </p>
-
-                <h3 className="font-heading text-primary mt-4 text-[23px] font-bold">
-                  Finding your order
-                </h3>
-
-                <p className="mt-3 max-w-[260px] text-[12px] leading-7 text-[#718A96]">
-                  Checking your order details.
-                </p>
-              </div>
-            )}
-
-            {phase === "missing" && (
-              <div className="flex min-h-[410px] flex-1 flex-col items-center justify-center px-5 py-10 text-center">
-                <span className="text-primary flex size-[64px] items-center justify-center rounded-full bg-[#EDF7FA]">
-                  <Search size={27} strokeWidth={1.8} />
-                </span>
-
-                <p className="text-secondary mt-7 text-[10px] font-bold tracking-[0.16em] uppercase">
-                  Order Tracking
-                </p>
-
-                <h3 className="font-heading text-primary mt-4 text-[24px] font-bold">
-                  Order not found
-                </h3>
-
-                <p className="mt-3 max-w-[260px] text-[12px] leading-7 text-[#718A96]">
-                  Please check your order number and billing email, then try
-                  again.
-                </p>
-              </div>
-            )}
-
-            {phase === "found" && order && (
-              <div className="max-h-[570px] min-h-0 flex-1 [scrollbar-width:thin] overflow-y-auto px-4 py-6 sm:px-5">
-                <div className="text-center">
-                  <span className="inline-flex items-center gap-2 rounded-full border border-[#D7EBF0] bg-[#F1F9FB] px-3 py-1.5">
-                    <span className="bg-secondary size-1.5 rounded-full" />
-
-                    <span className="text-primary text-[9px] font-bold tracking-[0.12em] uppercase">
-                      Order Tracking
-                    </span>
-                  </span>
-
-                  <h3 className="font-heading text-primary mt-4 text-[23px] font-bold tracking-[-0.04em]">
-                    {statusLabels[order.status]}
-                  </h3>
-
-                  <p className="mt-2 text-[11px] text-[#718A96]">
-                    Order #{order.id}
-                  </p>
-                </div>
-
-                <div className="mt-6 rounded-[16px] border border-[#DCE8ED] bg-[#F5FAFC] p-4">
-                  <div className="flex items-center justify-between gap-2">
-                    <span className="text-[10px] font-semibold text-[#718A96]">
-                      Delivery Progress
-                    </span>
-
-                    <span className="text-primary text-[11px] font-bold">
-                      {Math.round(progress)}%
-                    </span>
-                  </div>
-
-                  <div
-                    role="progressbar"
-                    aria-label="Order delivery progress"
-                    aria-valuenow={progress}
-                    aria-valuemin={0}
-                    aria-valuemax={100}
-                    className="mt-3 h-1.5 overflow-hidden rounded-full bg-[#DCE8ED]"
-                  >
                     <div
-                      className="h-full rounded-full bg-[linear-gradient(90deg,var(--color-primary),var(--color-secondary))] transition-[width] duration-700"
-                      style={{ width: `${progress}%` }}
-                    />
-                  </div>
-
-                  <div className="mt-4 flex items-center justify-between gap-3 border-t border-[#DFEAF0] pt-3">
-                    <div>
-                      <p className="text-[9px] text-[#8BA0AA]">Carrier</p>
-
-                      <p className="text-primary mt-1 text-[11px] font-semibold">
-                        {order.carrier}
-                      </p>
+                      role="progressbar"
+                      aria-label="Shipment progress"
+                      aria-valuemin={0}
+                      aria-valuemax={100}
+                      aria-valuenow={progress}
+                      className="bg-primary/10 mt-3 h-2 overflow-hidden rounded-full"
+                    >
+                      <div
+                        style={{ width: `${progress}%` }}
+                        className="from-primary-light via-accent to-secondary h-full rounded-full bg-linear-to-r transition-[width] duration-700"
+                      />
                     </div>
 
-                    <div className="text-right">
-                      <p className="text-[9px] text-[#8BA0AA]">Delivery</p>
+                    <div className="border-primary/10 mt-4 grid grid-cols-2 gap-3 border-t pt-3">
+                      {[
+                        ["Carrier", order.carrier],
+                        ["Delivery", order.eta],
+                      ].map(([label, value]) => (
+                        <div key={label}>
+                          <p className="text-muted text-xs">{label}</p>
 
-                      <p className="text-primary mt-1 text-[11px] font-semibold">
-                        {order.eta}
-                      </p>
+                          <p className="text-primary mt-1 text-sm font-semibold">
+                            {value}
+                          </p>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                </div>
 
-                <div className="mt-7">
-                  <div className="mb-5 flex items-center justify-between">
-                    <h4 className="font-heading text-primary text-[14px] font-bold">
-                      Shipment Journey
-                    </h4>
-
-                    <span className="text-[10px] text-[#8BA0AA]">
-                      {currentStep + 1}/{STEPS.length}
-                    </span>
-                  </div>
+                  <h4 className="font-heading text-primary mt-7 mb-5 text-base">
+                    Shipment Journey
+                  </h4>
 
                   <ol>
                     {STEPS.map((step, index) => {
                       const Icon = step.icon;
-                      const completed = index < currentStep;
-                      const current = index === currentStep;
                       const reached = index <= currentStep;
+                      const current = index === currentStep;
                       const last = index === STEPS.length - 1;
 
                       return (
-                        <li key={step.key} className="flex gap-3">
+                        <li
+                          key={step.key}
+                          aria-current={current ? "step" : undefined}
+                          className="flex gap-3"
+                        >
                           <div className="flex flex-col items-center">
                             <span
-                              className={`relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full border ${
+                              className={`flex size-10 shrink-0 items-center justify-center rounded-xl border ${
                                 reached
-                                  ? "border-primary bg-primary text-white"
-                                  : "border-[#DCE8ED] bg-[#F7FAFC] text-[#A1B3BB]"
-                              }`}
+                                  ? "border-secondary/40 from-primary-light to-primary text-accent-light bg-linear-to-br"
+                                  : "border-border bg-surface text-muted"
+                              } ${current ? "ring-secondary/15 ring-4" : ""}`}
                             >
-                              <Icon size={15} strokeWidth={1.8} />
+                              <Icon size={18} strokeWidth={1.7} />
                             </span>
 
                             {!last && (
-                              <div
-                                className={`h-11 w-[2px] ${
-                                  completed ? "bg-primary" : "bg-[#E2EBEF]"
+                              <span
+                                className={`min-h-10 w-[2px] flex-1 ${
+                                  index < currentStep
+                                    ? "bg-secondary"
+                                    : "bg-border"
                                 }`}
                               />
                             )}
                           </div>
 
-                          <div className="min-w-0 flex-1 pt-1.5">
+                          <div className="min-w-0 flex-1 pt-1 pb-5">
                             <div className="flex flex-wrap items-center gap-2">
-                              <p
-                                className={`text-[11px] font-semibold ${
-                                  reached ? "text-primary" : "text-[#98ABB5]"
-                                }`}
-                              >
+                              <p className="text-primary text-sm font-bold">
                                 {step.label}
                               </p>
 
                               {current && (
-                                <span className="text-secondary rounded-full bg-[#E7F5F8] px-2 py-0.5 text-[8px] font-bold">
+                                <span className="bg-secondary/15 text-secondary-dark rounded-full px-2 py-0.5 text-xs font-semibold">
                                   {last ? "Completed" : "Current"}
                                 </span>
                               )}
                             </div>
 
-                            <p className="mt-1 text-[10px] leading-[1.6] text-[#8299A4]">
+                            <p className="text-muted mt-1 text-xs leading-relaxed">
                               {step.description}
                             </p>
                           </div>
@@ -345,51 +307,42 @@ function TrackingPhone({ phase, order, currentStep, progress }) {
                       );
                     })}
                   </ol>
-                </div>
 
-                <div className="mt-6 rounded-[15px] border border-[#DCE8ED] bg-[#F8FBFC] p-4">
-                  <div className="mb-3 flex items-center gap-2">
-                    <Package size={16} className="text-secondary" />
-
-                    <h4 className="text-primary text-[12px] font-bold">
+                  <div className="border-border bg-surface mt-4 rounded-xl border p-4">
+                    <h4 className="text-primary mb-3 flex items-center gap-2 text-sm font-bold">
+                      <Package size={18} className="text-secondary-dark" />
                       Order Items
                     </h4>
-                  </div>
 
-                  <div className="space-y-2">
                     {order.items.map((item) => (
                       <div
                         key={item.name}
-                        className="flex items-center justify-between gap-3"
+                        className="border-border flex items-center justify-between gap-3 border-t py-2 text-sm"
                       >
-                        <span className="text-[11px] text-[#617987]">
-                          {item.name}
-                        </span>
+                        <span className="text-charcoal">{item.name}</span>
 
-                        <span className="text-primary text-[10px] font-semibold">
+                        <span className="text-primary font-semibold">
                           ×{item.qty}
                         </span>
                       </div>
                     ))}
                   </div>
-                </div>
 
-                <p className="mt-5 text-center text-[10px] leading-5 text-[#8299A4]">
-                  Demonstration tracking only. Not live carrier information.
-                </p>
-              </div>
+                  <p className="text-muted mt-4 text-center text-xs leading-relaxed">
+                    Demonstration tracking only. Not live carrier information.
+                  </p>
+                </div>
+              )
             )}
           </div>
 
-          <div className="mt-auto flex items-center justify-center border-t border-[#E8F0F3] bg-[#F8FBFC] py-4">
-            <div className="flex items-center gap-2">
-              <LockKeyhole size={13} className="text-secondary" />
+          <footer className="border-border bg-primary-soft/50 mt-auto flex items-center justify-center gap-2 border-t px-4 py-4">
+            <LockKeyhole size={15} className="text-secondary-dark" />
 
-              <span className="text-[9px] font-bold tracking-[0.1em] text-[#617987] uppercase">
-                Secure Order Record
-              </span>
-            </div>
-          </div>
+            <span className="text-primary text-xs font-semibold">
+              Order Tracking Preview
+            </span>
+          </footer>
         </div>
       </div>
     </aside>
@@ -427,78 +380,86 @@ export default function OrderTracker() {
     setPhase(found ? "found" : "missing");
   }
 
-  const currentStep = order
-    ? STEPS.findIndex((step) => step.key === order.status)
-    : -1;
-
-  const progress =
-    currentStep >= 0 ? (currentStep / (STEPS.length - 1)) * 100 : 0;
+  const inputClass =
+    "h-13 w-full rounded-xl border border-primary/15 bg-primary-soft/50 pr-4 pl-12 text-base text-primary outline-none transition-all duration-300 placeholder:text-muted/70 focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/10";
 
   return (
-    <main className="min-h-screen bg-[#F8FBFC]">
-      <section className="px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-16">
-        <div className="mx-auto grid max-w-7xl grid-cols-1 items-start gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,3fr)] lg:gap-8 xl:gap-12">
-          <div className="min-w-0 lg:pt-12 xl:pt-16">
-            <div className="max-w-[700px]">
-              <p className="text-primary mb-4 inline-flex items-center gap-2 rounded-full border border-[#DCE8ED] bg-white px-4 py-2 text-[11px] font-bold tracking-[0.12em] uppercase">
-                <span className="bg-secondary size-1.5 rounded-full" />
-                Order Tracking
-              </p>
+    <main className="bg-surface min-h-screen">
+      <section className="via-primary-soft/60 relative isolate overflow-hidden bg-linear-to-br from-white to-white px-4 pt-28 pb-12 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-16">
+        <div
+          aria-hidden="true"
+          className="bg-primary-light/10 pointer-events-none absolute -top-40 -right-40 -z-10 size-[500px] rounded-full blur-[100px]"
+        />
+
+        <div
+          aria-hidden="true"
+          className="bg-secondary/10 pointer-events-none absolute -bottom-40 -left-40 -z-10 size-[500px] rounded-full blur-[100px]"
+        />
+
+        <div className="mx-auto grid max-w-7xl items-start gap-10 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)] lg:gap-16">
+          <div className="min-w-0">
+            <header>
+              <span className="border-secondary/30 bg-secondary/10 text-secondary-dark mb-4 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold tracking-wider uppercase">
+                <Truck size={16} strokeWidth={1.8} />
+                Shipment Tracking
+              </span>
 
               <h1 className="section-heading">
-                Track your order,{" "}
-                <span className="text-secondary">live.</span>
+                Track Your <span className="text-secondary">Order.</span>
               </h1>
 
-              <p className="mt-6 max-w-[590px] text-md leading-8 text-[#617987]">
-                Enter the order number from your confirmation and the billing
-                email used at checkout. Your verified order status appears in
-                the phone.
-              </p>
-            </div>
+              <div className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r" />
 
-            <div className="mt-10 max-w-[700px] overflow-hidden rounded-[22px] border border-[#DCE8ED] bg-white shadow-[0_15px_45px_rgba(7,59,104,0.06)] sm:mt-12 sm:rounded-[26px]">
-              <div className="flex items-center gap-3 px-5 pt-6 sm:px-7 sm:pt-7">
-                <span className="text-primary flex size-11 shrink-0 items-center justify-center rounded-xl bg-[#EAF7FA]">
-                  <Package size={21} strokeWidth={1.8} />
+              <p className="text-muted max-w-xl text-base leading-8">
+                Stay informed throughout your shipment journey. Enter your order
+                number and billing email to view your order details.
+              </p>
+            </header>
+
+            <div className="border-border shadow-primary/5 mt-8 overflow-hidden rounded-[22px] border bg-white shadow-xl">
+              <div className="from-secondary-dark via-accent-light to-secondary-dark h-[3px] bg-linear-to-r" />
+
+              <div className="flex items-center gap-4 px-5 pt-6 sm:px-7">
+                <span className="border-secondary/30 from-primary-light via-accent to-primary text-accent-light flex size-13 shrink-0 items-center justify-center rounded-xl border bg-linear-to-br">
+                  <Package size={25} strokeWidth={1.7} />
                 </span>
 
                 <div>
-                  <h2 className="font-heading text-primary text-[18px] font-bold tracking-[-0.025em] sm:text-[20px]">
-                    Find your order
+                  <h2 className="font-heading text-primary text-xl">
+                    Find Your Order
                   </h2>
 
-                  <p className="mt-1 text-[12px] text-[#718A96]">
-                    Both details must match the same record.
+                  <p className="text-muted mt-1 text-sm">
+                    Enter the details used at checkout.
                   </p>
                 </div>
               </div>
 
               <form onSubmit={handleSubmit} className="p-5 sm:p-7">
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-5 sm:grid-cols-2">
                   <div>
                     <label
                       htmlFor="order-number"
-                      className="mb-2 block text-[11px] font-bold tracking-[0.08em] text-[#173B4A] uppercase"
+                      className="text-primary mb-2 block text-sm font-semibold"
                     >
                       Order Number
                     </label>
 
                     <div className="relative">
                       <Search
-                        size={17}
-                        className="text-secondary pointer-events-none absolute top-1/2 left-4 -translate-y-1/2"
+                        size={19}
+                        className="text-secondary-dark pointer-events-none absolute top-1/2 left-4 -translate-y-1/2"
                       />
 
                       <input
                         id="order-number"
                         type="text"
                         required
+                        autoComplete="off"
                         value={orderNumber}
                         onChange={(event) => setOrderNumber(event.target.value)}
                         placeholder="e.g. ORD-1042"
-                        autoComplete="off"
-                        className="text-primary focus:border-primary focus:ring-primary/10 h-12 w-full rounded-xl border border-[#DCE8ED] bg-[#F8FBFC] pr-4 pl-11 text-[13px] transition-all duration-200 outline-none placeholder:text-[#9AADB7] focus:bg-white focus:ring-2"
+                        className={inputClass}
                       />
                     </div>
                   </div>
@@ -506,26 +467,26 @@ export default function OrderTracker() {
                   <div>
                     <label
                       htmlFor="billing-email"
-                      className="mb-2 block text-[11px] font-bold tracking-[0.08em] text-[#173B4A] uppercase"
+                      className="text-primary mb-2 block text-sm font-semibold"
                     >
                       Billing Email
                     </label>
 
                     <div className="relative">
                       <Mail
-                        size={17}
-                        className="text-secondary pointer-events-none absolute top-1/2 left-4 -translate-y-1/2"
+                        size={19}
+                        className="text-secondary-dark pointer-events-none absolute top-1/2 left-4 -translate-y-1/2"
                       />
 
                       <input
                         id="billing-email"
                         type="email"
                         required
+                        autoComplete="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                         placeholder="you@example.com"
-                        autoComplete="email"
-                        className="text-primary focus:border-primary focus:ring-primary/10 h-12 w-full rounded-xl border border-[#DCE8ED] bg-[#F8FBFC] pr-4 pl-11 text-[13px] transition-all duration-200 outline-none placeholder:text-[#9AADB7] focus:bg-white focus:ring-2"
+                        className={inputClass}
                       />
                     </div>
                   </div>
@@ -534,23 +495,17 @@ export default function OrderTracker() {
                 <button
                   type="submit"
                   disabled={phase === "loading"}
-                  className="group relative mt-5 flex h-12 w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-[13px] font-semibold text-white shadow-md transition-all duration-500 hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
+                  className="btn-primary mt-6 h-13 w-full gap-3 px-6 text-base"
                 >
-                  <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 group-hover:opacity-100 group-disabled:opacity-0" />
-
                   {phase === "loading" ? (
-                    <span className="relative z-10 flex items-center gap-2">
-                      <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
-                      Finding your order...
-                    </span>
+                    <>
+                      <span className="size-5 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                      Finding Your Order...
+                    </>
                   ) : (
                     <>
-                      <span className="relative z-10">Track my order</span>
-
-                      <ArrowRight
-                        size={17}
-                        className="relative z-10 transition-transform duration-300 group-hover:translate-x-1"
-                      />
+                      Track My Order
+                      <ArrowRight size={19} strokeWidth={1.8} />
                     </>
                   )}
                 </button>
@@ -558,20 +513,20 @@ export default function OrderTracker() {
                 {phase === "missing" && (
                   <p
                     role="alert"
-                    className="mt-4 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-[12px] leading-6 text-red-600"
+                    className="mt-4 rounded-xl border border-red-200 bg-red-50 p-4 text-sm leading-relaxed text-red-600"
                   >
                     No matching demo order was found. Please check your order
                     number and email address.
                   </p>
                 )}
 
-                <div className="mt-5 flex items-start gap-2">
+                <div className="mt-5 flex items-start gap-2.5">
                   <LockKeyhole
-                    size={14}
-                    className="text-secondary mt-0.5 shrink-0"
+                    size={17}
+                    className="text-secondary-dark mt-0.5 shrink-0"
                   />
 
-                  <p className="text-[11px] leading-5 text-[#718A96]">
+                  <p className="text-muted text-sm leading-relaxed">
                     Your details are used for this lookup and are not saved on
                     this page.
                   </p>
@@ -579,49 +534,52 @@ export default function OrderTracker() {
               </form>
             </div>
 
-            <div className="mt-5 max-w-[700px] rounded-[18px] border border-[#DCE8ED] bg-[#EDF7FA] p-5 sm:p-6">
-              <div className="flex items-start gap-3">
-                <ShieldCheck
-                  size={20}
-                  className="text-primary mt-0.5 shrink-0"
-                  strokeWidth={1.8}
-                />
+            <div className="border-secondary/30 from-primary-light via-accent to-primary relative isolate mt-6 overflow-hidden rounded-2xl border bg-linear-to-br p-5 sm:p-6">
+              <ShieldCheck
+                aria-hidden="true"
+                size={170}
+                strokeWidth={0.7}
+                className="pointer-events-none absolute -right-8 -bottom-14 -z-10 rotate-[-15deg] text-white/10"
+              />
+
+              <div className="flex items-start gap-4">
+                <span className="border-accent-light/30 text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border bg-white/10">
+                  <ShieldCheck size={25} strokeWidth={1.6} />
+                </span>
 
                 <div>
-                  <h3 className="font-heading text-primary text-[14px] font-bold">
+                  <h3 className="font-heading text-lg text-white">
                     Need Help With Your Order?
                   </h3>
 
-                  <p className="mt-2 text-[12px] leading-6 text-[#617987]">
-                    If you have questions about your shipment, our support team
-                    can help.
+                  <p className="mt-2 max-w-lg text-sm leading-7 text-white/85">
+                    Have questions about your shipment? Our support team is here
+                    to assist you throughout your order journey.
                   </p>
 
                   <Link
                     href="/contact"
-                    className="text-primary hover:text-secondary mt-3 inline-flex items-center gap-2 text-[12px] font-semibold transition-colors"
+                    className="group text-accent-light mt-4 inline-flex items-center gap-2 text-sm font-bold"
                   >
                     Contact Support
-                    <ArrowUpRight size={15} />
+                    <ArrowUpRight
+                      size={17}
+                      className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                    />
                   </Link>
                 </div>
               </div>
             </div>
 
-            <p className="mt-5 px-1 text-[11px] leading-6 text-[#8299A4]">
+            <p className="text-muted mt-5 text-sm leading-6">
               Demo tracking: Try{" "}
               <strong className="text-primary">ORD-1042</strong> with{" "}
               <strong className="text-primary">demo@yourshop.com</strong>.
             </p>
           </div>
 
-          <div className="min-w-0 lg:sticky lg:top-24">
-            <TrackingPhone
-              phase={phase}
-              order={order}
-              currentStep={currentStep}
-              progress={progress}
-            />
+          <div className="min-w-0 lg:sticky lg:top-28">
+            <TrackingPhone phase={phase} order={order} />
           </div>
         </div>
       </section>

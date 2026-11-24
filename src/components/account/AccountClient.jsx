@@ -17,7 +17,6 @@ import {
   Plus,
   Trash2,
   UserRound,
-  X,
 } from "lucide-react";
 import { coaRecords } from "@/data/coa-records";
 
@@ -31,7 +30,7 @@ const nav = [
   { slug: "payment-methods", label: "Payment methods", icon: CreditCard },
 ];
 const input =
-  "h-12 w-full rounded-xl border border-[#E8DCEA] bg-white px-4 text-[15px] text-[#34283A] outline-none focus:border-primary";
+  "h-12 w-full rounded-xl border border-border bg-primary-soft/40 px-4 text-base text-charcoal outline-none transition-colors focus:border-primary focus:bg-white focus:ring-2 focus:ring-primary/10";
 const money = (n) =>
   new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(
     Number(n) || 0,
@@ -66,7 +65,7 @@ function Field({
   autoComplete,
 }) {
   return (
-    <label className="block text-[14px] font-semibold text-[#49394F]">
+    <label className="text-primary block text-[14px] font-semibold">
       {label}
       <input
         name={name}
@@ -86,10 +85,8 @@ function Button({ children, busy = false }) {
     <button
       type="submit"
       disabled={busy}
-      className="group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-[14px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0"
+      className="btn-primary h-12 px-7 text-sm"
     >
-      <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100 group-disabled:opacity-0" />
-
       <span className="relative z-10">
         {busy ? "Please wait..." : children}
       </span>
@@ -109,16 +106,14 @@ function Button({ children, busy = false }) {
 }
 function Panel({ title, subtitle, children, action }) {
   return (
-    <section className="rounded-[22px] border border-[#ECE2ED] bg-white p-5 sm:p-7">
+    <section className="border-border rounded-2xl border bg-white p-5 shadow-sm sm:p-7">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="font-heading text-primary text-[25px] font-bold">
+          <h2 className="font-heading text-primary text-xl sm:text-[25px]">
             {title}
           </h2>
           {subtitle && (
-            <p className="mt-2 text-[14px] leading-6 text-[#817586]">
-              {subtitle}
-            </p>
+            <p className="text-muted mt-2 text-[14px] leading-6">{subtitle}</p>
           )}
         </div>
         {action}
@@ -129,21 +124,16 @@ function Panel({ title, subtitle, children, action }) {
 }
 function Empty({ icon: Icon, title, description, href, action }) {
   return (
-    <div className="rounded-[18px] border border-dashed border-[#E6D9E8] bg-[#FCFAFC] px-5 py-10 text-center">
-      <Icon className="text-primary/60 mx-auto" size={34} />
+    <div className="border-primary/20 bg-primary-soft/40 rounded-xl border border-dashed px-5 py-10 text-center">
+      <Icon className="text-secondary-dark mx-auto" size={34} />
       <h3 className="font-heading text-primary mt-4 text-[22px] font-bold">
         {title}
       </h3>
-      <p className="mx-auto mt-2 max-w-md text-[14px] leading-7 text-[#817586]">
+      <p className="text-muted mx-auto mt-2 max-w-md text-[14px] leading-7">
         {description}
       </p>
       {href && (
-        <Link
-          href={href}
-          className="group relative mt-5 inline-flex h-11 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-[14px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
-        >
-          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
-
+        <Link href={href} className="btn-primary mt-5 h-11 px-6 text-sm">
           <span className="relative z-10">{action}</span>
 
           <ArrowUpRight
@@ -202,7 +192,7 @@ function AuthForms({ section, onSuccess }) {
           </form>
           <Link
             href="/account"
-            className="text-primary mt-5 inline-block text-[14px] font-semibold"
+            className="text-primary hover:text-secondary-dark mt-5 inline-block text-sm font-semibold"
           >
             Back to sign in
           </Link>
@@ -221,11 +211,11 @@ function AuthForms({ section, onSuccess }) {
     );
   return (
     <div className="grid gap-6 py-10 lg:grid-cols-2 lg:gap-8 lg:py-14">
-      <section className="rounded-[22px] border border-[#ECE2ED] bg-white p-6 sm:p-9">
-        <h2 className="font-heading text-primary text-[32px] font-bold">
+      <section className="border-border rounded-2xl border bg-white p-5 shadow-sm sm:p-9">
+        <h2 className="font-heading text-primary text-[25px] sm:text-[32px]">
           Welcome back.
         </h2>
-        <p className="mt-2 text-[15px] text-[#817586]">
+        <p className="text-muted mt-2 text-[15px]">
           Sign in with the email you order with.
         </p>
         <form onSubmit={(e) => submit(e, "login")} className="mt-7 space-y-5">
@@ -249,18 +239,18 @@ function AuthForms({ section, onSuccess }) {
             <Button busy={busy}>Sign in</Button>
             <Link
               href="/account/lost-password"
-              className="text-primary text-[14px] font-semibold"
+              className="text-primary hover:text-secondary-dark text-sm font-semibold"
             >
               Forgot password?
             </Link>
           </div>
         </form>
       </section>
-      <section className="bg-primary-soft rounded-[22px] border border-[#ECE2ED] p-6 sm:p-9">
-        <h2 className="font-heading text-primary text-[32px] font-bold">
+      <section className="border-secondary/25 via-primary-soft rounded-2xl border bg-linear-to-br from-white to-white p-5 shadow-sm sm:p-9">
+        <h2 className="font-heading text-primary text-[25px] sm:text-[32px]">
           Open an Account.
         </h2>
-        <p className="mt-2 text-[15px] leading-7 text-[#817586]">
+        <p className="text-muted mt-2 text-[15px] leading-7">
           Order history and batch certificates, filed under one address.
         </p>
         <form
@@ -300,7 +290,7 @@ function AuthForms({ section, onSuccess }) {
             onChange={change}
             autoComplete="new-password"
           />
-          <p className="text-[14px] text-[#817586]">At least 8 characters.</p>
+          <p className="text-muted text-[14px]">At least 8 characters.</p>
           <Button busy={busy}>Open an Account</Button>
         </form>
       </section>
@@ -319,7 +309,7 @@ function Orders({ orders }) {
       subtitle="Your orders will appear here when your checkout saves them to the local database."
     >
       {orders.length ? (
-        <div className="divide-y divide-[#EEE6EF]">
+        <div className="divide-border divide-y">
           {orders.map((o) => (
             <div
               key={o.id}
@@ -327,7 +317,7 @@ function Orders({ orders }) {
             >
               <div>
                 <p className="text-primary font-semibold">{o.order_number}</p>
-                <p className="mt-1 text-[#817586] capitalize">
+                <p className="text-muted mt-1 capitalize">
                   {o.status.replaceAll("_", " ")}
                 </p>
               </div>
@@ -375,7 +365,7 @@ function Downloads({ orders }) {
               target="_blank"
               rel="noopener noreferrer"
               href={d.url}
-              className="text-primary flex items-center justify-between rounded-xl border border-[#E8DCEA] p-4"
+              className="border-border text-primary hover:border-secondary/50 hover:bg-primary-soft flex items-center justify-between gap-3 rounded-xl border p-4 transition-colors"
             >
               <span>
                 {d.name} · {d.lot}
@@ -440,7 +430,7 @@ function Addresses({ addresses, reload }) {
           <button
             type="button"
             onClick={() => edit(null)}
-            className="bg-primary inline-flex items-center gap-2 rounded-full px-5 py-3 text-[14px] font-semibold text-white"
+            className="btn-primary h-11 px-5 text-sm"
           >
             <Plus size={17} /> Add address
           </button>
@@ -501,7 +491,7 @@ function Addresses({ addresses, reload }) {
             <button
               type="button"
               onClick={() => setEditing(false)}
-              className="text-primary rounded-full border border-[#E8DCEA] px-5 text-[14px]"
+              className="border-border text-primary hover:bg-primary-soft rounded-full border px-5 text-sm font-semibold"
             >
               Cancel
             </button>
@@ -512,10 +502,10 @@ function Addresses({ addresses, reload }) {
           {addresses.map((a) => (
             <article
               key={a.id}
-              className="rounded-xl border border-[#E8DCEA] p-5"
+              className="border-border bg-surface rounded-xl border p-5"
             >
               <strong className="text-primary">{a.label}</strong>
-              <address className="mt-3 text-[14px] leading-7 text-[#817586] not-italic">
+              <address className="text-muted mt-3 text-[14px] leading-7 not-italic">
                 {a.full_name}
                 <br />
                 {a.address1} {a.address2}
@@ -526,7 +516,7 @@ function Addresses({ addresses, reload }) {
                 <button
                   type="button"
                   onClick={() => edit(a)}
-                  className="text-primary text-[14px] font-semibold"
+                  className="text-primary hover:text-secondary-dark text-sm font-semibold"
                 >
                   Edit
                 </button>
@@ -716,23 +706,35 @@ export default function AccountClient({ section = "dashboard" }) {
   const { user, orders, addresses } = data;
   const active = nav.find((n) => n.slug === section) || nav[0];
   return (
-    <main className="min-h-screen bg-white">
-      <header className="border-b border-[#EEE6EF] px-5 py-6 sm:px-8 md:py-12">
+    <main className="bg-surface min-h-screen">
+      <header className="border-border from-primary-soft to-primary-soft border-b bg-linear-to-r via-white px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
         <div className="mx-auto max-w-7xl">
+          <nav
+            aria-label="Breadcrumb"
+            className="text-muted mb-4 flex items-center gap-2 text-sm"
+          >
+            <Link href="/" className="hover:text-primary">
+              Home
+            </Link>
+            <ChevronRight size={15} aria-hidden="true" />
+            <span aria-current="page" className="text-primary font-semibold">
+              My Account
+            </span>
+          </nav>
           <h1 className="section-heading">
             {user && section !== "dashboard" ? active.label : "My Account"}
             <span className="text-secondary">.</span>
           </h1>
-          <p className="mt-2 text-[15px] text-[#817586]">
+          <p className="text-muted mt-2 text-[15px]">
             {user
               ? "Manage your profile, orders and documents."
               : "Sign in or create your account."}
           </p>
         </div>
       </header>
-      <div className="mx-auto max-w-7xl px-5 sm:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {!ready ? (
-          <p role="status" className="py-16 text-[15px] text-[#817586]">
+          <p role="status" className="text-muted py-16 text-[15px]">
             Loading account...
           </p>
         ) : section === "reset-password" && token ? (
@@ -752,12 +754,12 @@ export default function AccountClient({ section = "dashboard" }) {
           />
         ) : (
           <div className="grid items-start gap-7 py-10 lg:grid-cols-[260px_minmax(0,1fr)] lg:py-14">
-            <aside className="rounded-[22px] border border-[#ECE2ED] bg-white p-3 lg:sticky lg:top-24">
-              <div className="border-b border-[#EEE6EF] p-3 pb-5">
+            <aside className="border-border rounded-2xl border bg-white p-3 shadow-sm lg:sticky lg:top-28">
+              <div className="border-border border-b p-3 pb-5">
                 <p className="text-primary text-[16px] font-bold">
                   {user.first_name} {user.last_name}
                 </p>
-                <p className="mt-1 truncate text-[13px] text-[#817586]">
+                <p className="text-muted mt-1 truncate text-[13px]">
                   {user.email}
                 </p>
               </div>
@@ -771,9 +773,12 @@ export default function AccountClient({ section = "dashboard" }) {
                     href={
                       slug === "dashboard" ? "/account" : `/account/${slug}`
                     }
-                    className={`flex items-center gap-2 rounded-xl px-3 py-3 text-[14px] font-semibold ${active.slug === slug ? "bg-primary text-white" : "hover:text-primary hover:bg-primary-soft text-[#635367]"}`}
+                    className={`flex items-center gap-2 rounded-xl px-3 py-3 text-[14px] font-semibold ${active.slug === slug ? "from-primary-light via-accent to-primary bg-linear-to-r text-white shadow-sm" : "hover:text-primary hover:bg-primary-soft text-charcoal"}`}
                   >
-                    <Icon size={18} className="shrink-0" />
+                    <Icon
+                      size={18}
+                      className={`shrink-0 ${active.slug === slug ? "text-accent-light" : "text-secondary-dark"}`}
+                    />
                     {label}
                   </Link>
                 ))}
@@ -781,7 +786,7 @@ export default function AccountClient({ section = "dashboard" }) {
               <button
                 type="button"
                 onClick={logout}
-                className="mt-3 flex w-full items-center gap-3 border-t border-[#EEE6EF] px-3 py-4 text-[14px] font-semibold text-[#7A617D]"
+                className="border-border text-muted mt-3 flex w-full items-center gap-3 border-t px-3 py-4 text-sm font-semibold transition-colors hover:text-red-600"
               >
                 <LogOut size={18} /> Sign out
               </button>
@@ -789,8 +794,17 @@ export default function AccountClient({ section = "dashboard" }) {
             <div className="min-w-0 space-y-5">
               {active.slug === "dashboard" && (
                 <>
-                  <div className="rounded-[22px] bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] p-6 text-white sm:p-8">
-                    <h2 className="font-heading mt-3 text-[34px] font-bold">
+                  <div className="border-secondary/30 from-primary-light via-accent to-primary shadow-primary/10 relative isolate overflow-hidden rounded-2xl border bg-linear-to-r p-6 text-white shadow-lg sm:p-8">
+                    <LayoutDashboard
+                      aria-hidden="true"
+                      size={160}
+                      strokeWidth={0.7}
+                      className="pointer-events-none absolute -right-5 -bottom-10 -z-10 text-white/10"
+                    />
+                    <p className="text-accent-light text-sm font-semibold tracking-wider uppercase">
+                      Your Research Account
+                    </p>
+                    <h2 className="font-heading mt-3 text-[26px] sm:text-[34px]">
                       Welcome, {user.first_name}.
                     </h2>
                     <p className="mt-2 text-[15px] text-white/80">
@@ -798,15 +812,18 @@ export default function AccountClient({ section = "dashboard" }) {
                     </p>
                   </div>
                   <Orders orders={orders.slice(0, 3)} />
-                  <Panel title="Everything else">
+                  <Panel title="Quick Access">
                     <div className="grid gap-3 sm:grid-cols-2">
                       {nav.slice(1, 5).map(({ slug, label, icon: Icon }) => (
                         <Link
                           key={slug}
                           href={`/account/${slug}`}
-                          className="text-primary flex items-center gap-3 rounded-xl border border-[#EEE6EF] p-5 text-[15px] font-semibold hover:bg-[#FCF7FD]"
+                          className="border-border text-primary hover:border-secondary/50 hover:bg-primary-soft flex items-center gap-3 rounded-xl border p-4 text-base font-semibold transition-colors"
                         >
-                          <Icon size={21} />
+                          <Icon
+                            size={21}
+                            className="text-secondary-dark shrink-0"
+                          />
                           {label}
                           <ArrowUpRight size={16} className="ml-auto" />
                         </Link>

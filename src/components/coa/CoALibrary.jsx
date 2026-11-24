@@ -1,13 +1,15 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import {
-  ChevronDown,
+  Search,
+  X,
+  ArrowUpRight,
   FileCheck2,
   FileSearch,
-  Search,
-  SunSnow,
+  FlaskConical,
 } from "lucide-react";
 
 import { products } from "@/data/products";
@@ -15,154 +17,153 @@ import { coaRecords } from "@/data/coa-records";
 import CustomSelect from "../CustomSelect";
 import PageHero from "../PageHero";
 
-function CoACard({ product }) {
-  const [variantIndex, setVariantIndex] = useState(product.defaultVariant ?? 0);
+const SHOW_DEMO = process.env.NODE_ENV === "development";
 
-  const variants = product.variants || [];
-  const variant = variants[variantIndex] || variants[0];
+const columns = [
+  "Research Product",
+  "Batch Number",
+  "Purity",
+  "Test Date",
+  "Laboratory",
+  "Documents",
+];
 
-  const realRecord =
-    coaRecords[`${product.slug}:${variant?.id}`] ||
-    coaRecords[variant?.id] ||
-    null;
+const catalog = products
+  .filter((product) => product.active !== false)
+  .flatMap((product, productIndex) =>
+    (product.variants?.length ? product.variants : [null]).map(
+      (variant, index) => {
+        const actual = coaRecords[`${product.slug}:${variant?.id}`];
+        const record = actual && !actual.demo ? actual : null;
 
-  const sampleNumber = Number(product.id) * 17 + variantIndex * 13;
-  const samplePurity = (98.5 + (sampleNumber % 140) / 100).toFixed(2);
+        const sample = {
+          lot: `DEMO-${String(productIndex + 1).padStart(3, "0")}-${index + 1}`,
+          purity: `${(99 + ((productIndex * 7 + index * 3) % 95) / 100).toFixed(2)}%`,
+          testDate: "Nov 12, 2026",
+          laboratory: "Sample Laboratory",
+          demo: true,
+        };
 
-  const record = realRecord || {
-    demo: true,
-    purity: samplePurity,
-    lot: `DEMO-${String(product.id).padStart(3, "0")}-${variantIndex + 1}`,
-    accession: `SAMPLE-${String(sampleNumber).padStart(6, "0")}`,
-    testDate: "Sample record · 2026",
-    results: [
-      { name: "Identity (LC-MS)", value: product.name, status: "Example" },
-      {
-        name: "Purity (HPLC-UV)",
-        value: `${samplePurity}%`,
-        status: "Example",
+        return {
+          key: `${product.slug}-${variant?.id ?? index}`,
+          product,
+          variant,
+          record: record || (SHOW_DEMO ? sample : null),
+        };
       },
-      { name: "Net content", value: variant?.label, status: "Example" },
-      { name: "Microbial (PCR)", value: "Not tested", status: "Sample only" },
-      { name: "Laboratory", value: "Demo laboratory", status: "Sample only" },
-    ],
-  };
-
-  // Always keep the selected strength visible in the two-pill preview.
-  const selectedIndex = variants[variantIndex] ? variantIndex : 0;
-
-  // Keep the first strength and the selected strength visible.
-  const visibleIndexes =
-    variants.length <= 2
-      ? variants.map((_, index) => index)
-      : selectedIndex > 1
-        ? [0, selectedIndex]
-        : [0, 1];
-
-  const remainingOptions = variants.flatMap((item, index) =>
-    visibleIndexes.includes(index)
-      ? []
-      : [
-          {
-            value: String(index),
-            label: item.label,
-          },
-        ],
+    ),
   );
 
-  const pdfUrl = record?.pdfUrl || "/assets/certificate.pdf";
+const categories = [
+  ...new Set(catalog.map(({ product }) => product.category).filter(Boolean)),
+];
+
+function CertificateRow({ item }) {
+  const { product, variant, record } = item;
+
+  const purity =
+    record?.purity ??
+    record?.results?.find((result) =>
+      result.name?.toLowerCase().includes("purity"),
+    )?.value;
+
+  const laboratory =
+    record?.laboratory ||
+    record?.lab ||
+    record?.results?.find((result) =>
+      result.name?.toLowerCase().includes("laboratory"),
+    )?.value;
+
+  const details = [
+    ["Batch Number", record?.lot],
+    ["Purity", purity ? `${String(purity).replace(/%$/, "")}%` : null],
+    ["Test Date", record?.testDate],
+    ["Laboratory", laboratory],
+  ];
 
   return (
-    <article className="group hover:border-primary/20 relative flex h-full min-w-0 flex-col overflow-hidden rounded-[20px] border border-[#DCE8ED] bg-white transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_18px_45px_rgba(7,85,143,0.10)] sm:rounded-[26px]">
-      <div className="relative aspect-square overflow-hidden bg-[#EAF4F7]">
-        {product.image ? (
-          <Image
-            src={product.image}
-            alt={product.name}
-            fill
-            sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
-          />
-        ) : (
-          <div className="text-primary/40 flex h-full items-center justify-center text-xs sm:text-sm">
-            Image unavailable
-          </div>
-        )}
+    <article className="group border-border hover:border-secondary/50 hover:bg-primary-soft/40 relative grid min-w-0 gap-4 rounded-2xl border bg-white p-4 transition-all duration-300 hover:shadow-md xl:grid-cols-[2fr_1fr_0.7fr_1fr_1.1fr_1.6fr] xl:items-center xl:gap-4 xl:rounded-xl xl:px-5 xl:py-4">
+      <div className="flex min-w-0 items-center gap-3">
+        <div className="border-primary/10 bg-primary-soft relative size-17 shrink-0 overflow-hidden rounded-xl border">
+          {product.image && (
+            <Image
+              src={product.image}
+              alt={product.name}
+              fill
+              sizes="68px"
+              className="object-cover"
+            />
+          )}
+        </div>
 
-        {record?.demo && (
-          <span className="text-primary absolute top-2 left-2 rounded-full bg-white/90 px-2 py-1 text-[8px] font-semibold tracking-wider uppercase shadow-sm sm:top-4 sm:left-4 sm:px-3 sm:text-[10px]">
-            Sample COA
-          </span>
-        )}
+        <div className="min-w-0">
+          <h3 className="text-primary font-sans text-base leading-snug font-bold">
+            {product.name}
+          </h3>
+
+          <div className="mt-1.5 flex flex-wrap items-center gap-2">
+            {variant?.label && (
+              <span className="bg-primary-soft text-primary rounded-md px-2 py-1 text-sm font-semibold">
+                {variant.label}
+              </span>
+            )}
+
+            {record?.demo && (
+              <span className="text-secondary-dark text-xs font-semibold">
+                Sample
+              </span>
+            )}
+          </div>
+        </div>
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col px-2.5 pt-3 pb-3 sm:px-5 sm:pt-5 sm:pb-5">
-        <h2 className="font-heading text-primary group-hover:text-secondary text-md leading-[1.3] font-semibold tracking-[-0.03em] transition-colors">
-          {product.name}
-        </h2>
+      <dl className="bg-primary-soft/60 grid grid-cols-2 gap-x-3 gap-y-4 rounded-xl p-3 xl:contents">
+        {details.map(([label, value]) => (
+          <div key={label} className="min-w-0">
+            <dt className="text-muted mb-1 text-sm font-medium xl:sr-only">
+              {label}
+            </dt>
 
-        <p className="text-sm text-gray-500 font-sans mt-2">Certificate added August 2026</p>
-
-        {/* <div className="mt-3 min-h-[26px] min-w-0 sm:min-h-[32px]">
-          {variants.length > 1 && (
-            <div
-              role="group"
-              aria-label={`Select strength for ${product.name}`}
-              className="flex min-w-0 flex-nowrap items-center gap-1 sm:gap-2"
+            <dd
+              className={`text-[15px] font-semibold wrap-break-word ${
+                label === "Purity" && value
+                  ? "text-emerald-700"
+                  : "text-primary"
+              }`}
             >
-              {visibleIndexes.map((index) => {
-                const item = variants[index];
-                const isSelected = selectedIndex === index;
+              {value || "Not provided"}
+            </dd>
+          </div>
+        ))}
+      </dl>
 
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    onClick={() => setVariantIndex(index)}
-                    aria-pressed={isSelected}
-                    title={item.label}
-                    className={`focus-visible:ring-primary/30 inline-flex h-6 shrink-0 items-center justify-center rounded-full border px-1.5 text-[8px] leading-none font-semibold whitespace-nowrap transition-all duration-200 focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none sm:h-[32px] sm:px-3 sm:text-[11px] ${
-                      isSelected
-                        ? "border-primary bg-primary text-white shadow-sm"
-                        : "hover:border-primary hover:text-primary border-[#DCE8ED] bg-[#F7FAFC] text-[#54717C] hover:bg-white"
-                    }`}
-                  >
-                    {item.label}
-                  </button>
-                );
-              })}
+      <div className="flex items-center gap-2">
+        <Link
+          href={`/products/${product.slug}`}
+          className="group/link border-primary/20 text-primary hover:border-secondary hover:bg-secondary/5 flex h-11 flex-1 items-center justify-center gap-1.5 rounded-lg border bg-white px-3 text-sm font-semibold whitespace-nowrap transition-all"
+        >
+          Product
+          <ArrowUpRight
+            size={16}
+            className="text-secondary-dark transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5"
+          />
+        </Link>
 
-              {remainingOptions.length > 0 && (
-                <div className="relative z-20 shrink-0">
-                  <CustomSelect
-                    compact
-                    openUp
-                    value=""
-                    placeholder={`+${remainingOptions.length}`}
-                    options={remainingOptions}
-                    onChange={(event) => {
-                      setVariantIndex(Number(event.target.value));
-                    }}
-                    className="shrink-0"
-                  />
-                </div>
-              )}
-            </div>
-          )}
-        </div> */}
-
-        <div className="mt-auto pt-4 sm:pt-5">
+        {record?.pdfUrl && !record.demo ? (
           <a
-            href={pdfUrl}
+            href={record.pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group/btn relative flex h-9 w-full items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-2 text-sm font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98] sm:h-11 sm:px-4"
+            className="btn-primary h-11 flex-1 gap-2 px-3 text-sm whitespace-nowrap"
           >
-            <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover/btn:opacity-100" />
-
-            <span className="relative z-10">View COA</span>
+            COA
+            <FileCheck2 size={17} />
           </a>
-        </div>
+        ) : (
+          <span className="border-border bg-surface text-muted flex h-11 flex-1 items-center justify-center gap-2 rounded-lg border px-3 text-sm font-semibold whitespace-nowrap">
+            {record?.demo ? "Sample COA" : "No PDF"}
+          </span>
+        )}
       </div>
     </article>
   );
@@ -170,87 +171,75 @@ function CoACard({ product }) {
 
 export default function CoALibrary() {
   const [query, setQuery] = useState("");
-  const [filter, setFilter] = useState("all");
   const [category, setCategory] = useState("all");
-  const catalog = useMemo(
-    () =>
-      products
-        .filter((product) => product.active !== false)
-        .flatMap((product) =>
-          (product.variants || []).map((variant) => ({
-            product,
-            variant,
-            record: coaRecords[`${product.slug}:${variant.id}`] || null,
-          })),
-        ),
-    [],
-  );
-  const categories = useMemo(
-    () => [
-      ...new Set(
-        catalog.map(({ product }) => product.category).filter(Boolean),
-      ),
-    ],
-    [catalog],
-  );
-  const filtered = useMemo(
-    () =>
-      catalog.filter(({ product, variant, record }) => {
-        if (filter === "available" && (record?.demo || !record?.pdfUrl))
-          return false;
-        if (filter === "pending" && !record?.demo && record?.pdfUrl)
-          return false;
-        if (category !== "all" && product.category !== category) return false;
-        return `${product.name} ${product.slug} ${product.category || ""} ${variant.label} ${record?.lot || ""} ${record?.accession || ""}`
-          .toLowerCase()
-          .includes(query.trim().toLowerCase());
-      }),
-    [catalog, query, filter, category],
-  );
-  const availableCount = catalog.filter(({ record }) =>
-    Boolean(record?.pdfUrl && !record?.demo),
-  ).length;
+  const [limit, setLimit] = useState(15);
+
+  const filtered = catalog.filter(({ product, variant, record }) => {
+    const matchesCategory = category === "all" || product.category === category;
+
+    const matchesQuery =
+      `${product.name} ${variant?.label || ""} ${record?.lot || ""} ${record?.accession || ""}`
+        .toLowerCase()
+        .includes(query.trim().toLowerCase());
+
+    return matchesCategory && matchesQuery;
+  });
 
   return (
     <main className="min-h-screen bg-white">
       <PageHero
-        title="Certificates of"
-        highlight="Analysis."
-        description="Explore available product testing documentation and batch-specific analysis reports."
-        features={["Batch Information", "Research Documentation"]}
-        icon="sun"
+        breadcrumb="COA"
+        subtitle="Quality & Transparency"
+        title="Verified Quality."
+        highlight="Proven Precision."
+        description="Explore our batch-specific Certificates of Analysis and independent laboratory testing documentation."
+        mobileImage="/assets-v/voltera-coa-mobile.png"
+        desktopImage="/assets-v/voltera-coa.png"
       />
 
-      <section
-        aria-label="Certificate of Analysis library"
-        className="relative px-4 py-10 sm:px-6 sm:py-14 lg:px-10"
-      >
+      <section className="bg-primary-soft/60 px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
         <div className="mx-auto max-w-7xl">
-          <div className="flex min-w-0 flex-col gap-3 border-b border-[#EEE6EF] pb-6 sm:flex-row sm:items-center sm:gap-4">
-            <div className="relative w-full min-w-0 sm:flex-1 lg:max-w-[390px]">
+          <header className="mb-8 text-center">
+            <h2 className="section-heading">
+              Certificate <span className="text-secondary">Library.</span>
+            </h2>
+
+            <p className="text-muted mx-auto mt-3 max-w-xl text-[15px] leading-relaxed">
+              Explore laboratory results and batch-specific documentation for
+              our research compounds.
+            </p>
+          </header>
+
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div className="relative w-full sm:max-w-xl">
               <Search
-                size={17}
-                className="text-primary/60 pointer-events-none absolute top-1/2 left-3 -translate-y-1/2 sm:left-4"
+                size={20}
+                className="text-primary pointer-events-none absolute top-1/2 left-4 -translate-y-1/2"
               />
-              <label htmlFor="coa-search" className="sr-only">
-                Search products or batches
-              </label>
+
               <input
-                id="coa-search"
                 type="search"
+                aria-label="Search products or batch numbers"
                 value={query}
-                onChange={(event) => setQuery(event.target.value)}
-                placeholder="Search compounds..."
-                className="focus:border-primary h-11 w-full min-w-0 rounded-2xl border border-[#E8DCEA] bg-white pr-9 pl-9 text-[12px] text-[#29232D] outline-none placeholder:text-[#A69BA9] sm:h-12 sm:pl-11 sm:text-sm [&::-webkit-search-cancel-button]:hidden"
+                onChange={(event) => {
+                  setQuery(event.target.value);
+                  setLimit(15);
+                }}
+                placeholder="Search product or batch number..."
+                className="border-primary/20 text-primary placeholder:text-muted focus:border-primary focus:ring-primary/10 h-13 w-full rounded-xl border bg-white pr-11 pl-12 text-base transition-all outline-none focus:ring-2 [&::-webkit-search-cancel-button]:hidden"
               />
+
               {query && (
                 <button
                   type="button"
                   aria-label="Clear search"
-                  onClick={() => setQuery("")}
-                  className="text-primary absolute top-1/2 right-2 flex size-7 -translate-y-1/2 items-center justify-center rounded-full hover:bg-[#F6E5F7]"
+                  onClick={() => {
+                    setQuery("");
+                    setLimit(15);
+                  }}
+                  className="text-primary hover:bg-primary-soft absolute top-1/2 right-3 -translate-y-1/2 rounded-full p-1.5"
                 >
-                  <X size={14} />
+                  <X size={18} />
                 </button>
               )}
             </div>
@@ -258,11 +247,14 @@ export default function CoALibrary() {
             <CustomSelect
               id="coa-category"
               value={category}
-              onChange={(event) => setCategory(event.target.value)}
-              placeholder="Filter category"
-              className="w-full sm:w-[190px] sm:shrink-0 lg:ml-auto"
+              onChange={(event) => {
+                setCategory(event.target.value);
+                setLimit(15);
+              }}
+              placeholder="All Categories"
+              className="w-full text-base sm:w-[240px]"
               options={[
-                { value: "all", label: "All categories" },
+                { value: "all", label: "All Categories" },
                 ...categories.map((name) => ({
                   value: name,
                   label: name,
@@ -270,44 +262,82 @@ export default function CoALibrary() {
               ]}
             />
           </div>
-          {filtered.length ? (
-            <div className="mt-8 grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {Array.from(
-                new Map(
-                  filtered.map((item) => [item.product.slug, item.product]),
-                ).values(),
-              ).map((product) => (
-                <CoACard key={product.id} product={product} />
+
+          <div className="mt-6 mb-4 flex flex-wrap items-center justify-between gap-2">
+            <p aria-live="polite" className="text-muted text-sm sm:text-base">
+              Showing{" "}
+              <strong className="text-primary">{filtered.length}</strong>{" "}
+              product records
+            </p>
+
+            {SHOW_DEMO && (
+              <span className="border-secondary/30 bg-secondary/10 text-secondary-dark rounded-lg border px-3 py-1.5 text-sm font-semibold">
+                Development Preview
+              </span>
+            )}
+          </div>
+
+          <div className="border-secondary from-primary via-accent to-primary mb-3 hidden grid-cols-[2fr_1fr_0.7fr_1fr_1.1fr_1.6fr] gap-4 rounded-xl border-t-[3px] bg-linear-to-r px-5 py-5 xl:grid">
+            {columns.map((column) => (
+              <span
+                key={column}
+                className="text-[15px] font-semibold text-white"
+              >
+                {column}
+              </span>
+            ))}
+          </div>
+
+          {filtered.length > 0 ? (
+            <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-1">
+              {filtered.slice(0, limit).map((item) => (
+                <CertificateRow key={item.key} item={item} />
               ))}
             </div>
           ) : (
-            <div className="flex min-h-64 flex-col items-center justify-center text-center">
-              <FileSearch size={33} className="text-primary/30" />
-              <h2 className="font-heading text-primary mt-4 text-xl font-bold">
-                No matching records
-              </h2>
-              <p className="mt-2 text-sm text-[#817586]">
-                Try another compound, strength, or filter.
+            <div className="border-border flex min-h-64 flex-col items-center justify-center rounded-2xl border bg-white text-center">
+              <FileSearch size={40} className="text-primary/40" />
+
+              <h3 className="font-heading text-primary mt-4 text-xl">
+                No Matching Records
+              </h3>
+
+              <p className="text-muted mt-2 text-base">
+                Try a different product or batch number.
               </p>
+
               <button
                 type="button"
                 onClick={() => {
                   setQuery("");
-                  setFilter("all");
                   setCategory("all");
+                  setLimit(15);
                 }}
-                className="bg-primary mt-5 rounded-full px-5 py-3 text-xs font-semibold text-white"
+                className="btn-primary mt-5 h-11 px-6 text-sm"
               >
-                Clear filters
+                Clear Filters
               </button>
             </div>
           )}
-          <p className="mt-12 flex items-start gap-2 border-t border-[#EEE6EF] pt-5 text-xs leading-6 text-[#817586]">
-            <FileCheck2 size={17} className="text-primary mt-0.5 shrink-0" />
-            Sample laboratory values are placeholders for UI testing only, not
-            product certificates or evidence of testing. Display verified
-            results and PDFs only after receiving actual batch documentation.
-            Research use only.
+
+          {limit < filtered.length && (
+            <div className="mt-8 flex justify-center">
+              <button
+                type="button"
+                onClick={() => setLimit((previous) => previous + 15)}
+                className="btn-primary h-12 px-8 text-base"
+              >
+                Load More Records
+              </button>
+            </div>
+          )}
+
+          <p className="border-primary/10 text-muted mt-8 flex items-start gap-3 rounded-xl border bg-white p-4 text-sm leading-relaxed">
+            <FileCheck2 size={22} className="text-secondary-dark shrink-0" />
+
+            {SHOW_DEMO
+              ? "Sample values are for development and layout testing only. They are not actual laboratory results."
+              : "Certificates of Analysis are specific to their corresponding products and batches. All compounds are intended for research use only."}
           </p>
         </div>
       </section>

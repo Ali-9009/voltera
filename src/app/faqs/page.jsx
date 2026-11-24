@@ -1,26 +1,30 @@
 import Link from "next/link";
 import {
   ArrowUpRight,
-  ChevronDown,
   ChevronRight,
-  HelpCircle,
+  FlaskConical,
+  Package,
+  FileCheck2,
   MessageCircle,
+  Plus,
 } from "lucide-react";
+import PageHero from "@/components/PageHero";
 
 export const metadata = {
-  title: "Frequently Asked Questions | Spectrum Biosciences",
+  title: "Frequently Asked Questions | Voltera Sciences",
   description:
-    "Answers about Spectrum Biosciences research products, orders, shipping, and batch documentation.",
+    "Find answers to frequently asked questions about Voltera Sciences research peptides, laboratory testing, product storage, ordering, shipping, and payments.",
 };
 
 const groups = [
   {
     title: "Products & Research",
+    icon: FlaskConical,
     items: [
       {
         question: "Are your products intended for human use?",
         answer:
-          "No. Products in the Spectrum Biosciences research collection are intended for scientific and laboratory research only, not for human or veterinary use.",
+          "No. Products in the Voltera Sciences research collection are intended for scientific and laboratory research only, not for human or veterinary use.",
       },
       {
         question: "How do I select a product strength?",
@@ -41,6 +45,7 @@ const groups = [
   },
   {
     title: "Ordering & Shipping",
+    icon: Package,
     items: [
       {
         question: "How do multi-bottle discounts work?",
@@ -66,6 +71,7 @@ const groups = [
   },
   {
     title: "Documentation & Support",
+    icon: FileCheck2,
     items: [
       {
         question: "Where can I find a Certificate of Analysis?",
@@ -78,7 +84,7 @@ const groups = [
           "Some products may not have a linked document on the website. Contact our team to ask about available batch documentation rather than assuming a result.",
       },
       {
-        question: "How can I contact Spectrum Biosciences?",
+        question: "How can I contact Voltera Sciences?",
         answer:
           "Use the Contact page to prepare an inquiry about products, documentation, or your order.",
       },
@@ -88,127 +94,127 @@ const groups = [
 
 export default function FAQsPage() {
   return (
-    <main className="min-h-screen bg-[#F8FBFC]">
-      <header className="border-b border-[#E2EBEF] bg-white px-4 py-8 sm:px-6 md:py-10 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="max-w-2xl">
-            <h1 className="font-heading text-primary text-[34px] leading-[1.15] font-bold tracking-[-0.04em] sm:text-[44px] lg:text-[52px]">
-              Frequently Asked{" "}
-              <span className="text-secondary">Questions.</span>
-            </h1>
+    <main className="bg-surface min-h-screen">
+      <PageHero
+        breadcrumb="FAQs"
+        subtitle="We're Here to Help"
+        title="Frequently Asked"
+        highlight="Questions."
+        description="Find answers to common questions about our research compounds, quality standards, shipping, and ordering process."
+        mobileImage="/assets-v/voltera-faqs-mobile.png"
+        desktopImage="/assets-v/voltera-faqs.png"
+      />
 
-            <p className="mt-5 max-w-xl text-sm leading-7 text-[#617987] sm:text-[15px]">
-              Find answers to common questions about our research products,
-              ordering process, shipping, and product documentation.
-            </p>
-          </div>
-        </div>
-      </header>
-
-      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:px-6 sm:py-14 lg:grid-cols-[240px_minmax(0,1fr)] lg:gap-12 lg:px-8 lg:py-16">
-        <aside className="min-w-0 lg:sticky lg:top-28 lg:self-start">
-          <div className="lg:rounded-[20px] lg:border lg:border-[#E2EBEF] lg:bg-white lg:p-5">
-            <div className="mb-4 hidden items-center gap-2 lg:flex">
-              <HelpCircle
-                size={17}
-                strokeWidth={1.8}
-                className="text-secondary"
-              />
-
-              <h2 className="font-heading text-primary text-sm font-bold">
-                Browse Topics
-              </h2>
-            </div>
+      <div className="mx-auto grid max-w-7xl items-start gap-8 px-4 py-10 sm:px-6 lg:grid-cols-[280px_minmax(0,1fr)] lg:gap-10 lg:px-8 lg:py-14">
+        <aside className="min-w-0 lg:sticky lg:top-28">
+          <div className="border-border rounded-2xl border bg-white p-3 sm:p-4">
+            <h2 className="font-heading text-primary mb-3 hidden px-3 pt-2 text-base lg:block">
+              Browse Topics
+            </h2>
 
             <nav
-              aria-label="FAQ sections"
-              className="flex [scrollbar-width:none] gap-2 overflow-x-auto pb-2 lg:flex-col lg:overflow-visible lg:pb-0 [&::-webkit-scrollbar]:hidden"
+              aria-label="FAQ topics"
+              className="flex gap-2 overflow-x-auto lg:flex-col lg:overflow-visible"
             >
-              {groups.map((group, index) => (
+              {groups.map(({ title, icon: Icon }, index) => (
                 <a
-                  key={group.title}
+                  key={title}
                   href={`#faq-${index}`}
-                  className="group/nav hover:border-primary/30 hover:text-primary inline-flex shrink-0 items-center gap-2 rounded-full border border-[#DCE8ED] bg-white px-4 py-2.5 text-[12px] font-semibold whitespace-nowrap text-[#617987] transition-all duration-200 hover:bg-[#F0F8FA] lg:w-full lg:rounded-xl lg:border-transparent lg:px-3 lg:py-3 lg:text-left"
+                  className="group bg-primary-soft/60 text-primary hover:border-secondary/30 hover:bg-primary-soft flex shrink-0 items-center gap-3 rounded-xl border border-transparent px-3 py-3 text-sm font-semibold whitespace-nowrap transition-all duration-300 lg:whitespace-normal"
                 >
-                  <span className="group-hover/nav:bg-secondary hidden h-1.5 w-1.5 shrink-0 rounded-full bg-[#B8D4DE] transition-colors lg:block" />
+                  <Icon
+                    size={19}
+                    strokeWidth={1.7}
+                    className="text-secondary-dark shrink-0"
+                  />
 
-                  {group.title}
+                  {title}
+
+                  <ChevronRight
+                    size={15}
+                    className="ml-auto hidden shrink-0 transition-transform group-hover:translate-x-0.5 lg:block"
+                  />
                 </a>
               ))}
             </nav>
           </div>
 
-          <div className="mt-5 hidden rounded-[20px] border border-[#D9EAF0] bg-[#EDF7FA] p-5 lg:block">
+          <div className="border-secondary/30 from-primary-light via-accent to-primary relative isolate mt-5 hidden overflow-hidden rounded-2xl border bg-linear-to-br p-6 lg:block">
             <MessageCircle
-              size={23}
-              strokeWidth={1.6}
-              className="text-secondary"
+              size={150}
+              strokeWidth={0.7}
+              aria-hidden="true"
+              className="pointer-events-none absolute -right-10 -bottom-10 -z-10 text-white/10"
             />
 
-            <h3 className="font-heading text-primary mt-3 text-[16px] font-bold">
-              Need more help?
+            <span className="border-accent-light/30 text-accent-light flex size-12 items-center justify-center rounded-xl border bg-white/10">
+              <MessageCircle size={25} strokeWidth={1.6} />
+            </span>
+
+            <h3 className="font-heading mt-5 text-lg text-white">
+              Need More Help?
             </h3>
 
-            <p className="mt-2 text-[12px] leading-6 text-[#617987]">
-              Can't find what you're looking for? We're here to help.
+            <p className="mt-3 text-sm leading-7 text-white/85">
+              Can't find the answer you're looking for? Our support team is here
+              to help.
             </p>
 
             <Link
               href="/contact"
-              className="text-primary hover:text-secondary mt-4 inline-flex items-center gap-2 text-[12px] font-semibold transition-colors"
+              className="group text-accent-light mt-5 inline-flex items-center gap-2 text-sm font-bold"
             >
               Contact Support
-              <ArrowUpRight size={15} />
+              <ArrowUpRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </Link>
           </div>
         </aside>
 
-        <div className="min-w-0 space-y-10 sm:space-y-12">
-          {groups.map((group, index) => (
+        <div className="min-w-0 space-y-10">
+          {groups.map(({ title, icon: Icon, items }, index) => (
             <section
-              key={group.title}
+              key={title}
               id={`faq-${index}`}
               aria-labelledby={`faq-heading-${index}`}
-              className="scroll-mt-28"
+              className="scroll-mt-32"
             >
-              <div className="mb-5 flex items-center gap-3">
-                <div className="text-primary flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[#E5F3F7] text-xs font-bold">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
+              <header className="mb-5 flex items-center gap-3 sm:gap-4">
+                <span className="border-secondary/30 from-primary-light via-accent to-primary text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border bg-linear-to-br">
+                  <Icon size={24} strokeWidth={1.6} />
+                </span>
 
                 <h2
                   id={`faq-heading-${index}`}
-                  className="font-heading text-primary text-[21px] font-bold tracking-[-0.03em] sm:text-[25px]"
+                  className="font-heading text-primary text-xl leading-snug sm:text-2xl"
                 >
-                  {group.title}
+                  {title}
                 </h2>
-              </div>
+              </header>
 
-              <div className="overflow-hidden rounded-[18px] border border-[#E2EBEF] bg-white sm:rounded-[22px]">
-                {group.items.map((item, itemIndex) => (
+              <div className="space-y-3">
+                {items.map(({ question, answer }) => (
                   <details
-                    key={item.question}
-                    className={`group/faq px-4 transition-colors duration-200 open:bg-[#FAFDFE] sm:px-6 ${
-                      itemIndex !== 0 ? "border-t border-[#EAF0F3]" : ""
-                    }`}
+                    key={question}
+                    className="group border-border hover:border-primary/25 open:border-secondary/40 overflow-hidden rounded-xl border bg-white transition-all duration-300 open:shadow-sm"
                   >
-                    <summary className="flex min-h-[70px] cursor-pointer list-none items-center justify-between gap-5 py-4 text-left text-[13px] leading-6 font-semibold text-[#173B4A] marker:content-none sm:min-h-[76px] sm:text-[15px] [&::-webkit-details-marker]:hidden">
-                      <span className="group-open/faq:text-primary transition-colors duration-200">
-                        {item.question}
-                      </span>
+                    <summary className="text-charcoal group-open:bg-primary-soft/60 group-open:text-primary flex min-h-18 cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 text-base leading-relaxed font-semibold transition-colors sm:px-6 [&::-webkit-details-marker]:hidden">
+                      <span>{question}</span>
 
-                      <span className="text-primary group-open/faq:border-primary/20 group-open/faq:bg-primary flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#DCE8ED] bg-[#F5FAFC] transition-all duration-300 group-open/faq:text-white">
-                        <ChevronDown
-                          size={16}
-                          strokeWidth={2}
-                          className="transition-transform duration-300 group-open/faq:rotate-180"
+                      <span className="border-primary/10 bg-primary-soft text-primary group-open:border-secondary/30 group-open:bg-primary group-open:text-accent-light flex size-9 shrink-0 items-center justify-center rounded-lg border transition-all duration-300">
+                        <Plus
+                          size={20}
+                          strokeWidth={1.8}
+                          className="transition-transform duration-300 group-open:rotate-45"
                         />
                       </span>
                     </summary>
 
-                    <div className="border-t border-[#EDF2F5] pt-4 pb-6">
-                      <p className="max-w-[760px] text-[13px] leading-7 text-[#617987] sm:text-[14px] sm:leading-8">
-                        {item.answer}
+                    <div className="border-border border-t px-4 py-5 sm:px-6">
+                      <p className="border-secondary text-charcoal/80 border-l-2 pl-4 text-base leading-[1.9]">
+                        {answer}
                       </p>
                     </div>
                   </details>
@@ -217,18 +223,25 @@ export default function FAQsPage() {
             </section>
           ))}
 
-          <section className="relative overflow-hidden rounded-[22px] border border-[#D9EAF0] bg-[linear-gradient(120deg,#EFF8FA_0%,#FFFFFF_100%)] p-6 sm:rounded-[26px] sm:p-8">
-            <div className="relative z-10 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-              <div className="max-w-md">
-                <p className="text-secondary text-[11px] font-bold tracking-[0.14em] uppercase">
+          <section className="border-secondary/30 from-primary via-accent to-primary relative isolate overflow-hidden rounded-2xl border bg-linear-to-r p-6 sm:p-8">
+            <MessageCircle
+              aria-hidden="true"
+              size={220}
+              strokeWidth={0.6}
+              className="pointer-events-none absolute -right-8 -bottom-20 -z-10 text-white/10"
+            />
+
+            <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <p className="text-accent-light mb-2 text-xs font-bold tracking-widest uppercase">
                   We're Here to Help
                 </p>
 
-                <h2 className="font-heading text-primary mt-2 text-[23px] font-bold tracking-[-0.03em] sm:text-[27px]">
-                  Still have a question?
+                <h2 className="font-heading text-2xl text-white">
+                  Still Have Questions?
                 </h2>
 
-                <p className="mt-2 text-[13px] leading-6 text-[#617987] sm:text-sm">
+                <p className="mt-3 max-w-md text-[15px] leading-7 text-white/85">
                   Get in touch with our team for help with product information,
                   orders, or general inquiries.
                 </p>
@@ -236,16 +249,10 @@ export default function FAQsPage() {
 
               <Link
                 href="/contact"
-                className="group relative inline-flex h-11 shrink-0 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-6 text-[13px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
+                className="btn-hero-primary h-12 shrink-0 px-6 text-sm"
               >
-                <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
-
-                <span className="relative z-10">Contact Us</span>
-
-                <ArrowUpRight
-                  size={16}
-                  className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                />
+                Contact Us
+                <ArrowUpRight size={18} />
               </Link>
             </div>
           </section>

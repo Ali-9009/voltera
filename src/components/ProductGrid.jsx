@@ -56,13 +56,13 @@ export default function ProductGrid() {
                 <button
                   type="button"
                   onClick={handleLoadMore}
-                  className="group border-primary bg-primary hover:bg-primary-light inline-flex h-[50px] items-center justify-center gap-3 rounded-full border px-8 font-sans text-[13px] font-semibold text-white shadow-[0_6px_20px_rgba(7,26,67,0.18)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(7,26,67,0.25)] active:translate-y-0 sm:h-[54px] sm:px-10 sm:text-[14px]"
+                  className="btn-primary group h-[50px] gap-3 px-8 text-[13px] sm:h-[54px] sm:px-10 sm:text-[14px]"
                 >
                   Load More Products
                   <ArrowDown
                     size={18}
                     strokeWidth={1.8}
-                    className="transition-transform duration-300 group-hover:translate-y-1"
+                    className="btn-arrow-down"
                   />
                 </button>
               ) : (

@@ -46,35 +46,30 @@ export default function HomePage() {
         <div className="relative mx-auto flex min-h-[calc(100svh-48px)] w-full max-w-7xl px-4 sm:px-6 lg:min-h-[calc(100svh-54px)] lg:px-8">
           <div className="flex w-full flex-col items-center justify-start pt-36 pb-10 text-center sm:pt-40 lg:items-start lg:justify-center lg:pt-32 lg:pb-10 lg:text-left">
             <div className="w-full max-w-[580px] lg:max-w-[620px]">
-              <div className="mb-5 flex items-center justify-center gap-3 sm:mb-6 sm:gap-4 lg:justify-start">
-                <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-                  <FlaskConical
-                    strokeWidth={1.8}
-                    className="text-primary-dark size-7 sm:size-9"
-                  />
-
-                  <p className="font-heading text-primary-dark text-[29px] leading-none tracking-tight italic sm:text-[36px]">
-                    10×
-                    <span className="ml-1.5 text-[21px] sm:ml-2 sm:text-[26px]">
-                      TESTED
-                    </span>
-                  </p>
-                </div>
+              <div className="mb-4 inline-flex shrink-0 items-center gap-2.5 rounded-full border border-[#3D75D8]/50 bg-[linear-gradient(135deg,#1746A2_0%,#071A43_100%)] px-4 py-2.5 shadow-[inset_0_1px_1px_rgba(255,255,255,0.18),0_4px_15px_rgba(7,26,67,0.18)] sm:gap-3 sm:px-5 sm:py-3">
+                <FlaskConical
+                  strokeWidth={1.8}
+                  className="size-6 shrink-0 text-[#A8CBFF] sm:size-8"
+                />
 
                 <span
                   aria-hidden="true"
-                  className="bg-primary-dark/30 h-9 w-px shrink-0 sm:h-10"
+                  className="h-6 w-px bg-white/25 sm:h-8"
                 />
 
-                <span className="text-primary-dark max-w-[125px] text-left font-sans text-[10px] leading-relaxed font-bold tracking-wider uppercase sm:max-w-[150px] sm:text-[12px]">
-                  Precision Without Compromise
-                </span>
+                <p className="font-heading flex items-baseline gap-1.5 leading-none font-bold tracking-tight whitespace-nowrap text-white italic sm:gap-2">
+                  <span className="text-[27px] sm:text-[34px]">10×</span>
+
+                  <span className="text-[17px] text-[#D6E6FF] sm:text-[23px]">
+                    TESTED
+                  </span>
+                </p>
               </div>
 
               <h1
                 id="hero-heading"
                 data-hero-heading
-                className="font-heading text-primary-dark text-[clamp(2.5rem,10vw,3.6rem)] leading-[1.08] font-normal tracking-[-0.035em] sm:text-[clamp(3rem,5.5vw,4.2rem)] lg:text-[clamp(3.4rem,4.5vw,4.6rem)]"
+                className="font-heading text-primary-dark text-[clamp(2.5rem,10vw,3.6rem)] leading-[1.08] font-semibold tracking-[-0.035em] sm:text-[clamp(3rem,5.5vw,4.2rem)] lg:text-[clamp(3.4rem,4.5vw,4.6rem)]"
               >
                 Authenticity
                 <br />

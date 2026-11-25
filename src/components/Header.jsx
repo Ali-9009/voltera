@@ -217,8 +217,8 @@ export default function Header() {
           <div
             className={`border-primary/10 relative mx-auto w-full rounded-full border bg-white shadow-[0_10px_35px_rgba(3,13,39,0.12)] transition-[max-width,box-shadow] duration-500 ease-in-out ${
               scrolled
-                ? "max-w-7xl shadow-[0_14px_45px_rgba(3,13,39,0.18)]"
-                : "max-w-[1500px]"
+                ? "max-w-6xl shadow-[0_14px_45px_rgba(3,13,39,0.18)]"
+                : "max-w-7xl"
             }`}
           >
             <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2.5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">

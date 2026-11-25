@@ -7,7 +7,7 @@ import ResearcherGate from "@/components/ResearcherGate";
 
 import "@/styles/globals.css";
 
-import { DM_Sans, Russo_One } from "next/font/google";
+import { DM_Sans, Poppins } from "next/font/google";
 const SITE_URL = "https://voltera-iota.vercel.app";
 const OG_IMAGE = `${SITE_URL}/brand/og-image-v3.png`;
 
@@ -84,10 +84,10 @@ export const metadata = {
     icon: "/favicon.ico",
   },
 };
-const headingFont = Russo_One({
+const headingFont = Poppins({
   subsets: ["latin"],
-  weight: "400",
-  variable: "--font-russo-one",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-poppins",
   display: "swap",
 });
 

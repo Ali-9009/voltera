@@ -71,16 +71,26 @@ export default function PromoMarquee() {
   return (
     <section
       aria-label="Voltera Sciences quality and service highlights"
-      className="bg-brand-gradient border-accent-light/20 relative z-30 w-full overflow-hidden border-y py-3.5 sm:py-4"
+      className="relative isolate z-30 w-full overflow-hidden border-y border-[#285BB8]/40 bg-[linear-gradient(110deg,#071A43_0%,#12336B_25%,#1746A2_50%,#12336B_75%,#071A43_100%)] py-3.5 sm:py-4"
     >
       <div
         aria-hidden="true"
-        className="to-primary-dark/10 pointer-events-none absolute inset-0 bg-linear-to-b from-white/10 via-transparent"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_35px,rgba(168,203,255,0.08)_35px,rgba(168,203,255,0.08)_36px)]"
       />
 
       <div
         aria-hidden="true"
-        className="via-accent-light/60 pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent to-transparent"
+        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-[#3D75D8]/15 via-transparent to-[#030D27]/30"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#6495EE]/70 to-transparent"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-[#071A43] via-[#3D75D8] to-[#071A43]"
       />
 
       <div className="promo-marquee relative flex w-full items-center overflow-hidden">

@@ -114,13 +114,13 @@ export default function HomePage() {
                   />
                 </Link>
 
-                <Link href="/about" className="btn-primary">
+                {/* <Link href="/about" className="btn-primary">
                   Learn More
                   <ArrowUpRight
                     strokeWidth={1.8}
                     className="size-3.5 shrink-0 sm:size-[19px]"
                   />
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>

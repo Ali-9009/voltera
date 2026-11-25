@@ -212,10 +212,7 @@ export default function ResearchShowcase() {
     >
       <div className="relative mx-auto max-w-7xl">
         <header className="mx-auto max-w-[750px] text-center">
-          <h2
-            id="research-showcase-heading"
-            className="font-heading text-primary text-[clamp(28px,4.5vw,50px)] leading-[1.15] tracking-tight"
-          >
+          <h2 id="research-showcase-heading" className="section-heading">
             Precision at <span className="text-secondary">Every Level.</span>
           </h2>
 

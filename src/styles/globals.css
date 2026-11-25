@@ -94,7 +94,7 @@
 
 @layer components {
   .section-heading {
-    @apply font-heading text-black;
+    @apply font-heading font-semibold text-black;
 
     font-size: clamp(32px, 4.5vw, 58px);
     line-height: 1.08;

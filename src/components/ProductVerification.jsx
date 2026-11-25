@@ -261,10 +261,7 @@ export default function ProductVerification() {
               Product Verification
             </span>
 
-            <h2
-              id="verification-heading"
-              className="font-heading text-[clamp(26px,4vw,44px)] leading-[1.2] font-normal tracking-[-0.03em] text-white"
-            >
+            <h2 id="verification-heading" className="section-heading !text-white">
               Every Vial.{" "}
               <span className="via-accent-light to-secondary bg-linear-to-b from-[#fff0bb] bg-clip-text text-transparent">
                 Every Detail Verified.

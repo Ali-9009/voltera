@@ -123,10 +123,7 @@ export default function CTASection() {
             <span className="bg-secondary/70 h-px w-7" />
           </div>
 
-          <h2
-            id="research-cta-heading"
-            className="font-heading text-[clamp(28px,4.5vw,54px)] leading-[1.15] tracking-[-0.025em] text-white"
-          >
+          <h2 id="research-cta-heading" className="section-heading !text-white">
             Research Excellence.
             <br />
             <span className="text-accent-light">Verified in Every Batch.</span>

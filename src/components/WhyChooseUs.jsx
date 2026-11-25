@@ -199,10 +199,7 @@ export default function WhyChooseUs() {
 
       <div className="relative mx-auto w-full max-w-7xl">
         <header className="mx-auto mb-10 max-w-[750px] text-center sm:mb-14">
-          <h2
-            id="why-title"
-            className="font-heading text-primary text-[clamp(28px,4.5vw,52px)] leading-[1.15] font-normal tracking-[-0.025em]"
-          >
+          <h2 id="why-title" className="section-heading">
             Why Choose
             <br />
             <span className="text-secondary">Voltera Sciences?</span>

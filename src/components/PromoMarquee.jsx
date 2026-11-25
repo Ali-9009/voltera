@@ -25,11 +25,11 @@ function PromoItem({ promotion }) {
   return (
     <div className="flex shrink-0 items-center gap-5 pr-5 sm:gap-8 sm:pr-8 lg:gap-10 lg:pr-10">
       <div className="group flex shrink-0 items-center gap-3 sm:gap-4">
-        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-[#E8C77B]/30 bg-white/[0.07] transition-colors duration-300 group-hover:border-[#E8C77B]/60 group-hover:bg-white/10 sm:size-11">
+        <span className="flex size-10 shrink-0 items-center justify-center rounded-xl border border-[var(--gold-light)]/30 bg-white/[0.07] transition-colors duration-300 group-hover:border-[var(--gold-light)]/60 group-hover:bg-white/10 sm:size-11">
           <lord-icon
             src={promotion.icon}
             trigger="loop(1500)"
-            colors="primary:#E8C77B,secondary:#FFFFFF"
+            colors="primary:#EAC46E,secondary:#FFFFFF"
             stroke="regular"
             speed="0.8"
             className="h-7 w-7 sm:h-[34px] sm:w-[34px]"
@@ -43,11 +43,11 @@ function PromoItem({ promotion }) {
       </div>
 
       <span aria-hidden="true" className="flex items-center gap-2">
-        <span className="h-px w-5 bg-[#E8C77B]/25 sm:w-7" />
+        <span className="h-px w-5 bg-[var(--gold-light)]/25 sm:w-7" />
 
-        <span className="size-1.5 rotate-45 border border-[#E8C77B]/70 bg-[#E8C77B]/20" />
+        <span className="size-1.5 rotate-45 border border-[var(--gold-light)]/70 bg-[var(--gold-light)]/20" />
 
-        <span className="h-px w-5 bg-[#E8C77B]/25 sm:w-7" />
+        <span className="h-px w-5 bg-[var(--gold-light)]/25 sm:w-7" />
       </span>
     </div>
   );
@@ -71,26 +71,26 @@ export default function PromoMarquee() {
   return (
     <section
       aria-label="Voltera Sciences quality and service highlights"
-      className="relative isolate z-30 w-full overflow-hidden border-y border-[#285BB8]/40 bg-[linear-gradient(110deg,#071A43_0%,#12336B_25%,#1746A2_50%,#12336B_75%,#071A43_100%)] py-3.5 sm:py-4"
+      className="relative isolate z-30 w-full overflow-hidden border-y border-[var(--navy-soft)]/40 bg-[linear-gradient(110deg,var(--navy)_0%,var(--navy)_25%,var(--navy-soft)_50%,var(--navy)_75%,var(--navy)_100%)] py-3.5 sm:py-4"
     >
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_35px,rgba(168,203,255,0.08)_35px,rgba(168,203,255,0.08)_36px)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_35px,rgba(201,149,61,0.08)_35px,rgba(201,149,61,0.08)_36px)]"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-[#3D75D8]/15 via-transparent to-[#030D27]/30"
+        className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-b from-[var(--gold)]/15 via-transparent to-[var(--navy-deep)]/30"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#6495EE]/70 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[var(--gold)]/70 to-transparent"
       />
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-[#071A43] via-[#3D75D8] to-[#071A43]"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-[2px] bg-linear-to-r from-[var(--navy)] via-[var(--gold)] to-[var(--navy)]"
       />
 
       <div className="promo-marquee relative flex w-full items-center overflow-hidden">

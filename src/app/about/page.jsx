@@ -126,7 +126,7 @@ function PrincipleCard({ principle }) {
 
       <footer className="text-primary mt-auto flex items-center gap-2 pt-7 text-sm font-semibold">
         <Check size={17} className="text-secondary-dark" />
-        The Voltera Standard
+        The Voltera Sciences Standard
       </footer>
 
       <span
@@ -352,7 +352,7 @@ export default function AboutUsPage() {
             </p>
 
             <h2 id="principles-heading" className="section-heading">
-              What Defines <span className="text-secondary">Voltera.</span>
+              What Defines <span className="text-secondary">Voltera Sciences.</span>
             </h2>
 
             <div className="from-secondary-dark via-accent-light to-secondary-dark mx-auto my-5 h-[3px] w-20 rounded-full bg-linear-to-r" />
@@ -378,7 +378,7 @@ export default function AboutUsPage() {
         <div className="mx-auto max-w-7xl">
           <header className="mx-auto max-w-3xl text-center">
             <p className="text-secondary-dark mb-3 text-xs font-bold tracking-widest uppercase">
-              The Voltera Experience
+              The Voltera Sciences Experience
             </p>
             <h2 id="experience-heading" className="section-heading">
               Designed around{" "}

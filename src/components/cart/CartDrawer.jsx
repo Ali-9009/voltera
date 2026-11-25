@@ -205,7 +205,7 @@ export default function CartDrawer() {
             </div>
 
             {items.length > 0 && (
-              <footer className="border-border shrink-0 border-t bg-white px-3.5 py-4 shadow-[0_-12px_24px_rgba(18,51,107,0.04)] sm:px-5">
+              <footer className="border-border shrink-0 border-t bg-white px-3.5 py-4 shadow-[0_-12px_24px_rgba(1,17,59,0.04)] sm:px-5">
                 <div className="flex items-center justify-between gap-3">
                   <div>
                     <span className="text-primary font-sans text-[13px] font-bold">

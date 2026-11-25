@@ -32,13 +32,13 @@ export default function CartLineItem({ item, onNavigate }) {
             <Link
               href={`/products/${item.slug}`}
               onClick={onNavigate}
-              className="font-heading text-[15px] font-bold text-[#0b1b3f] hover:text-[#347ec8]"
+              className="font-heading text-[15px] font-bold text-[var(--navy)] hover:text-[#347ec8]"
             >
               {item.name}
             </Link>
             <p className="mt-1 text-xs text-[#788aa0]">{item.variantLabel}</p>
           </div>
-          <span className="shrink-0 text-[13px] font-bold text-[#0b1b3f]">
+          <span className="shrink-0 text-[13px] font-bold text-[var(--navy)]">
             {formatCartMoney(item.price * item.quantity)}
           </span>
         </div>
@@ -48,12 +48,12 @@ export default function CartLineItem({ item, onNavigate }) {
               type="button"
               aria-label={`Decrease ${item.name} quantity`}
               onClick={() => updateQuantity(item.key, item.quantity - 1)}
-              className="grid size-9 place-items-center text-[#0b1b3f] hover:bg-[#eef6ff]"
+              className="grid size-9 place-items-center text-[var(--navy)] hover:bg-[var(--ivory)]"
             >
               <Minus size={14} />
             </button>
             <span
-              className="min-w-6 text-center text-xs font-semibold text-[#0b1b3f]"
+              className="min-w-6 text-center text-xs font-semibold text-[var(--navy)]"
               aria-live="polite"
             >
               {item.quantity}
@@ -63,7 +63,7 @@ export default function CartLineItem({ item, onNavigate }) {
               aria-label={`Increase ${item.name} quantity`}
               disabled={!canIncrease}
               onClick={() => updateQuantity(item.key, item.quantity + 1)}
-              className="grid size-9 place-items-center text-[#0b1b3f] hover:bg-[#eef6ff] disabled:cursor-not-allowed disabled:opacity-30"
+              className="grid size-9 place-items-center text-[var(--navy)] hover:bg-[var(--ivory)] disabled:cursor-not-allowed disabled:opacity-30"
             >
               <Plus size={14} />
             </button>

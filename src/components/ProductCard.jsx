@@ -76,7 +76,7 @@ export default function ProductCard({ product, onQuickView }) {
       <div aria-hidden="true" className="product-glow-border" />
 
       <div className="relative z-10 flex h-full min-w-0 flex-col rounded-[20px] bg-white p-1.5 sm:rounded-[24px] sm:p-2.5">
-        <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[#EAF4F7] sm:rounded-[22px]">
+        <div className="relative aspect-square overflow-hidden rounded-[18px] bg-[var(--ivory)] sm:rounded-[22px]">
           <Link
             href={`/products/${product.slug}`}
             aria-label={`View ${product.name}`}
@@ -121,7 +121,7 @@ export default function ProductCard({ product, onQuickView }) {
           {/* TITLE */}
 
           <Link href={`/products/${product.slug}`} className="block">
-            <h3 className="font-heading group-hover:text-primary text-md min-h-[42px] leading-[1.3] font-medium tracking-[-0.03em] text-[#102E38] transition-colors md:text-lg">
+            <h3 className="font-heading group-hover:text-primary text-md min-h-[42px] leading-[1.3] font-medium tracking-[-0.03em] text-[var(--navy)] transition-colors md:text-lg">
               {product.name}
             </h3>
           </Link>
@@ -152,7 +152,7 @@ export default function ProductCard({ product, onQuickView }) {
                       title={item.label}
                       className={`inline-flex h-6 shrink-0 items-center justify-center rounded-full border px-2 font-sans text-[8px] leading-none font-semibold whitespace-nowrap transition-all duration-200 sm:h-[32px] sm:px-3 sm:text-[11px] ${
                         selected
-                          ? "border-primary bg-[linear-gradient(135deg,#1746A2_0%,#071A43_100%)] text-white shadow-[0_3px_10px_rgba(7,26,67,0.18)]"
+                          ? "border-primary bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_100%)] text-white shadow-[0_3px_10px_rgba(1,17,59,0.18)]"
                           : "border-primary/15 text-primary hover:border-primary-light/40 hover:bg-primary-light/10"
                       } ${unavailable ? "cursor-not-allowed opacity-40" : ""}`}
                     >
@@ -184,7 +184,7 @@ export default function ProductCard({ product, onQuickView }) {
 
           <div className="mt-auto pt-3">
             <div className="flex min-h-[42px] flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-[#EDF2F4] pt-3">
-              <span className="font-sans text-[16px] font-bold text-[#102E38] sm:text-[19px]">
+              <span className="font-sans text-[16px] font-bold text-[var(--navy)] sm:text-[19px]">
                 {hasPrice ? formatPrice(variant.price) : "Price pending"}
               </span>
 

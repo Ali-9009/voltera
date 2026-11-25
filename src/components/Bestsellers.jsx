@@ -82,7 +82,7 @@ function BestsellerCard({ product }) {
       ========================= */}
 
       <div className="relative overflow-hidden rounded-[26px] transition-colors duration-500 group-hover:bg-[#E6F3F7] sm:rounded-[30px]">
-        <div className="relative aspect-[1/1.12] overflow-hidden rounded-[21px] bg-gradient-to-br from-[#F5FAFC] via-[#EAF5F8] to-[#DCEEF3] sm:rounded-[25px]">
+        <div className="relative aspect-[1/1.12] overflow-hidden rounded-[21px] bg-gradient-to-br from-[var(--ivory)] via-[#EAF5F8] to-[#DCEEF3] sm:rounded-[25px]">
           {/* PRODUCT IMAGE */}
 
           <Link
@@ -114,7 +114,7 @@ function BestsellerCard({ product }) {
           <Link
             href={`/products/${product.slug}`}
             aria-label={`Explore ${product.name}`}
-            className="bg-primary hover:bg-primary-dark absolute right-3 bottom-3 flex h-11 w-11 items-center justify-center rounded-full text-white shadow-[0_8px_20px_rgba(7,85,143,0.18)] transition-all duration-300 group-hover:rotate-45 sm:right-4 sm:bottom-4 sm:h-12 sm:w-12"
+            className="navy-cta absolute right-3 bottom-3 flex h-11 w-11 items-center justify-center rounded-full text-white shadow-[0_8px_20px_rgba(7,85,143,0.18)] transition-all duration-300 group-hover:rotate-45 sm:right-4 sm:bottom-4 sm:h-12 sm:w-12"
           >
             <ArrowUpRight size={21} strokeWidth={1.8} />
           </Link>
@@ -129,7 +129,7 @@ function BestsellerCard({ product }) {
         {/* PRODUCT NAME */}
 
         <Link href={`/products/${product.slug}`} className="mt-2 block">
-          <h3 className="font-heading group-hover:text-primary text-[18px] leading-[1.3] font-semibold tracking-[-0.035em] text-[#102E38] transition-colors duration-300 sm:text-[21px]">
+          <h3 className="font-heading group-hover:text-primary text-[18px] leading-[1.3] font-semibold tracking-[-0.035em] text-[var(--navy)] transition-colors duration-300 sm:text-[21px]">
             {product.name}
           </h3>
         </Link>

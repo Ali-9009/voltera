@@ -41,90 +41,12 @@ const footerLinks = [
   },
 ];
 
-const decorativeSquares = [
-  {
-    className:
-      "left-[3%] top-[12%] size-20 rotate-12 bg-white/[0.035] border-white/[0.08]",
-  },
-  {
-    className:
-      "left-[9%] top-[25%] size-12 rotate-12 bg-secondary/[0.07] border-secondary/15",
-  },
-  {
-    className:
-      "left-[30%] top-[8%] size-16 -rotate-12 bg-white/[0.025] border-white/[0.07]",
-  },
-  {
-    className:
-      "right-[5%] top-[12%] size-28 rotate-[20deg] bg-white/[0.035] border-white/[0.09]",
-  },
-  {
-    className:
-      "right-[15%] top-[32%] size-14 rotate-[20deg] bg-secondary/[0.06] border-secondary/15",
-  },
-  {
-    className:
-      "left-[5%] bottom-[15%] size-24 -rotate-12 bg-primary-light/[0.08] border-white/[0.08]",
-  },
-  {
-    className:
-      "left-[43%] bottom-[8%] size-12 rotate-12 bg-secondary/[0.06] border-secondary/15",
-  },
-  {
-    className:
-      "right-[6%] bottom-[12%] size-20 rotate-12 bg-white/[0.03] border-white/[0.08]",
-  },
-];
-
 function FooterBackground() {
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none absolute inset-0 overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-[linear-gradient(125deg,#020817_0%,#071A43_50%,#10265B_100%)]" />
-
-      <div className="absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] [background-size:64px_64px] opacity-30" />
-
-      <div className="absolute -top-40 left-[20%] size-[450px] rounded-full bg-[#1746A2]/15 blur-[110px]" />
-
-      <div className="absolute right-[10%] -bottom-48 size-[450px] rounded-full bg-[#1746A2]/15 blur-[110px]" />
-
-      {decorativeSquares.map((square, index) => (
-        <span
-          key={index}
-          className={`absolute rounded-[10px] border ${square.className}`}
-        />
-      ))}
-
-      <div className="absolute top-12 -right-12 grid grid-cols-5 gap-3 opacity-35">
-        {Array.from({ length: 25 }, (_, index) => (
-          <span
-            key={index}
-            className={`size-4 rounded-[3px] ${
-              index % 4 === 0
-                ? "bg-secondary/25"
-                : "border border-white/15 bg-white/[0.04]"
-            }`}
-          />
-        ))}
-      </div>
-
-      <div className="absolute bottom-16 -left-12 grid grid-cols-4 gap-3 opacity-25">
-        {Array.from({ length: 16 }, (_, index) => (
-          <span
-            key={index}
-            className={`size-5 rounded-[3px] ${
-              index % 3 === 0
-                ? "bg-secondary/20"
-                : "border border-white/15 bg-white/[0.04]"
-            }`}
-          />
-        ))}
-      </div>
-
-      <div className="via-secondary absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent to-transparent" />
-    </div>
+      className="pointer-events-none absolute inset-0 bg-[radial-gradient(60%_80%_at_50%_0%,var(--navy-soft),transparent_75%),linear-gradient(180deg,var(--navy)_0%,var(--navy-deep)_100%)]"
+    />
   );
 }
 

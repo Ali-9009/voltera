@@ -190,7 +190,7 @@ function GoldenPattern({ icon: Icon }) {
 
       <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
 
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(50,104,197,0.25),transparent_75%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(10,34,80,0.9),transparent_75%)]" />
 
       <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
 
@@ -223,7 +223,7 @@ function PartnerHero() {
           <h1 className="font-heading text-[clamp(36px,5vw,62px)] leading-[1.12] tracking-[-0.035em] text-white">
             Build influence.
             <span className="via-accent-light to-secondary mt-2 block bg-linear-to-b from-[#fff0bb] bg-clip-text text-transparent">
-              Earn with Voltera.
+              Earn with Voltera Sciences.
             </span>
           </h1>
 

@@ -217,7 +217,7 @@ export default function HeaderSearch({ open, onClose }) {
       aria-label="Product search"
       aria-hidden={!open}
       inert={!open}
-      className={`border-primary/15 via-primary-soft absolute top-full left-1/2 z-[100] mt-23 w-[calc(100%_-_24px)] max-w-[700px] -translate-x-1/2 rounded-[22px] border bg-linear-to-br from-white to-white shadow-[0_15px_45px_rgba(18,51,107,0.15)] transition-all duration-300 ease-out ${
+      className={`border-primary/15 via-primary-soft absolute top-full left-1/2 z-[100] mt-24 w-[calc(100%_-_24px)] max-w-[700px] -translate-x-1/2 rounded-[22px] border bg-linear-to-br from-white to-white shadow-[0_15px_45px_rgba(1,17,59,0.15)] transition-all duration-300 ease-out ${
         open
           ? "visible translate-y-0 opacity-100"
           : "invisible -translate-y-3 opacity-0"

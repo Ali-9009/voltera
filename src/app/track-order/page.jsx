@@ -112,7 +112,7 @@ function TrackingPhone({ phase, order }) {
       aria-label="Order tracking preview"
       className="mx-auto w-full max-w-[400px]"
     >
-      <div className="border-secondary/50 from-primary-light via-primary to-primary-dark relative rounded-[42px] border bg-linear-to-br p-2 shadow-[0_20px_60px_rgba(18,51,107,0.2)]">
+      <div className="border-secondary/50 from-primary-light via-primary to-primary-dark relative rounded-[42px] border bg-linear-to-br p-2 shadow-[0_20px_60px_rgba(1,17,59,0.2)]">
         <div className="flex min-h-[600px] flex-col overflow-hidden rounded-[34px] border border-white/20 bg-white">
           <header className="from-primary-light via-accent to-primary relative isolate overflow-hidden bg-linear-to-br px-5 pt-3 pb-6 text-center">
             <div
@@ -146,7 +146,7 @@ function TrackingPhone({ phase, order }) {
             </p>
 
             <p className="text-white mt-1 text-sm">
-              Voltera Shipment Tracking
+              Voltera Sciences Shipment Tracking
             </p>
           </header>
 

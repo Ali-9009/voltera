@@ -12,7 +12,7 @@ export default function FreeShippingProgress({ compact = false }) {
 
   return (
     <div
-      className={`relative isolate overflow-hidden rounded-[18px] border border-[#C9953D]/20 bg-[linear-gradient(125deg,#030D27_0%,#071A43_55%,#1746A2_100%)] text-white shadow-[0_8px_25px_rgba(7,26,67,0.12)] ${
+      className={`relative isolate overflow-hidden rounded-[18px] border border-[#C9953D]/20 bg-[linear-gradient(125deg,var(--navy-deep)_0%,var(--navy)_55%,var(--navy-soft)_100%)] text-white shadow-[0_8px_25px_rgba(1,17,59,0.12)] ${
         compact ? "p-4" : "p-5"
       }`}
     >

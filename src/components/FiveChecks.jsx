@@ -54,7 +54,7 @@ import { LordIcon } from "@lordicon/react";
 function AnimatedIcon({
   src = "/assets/wired.json",
   size = 60,
-  color = "#009CA9",
+  color = "#c9953d",
 }) {
   return (
     <LordIcon
@@ -82,7 +82,7 @@ function CheckItem({ check, iconRef }) {
         <div className="absolute inset-[4px] rounded-full bg-white/80" />
 
         <div className="relative z-10 flex items-center justify-center">
-          <AnimatedIcon src={check.icon} size={46} color="#009CA9" />
+          <AnimatedIcon src={check.icon} size={46} color="#c9953d" />
         </div>
       </div>
 
@@ -395,7 +395,7 @@ export default function FiveChecks() {
                       <path
                         d={connection.d}
                         fill="none"
-                        stroke="#07558F"
+                        stroke="#01113b"
                         strokeWidth="2"
                         strokeOpacity="0.1"
                       />
@@ -406,7 +406,7 @@ export default function FiveChecks() {
                         }}
                         d={connection.d}
                         fill="none"
-                        stroke="#04C1CA"
+                        stroke="#c9953d"
                         strokeWidth="2.5"
                         strokeLinecap="round"
                       />
@@ -418,7 +418,7 @@ export default function FiveChecks() {
                         cx={connection.x}
                         cy={connection.y}
                         r="5"
-                        fill="#04C1CA"
+                        fill="#c9953d"
                         stroke="white"
                         strokeWidth="2"
                       />
@@ -435,7 +435,7 @@ export default function FiveChecks() {
               >
                 <Image
                   src="/assets/penguin-logo.png"
-                  alt="Penguin Peptides"
+                  alt="Voltera Sciences"
                   width={260}
                   height={160}
                   sizes="(max-width: 639px) 140px, (max-width: 767px) 190px, 280px"

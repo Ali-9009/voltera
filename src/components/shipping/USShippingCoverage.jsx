@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import {
-  ArrowUpRight,
+  Clock3,
   MapPin,
   Truck,
   ShieldCheck,
@@ -23,6 +23,24 @@ const destinations = [
   { name: "Chicago", x: 575.2, y: 201.2 },
   { name: "Nashville", x: 614, y: 321 },
   { name: "New York", x: 768.3, y: 192.4 },
+];
+
+const shippingPerks = [
+  {
+    title: "Same-day shipping",
+    text: "On eligible orders",
+    icon: Clock3,
+  },
+  {
+    title: "Free ground shipping",
+    text: "On eligible orders of $150+",
+    icon: PackageCheck,
+  },
+  {
+    title: "Tracked delivery*",
+    text: "Across the United States",
+    icon: ShieldCheck,
+  },
 ];
 
 const stateNames = {
@@ -82,16 +100,16 @@ const stateNames = {
 const highlighted = new Set(["TX", "OK", "NM", "AR", "LA", "IA"]);
 
 const colors = {
-  primary: "#071A43",
-  primaryDark: "#030D27",
-  primaryLight: "#1746A2",
-  secondary: "#C9953D",
-  secondaryLight: "#E8C77B",
+  primary: "#01113b",
+  primaryDark: "#010a24",
+  primaryLight: "#0a2250",
+  secondary: "#CA8B30",
+  secondaryLight: "#EAC46E",
   secondaryDark: "#A9792C",
-  defaultState: "#102A59",
-  highlightedState: "#1746A2",
-  selectedState: "#C9953D",
-  stateBorder: "#36558A",
+  defaultState: "#0a2250",
+  highlightedState: "#0a2250",
+  selectedState: "#CA8B30",
+  stateBorder: "#a9792c",
   white: "#FFFFFF",
 };
 
@@ -138,11 +156,6 @@ export default function USShippingCoverage() {
             <h2 id="shipping-coverage-title" className="section-heading">
               Across the <span className="text-secondary">United States.</span>
             </h2>
-
-            <p className="text-muted mt-4 max-w-xl font-sans text-[13px] leading-7 sm:text-[15px]">
-              Explore our domestic shipping network, discover destinations, and
-              view illustrated routes from our Dallas hub.
-            </p>
           </div>
 
           <div className="border-secondary/25 flex w-fit items-center gap-3 rounded-full border bg-[#FFF8EC] px-4 py-2.5">
@@ -158,9 +171,9 @@ export default function USShippingCoverage() {
           </div>
         </header>
 
-        <div className="border-primary/10 overflow-hidden rounded-[24px] border bg-white shadow-[0_15px_50px_rgba(7,26,67,0.08)] sm:rounded-[28px]">
+        <div className="border-primary/10 overflow-hidden rounded-[24px] border bg-white shadow-[0_15px_50px_rgba(1,17,59,0.08)] sm:rounded-[28px]">
           <div className="grid min-w-0 gap-4 p-3 sm:p-5 lg:grid-cols-[minmax(0,1fr)_290px] lg:gap-5 lg:p-6">
-            <div className="relative flex min-w-0 flex-col overflow-hidden rounded-[20px] border border-white/10 bg-[radial-gradient(ellipse_at_center,#102B60_0%,#071A43_55%,#030D27_100%)]">
+            <div className="relative flex min-w-0 flex-col overflow-hidden rounded-[20px] border border-white/10 bg-[radial-gradient(ellipse_at_center,#102B60_0%,#01113b_55%,#010a24_100%)]">
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-0 [background-image:linear-gradient(rgba(255,255,255,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.12)_1px,transparent_1px)] [background-size:48px_48px] opacity-[0.1]"
@@ -428,100 +441,66 @@ export default function USShippingCoverage() {
 
             <aside
               aria-label="Shipping information"
-              className="border-primary/10 flex min-w-0 flex-col rounded-[20px] border bg-white p-5 sm:p-6"
+              className="ship-panel flex min-w-0 flex-col rounded-[20px] p-4 sm:p-5"
             >
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-secondary-dark text-[10px] font-bold tracking-[0.14em] uppercase">
-                  Shipping Overview
-                </span>
-
-                <span className="bg-primary-soft text-primary flex size-10 items-center justify-center rounded-xl">
-                  <Truck size={19} strokeWidth={1.8} />
-                </span>
-              </div>
-
-              <div className="mt-7">
-                <div className="flex items-end gap-3">
-                  <span className="font-heading text-primary text-[42px] leading-none">
-                    US
-                  </span>
-
-                  <span className="text-muted pb-1 text-[12px] font-semibold">
-                    Domestic Delivery
-                  </span>
-                </div>
-
-                <p className="text-muted mt-3 font-sans text-[12px] leading-6">
-                  Explore destinations and shipping connections throughout the
-                  United States.
-                </p>
-              </div>
-
-              <div className="border-primary/10 mt-7 border-t pt-6">
-                <p className="text-secondary-dark text-[10px] font-bold tracking-[0.13em] uppercase">
-                  Selected Location
-                </p>
-
-                <div className="mt-4 flex items-center gap-3">
-                  <span className="text-secondary-dark flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#FFF8EC]">
-                    <MapPin size={20} strokeWidth={1.8} />
-                  </span>
-
-                  <h3 className="font-heading text-primary min-w-0 text-[20px] leading-tight">
-                    {selectedCity || currentName}
-                  </h3>
-                </div>
-
-                <p className="text-muted mt-4 font-sans text-[12px] leading-6">
-                  {selectedCity
-                    ? `Viewing an illustrative shipping route from Dallas to ${selectedCity}. Actual carrier routes and delivery estimates may vary.`
-                    : `Explore shipping information for ${currentName}. Select a destination on the map to view its route.`}
-                </p>
-              </div>
-
-              <div className="border-primary/10 mt-7 space-y-5 border-t pt-6">
+              <div className="ship-ticket rounded-[16px] p-5 text-white lg:py-8">
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-muted flex items-center gap-2 text-[12px]">
-                    <PackageCheck size={16} className="text-secondary-dark" />
-                    Shipping Service
-                  </span>
-
-                  <span className="text-primary text-right text-[12px] font-semibold">
-                    Tracked Shipping*
-                  </span>
+                  <p className="text-sm font-semibold text-[var(--gold-light)]">
+                    {selectedCity ? "Your route" : "Selected location"}
+                  </p>
+                  <Truck
+                    size={22}
+                    strokeWidth={1.7}
+                    aria-hidden="true"
+                    className="text-[var(--gold-light)]"
+                  />
                 </div>
 
-                <div className="flex items-center justify-between gap-3">
-                  <span className="text-muted flex items-center gap-2 text-[12px]">
-                    <ShieldCheck size={16} className="text-secondary-dark" />
-                    Coverage
-                  </span>
+                <h3
+                  aria-live="polite"
+                  className="font-heading mt-2 text-[28px] leading-[1.1] font-semibold tracking-[-0.03em] text-balance"
+                >
+                  {selectedCity || currentName}
+                </h3>
 
-                  <span className="text-primary text-right text-[12px] font-semibold">
-                    United States
-                  </span>
+                <div className="mt-5 flex items-center gap-2.5 text-sm font-semibold lg:mt-8">
+                  <span className="size-3 shrink-0 rounded-full bg-[var(--gold-light)]" />
+                  <span>Dallas</span>
+                  <span aria-hidden="true" className="ship-line h-0.5 min-w-4 flex-1" />
+                  <MapPin
+                    size={18}
+                    aria-hidden="true"
+                    className="shrink-0 text-[var(--gold-light)]"
+                  />
                 </div>
               </div>
+
+              <ul className="my-auto space-y-7 py-7">
+                {shippingPerks.map(({ title, text, icon: Icon }) => (
+                  <li key={title} className="flex items-center gap-3">
+                    <span className="bg-primary grid size-13 shrink-0 place-items-center rounded-[15px] text-[var(--gold-light)]">
+                      <Icon size={20} strokeWidth={1.7} aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0">
+                      <strong className="text-primary block text-[17px] leading-tight font-bold">
+                        {title}
+                      </strong>
+                      <span className="text-primary-dark/80 mt-1 block text-sm leading-snug">
+                        {text}
+                      </span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
 
               <button
                 type="button"
                 onClick={resetSelection}
-                className="border-primary/15 bg-primary-soft text-primary hover:bg-primary mt-7 flex w-full items-center justify-center gap-2 rounded-xl border px-4 py-3 font-sans text-[12px] font-semibold transition-all duration-300 hover:text-white"
+                className="border-primary/25 text-primary hover:bg-primary flex min-h-11 w-full items-center justify-center gap-2 rounded-full border bg-white px-4 text-sm font-semibold transition-colors duration-300 hover:text-white"
               >
-                <RotateCcw size={15} />
-                Reset Selection
+                <RotateCcw size={15} aria-hidden="true" />
+                Reset map
               </button>
-
-              {activeCity && (
-                <button
-                  type="button"
-                  onClick={() => setActiveCity(null)}
-                  className="text-secondary-dark hover:text-primary mt-4 inline-flex items-center justify-center gap-2 text-[12px] font-semibold"
-                >
-                  Show All Routes
-                  <ArrowUpRight size={15} />
-                </button>
-              )}
             </aside>
           </div>
 

@@ -46,11 +46,11 @@ export default function CartSuggestions() {
                 )}
               </div>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-xs font-bold text-[#0b1b3f]">
+                <p className="truncate text-xs font-bold text-[var(--navy)]">
                   {product.name}
                 </p>
                 <p className="text-[10px] text-[#7e91a9]">{variant.label}</p>
-                <p className="mt-0.5 text-[11px] font-semibold text-[#0b1b3f]">
+                <p className="mt-0.5 text-[11px] font-semibold text-[var(--navy)]">
                   {formatCartMoney(variant.price)}
                 </p>
               </div>
@@ -59,7 +59,7 @@ export default function CartSuggestions() {
               type="button"
               disabled={!available}
               onClick={() => addItem(product, variant, 1)}
-              className="group border-secondary/30 hover:border-secondary relative mt-2 flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(135deg,#1746A2_0%,#071A43_60%,#030D27_100%)] px-4 font-sans text-[12px] font-bold whitespace-nowrap text-white shadow-[0_6px_18px_rgba(7,26,67,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(7,26,67,0.25)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:h-8"
+              className="group border-secondary/30 hover:border-secondary relative mt-2 flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_60%,var(--navy-deep)_100%)] px-4 font-sans text-[12px] font-bold whitespace-nowrap text-white shadow-[0_6px_18px_rgba(1,17,59,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(1,17,59,0.25)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:translate-y-0 sm:h-8"
             >
               <span className="bg-primary-dark absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-disabled:opacity-0" />
 

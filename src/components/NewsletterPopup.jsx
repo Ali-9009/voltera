@@ -74,6 +74,17 @@ export default function NewsletterPopup() {
   };
 
   useEffect(() => {
+    const handleOpen = (event) => {
+      setEmail(event.detail?.email ?? "");
+      setNotice("");
+      setIsOpen(true);
+    };
+
+    window.addEventListener("newsletter:open", handleOpen);
+    return () => window.removeEventListener("newsletter:open", handleOpen);
+  }, []);
+
+  useEffect(() => {
     if (!isOpen) return;
 
     const previousOverflow = document.body.style.overflow;
@@ -100,15 +111,15 @@ export default function NewsletterPopup() {
 
     if (!email.trim() || !agreed) return;
 
-    const subject = "Penguin Peptides - Research Updates Subscription";
+    const subject = "Voltera Sciences - Research Updates Subscription";
 
     const body = `Please add the following email to your research updates list:
 
 Email: ${email.trim()}
 
-I agree to receive research updates, restock alerts, and offers from Penguin Peptides.`;
+I agree to receive research updates, restock alerts, and offers from Voltera Sciences.`;
 
-    window.location.href = `mailto:support@penguinpeptides.com?subject=${encodeURIComponent(
+    window.location.href = `mailto:support@volterasciences.com?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`;
 
@@ -193,10 +204,10 @@ return (
             <div className="relative isolate">
               <div
                 aria-hidden="true"
-                className="newsletter-float-left pointer-events-none absolute top-14 -left-3 z-0 h-[65px] w-[45px] drop-shadow-[0_8px_12px_rgba(18,51,107,0.15)] sm:top-8 sm:-left-6 sm:h-[110px] sm:w-[75px]"
+                className="newsletter-float-left pointer-events-none absolute top-14 -left-3 z-0 h-[65px] w-[45px] drop-shadow-[0_8px_12px_rgba(1,17,59,0.15)] sm:top-8 sm:-left-6 sm:h-[110px] sm:w-[75px]"
               >
                 <Image
-                  src="/pngs/quick-view-2.png"
+                  src="/pngs/vials/vls-3rt.png"
                   alt=""
                   fill
                   sizes="(max-width: 639px) 45px, 75px"
@@ -206,10 +217,10 @@ return (
 
               <div
                 aria-hidden="true"
-                className="newsletter-float-right pointer-events-none absolute top-14 -right-3 z-0 h-[65px] w-[45px] drop-shadow-[0_8px_12px_rgba(18,51,107,0.15)] sm:top-8 sm:-right-6 sm:h-[110px] sm:w-[75px]"
+                className="newsletter-float-right pointer-events-none absolute top-14 -right-3 z-0 h-[65px] w-[45px] drop-shadow-[0_8px_12px_rgba(1,17,59,0.15)] sm:top-8 sm:-right-6 sm:h-[110px] sm:w-[75px]"
               >
                 <Image
-                  src="/pngs/quick-view.png"
+                  src="/pngs/vials/vls-2trz.png"
                   alt=""
                   fill
                   sizes="(max-width: 639px) 45px, 75px"

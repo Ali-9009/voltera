@@ -145,7 +145,7 @@ export default function ResearcherGate() {
                   type="checkbox"
                   checked={ageConfirmed}
                   onChange={(event) => setAgeConfirmed(event.target.checked)}
-                  className="mt-0.5 size-5 shrink-0 cursor-pointer accent-[#C9953D]"
+                  className="accent-secondary mt-0.5 size-5 shrink-0 cursor-pointer"
                 />
 
                 <span className="text-muted font-sans text-[13px] leading-6 sm:text-[14px]">
@@ -169,7 +169,7 @@ export default function ResearcherGate() {
                   onChange={(event) =>
                     setResearchConfirmed(event.target.checked)
                   }
-                  className="mt-0.5 size-5 shrink-0 cursor-pointer accent-[#C9953D]"
+                  className="accent-secondary mt-0.5 size-5 shrink-0 cursor-pointer"
                 />
 
                 <span className="text-muted font-sans text-[13px] leading-6 sm:text-[14px]">
@@ -190,10 +190,8 @@ export default function ResearcherGate() {
               type="button"
               onClick={handleContinue}
               disabled={!ageConfirmed || !researchConfirmed}
-              className="group border-secondary/30 hover:border-secondary relative mt-6 flex h-[52px] w-full items-center justify-center gap-3 overflow-hidden rounded-full border bg-[linear-gradient(135deg,#1746A2_0%,#071A43_60%,#030D27_100%)] px-5 font-sans text-[13px] font-semibold text-white shadow-[0_8px_25px_rgba(7,26,67,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(7,26,67,0.25)] active:scale-[0.98] disabled:cursor-not-allowed disabled:border-transparent disabled:bg-[#DCE4F0] disabled:bg-none disabled:text-[#81939C] disabled:shadow-none disabled:hover:translate-y-0 sm:text-sm"
+              className="group border-secondary/30 hover:border-secondary navy-cta relative mt-6 flex h-[52px] w-full items-center justify-center gap-3 overflow-hidden rounded-full border px-5 font-sans text-[13px] font-semibold text-white shadow-[0_8px_25px_rgba(1,17,59,0.15)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_rgba(1,17,59,0.25)] active:scale-[0.98] disabled:cursor-not-allowed disabled:border-transparent disabled:bg-[#DCE4F0] disabled:bg-none disabled:text-[#81939C] disabled:shadow-none disabled:hover:translate-y-0 sm:text-sm"
             >
-              <span className="bg-primary-dark pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-disabled:opacity-0" />
-
               <span className="relative z-10">Enter Voltera Sciences</span>
 
               <ArrowRight

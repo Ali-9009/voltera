@@ -322,7 +322,7 @@ function CertificateArchive({ product, certificatePdf }) {
                           href={certificate.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-primary hover:bg-primary-light inline-flex items-center justify-center gap-2 rounded-full px-3 py-2 font-sans text-[11px] font-semibold whitespace-nowrap text-white transition-all duration-300"
+                          className="navy-cta inline-flex items-center justify-center gap-2 rounded-full px-3 py-2 font-sans text-[11px] font-semibold whitespace-nowrap text-white transition-all duration-300"
                         >
                           View
                           <ArrowUpRight size={14} />
@@ -420,7 +420,7 @@ export default function ProductResearchSection({
                 onClick={() => setActiveTab(tab.id)}
                 className={`rounded-full border px-4 py-3 font-sans text-[11px] font-bold whitespace-nowrap transition-all duration-300 sm:px-5 sm:text-[12px] ${
                   selected
-                    ? "border-primary bg-primary text-white shadow-[0_6px_18px_rgba(7,26,67,0.12)]"
+                    ? "border-primary bg-primary text-white shadow-[0_6px_18px_rgba(1,17,59,0.12)]"
                     : "border-primary/15 text-primary hover:border-secondary bg-white hover:bg-[#FFF9EF]"
                 }`}
               >

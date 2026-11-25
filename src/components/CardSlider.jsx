@@ -195,9 +195,9 @@ function ProductCard({ product }) {
             type="button"
             onClick={handlePrimaryAction}
             disabled={adding || !inStock || !hasPrice}
-            className="group/btn border-primary-light/20 relative flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(120deg,#1746A2_0%,#071A43_65%,#030D27_100%)] px-2 font-sans text-[11px] font-semibold text-white shadow-[0_5px_16px_rgba(7,26,67,0.18)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_9px_22px_rgba(7,26,67,0.3)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:h-11 sm:text-[12px]"
+            className="group/btn border-primary-light/20 relative flex h-10 w-full items-center justify-center gap-2 overflow-hidden rounded-full border bg-[linear-gradient(120deg,var(--navy-soft)_0%,var(--navy)_65%,var(--navy-deep)_100%)] px-2 font-sans text-[11px] font-semibold text-white shadow-[0_5px_16px_rgba(1,17,59,0.18)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_9px_22px_rgba(1,17,59,0.3)] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0 sm:h-11 sm:text-[12px]"
           >
-            <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,#2458B5_0%,#1746A2_50%,#071A43_100%)] opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100 group-disabled/btn:opacity-0" />
+            <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,var(--navy-soft)_0%,var(--navy-soft)_50%,var(--navy)_100%)] opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100 group-disabled/btn:opacity-0" />
 
             <span className="relative z-10">
               {adding
@@ -228,7 +228,7 @@ function ProductCard({ product }) {
         data-open={panelOpen}
         aria-hidden={!panelOpen}
         inert={!panelOpen}
-        className="border-secondary/30 absolute inset-x-0 bottom-0 z-20 flex h-[50%] min-h-[220px] translate-y-full flex-col rounded-t-[18px] border-t bg-white shadow-[0_-12px_35px_rgba(7,26,67,0.15)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-[open=true]:translate-y-0 sm:h-[48%] sm:rounded-t-[22px]"
+        className="border-secondary/30 absolute inset-x-0 bottom-0 z-20 flex h-[50%] min-h-[220px] translate-y-full flex-col rounded-t-[18px] border-t bg-white shadow-[0_-12px_35px_rgba(1,17,59,0.15)] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] data-[open=true]:translate-y-0 sm:h-[48%] sm:rounded-t-[22px]"
       >
         <div className="bg-primary/15 mx-auto mt-2 h-1 w-9 shrink-0 rounded-full" />
 
@@ -318,7 +318,7 @@ function ProductCard({ product }) {
               type="button"
               onClick={handleAddToCart}
               disabled={adding || !inStock || !hasPrice}
-              className="flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(120deg,#1746A2,#071A43)] px-2 font-sans text-[10px] font-semibold text-white shadow-[0_5px_15px_rgba(7,26,67,0.18)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(7,26,67,0.3)] disabled:cursor-not-allowed disabled:opacity-50 sm:h-10 sm:text-[12px]"
+              className="flex h-9 w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(120deg,var(--navy-soft),var(--navy))] px-2 font-sans text-[10px] font-semibold text-white shadow-[0_5px_15px_rgba(1,17,59,0.18)] transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_20px_rgba(1,17,59,0.3)] disabled:cursor-not-allowed disabled:opacity-50 sm:h-10 sm:text-[12px]"
             >
               <span>{adding ? "Adding..." : "Add to Cart"}</span>
 

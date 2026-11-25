@@ -49,7 +49,7 @@ const steps = [
   },
 ];
 
-const STEP_DURATION = 2400;
+const STEP_DURATION = 1300;
 
 function StepCard({ step, index, activeStep }) {
   const Icon = step.icon;
@@ -78,7 +78,7 @@ function StepCard({ step, index, activeStep }) {
         <span
           className={`relative flex size-[50px] items-center justify-center rounded-full border transition-all duration-500 ${
             reached
-              ? "border-primary-light/30 from-accent to-primary ring-primary-light/10 bg-linear-to-br text-white shadow-[0_5px_18px_rgba(40,91,184,0.3)] ring-4"
+              ? "border-primary-light/30 from-accent to-primary ring-primary-light/10 bg-linear-to-br text-white shadow-[0_5px_18px_rgba(1,17,59,0.3)] ring-4"
               : "border-border text-primary/40 bg-white"
           }`}
         >
@@ -89,9 +89,9 @@ function StepCard({ step, index, activeStep }) {
       <article
         className={`relative flex min-h-[125px] w-full min-w-0 flex-1 flex-col rounded-[18px] border p-4 transition-all duration-500 sm:p-5 ${
           active
-            ? "border-secondary bg-white shadow-[0_12px_30px_rgba(18,51,107,0.12)] lg:-translate-y-1"
+            ? "border-secondary bg-white shadow-[0_12px_30px_rgba(1,17,59,0.12)] lg:-translate-y-1"
             : completed
-              ? "border-primary/15 bg-white shadow-[0_6px_20px_rgba(18,51,107,0.06)]"
+              ? "border-primary/15 bg-white shadow-[0_6px_20px_rgba(1,17,59,0.06)]"
               : "border-primary/10 bg-white/40 opacity-60"
         }`}
       >
@@ -139,7 +139,6 @@ export default function HowItWork() {
 
   const [activeStep, setActiveStep] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
@@ -178,7 +177,7 @@ export default function HowItWork() {
   }, []);
 
   useEffect(() => {
-    if (!isVisible || paused || reducedMotion) return;
+    if (!isVisible || reducedMotion) return;
 
     const timer = window.setTimeout(
       () => {
@@ -186,11 +185,11 @@ export default function HowItWork() {
           previous === steps.length - 1 ? 0 : previous + 1,
         );
       },
-      activeStep === steps.length - 1 ? STEP_DURATION + 1000 : STEP_DURATION,
+      activeStep === steps.length - 1 ? STEP_DURATION + 500 : STEP_DURATION,
     );
 
     return () => window.clearTimeout(timer);
-  }, [activeStep, isVisible, paused, reducedMotion]);
+  }, [activeStep, isVisible, reducedMotion]);
 
   const progress = (activeStep / (steps.length - 1)) * 100;
 
@@ -223,11 +222,7 @@ export default function HowItWork() {
           </p>
         </header>
 
-        <div
-          className="relative"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-        >
+        <div className="relative">
           <div
             aria-hidden="true"
             className="bg-primary/10 absolute top-[24px] right-[calc(20%-25px)] left-[25px] hidden h-[2px] rounded-full lg:block"
@@ -236,7 +231,7 @@ export default function HowItWork() {
               className={`from-primary-light via-accent to-secondary relative h-full rounded-full bg-linear-to-r ${
                 activeStep === 0
                   ? "transition-none"
-                  : "transition-[width] duration-[1200ms] ease-in-out motion-reduce:transition-none"
+                  : "transition-[width] duration-[900ms] ease-in-out motion-reduce:transition-none"
               }`}
               style={{
                 width: `${progress}%`,

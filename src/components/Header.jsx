@@ -98,7 +98,7 @@ function MobileSidebar({ open, onClose, pathname }) {
           className="flex-1 overflow-y-auto px-4 py-6"
         >
           <p className="text-primary mb-4 px-3 font-sans text-[10px] font-bold tracking-[0.18em] uppercase">
-            Explore Voltera
+            Explore Voltera Sciences
           </p>
 
           <div className="space-y-1.5">
@@ -180,28 +180,34 @@ function MobileSidebar({ open, onClose, pathname }) {
 export default function Header() {
   const pathname = usePathname();
 
-  const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+
+  // Scrolls away with the page; returns only when scrolling up.
+  useEffect(() => {
+    let lastY = window.scrollY;
+
+    const onScroll = () => {
+      const y = Math.max(0, window.scrollY);
+
+      if (y < 10) {
+        setHidden(false);
+        lastY = y;
+        return;
+      }
+
+      if (Math.abs(y - lastY) < 6) return;
+      setHidden(y > lastY);
+      lastY = y;
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const { openCart, itemCount, hydrated } = useCart();
   const cartCount = hydrated ? itemCount : 0;
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    handleScroll();
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -212,16 +218,14 @@ export default function Header() {
     <>
       <AnnouncementBar />
 
-      <header className="sticky top-0 z-50 h-0 w-full">
-        <div className="px-3 pt-3 sm:px-5 lg:px-7">
-          <div
-            className={`border-primary/10 relative mx-auto w-full rounded-full border bg-white shadow-[0_10px_35px_rgba(3,13,39,0.12)] transition-[max-width,box-shadow] duration-500 ease-in-out ${
-              scrolled
-                ? "max-w-6xl shadow-[0_14px_45px_rgba(3,13,39,0.18)]"
-                : "max-w-7xl"
-            }`}
-          >
-            <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2.5 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">
+      <header
+        className={`sticky top-0 z-50 h-0 w-full transition-transform duration-300 ease-out has-[:focus-visible]:translate-y-0 motion-reduce:transition-none ${
+          hidden && !searchOpen ? "-translate-y-32" : "translate-y-0"
+        }`}
+      >
+        <div className="pt-2.5">
+          <div className="site-header">
+            <div className="relative grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 lg:h-[72px] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">
               <Link
                 href="/"
                 aria-label="Voltera Sciences home"
@@ -233,13 +237,13 @@ export default function Header() {
                   width={200}
                   height={65}
                   priority
-                  className="h-11 w-auto max-w-[125px] object-contain sm:max-w-48"
+                  className="h-12 w-auto object-contain lg:h-[54px]"
                 />
               </Link>
 
               <nav
                 aria-label="Main navigation"
-                className="border-primary/[0.06] hidden items-center justify-center gap-1 rounded-full border bg-[#F5F7FB] px-3 py-1.5 lg:flex xl:gap-2 xl:px-5"
+                className="site-header-nav hidden items-center justify-center gap-1 rounded-full px-3 py-1.5 lg:flex xl:gap-2 xl:px-5"
               >
                 {navLinks.map((link) => {
                   const active = pathname === link.href;
@@ -249,10 +253,10 @@ export default function Header() {
                       key={link.href}
                       href={link.href}
                       aria-current={active ? "page" : undefined}
-                      className={`rounded-full px-3 py-2 font-sans text-[12px] font-medium whitespace-nowrap transition-colors duration-300 xl:px-4 xl:text-[13px] ${
+                      className={`rounded-full px-3 py-2 font-sans text-[13px] font-semibold whitespace-nowrap transition-colors duration-300 xl:px-4 xl:text-[15px] ${
                         active
-                          ? "text-secondary-dark bg-white shadow-sm"
-                          : "text-primary hover:text-secondary-dark hover:bg-white"
+                          ? "bg-primary text-white"
+                          : "text-primary hover:bg-primary/5"
                       }`}
                     >
                       {link.name}
@@ -274,8 +278,8 @@ export default function Header() {
                   aria-controls="header-search"
                   className={`flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 sm:size-10 ${
                     searchOpen
-                      ? "border-secondary/40 text-secondary-dark bg-[#FFF5E4]"
-                      : "border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark bg-[#F5F7FB] hover:bg-[#FFF5E4]"
+                      ? "border-primary bg-primary text-white"
+                      : "site-header-icon"
                   }`}
                 >
                   {searchOpen ? (
@@ -288,7 +292,7 @@ export default function Header() {
                 <Link
                   href="/account"
                   aria-label="My account"
-                  className="border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark flex size-9 shrink-0 items-center justify-center rounded-full border bg-[#F5F7FB] transition-colors duration-300 hover:bg-[#FFF5E4] sm:size-10"
+                  className="site-header-icon flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 sm:size-10"
                 >
                   <UserRound size={19} strokeWidth={1.8} />
                 </Link>
@@ -297,12 +301,12 @@ export default function Header() {
                   type="button"
                   onClick={openCart}
                   aria-label={`Open shopping cart, ${cartCount} items`}
-                  className="border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark relative flex size-9 shrink-0 items-center justify-center rounded-full border bg-[#F5F7FB] transition-colors duration-300 hover:bg-[#FFF5E4] sm:size-10"
+                  className="site-header-icon relative flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 sm:size-10"
                 >
                   <ShoppingBag size={19} strokeWidth={1.8} />
 
                   {cartCount > 0 && (
-                    <span className="bg-secondary absolute -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
+                    <span className="absolute bg-primary -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
                       {cartCount > 99 ? "99+" : cartCount}
                     </span>
                   )}
@@ -317,7 +321,7 @@ export default function Header() {
                   aria-label="Open navigation menu"
                   aria-expanded={menuOpen}
                   aria-controls="mobile-navigation"
-                  className="border-primary/10 text-primary hover:border-secondary/40 hover:text-secondary-dark flex size-9 shrink-0 items-center justify-center rounded-full border bg-[#F5F7FB] transition-colors duration-300 hover:bg-[#FFF5E4] sm:size-10 lg:hidden"
+                  className="site-header-icon flex size-9 shrink-0 items-center justify-center rounded-full border transition-colors duration-300 sm:size-10 lg:hidden"
                 >
                   <Menu size={21} strokeWidth={1.8} />
                 </button>

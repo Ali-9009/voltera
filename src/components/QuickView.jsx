@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useState } from "react";
 import Image from "next/image";
+import { getCutout } from "@/data/cutouts";
 import {
   ArrowRight,
   Check,
@@ -101,7 +102,7 @@ export default function QuickView({ product, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center bg-[#030D27]/80 p-2 backdrop-blur-sm sm:p-5"
+      className="fixed inset-0 z-[100] flex items-center justify-center bg-[var(--navy-deep)]/80 p-2 backdrop-blur-sm sm:p-5"
       onMouseDown={(event) => {
         if (event.target === event.currentTarget) onClose();
       }}
@@ -186,7 +187,7 @@ export default function QuickView({ product, onClose }) {
                       aria-pressed={selected}
                       className={`inline-flex min-h-10 items-center justify-center rounded-lg border px-4 font-sans text-[12px] font-bold transition-all duration-300 disabled:cursor-not-allowed disabled:opacity-40 ${
                         selected
-                          ? "border-primary bg-primary text-white shadow-[0_5px_15px_rgba(7,26,67,0.12)]"
+                          ? "border-primary bg-primary text-white shadow-[0_5px_15px_rgba(1,17,59,0.12)]"
                           : "border-primary/15 text-primary hover:border-secondary hover:bg-secondary/5 bg-white"
                       }`}
                     >
@@ -270,11 +271,11 @@ export default function QuickView({ product, onClose }) {
                             }}
                           >
                             <Image
-                              src="/pngs/quick-view.png"
+                              src={getCutout(product.slug)}
                               alt=""
                               fill
                               sizes="40px"
-                              className="object-contain drop-shadow-[0_3px_4px_rgba(18,51,107,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
+                              className="object-contain drop-shadow-[0_3px_4px_rgba(1,17,59,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
                             />
                           </span>
                         ))}
@@ -329,7 +330,7 @@ export default function QuickView({ product, onClose }) {
                   type="button"
                   onClick={handleAddToCart}
                   disabled={!canAdd}
-                  className="group flex h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,#1746A2,#071A43_65%,#030D27)] px-3 font-sans text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(7,26,67,0.2)] disabled:cursor-not-allowed disabled:opacity-50"
+                  className="group flex h-12 min-w-0 flex-1 items-center justify-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--navy-soft),var(--navy)_65%,var(--navy-deep))] px-3 font-sans text-[13px] font-bold text-white transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_25px_rgba(1,17,59,0.2)] disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <span>
                     {!inStock

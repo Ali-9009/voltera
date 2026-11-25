@@ -62,7 +62,7 @@ export default function ContactPage() {
 
           <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
 
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(50,104,197,0.25),transparent_75%)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(10,34,80,0.9),transparent_75%)]" />
 
           <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
 

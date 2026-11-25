@@ -71,12 +71,12 @@ function CategoryCard({ category, index }) {
 
       <span
         aria-hidden="true"
-        className="border-primary/10 bg-primary-light/[0.025] pointer-events-none absolute -top-8 -right-8 size-28 rotate-45 rounded-[24px] border transition-transform duration-500 group-hover:rotate-[60deg]"
+        className="bg-primary pointer-events-none absolute -top-[30px] -right-[34px] size-[100px] rotate-45 rounded-[24px] sm:-top-[38px] sm:-right-[44px] sm:size-[124px]"
       />
 
       <span
         aria-hidden="true"
-        className="border-secondary/15 pointer-events-none absolute -top-12 -right-2 size-28 rotate-45 rounded-[24px] border"
+        className="border-secondary/60 pointer-events-none absolute -top-[30px] -right-[34px] size-[100px] -translate-x-[6px] translate-y-[6px] rotate-45 rounded-[24px] border sm:-top-[38px] sm:-right-[44px] sm:size-[124px]"
       />
 
       <div className="relative flex items-start justify-between">
@@ -90,7 +90,7 @@ function CategoryCard({ category, index }) {
 
         <span
           aria-hidden="true"
-          className="font-heading text-[32px] leading-none tracking-tight text-transparent opacity-15 transition-all duration-300 [-webkit-text-stroke:1px_var(--color-primary)] group-hover:opacity-40 group-hover:[-webkit-text-stroke:1px_var(--color-secondary)] sm:text-[42px]"
+          className="font-heading -mt-0.5 -mr-1 text-[24px] leading-none font-bold tracking-tight text-white tabular-nums transition-colors duration-300 group-hover:text-[var(--gold-light)] sm:text-[32px]"
         >
           {String(index + 1).padStart(2, "0")}
         </span>
@@ -124,7 +124,7 @@ export default function ShopByCategory() {
     >
       <div
         aria-hidden="true"
-        className="bg-primary-light/15 pointer-events-none absolute -top-48 -right-40 size-[500px] rounded-full blur-[120px]"
+        className="bg-secondary/10 pointer-events-none absolute -top-48 -right-40 size-[500px] rounded-full blur-[120px]"
       />
 
       <div

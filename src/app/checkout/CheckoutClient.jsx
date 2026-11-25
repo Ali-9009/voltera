@@ -200,7 +200,7 @@ export default function CheckoutClient() {
             </p>
             <Link
               href="/shop"
-              className="bg-primary mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#35143E]"
+              className="navy-cta mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white transition-colors"
             >
               Explore products <ArrowRight size={16} />
             </Link>

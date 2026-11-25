@@ -9,77 +9,64 @@ import {
   Atom,
   ShieldCheck,
   Microscope,
-  Activity,
-  Droplets,
   TestTube,
   Biohazard,
   ArrowUpRight,
 } from "lucide-react";
 
+// Test names and methods follow the ILS Laboratories COA (lot RT10-11032026).
 const researchFeatures = [
   {
-    title: "Identity",
-    description: "Compound verification",
+    title: "Identity Verification",
+    description: "HPLC-RTM",
     icon: Fingerprint,
   },
   {
-    title: "Purity",
-    description: "HPLC analysis",
+    title: "Peptide Purity",
+    description: "HPLC",
     icon: FlaskConical,
   },
   {
-    title: "Net Content",
-    description: "Peptide quantification",
+    title: "Net Peptide Content",
+    description: "Measured mg per vial",
     icon: Scale,
   },
   {
-    title: "Arsenic",
-    description: "Trace metal screening",
-    icon: Atom,
-  },
-  {
-    title: "Cadmium",
-    description: "ICP-MS analysis",
-    icon: Microscope,
-  },
-  {
-    title: "Lead",
-    description: "Heavy metal screening",
+    title: "Fentanyl Screen",
+    description: "Immunoassay",
     icon: ShieldCheck,
   },
   {
-    title: "Mercury",
-    description: "Trace metal analysis",
-    icon: Droplets,
+    title: "Heavy Metals",
+    description: "ICP-MS: As, Cd, Pb, Hg, Cr",
+    icon: Atom,
   },
   {
-    title: "Chromium",
-    description: "ICP-MS screening",
-    icon: Activity,
-  },
-  {
-    title: "Sterility",
-    description: "PCR testing",
+    title: "Sterility Testing",
+    description: "PCR",
     icon: TestTube,
   },
   {
-    title: "Endotoxins",
-    description: "USP <85> testing",
+    title: "Endotoxin Testing",
+    description: "USP <85>",
     icon: Biohazard,
+  },
+  {
+    title: "HPLC Conformity",
+    description: "Two samples compared",
+    icon: Microscope,
   },
 ];
 
 const positions = [
   { x: 50, y: 9 },
-  { x: 72, y: 16 },
-  { x: 87, y: 36 },
-  { x: 87, y: 61 },
-  { x: 72, y: 83 },
+  { x: 79, y: 20 },
+  { x: 88, y: 50 },
+  { x: 79, y: 80 },
   { x: 50, y: 91 },
-  { x: 28, y: 83 },
-  { x: 13, y: 61 },
-  { x: 13, y: 36 },
-  { x: 28, y: 16 },
+  { x: 21, y: 80 },
+  { x: 12, y: 50 },
+  { x: 21, y: 20 },
 ];
 
 function ResearchFeature({ feature, position }) {
@@ -91,20 +78,15 @@ function ResearchFeature({ feature, position }) {
         "--node-x": `${position.x}%`,
         "--node-y": `${position.y}%`,
       }}
-      className="group relative flex min-w-0 flex-col items-center text-center lg:absolute lg:top-[var(--node-y)] lg:left-[var(--node-x)] lg:w-[180px] lg:-translate-x-1/2 lg:-translate-y-1/2"
+      className="group relative flex min-w-0 flex-col items-center bg-white text-center lg:absolute lg:pb-2 lg:top-[var(--node-y)] lg:left-[var(--node-x)] lg:w-[210px] lg:-translate-x-1/2 lg:-translate-y-1/2"
     >
       <div className="relative flex size-[64px] items-center justify-center sm:size-[76px]">
         <span
           aria-hidden="true"
-          className="border-primary-light/20 group-hover:border-secondary/60 absolute inset-0 rounded-full border transition-all duration-500 group-hover:scale-110"
+          className="border-secondary/60 absolute inset-0 rounded-full border"
         />
 
-        <span
-          aria-hidden="true"
-          className="border-primary-light/20 absolute inset-[5px] rounded-full border border-dashed motion-safe:animate-[spin_25s_linear_infinite]"
-        />
-
-        <span className="to-primary-light/15 text-primary group-hover:border-secondary group-hover:from-accent-light/40 group-hover:to-secondary/20 group-hover:text-secondary-dark relative flex size-[52px] items-center justify-center rounded-full border border-white bg-linear-to-br from-white shadow-[0_5px_15px_rgba(18,51,107,0.12)] transition-all duration-300 group-hover:bg-linear-to-br sm:size-[62px]">
+        <span className="bg-primary relative flex size-[54px] items-center justify-center rounded-full text-[var(--gold-light)] shadow-[0_10px_20px_-8px_rgba(1,17,59,0.5)] transition-transform duration-300 group-hover:scale-105 sm:size-[64px]">
           <Icon
             aria-hidden="true"
             strokeWidth={1.7}
@@ -112,17 +94,13 @@ function ResearchFeature({ feature, position }) {
           />
         </span>
 
-        <span
-          aria-hidden="true"
-          className="bg-secondary absolute top-0 right-1 size-2 rounded-full border border-white"
-        />
       </div>
 
-      <h3 className="text-primary group-hover:text-secondary-dark mt-2.5 font-sans text-[13px] leading-tight font-extrabold transition-colors duration-300 sm:text-[15px]">
+      <h3 className="text-primary group-hover:text-secondary-dark mt-2.5 font-sans text-[15px] leading-tight font-extrabold transition-colors duration-300 sm:text-[17px]">
         {feature.title}
       </h3>
 
-      <p className="text-muted mt-1 font-sans text-[10px] leading-relaxed sm:text-[12px]">
+      <p className="text-primary-dark/75 mt-1 font-sans text-[13px] leading-relaxed sm:text-sm">
         {feature.description}
       </p>
     </article>
@@ -135,7 +113,7 @@ function ResearchConnections() {
       viewBox="0 0 1000 1000"
       preserveAspectRatio="none"
       aria-hidden="true"
-      className="text-primary-light/35 pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
+      className="text-secondary/55 pointer-events-none absolute inset-0 hidden h-full w-full lg:block"
     >
       {positions.map((position, index) => (
         <line
@@ -146,7 +124,6 @@ function ResearchConnections() {
           y2={position.y * 10}
           stroke="currentColor"
           strokeWidth="1"
-          strokeDasharray="5 7"
           vectorEffect="non-scaling-stroke"
         />
       ))}
@@ -159,35 +136,20 @@ function CenterPortal() {
     <div className="relative mx-auto flex size-[220px] items-center justify-center sm:size-[260px] lg:size-[290px]">
       <span
         aria-hidden="true"
-        className="bg-primary-light/10 absolute -inset-5 rounded-full blur-[45px]"
+        className="hidden"
       />
 
       <span
         aria-hidden="true"
-        className="border-primary-light/20 absolute inset-0 rounded-full border"
+        className="border-secondary/25 absolute inset-0 rounded-full border bg-[radial-gradient(circle,#fff_40%,#fbf3df_100%)]"
       />
 
       <span
         aria-hidden="true"
-        className="border-secondary/40 absolute inset-3 rounded-full border border-dashed motion-safe:animate-[spin_40s_linear_infinite]"
+        className="border-secondary/50 absolute inset-4 rounded-full border"
       />
 
-      <span
-        aria-hidden="true"
-        className="border-primary-light/15 absolute inset-7 rounded-full border"
-      />
-
-      <span
-        aria-hidden="true"
-        className="bg-secondary absolute top-0 left-1/2 size-2.5 -translate-x-1/2 rounded-full"
-      />
-
-      <span
-        aria-hidden="true"
-        className="bg-secondary absolute right-0 bottom-1/2 size-2.5 rounded-full"
-      />
-
-      <div className="relative flex size-[155px] flex-col items-center justify-center rounded-[24px] border border-white bg-white p-6 shadow-[0_15px_35px_rgba(18,51,107,0.15)] sm:size-[180px] lg:size-[195px]">
+      <div className="relative flex size-[155px] flex-col items-center justify-center rounded-full bg-white p-6 shadow-[0_15px_35px_rgba(1,17,59,0.15)] sm:size-[180px] lg:size-[195px]">
         <div className="relative h-[85px] w-full sm:h-[105px]">
           <Image
             src="/assets-v/voltera-black.png"
@@ -208,7 +170,7 @@ export default function ResearchShowcase() {
   return (
     <section
       aria-labelledby="research-showcase-heading"
-      className="relative isolate overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+      className="relative isolate overflow-hidden bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
     >
       <div className="relative mx-auto max-w-7xl">
         <header className="mx-auto max-w-[750px] text-center">
@@ -216,7 +178,7 @@ export default function ResearchShowcase() {
             Precision at <span className="text-secondary">Every Level.</span>
           </h2>
 
-          <p className="text-muted mx-auto mt-4 max-w-[580px] font-sans text-[13px] leading-[1.8] sm:text-[15px]">
+          <p className="text-primary-dark/75 mx-auto mt-4 max-w-[580px] font-sans text-[15px] leading-[1.7] sm:text-base">
             Explore the laboratory testing indicators behind compound identity,
             purity, content, and batch-specific quality analysis.
           </p>
@@ -229,7 +191,7 @@ export default function ResearchShowcase() {
             <CenterPortal />
           </div>
 
-          <div className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-5 lg:static">
+          <div className="relative grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-4 lg:static">
             {researchFeatures.map((feature, index) => (
               <ResearchFeature
                 key={feature.title}

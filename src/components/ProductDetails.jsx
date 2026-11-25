@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import { getCutout } from "@/data/cutouts";
 import Link from "next/link";
 import { ChevronDown, Download, ExternalLink, FileText } from "lucide-react";
 import {
@@ -67,7 +68,7 @@ function Gallery({ product }) {
     <div className="w-full min-w-0">
       {/* MAIN PRODUCT IMAGE */}
 
-      <div className="relative h-[350px] w-full overflow-hidden rounded-[26px] bg-[#EAF4F7] sm:h-130 lg:h-160">
+      <div className="relative h-[350px] w-full overflow-hidden rounded-[26px] bg-[var(--ivory)] sm:h-130 lg:h-160">
         {current ? (
           <Image
             key={current}
@@ -96,7 +97,7 @@ function Gallery({ product }) {
               aria-label={`View image ${index + 1}`}
               aria-pressed={active === index}
               onClick={() => setActive(index)}
-              className={`relative h-[76px] w-[76px] overflow-hidden rounded-xl border-2 bg-[#F5FAFC] transition-colors ${
+              className={`relative h-[76px] w-[76px] overflow-hidden rounded-xl border-2 bg-[var(--ivory)] transition-colors ${
                 active === index
                   ? "border-primary"
                   : "hover:border-primary/30 border-transparent"
@@ -242,11 +243,11 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
                     }}
                   >
                     <Image
-                      src="/pngs/quick-view.png"
+                      src={getCutout(product.slug)}
                       alt=""
                       fill
                       sizes="40px"
-                      className="object-contain drop-shadow-[0_3px_4px_rgba(18,51,107,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
+                      className="object-contain drop-shadow-[0_3px_4px_rgba(1,17,59,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
                     />
                   </span>
                 ))}
@@ -642,7 +643,7 @@ export default function ProductDetails({ product }) {
                   />
 
                   <span className="font-heading text-accent-light text-[24px] leading-none tracking-tight italic sm:text-[32px]">
-                    10×
+                    8×
                     <span className="ml-1.5 text-[16px] sm:text-[22px]">
                       TESTED
                     </span>
@@ -776,7 +777,7 @@ export default function ProductDetails({ product }) {
       <CardSlider currentProduct={product} />
 
       <div
-        className={`border-primary/10 fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+12px)] shadow-[0_-8px_30px_rgba(18,51,107,0.08)] backdrop-blur-xl transition-all duration-300 lg:hidden ${
+        className={`border-primary/10 fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+12px)] shadow-[0_-8px_30px_rgba(1,17,59,0.08)] backdrop-blur-xl transition-all duration-300 lg:hidden ${
           showStickyCart
             ? "translate-y-0 opacity-100"
             : "pointer-events-none translate-y-full opacity-0"

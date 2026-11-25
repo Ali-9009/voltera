@@ -60,9 +60,9 @@ function TimelineConnector({ index }) {
           x2="100%"
           y2="100%"
         >
-          <stop offset="0%" stopColor="#07558F" />
-          <stop offset="55%" stopColor="#04C1CA" />
-          <stop offset="100%" stopColor="#009CA9" />
+          <stop offset="0%" stopColor="#01113b" />
+          <stop offset="55%" stopColor="#c9953d" />
+          <stop offset="100%" stopColor="#c9953d" />
         </linearGradient>
       </defs>
 
@@ -102,12 +102,12 @@ function TimelineCard({ step, index, last }) {
 
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center justify-between gap-2">
-              <h3 className="font-heading text-[15px] leading-[1.35] font-bold tracking-[-0.035em] text-[#102E38] sm:text-[18px]">
+              <h3 className="font-heading text-[15px] leading-[1.35] font-bold tracking-[-0.035em] text-[#01113b] sm:text-[18px]">
                 {step.title}
               </h3>
 
               {last && (
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#E8F7F2] text-[#128A64]">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-[#EAF7FA] text-[#01113b]">
                   <Check size={15} strokeWidth={2.3} />
                 </span>
               )}

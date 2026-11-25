@@ -1,7 +1,7 @@
 import CartPageClient from "./CartPageClient";
 
 export const metadata = {
-  title: "Your Research Cart | 100 Peptides Research",
+  title: "Your Research Cart",
   description: "Review and update your research cart.",
 };
 

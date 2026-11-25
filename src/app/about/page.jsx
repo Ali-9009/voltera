@@ -17,7 +17,7 @@ import {
 import PageHero from "@/components/PageHero";
 
 export const metadata = {
-  title: "About Us | Voltera Sciences",
+  title: "About Us",
   description:
     "Discover Voltera Sciences and our commitment to research excellence, product quality, laboratory testing, and scientific transparency.",
 };
@@ -246,8 +246,99 @@ export default function AboutUsPage() {
       </section>
 
       <section
+        aria-labelledby="quality-heading"
+        className="border-secondary/30 from-primary via-primary-light to-primary relative isolate overflow-hidden border-y bg-linear-to-br px-4 py-14 sm:px-6 md:py-20 lg:px-8"
+      >
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(30deg,transparent_49%,rgba(214,166,79,0.17)_50%,transparent_51%),linear-gradient(150deg,transparent_49%,rgba(214,166,79,0.17)_50%,transparent_51%)] bg-size-[72px_124px]"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(239,210,141,0.35)_1px,transparent_2px)] bg-size-[36px_62px]"
+        />
+        <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          <header>
+            <p className="text-accent-light mb-4 flex items-center gap-3 text-xs font-bold tracking-widest uppercase">
+              <span aria-hidden="true" className="bg-secondary h-px w-8" />
+              Quality &amp; Transparency
+            </p>
+            <h2
+              id="quality-heading"
+              className="font-heading text-[clamp(28px,4vw,44px)] leading-tight text-white"
+            >
+              Confidence starts with{" "}
+              <span className="text-accent-light">clarity.</span>
+            </h2>
+            <div
+              aria-hidden="true"
+              className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
+            />
+            <p className="max-w-xl text-base leading-[1.85] text-white/90 sm:text-[17px]">
+              Research sourcing should be straightforward. Explore available
+              documentation, review product information, and make informed
+              decisions based on the requirements of your work.
+            </p>
+            <Link
+              href="/coa"
+              className="btn-hero-primary mt-7 inline-flex h-12 gap-2 px-6 text-sm"
+            >
+              Explore COA Library <ArrowUpRight size={18} />
+            </Link>
+          </header>
+          <div className="grid gap-4">
+            {[
+              {
+                icon: FileCheck2,
+                title: "Accessible Documentation",
+                description:
+                  "Explore available Certificates of Analysis and batch-specific laboratory information.",
+              },
+              {
+                icon: Fingerprint,
+                title: "Batch Identification",
+                description:
+                  "Use product labels and batch details to locate the corresponding documentation where available.",
+              },
+              {
+                icon: FlaskConical,
+                title: "Research-Focused Standards",
+                description:
+                  "Review product details in the context of laboratory and analytical research requirements.",
+              },
+            ].map(({ icon: Icon, title, description }, index) => (
+              <article
+                key={title}
+                className="group border-accent-light/30 bg-primary-dark/35 hover:border-accent-light/70 relative flex items-start gap-4 overflow-hidden rounded-2xl border p-5 backdrop-blur-sm transition-colors sm:p-6"
+              >
+                <span className="border-secondary/40 text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border bg-white/10">
+                  <Icon size={25} strokeWidth={1.7} />
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-heading text-lg text-white">{title}</h3>
+                  <p className="mt-2 text-base leading-7 text-white/85">
+                    {description}
+                  </p>
+                </div>
+                <span
+                  aria-hidden="true"
+                  className="font-heading hidden text-4xl text-transparent [-webkit-text-stroke:1px_rgba(239,210,141,0.4)] sm:block"
+                >
+                  0{index + 1}
+                </span>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div
+          aria-hidden="true"
+          className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
+        />
+      </section>
+
+      <section
         aria-labelledby="principles-heading"
-        className="from-primary-soft via-surface to-primary-light/10 relative isolate overflow-hidden bg-linear-to-br px-4 py-12 sm:px-6 md:py-18 lg:px-8"
+        className="border-border from-primary-soft to-primary-light/10 relative isolate overflow-hidden border-y bg-linear-to-br via-white px-4 py-14 sm:px-6 md:py-20 lg:px-8"
       >
         <div
           aria-hidden="true"
@@ -281,10 +372,97 @@ export default function AboutUsPage() {
       </section>
 
       <section
+        aria-labelledby="experience-heading"
+        className="bg-surface px-4 py-14 sm:px-6 md:py-20 lg:px-8"
+      >
+        <div className="mx-auto max-w-7xl">
+          <header className="mx-auto max-w-3xl text-center">
+            <p className="text-secondary-dark mb-3 text-xs font-bold tracking-widest uppercase">
+              The Voltera Experience
+            </p>
+            <h2 id="experience-heading" className="section-heading">
+              Designed around{" "}
+              <span className="text-secondary">your research.</span>
+            </h2>
+            <div
+              aria-hidden="true"
+              className="from-secondary-dark via-accent-light to-secondary-dark mx-auto my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
+            />
+            <p className="text-charcoal/80 text-base leading-7">
+              From exploring our collection to finding documentation, our
+              approach is built around clarity and respect for your time.
+            </p>
+          </header>
+          <div className="mt-10 grid gap-5 md:grid-cols-3">
+            {[
+              {
+                icon: Layers3,
+                title: "Organized Sourcing",
+                description:
+                  "Explore our research collection and compare available product options without unnecessary complexity.",
+                href: "/shop",
+                action: "Explore Collection",
+              },
+              {
+                icon: FileCheck2,
+                title: "Information Within Reach",
+                description:
+                  "Find available product documentation and review batch information as part of your sourcing process.",
+                href: "/coa",
+                action: "View Certificates",
+              },
+              {
+                icon: UsersRound,
+                title: "Research-Focused Support",
+                description:
+                  "Connect with our team for questions about products, orders, and documentation.",
+                href: "/contact",
+                action: "Contact Our Team",
+              },
+            ].map(({ icon: Icon, title, description, href, action }, index) => (
+              <article
+                key={title}
+                className="group border-border relative flex flex-col overflow-hidden rounded-2xl border bg-white p-6 shadow-sm transition-shadow hover:shadow-lg sm:p-8"
+              >
+                <div
+                  aria-hidden="true"
+                  className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 top-0 h-[3px] bg-linear-to-r"
+                />
+                <div className="flex items-center justify-between">
+                  <span className="border-secondary/30 from-primary via-primary-light to-primary text-accent-light flex size-14 items-center justify-center rounded-2xl border bg-linear-to-br">
+                    <Icon size={27} strokeWidth={1.7} />
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="font-heading text-5xl text-transparent [-webkit-text-stroke:1px_var(--color-border)]"
+                  >
+                    0{index + 1}
+                  </span>
+                </div>
+                <h3 className="font-heading text-primary mt-6 text-xl leading-snug">
+                  {title}
+                </h3>
+                <p className="text-charcoal/80 mt-3 flex-1 text-base leading-[1.8]">
+                  {description}
+                </p>
+                <Link
+                  href={href}
+                  className="border-border text-primary hover:text-secondary-dark mt-6 inline-flex w-fit items-center gap-2 border-t pt-5 text-sm font-bold transition-colors"
+                >
+                  {action}
+                  <ArrowUpRight size={17} />
+                </Link>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section
         aria-labelledby="research-heading"
         className="px-4 py-12 sm:px-6 md:py-18 lg:px-8"
       >
-        <div className="border-secondary/30 from-primary-light via-primary to-primary-dark shadow-primary/10 relative isolate mx-auto max-w-7xl overflow-hidden rounded-[28px] border bg-linear-to-br px-5 py-9 shadow-xl sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+        <div className="border-secondary/30 from-primary via-primary-light to-primary shadow-primary/10 relative isolate mx-auto max-w-7xl overflow-hidden rounded-[28px] border bg-linear-to-br px-5 py-9 shadow-xl sm:px-10 sm:py-12 lg:px-14 lg:py-14">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -top-48 -right-48 -z-10 size-[550px] rounded-full border border-white/10"
@@ -293,6 +471,11 @@ export default function AboutUsPage() {
           <div
             aria-hidden="true"
             className="border-accent-light/15 pointer-events-none absolute -top-32 -right-32 -z-10 size-[400px] rounded-full border"
+          />
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-0 -z-10 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.20)_48px,rgba(214,166,79,0.20)_49px)]"
           />
 
           <ShieldCheck

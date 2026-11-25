@@ -1,330 +1,609 @@
-"use client";
-
-import { useRef, useState } from "react";
-import Link from "next/link";
-
 import {
-  ArrowRight,
   ArrowUpRight,
-  BarChart3,
-  Check,
-  FileCheck2,
-  Gift,
-  Handshake,
-  Link2,
-  Percent,
+  ArrowRight,
+  CheckCircle2,
   ShieldCheck,
+  Handshake,
+  TrendingUp,
+  FileCheck2,
+  Megaphone,
+  Users,
+  Wallet,
+  Gift,
+  CalendarDays,
+  UserRoundPlus,
+  ClipboardList,
+  LogIn,
+  LayoutDashboard,
+  Percent,
+  Info,
 } from "lucide-react";
 
-import { TrendingUp, Users } from "lucide-react";
+const links = {
+  register: "https://volterasciences.com/affiliate-registration",
+  login: "https://volterasciences.com/affiliate-login",
+  dashboard: "https://volterasciences.com/affiliate-area",
+  account: "https://volterasciences.com/my-account",
+};
 
-import { products } from "@/data/products";
-
-const tiers = [
+const partnership = [
   {
-    name: "Associate",
-    rate: 0.1,
-    minimum: 0,
-    range: "Under $2,500 / month",
-    perks: [
-      "Tracking link & dashboard",
-      "Partner creative assets",
-      "Available CoA access",
+    icon: TrendingUp,
+    title: "Benefits & Earnings",
+    items: [
+      "20% commission on the net value of approved referral sales.",
+      "A 10% discount code you can share with your audience.",
+      "Free sample opportunities for selected, approved affiliates.",
+      "Personal discount codes and wholesale opportunities where eligible.",
     ],
-  },
-  {
-    name: "Partner",
-    rate: 0.125,
-    minimum: 2500,
-    range: "$2,500–$9,999 / month",
-    perks: [
-      "Everything in Associate",
-      "Audience discount code*",
-      "Priority partner support",
-    ],
-  },
-  {
-    name: "Senior",
-    rate: 0.15,
-    minimum: 10000,
-    range: "$10,000–$49,999 / month",
-    perks: [
-      "Everything in Partner",
-      "Dedicated account contact",
-      "Early product announcements",
-    ],
-  },
-  {
-    name: "Laboratory",
-    rate: 0.18,
-    minimum: 50000,
-    range: "$50,000+ / month",
-    perks: [
-      "Everything in Senior",
-      "Co-branded materials*",
-      "Custom volume discussions",
-    ],
-  },
-];
-
-const benefits = [
-  {
-    icon: BarChart3,
-    title: "Clear performance reporting",
-    description:
-      "Review referral activity, order totals, estimated earnings, and payout history in one place.",
-  },
-  {
-    icon: Link2,
-    title: "Your own referral link",
-    description:
-      "Share one identifiable link with your audience and see which eligible orders it brings in.",
-  },
-  {
-    icon: FileCheck2,
-    title: "Research documentation",
-    description:
-      "Reference published, batch-specific Certificates of Analysis when available.",
-  },
-  {
-    icon: Gift,
-    title: "Ready-to-use creative",
-    description:
-      "Use approved product images and brand assets instead of building every campaign from scratch.",
-  },
-  {
-    icon: Handshake,
-    title: "Partner support",
-    description:
-      "Get a direct channel for questions about eligibility, creative guidelines, and reporting.",
   },
   {
     icon: ShieldCheck,
-    title: "Responsible communication",
-    description:
-      "Keep messaging aligned with research-use restrictions and avoid unsupported medical claims.",
+    title: "Program Standards",
+    items: [
+      "Coupon and discount-code websites are not permitted.",
+      "Paid brand bidding using “Voltera Sciences” is not permitted.",
+      "Self-referrals and retroactive coupon requests do not qualify.",
+      "All content must remain professional and research-use-only.",
+    ],
   },
 ];
 
-const suggestedSlugs = ["bpc-157", "tesamorelin", "selank", "tb-500"];
-const featured = suggestedSlugs
-  .map((slug) => products.find((item) => item.slug === slug))
-  .filter(Boolean)
-  .map((product) => ({
-    product,
-    variant:
-      product.variants?.[product.defaultVariant ?? 0] || product.variants?.[0],
-  }))
-  .filter((item) => item.variant?.price != null);
+const promotion = [
+  {
+    icon: FileCheck2,
+    title: "Content Marketing",
+    description:
+      "Create educational articles, videos, guides, graphics, and product-focused content featuring your affiliate link.",
+  },
+  {
+    icon: Megaphone,
+    title: "Social Promotion",
+    description:
+      "Share professional brand and product-awareness content across the social channels that best match your audience.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Responsible Messaging",
+    description:
+      "Never promote products for human or animal consumption. Products are strictly for research, laboratory, and analytical use.",
+  },
+  {
+    icon: Users,
+    title: "Audience Alignment",
+    description:
+      "Tailor your promotion to your niche while keeping every message accurate, compliant, and research-focused.",
+  },
+];
 
-function SectionHeading({ eyebrow, title, description }) {
+const payouts = [
+  {
+    icon: Wallet,
+    title: "Cash",
+    description:
+      "Receive your commissions directly to your bank account (US accounts). Clean, simple, no strings.",
+  },
+  {
+    icon: Gift,
+    title: "Store Credit",
+    description:
+      "Take your earnings as Voltera Sciences store credit and receive a 20% bonus on top. $100 earned becomes $120 to spend on any product.",
+    badge: "20% Bonus",
+  },
+  {
+    icon: CalendarDays,
+    title: "Get Paid",
+    description:
+      "Commissions are paid once a month, between the 1st and 7th. Choose cash, store credit, or a combination of both.",
+  },
+];
+
+const steps = [
+  {
+    icon: UserRoundPlus,
+    label: "Account",
+    title: "Create a Website Account",
+    description:
+      "Register a regular Voltera Sciences customer account and make sure you are logged in before starting your application.",
+    action: "Create Account",
+    href: links.account,
+  },
+  {
+    icon: ClipboardList,
+    label: "Application",
+    title: "Submit Your Application",
+    description:
+      "Complete the affiliate registration form with accurate information about you, your audience, and your promotional channels.",
+    action: "Apply Now",
+    href: links.register,
+  },
+  {
+    icon: FileCheck2,
+    label: "Review",
+    title: "Wait for Approval",
+    description:
+      "Our team will review your application. Affiliate access remains private until the application has been approved.",
+    badge: "Approval Required",
+  },
+  {
+    icon: LogIn,
+    label: "Access",
+    title: "Log In as an Affiliate",
+    description:
+      "After approval, use the dedicated affiliate login to access your affiliate profile securely.",
+    action: "Affiliate Login",
+    href: links.login,
+  },
+  {
+    icon: LayoutDashboard,
+    label: "Dashboard",
+    title: "Track Your Performance",
+    description:
+      "Generate referral links, monitor visits and conversions, and review eligible commissions from your dashboard.",
+    action: "Open Dashboard",
+    href: links.dashboard,
+  },
+];
+
+function SectionHeading({ eyebrow, title, highlight, description, dark }) {
   return (
-    <div className="max-w-2xl">
-      <p className="text-secondary mb-4 flex items-center gap-2 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+    <div className="mx-auto max-w-3xl text-center">
+      <p
+        className={`mb-4 flex items-center justify-center gap-3 text-xs font-bold tracking-[0.15em] uppercase ${
+          dark ? "text-accent-light" : "text-secondary-dark"
+        }`}
+      >
+        <span className="bg-secondary h-px w-8" />
         {eyebrow}
+        <span className="bg-secondary h-px w-8" />
       </p>
-      <h2 className="section-heading">{title}</h2>
-      {description && (
-        <p className="text-md mt-3 text-[#756779]">{description}</p>
+
+      <h2
+        className={`font-heading text-[clamp(28px,4vw,42px)] leading-[1.2] tracking-tight ${
+          dark ? "text-white" : "text-primary"
+        }`}
+      >
+        {title}{" "}
+        <span className={dark ? "text-accent-light" : "text-secondary-dark"}>
+          {highlight}
+        </span>
+      </h2>
+
+      <p
+        className={`mt-5 font-sans text-base leading-[1.85] sm:text-[17px] ${
+          dark ? "text-white/90" : "text-charcoal/75"
+        }`}
+      >
+        {description}
+      </p>
+    </div>
+  );
+}
+
+function GoldenPattern({ icon: Icon }) {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+    >
+      <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.22)_48px,rgba(214,166,79,0.22)_49px)]" />
+
+      <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
+
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(50,104,197,0.25),transparent_75%)]" />
+
+      <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
+
+      <div className="border-accent-light/25 absolute -right-12 -bottom-48 size-[380px] rounded-full border" />
+
+      <div className="border-secondary/20 absolute -right-44 -bottom-52 size-[550px] rounded-full border" />
+
+      {Icon && (
+        <Icon
+          strokeWidth={0.6}
+          className="text-accent-light/10 absolute -right-10 -bottom-20 size-80 rotate-[-15deg] sm:right-12 sm:size-[450px]"
+        />
       )}
     </div>
   );
 }
 
 function PartnerHero() {
-  const [referralSales, setReferralSales] = useState(0);
-
-  const commissionRate = 20;
-  const estimatedCommission = (referralSales * commissionRate) / 100;
-
-  const formatCurrency = (value) =>
-    new Intl.NumberFormat("en-US", {
-      style: "currency",
-      currency: "USD",
-      maximumFractionDigits: 0,
-    }).format(value);
-
   return (
-    <section className="overflow-hidden border-b border-[#DCE8ED] bg-[linear-gradient(180deg,#FFFFFF_0%,#F5FAFC_100%)] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1fr_1fr] lg:gap-16">
-        <div className="max-w-xl">
-          <h1 className="font-heading text-primary text-[38px] leading-[1.12] font-bold tracking-[-0.045em] sm:text-[48px] lg:text-[58px]">
-            Partner With Us.
-            <span className="text-secondary mt-1 block">Grow Together.</span>
-          </h1>
+    <header className="from-primary via-primary-light to-primary relative isolate overflow-hidden bg-linear-to-r px-4 pt-32 pb-12 sm:px-6 sm:pt-36 sm:pb-16 lg:px-8 lg:pt-44 lg:pb-20">
+      <GoldenPattern icon={Handshake} />
 
-          <p className="mt-6 max-w-lg font-sans text-[14px] leading-7 text-[#617987] sm:text-[16px] sm:leading-8">
-            Share our research peptides, earn through qualified referrals, and
-            grow with our partner program.
+      <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+        <div className="min-w-0">
+          <p className="text-accent-light mb-5 flex items-center gap-3 text-xs font-bold tracking-[0.15em] uppercase sm:text-sm">
+            <span className="bg-secondary h-[2px] w-8 shrink-0 rounded-full" />
+            Voltera Sciences Partner Network
           </p>
 
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-            <div className="flex items-start gap-3">
-              <div className="text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8F5F8]">
-                <Users size={19} strokeWidth={1.8} />
-              </div>
+          <h1 className="font-heading text-[clamp(36px,5vw,62px)] leading-[1.12] tracking-[-0.035em] text-white">
+            Build influence.
+            <span className="via-accent-light to-secondary mt-2 block bg-linear-to-b from-[#fff0bb] bg-clip-text text-transparent">
+              Earn with Voltera.
+            </span>
+          </h1>
 
-              <div>
-                <h3 className="text-primary text-[15px] font-semibold">
-                  Share & Refer
-                </h3>
+          <div className="from-secondary-dark via-accent-light to-secondary-dark my-6 h-[3px] w-24 rounded-full bg-linear-to-r" />
 
-                <p className="mt-1 text-sm leading-5 text-[#718A96]">
-                  Introduce your audience to our research collection.
-                </p>
-              </div>
-            </div>
+          <p className="max-w-xl font-sans text-base leading-[1.85] text-white/90 sm:text-[18px]">
+            Partner with a research-focused brand built around quality,
+            precision, and trust. Share Voltera Sciences with your audience and
+            earn commission from approved referral sales.
+          </p>
 
-            <div className="flex items-start gap-3">
-              <div className="text-primary flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8F5F8]">
-                <TrendingUp size={19} strokeWidth={1.8} />
-              </div>
-
-              <div>
-                <h3 className="text-primary text-[15px] font-semibold">
-                  Explore Earnings
-                </h3>
-
-                <p className="mt-1 text-sm leading-5 text-[#718A96]">
-                  Estimate potential earnings from qualified referrals.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/contact"
-              className="group relative inline-flex h-12 items-center justify-center gap-2 overflow-hidden rounded-full bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] px-7 text-[13px] font-semibold text-white shadow-md transition-all duration-500 ease-out hover:-translate-y-0.5 hover:shadow-lg active:scale-[0.98]"
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <a
+              href={links.register}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-hero-primary h-12 gap-2 px-6 text-sm"
             >
-              <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100" />
-
-              <span className="relative z-10">Become a Partner</span>
-
-              <ArrowUpRight
-                size={17}
-                className="relative z-10 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-              />
-            </Link>
+              Register
+              <ArrowUpRight size={18} />
+            </a>
 
             <a
-              href="#earnings"
-              className="text-primary hover:border-primary inline-flex h-12 items-center justify-center gap-2 rounded-full border border-[#CBDDE5] bg-white px-7 text-[13px] font-semibold transition-all duration-300 hover:bg-[#EDF8FA]"
+              href={links.login}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:border-accent-light inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition-colors hover:bg-white/20"
             >
-              How It Works
-              <ArrowRight size={16} />
+              Login
+              <LogIn size={17} />
+            </a>
+
+            <a
+              href={links.dashboard}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-accent-light inline-flex h-12 items-center gap-2 px-2 text-sm font-semibold transition-colors hover:text-white"
+            >
+              Affiliate Dashboard
+              <ArrowUpRight size={17} />
             </a>
           </div>
 
-          <div className="mt-7 flex items-center gap-2 text-[12px] text-[#81939C]">
-            <ShieldCheck size={16} className="text-secondary" />
-
-            <span>
-              Research-focused partnerships. Subject to program approval.
-            </span>
-          </div>
-        </div>
-
-        <div className="relative mx-auto w-full max-w-[520px]">
-          <div className="overflow-hidden rounded-[18px] border border-[#D7E5EF] bg-[linear-gradient(145deg,#FFFFFF_35%,#EDF7FF_100%)] p-5 sm:rounded-[20px] sm:p-7">
-            <div className="flex items-center justify-between gap-3">
-              <div className="text-primary flex h-11 w-11 items-center justify-center rounded-full bg-[#E4F2FC]">
-                <Percent size={22} strokeWidth={1.8} />
-              </div>
-
-              <div className="flex items-center gap-2">
-                <span className="bg-secondary h-1.5 w-1.5 rounded-full" />
-                <span className="text-[11px] font-medium text-[#59718C]">
-                  Applications open
-                </span>
-              </div>
-            </div>
-
-            <div className="mt-7 flex items-center gap-5">
-              <div className="text-primary flex shrink-0 items-baseline">
-                <span className="font-heading text-[58px] leading-none font-bold tracking-[-0.06em] sm:text-[72px]">
-                  20
-                </span>
-                <span className="font-heading text-[27px] font-bold sm:text-[35px]">
-                  %
-                </span>
-              </div>
-
-              <div className="max-w-[190px]">
-                <h2 className="text-[13px] font-bold text-[#173B4A] sm:text-[14px]">
-                  Affiliate Commission
-                </h2>
-
-                <p className="mt-2 text-[11px] leading-5 text-[#59718C] sm:text-[12px]">
-                  On qualifying, approved referral purchases.
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-7 border-t border-[#D7E5EF] pt-6">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <label
-                  htmlFor="partner-referral-sales"
-                  className="text-[11px] font-medium text-[#59718C] sm:text-[12px]"
-                >
-                  Qualifying Referral Sales
-                </label>
-
-                <span className="text-[14px] font-bold text-[#173B4A]">
-                  {formatCurrency(referralSales)}
-                </span>
-              </div>
-
-              <input
-                id="partner-referral-sales"
-                type="range"
-                min="0"
-                max="10000"
-                step="100"
-                value={referralSales}
-                onChange={(event) =>
-                  setReferralSales(Number(event.target.value))
-                }
-                className="accent-primary w-full cursor-pointer"
-              />
-            </div>
-
-            <div className="mt-7 flex items-center justify-between gap-4">
-              <span className="text-[11px] font-medium text-[#59718C] sm:text-[12px]">
-                Illustrative Commission
-              </span>
-
-              <span
-                aria-live="polite"
-                className="font-heading text-primary text-[30px] font-bold tracking-tight sm:text-[35px]"
+          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/15 pt-6">
+            {[
+              "Simple application",
+              "Private approval",
+              "Transparent tracking",
+            ].map((item) => (
+              <li
+                key={item}
+                className="flex items-center gap-2 text-sm font-medium text-white/90"
               >
-                {formatCurrency(estimatedCommission)}
+                <CheckCircle2
+                  size={17}
+                  className="text-accent-light shrink-0"
+                />
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <aside
+          aria-labelledby="program-overview"
+          className="border-secondary/40 to-primary-soft shadow-primary-dark/20 relative overflow-hidden rounded-[24px] border bg-linear-to-br from-white via-white shadow-2xl"
+        >
+          <div className="from-secondary-dark via-accent-light to-secondary-dark h-[4px] bg-linear-to-r" />
+
+          <div className="p-6 sm:p-8">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <h2
+                id="program-overview"
+                className="font-heading text-primary text-xl"
+              >
+                Program Overview
+              </h2>
+
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700">
+                <span className="size-1.5 rounded-full bg-emerald-500" />
+                Open
               </span>
             </div>
 
-            <div className="mt-7 grid grid-cols-2 gap-4 border-t border-[#D7E5EF] pt-6">
-              <div className="border-r border-[#D7E5EF] pr-3">
-                <h3 className="text-[13px] font-bold text-[#173B4A] sm:text-[15px]">
-                  One Flat Rate
-                </h3>
-
-                <p className="mt-2 text-[10px] leading-5 text-[#59718C] sm:text-[11px]">
-                  No tiers or volume targets
-                </p>
+            <div className="border-primary/10 from-primary-soft mt-7 rounded-2xl border bg-linear-to-br to-white p-5 sm:p-6">
+              <div className="text-primary flex items-center gap-2 text-sm font-semibold">
+                <Percent size={19} className="text-secondary-dark" />
+                Referral commission
               </div>
 
-              <div className="pl-1">
-                <h3 className="text-[13px] font-bold text-[#173B4A] sm:text-[15px]">
-                  Manual Review
-                </h3>
+              <p className="font-heading text-primary mt-4 text-[72px] leading-none tracking-[-0.05em] sm:text-[86px]">
+                20<span className="text-secondary text-[0.6em]">%</span>
+              </p>
 
-                <p className="mt-2 text-[10px] leading-5 text-[#59718C] sm:text-[11px]">
-                  Every application read by our team
-                </p>
+              <p className="text-charcoal/75 mt-4 text-base leading-7">
+                Earn commission from eligible, approved referral purchases.
+              </p>
+            </div>
+
+            <dl className="divide-border mt-6 grid grid-cols-2 divide-x">
+              <div className="pr-4">
+                <dt className="text-muted text-sm font-medium">
+                  Audience Offer
+                </dt>
+                <dd className="font-heading text-primary mt-2 text-xl sm:text-2xl">
+                  20% Off
+                </dd>
               </div>
+
+              <div className="pl-5">
+                <dt className="text-muted text-sm font-medium">Commitment</dt>
+                <dd className="font-heading text-primary mt-2 text-xl sm:text-2xl">
+                  No Contract
+                </dd>
+              </div>
+            </dl>
+
+            <div className="border-border mt-6 flex items-center gap-3 border-t pt-5">
+              <ShieldCheck size={22} className="text-secondary-dark shrink-0" />
+              <p className="text-primary text-sm font-semibold">
+                Research-use-focused partnerships
+              </p>
             </div>
           </div>
+        </aside>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
+      />
+    </header>
+  );
+}
+
+function PartnershipSection() {
+  return (
+    <section className="bg-white px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="The Partnership"
+          title="Built to reward"
+          highlight="credible promotion."
+          description="Everything you need to promote professionally, paired with clear standards that protect both our partners and the Voltera Sciences brand."
+        />
+
+        <div className="mt-10 grid gap-6 md:grid-cols-2">
+          {partnership.map(({ icon: Icon, title, items }, index) => (
+            <article
+              key={title}
+              className="group border-border to-primary-soft/50 hover:shadow-primary/5 relative overflow-hidden rounded-[24px] border bg-linear-to-br from-white p-6 transition-shadow duration-300 hover:shadow-lg sm:p-8"
+            >
+              <div className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 top-0 h-[3px] bg-linear-to-r" />
+
+              <div className="flex items-center justify-between">
+                <div className="border-secondary/30 bg-primary-soft text-primary flex size-14 items-center justify-center rounded-2xl border">
+                  <Icon size={27} strokeWidth={1.7} />
+                </div>
+
+                <span className="font-heading text-[58px] leading-none text-transparent [-webkit-text-stroke:1px_var(--color-border)]">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <h3 className="font-heading text-primary mt-6 text-2xl">
+                {title}
+              </h3>
+
+              <ul className="divide-border mt-6 divide-y">
+                {items.map((item) => (
+                  <li key={item} className="flex items-start gap-3 py-4">
+                    <CheckCircle2
+                      size={20}
+                      strokeWidth={1.8}
+                      className="text-secondary-dark mt-0.5 shrink-0"
+                    />
+
+                    <p className="text-charcoal/80 text-base leading-7">
+                      {item}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
         </div>
+      </div>
+    </section>
+  );
+}
+
+function PromotionSection() {
+  return (
+    <section className="border-border bg-surface border-y px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Promote With Purpose"
+          title="Share the science."
+          highlight="Strengthen the brand."
+          description="Focus on product awareness, research-use applications, brand quality, and helping qualified customers discover Voltera Sciences."
+        />
+
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          {promotion.map(({ icon: Icon, title, description }, index) => (
+            <article
+              key={title}
+              className="group border-border hover:border-secondary/50 hover:shadow-primary/5 relative overflow-hidden rounded-[20px] border bg-white p-6 transition-all duration-300 hover:shadow-lg"
+            >
+              <div className="flex items-center justify-between">
+                <div className="border-secondary/25 bg-primary-soft text-primary flex size-13 items-center justify-center rounded-xl border">
+                  <Icon size={25} strokeWidth={1.7} />
+                </div>
+
+                <span className="font-heading text-[40px] leading-none text-transparent [-webkit-text-stroke:1px_var(--color-border)]">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <div className="bg-secondary mt-6 h-[2px] w-10 rounded-full transition-all duration-300 group-hover:w-16" />
+
+              <h3 className="font-heading text-primary mt-5 text-xl leading-snug">
+                {title}
+              </h3>
+
+              <p className="text-charcoal/75 mt-4 text-base leading-[1.8]">
+                {description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function PayoutSection() {
+  return (
+    <section className="from-primary via-primary-light to-primary relative isolate overflow-hidden bg-linear-to-r px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+      <GoldenPattern icon={Wallet} />
+
+      <div className="relative mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Flexible Payouts"
+          title="Get paid"
+          highlight="your way."
+          description="Choose the payout option that works best for you, including cash, enhanced store credit, or a combination of both."
+          dark
+        />
+
+        <div className="mt-10 grid gap-5 md:grid-cols-3">
+          {payouts.map(({ icon: Icon, title, description, badge }, index) => (
+            <article
+              key={title}
+              className={`relative overflow-hidden rounded-[22px] border p-6 backdrop-blur-md sm:p-7 ${
+                badge
+                  ? "border-secondary/70 bg-white/15"
+                  : "border-white/20 bg-white/10"
+              }`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="border-secondary/40 bg-primary-dark/20 text-accent-light flex size-14 items-center justify-center rounded-xl border">
+                  <Icon size={27} strokeWidth={1.7} />
+                </div>
+
+                <span className="font-heading text-[46px] leading-none text-transparent [-webkit-text-stroke:1px_rgba(239,210,141,0.45)]">
+                  0{index + 1}
+                </span>
+              </div>
+
+              <h3 className="font-heading mt-6 text-2xl text-white">{title}</h3>
+
+              {badge && (
+                <span className="border-secondary/50 bg-secondary/15 text-accent-light mt-3 inline-flex rounded-full border px-3 py-1.5 text-xs font-bold">
+                  {badge}
+                </span>
+              )}
+
+              <p className="mt-4 text-base leading-[1.85] text-white/90">
+                {description}
+              </p>
+            </article>
+          ))}
+        </div>
+      </div>
+
+      <div
+        aria-hidden="true"
+        className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
+      />
+    </section>
+  );
+}
+
+function GettingStarted() {
+  return (
+    <section className="bg-white px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <SectionHeading
+          eyebrow="Getting Started"
+          title="Your path to becoming"
+          highlight="an affiliate."
+          description="Create your customer account first, submit your application, and begin promoting after your affiliate profile has been approved."
+        />
+
+        <ol className="relative mx-auto mt-12 max-w-5xl space-y-5">
+          <div
+            aria-hidden="true"
+            className="from-secondary via-border to-secondary absolute top-8 bottom-8 left-7 hidden w-px bg-linear-to-b sm:block"
+          />
+
+          {steps.map(
+            (
+              { icon: Icon, label, title, description, action, href, badge },
+              index,
+            ) => (
+              <li key={title} className="relative sm:pl-20">
+                <span className="border-secondary/40 bg-primary font-heading text-accent-light absolute top-6 left-0 hidden size-14 items-center justify-center rounded-full border text-xl shadow-sm sm:flex">
+                  0{index + 1}
+                </span>
+
+                <article className="border-border to-primary-soft/40 hover:border-secondary/40 rounded-[20px] border bg-linear-to-r from-white p-5 transition-colors sm:p-7">
+                  <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+                    <div className="flex min-w-0 items-start gap-4">
+                      <div className="border-secondary/25 bg-primary-soft text-primary flex size-12 shrink-0 items-center justify-center rounded-xl border">
+                        <Icon size={24} strokeWidth={1.7} />
+                      </div>
+
+                      <div>
+                        <p className="text-secondary-dark mb-2 text-xs font-bold tracking-widest uppercase">
+                          <span className="sm:hidden">0{index + 1} — </span>
+                          {label}
+                        </p>
+
+                        <h3 className="font-heading text-primary text-xl leading-snug">
+                          {title}
+                        </h3>
+
+                        <p className="text-charcoal/75 mt-3 max-w-xl text-base leading-7">
+                          {description}
+                        </p>
+                      </div>
+                    </div>
+
+                    {href && (
+                      <a
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary h-11 w-fit shrink-0 gap-2 px-5 text-sm"
+                      >
+                        {action}
+                        <ArrowUpRight size={17} />
+                      </a>
+                    )}
+
+                    {badge && (
+                      <span className="border-secondary/30 bg-secondary/10 text-secondary-dark inline-flex w-fit shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold">
+                        <ShieldCheck size={17} />
+                        {badge}
+                      </span>
+                    )}
+                  </div>
+                </article>
+              </li>
+            ),
+          )}
+        </ol>
+
+        <aside className="border-secondary/30 bg-secondary/5 mx-auto mt-8 flex max-w-5xl items-start gap-4 rounded-2xl border p-5 sm:p-6">
+          <Info size={24} className="text-secondary-dark mt-0.5 shrink-0" />
+
+          <p className="text-charcoal/85 text-base leading-7">
+            <strong className="text-primary font-bold">
+              Before you apply:
+            </strong>{" "}
+            You must create and log into your regular website account before
+            submitting the affiliate application. Dashboard access is available
+            only after approval.
+          </p>
+        </aside>
       </div>
     </section>
   );
@@ -332,259 +611,12 @@ function PartnerHero() {
 
 export default function PartnerProgramPage() {
   return (
-    <main className="min-h-screen">
+    <main className="bg-background min-h-screen">
       <PartnerHero />
-
-      <section className="bg-[#F7FAFC] px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <SectionHeading title="Commission Tiers." />
-
-          <div className="mt-10 grid items-stretch gap-5 sm:mt-12 md:grid-cols-2 xl:grid-cols-4">
-            {tiers.map((tier, index) => {
-              const featured = index === 1;
-
-              return (
-                <article
-                  key={tier.name}
-                  className={`group relative isolate flex h-full min-w-0 flex-col rounded-[24px] p-px transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_45px_rgba(7,59,104,0.10)] ${
-                    featured
-                      ? "bg-[linear-gradient(145deg,var(--color-primary),var(--color-secondary))] shadow-[0_12px_35px_rgba(7,85,143,0.10)]"
-                      : "bg-[#DCE8ED]"
-                  }`}
-                >
-                  <div
-                    className={`relative flex h-full flex-col overflow-hidden rounded-[23px] p-5 sm:p-6 ${
-                      featured
-                        ? "bg-[linear-gradient(160deg,#F0F9FC_0%,#FFFFFF_55%)]"
-                        : "bg-white"
-                    }`}
-                  >
-                    <div className="flex min-h-7 items-center justify-between gap-2">
-                      <span className="text-[10px] font-bold tracking-[0.15em] text-[#7A929D] uppercase">
-                        Partner Level {String(index + 1).padStart(2, "0")}
-                      </span>
-
-                      {featured && (
-                        <span className="bg-primary rounded-full px-3 py-1.5 text-[9px] font-semibold whitespace-nowrap text-white sm:text-[10px]">
-                          Featured
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="mt-7">
-                      <h3 className="font-heading text-primary text-[22px] font-bold tracking-[-0.03em] sm:text-[24px]">
-                        {tier.name}
-                      </h3>
-
-                      <div className="mt-5 flex items-baseline gap-2">
-                        <span className="font-heading text-primary text-[54px] leading-none font-bold tracking-[-0.06em] sm:text-[62px]">
-                          {tier.rate * 100}%
-                        </span>
-
-                        <span className="text-[11px] font-medium text-[#718A96]">
-                          Commission
-                        </span>
-                      </div>
-
-                      <p className="mt-4 text-[13px] leading-6 text-[#617987]">
-                        {tier.range}
-                      </p>
-                    </div>
-
-                    <div className="my-3 h-px w-full bg-[#E4EDF1]" />
-
-                    <div className="flex-1">
-                      <p className="text-primary mb-5 text-[11px] font-bold tracking-[0.12em] uppercase">
-                        Included Benefits
-                      </p>
-
-                      <div className="space-y-4">
-                        {tier.perks.map((perk) => (
-                          <div key={perk} className="flex items-start gap-3">
-                            <span className="text-secondary flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E8F5F8]">
-                              <Check size={12} strokeWidth={2.5} />
-                            </span>
-
-                            <p className="text-[12px] leading-6 text-[#526C79] sm:text-[13px]">
-                              {perk}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="mt-8 border-t border-[#E4EDF1] pt-6">
-                      <Link
-                        href="/contact"
-                        className={`group/btn relative flex h-11 w-full items-center justify-center gap-2 overflow-hidden rounded-full text-[12px] font-semibold transition-all duration-300 ${
-                          featured
-                            ? "bg-[linear-gradient(110deg,var(--color-primary),var(--color-secondary))] text-white shadow-sm hover:shadow-md"
-                            : "text-primary hover:border-primary border border-[#C8DDE6] bg-[#F5FAFC] hover:bg-[#EAF5F9]"
-                        }`}
-                      >
-                        {featured && (
-                          <span className="pointer-events-none absolute inset-0 bg-[linear-gradient(110deg,var(--color-primary-dark),var(--color-primary))] opacity-0 transition-opacity duration-500 ease-in-out group-hover/btn:opacity-100" />
-                        )}
-
-                        <span className="relative z-10">Become a Partner</span>
-
-                        <ArrowUpRight
-                          size={16}
-                          className="relative z-10 transition-transform duration-300 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
-                        />
-                      </Link>
-                    </div>
-                  </div>
-                </article>
-              );
-            })}
-          </div>
-
-          <div className="mt-7 flex items-start gap-3 rounded-xl border border-[#DCE8ED] bg-white px-4 py-4 sm:px-5">
-            <ShieldCheck
-              size={18}
-              className="text-secondary mt-0.5 shrink-0"
-              strokeWidth={1.8}
-            />
-
-            <p className="text-[12px] leading-6 text-[#718A96]">
-              Commission tiers and benefits shown are illustrative and subject
-              to program approval. Final rates, eligibility requirements, and
-              partner benefits will be confirmed in the applicable partner
-              agreement.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <PartnerBenefits benefits={benefits} />
+      <PartnershipSection />
+      <PromotionSection />
+      <PayoutSection />
+      <GettingStarted />
     </main>
-  );
-}
-
-function BenefitCard({ icon: Icon, title, description, index }) {
-  const cardRef = useRef(null);
-
-  const handleMouseMove = (event) => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
-    card.style.setProperty("--mouse-x", `${x}px`);
-    card.style.setProperty("--mouse-y", `${y}px`);
-  };
-
-  return (
-    <article
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      className="partner-benefit-card group relative isolate overflow-hidden rounded-[24px] p-px transition-all duration-500 ease-out hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(7,85,143,0.12)]"
-    >
-      <div className="partner-benefit-border pointer-events-none absolute inset-0 rounded-[inherit]" />
-
-      <div className="relative z-10 flex h-full flex-col overflow-hidden rounded-[23px] bg-[linear-gradient(145deg,#FFFFFF_0%,#F6FBFD_100%)] p-6 sm:p-7">
-        <div className="partner-benefit-glow pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
-
-        <div className="relative z-10 flex items-start justify-between">
-          <div className="text-primary group-hover:border-secondary/40 relative flex h-14 w-14 items-center justify-center rounded-[18px] border border-[#CFEAF0] bg-[linear-gradient(145deg,#E8F8FB,#D9F1F6)] shadow-[0_6px_18px_rgba(7,85,143,0.08)] transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_10px_25px_rgba(4,193,202,0.18)]">
-            <Icon
-              size={25}
-              strokeWidth={1.7}
-              className="relative z-10 transition-transform duration-500 group-hover:scale-110"
-            />
-
-            <span className="bg-secondary/10 pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 blur-lg transition-opacity duration-500 group-hover:opacity-100" />
-          </div>
-        </div>
-
-        <div className="relative z-10 mt-auto pt-4">
-          <h3 className="font-heading text-primary text-[22px] font-bold tracking-[-0.035em] sm:text-[24px]">
-            {title}
-          </h3>
-
-          <p className="mt-3 max-w-sm text-[13px] leading-7 text-[#617987] sm:text-[14px]">
-            {description}
-          </p>
-        </div>
-      </div>
-    </article>
-  );
-}
-function PartnerBenefits({ benefits = [] }) {
-  return (
-    <section className="relative overflow-hidden px-4 py-12 sm:px-6 md:py-16 lg:px-8">
-      <div className="bg-secondary/5 pointer-events-none absolute top-0 left-1/2 h-[450px] w-[700px] -translate-x-1/2 rounded-full blur-[110px]" />
-
-      <div className="relative mx-auto max-w-7xl">
-        <SectionHeading
-          title="Everything in One Place."
-          description="Discover the tools, resources, and support designed to make sharing research information simple and managing partnerships effortless."
-        />
-
-        <div className="mt-10 grid gap-5 sm:mt-12 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {benefits.map((benefit, index) => (
-            <BenefitCard key={benefit.title} {...benefit} index={index} />
-          ))}
-        </div>
-      </div>
-
-      <style jsx global>{`
-        @keyframes partnerBorderFlow {
-          0% {
-            background-position: 0% 50%;
-          }
-
-          50% {
-            background-position: 100% 50%;
-          }
-
-          100% {
-            background-position: 0% 50%;
-          }
-        }
-
-        .partner-benefit-border {
-          background: linear-gradient(
-            125deg,
-            #dce8ed,
-            var(--color-secondary),
-            var(--color-primary),
-            #dce8ed
-          );
-          background-size: 300% 300%;
-          animation: partnerBorderFlow 8s ease-in-out infinite;
-          opacity: 0.55;
-          transition: opacity 0.5s ease;
-        }
-
-        .partner-benefit-card:hover .partner-benefit-border {
-          opacity: 1;
-          animation-duration: 4s;
-        }
-
-        .partner-benefit-glow {
-          background: radial-gradient(
-            320px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-            rgba(4, 193, 202, 0.12),
-            transparent 65%
-          );
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .partner-benefit-border {
-            animation: none;
-          }
-
-          .partner-benefit-card,
-          .partner-benefit-card * {
-            transition-duration: 0.01ms !important;
-          }
-        }
-      `}</style>
-    </section>
   );
 }

@@ -53,44 +53,85 @@ export default function ContactPage() {
 
   return (
     <main className="bg-surface min-h-screen">
-      <header className="border-border from-primary-soft to-primary-soft relative isolate overflow-hidden border-b bg-linear-to-r via-white px-4 pt-28 pb-10 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-12">
-        <Headphones
+      <header className="border-secondary/40 from-primary via-primary-light to-primary relative isolate overflow-hidden border-b bg-linear-to-r px-4 pt-28 pb-10 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-12">
+        <div
           aria-hidden="true"
-          strokeWidth={0.6}
-          className="text-primary/5 pointer-events-none absolute -right-10 -bottom-20 -z-10 size-72 rotate-[-15deg] sm:right-12 sm:size-96"
-        />
-        <div className="mx-auto max-w-7xl">
+          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.22)_48px,rgba(214,166,79,0.22)_49px)]" />
+
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
+
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(50,104,197,0.25),transparent_75%)]" />
+
+          <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
+
+          <div className="border-accent-light/25 absolute -right-12 -bottom-48 size-[380px] rounded-full border" />
+
+          <div className="border-secondary/20 absolute -right-44 -bottom-52 size-[550px] rounded-full border" />
+
+          <Headphones
+            strokeWidth={0.6}
+            className="text-accent-light/10 absolute -right-10 -bottom-20 size-72 rotate-[-15deg] sm:right-12 sm:size-96"
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl">
           <nav
             aria-label="Breadcrumb"
-            className="text-muted mb-5 flex items-center gap-2 text-sm"
+            className="mb-5 flex items-center gap-2 text-sm text-white/85"
           >
-            <Link href="/" className="hover:text-primary transition-colors">
+            <Link
+              href="/"
+              className="hover:text-accent-light transition-colors duration-300"
+            >
               Home
             </Link>
-            <ChevronRight size={15} aria-hidden="true" />
-            <span aria-current="page" className="text-primary font-semibold">
+
+            <ChevronRight
+              size={15}
+              aria-hidden="true"
+              className="text-accent-light/80"
+            />
+
+            <span
+              aria-current="page"
+              className="text-accent-light font-semibold"
+            >
               Contact
             </span>
           </nav>
-          <p className="text-secondary-dark mb-3 flex items-center gap-2 text-xs font-bold tracking-[0.15em] uppercase">
+
+          <p className="text-accent-light mb-3 flex items-center gap-3 font-sans text-xs font-bold tracking-[0.15em] uppercase">
             <span
               aria-hidden="true"
-              className="bg-secondary size-1.5 rounded-full"
-            />{" "}
+              className="from-secondary-dark via-accent-light to-secondary h-[2px] w-8 rounded-full bg-linear-to-r"
+            />
             Customer Support
           </p>
-          <h1 className="section-heading">
-            We're Here to <span className="text-secondary">Help.</span>
+
+          <h1 className="font-heading text-[clamp(32px,5vw,48px)] leading-[1.15] tracking-tight text-white">
+            We're Here to{" "}
+            <span className="via-accent-light to-secondary bg-linear-to-b from-[#fff0bb] bg-clip-text text-transparent">
+              Help.
+            </span>
           </h1>
+
           <div
             aria-hidden="true"
-            className="from-secondary-dark via-accent-light to-secondary-dark my-4 h-[3px] w-24 rounded-full bg-linear-to-r"
+            className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
           />
-          <p className="text-muted max-w-xl text-base leading-7">
+
+          <p className="max-w-xl font-sans text-base leading-[1.8] text-white/95 sm:text-[17px]">
             Have a question about our research products, an order, or product
             documentation? Get in touch with our team.
           </p>
         </div>
+
+        <div
+          aria-hidden="true"
+          className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
+        />
       </header>
 
       <section className="px-4 py-10 sm:px-6 lg:px-8 lg:py-14">

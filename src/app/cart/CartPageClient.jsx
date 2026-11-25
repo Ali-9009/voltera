@@ -68,37 +68,79 @@ export default function CartPageClient() {
 
   return (
     <main className="bg-surface min-h-screen">
-      <header className="border-border from-primary-soft to-primary-soft border-b bg-linear-to-r via-white px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
-        <div className="mx-auto max-w-7xl">
+      <header className="border-secondary/40 from-primary via-primary-light to-primary relative isolate overflow-hidden border-b bg-linear-to-r px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.22)_48px,rgba(214,166,79,0.22)_49px)]" />
+
+          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
+
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(50,104,197,0.25),transparent_75%)]" />
+
+          <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
+
+          <div className="border-accent-light/25 absolute -right-12 -bottom-48 size-[380px] rounded-full border" />
+
+          <div className="border-secondary/20 absolute -right-44 -bottom-52 size-[550px] rounded-full border" />
+
+          <ShoppingBag
+            strokeWidth={0.6}
+            className="text-accent-light/10 absolute -right-10 -bottom-20 size-72 rotate-[-15deg] sm:right-12 sm:size-96"
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl">
           <nav
             aria-label="Breadcrumb"
-            className="text-muted mb-5 flex items-center gap-2 text-sm"
+            className="mb-5 flex items-center gap-2 text-sm text-white/85"
           >
-            <Link href="/" className="hover:text-primary transition-colors">
+            <Link
+              href="/"
+              className="hover:text-accent-light transition-colors duration-300"
+            >
               Home
             </Link>
 
-            <ChevronRight size={15} aria-hidden="true" />
+            <ChevronRight
+              size={15}
+              aria-hidden="true"
+              className="text-accent-light/80"
+            />
 
-            <span aria-current="page" className="text-primary font-semibold">
+            <span
+              aria-current="page"
+              className="text-accent-light font-semibold"
+            >
               Shopping Cart
             </span>
           </nav>
 
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <p className="text-secondary-dark mb-3 flex items-center gap-2 text-xs font-bold tracking-widest uppercase">
-                <span className="bg-secondary size-1.5 rounded-full" />
+              <p className="text-accent-light mb-3 flex items-center gap-3 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+                <span
+                  aria-hidden="true"
+                  className="from-secondary-dark via-accent-light to-secondary h-[2px] w-8 rounded-full bg-linear-to-r"
+                />
                 Voltera Sciences
               </p>
 
-              <h1 className="section-heading">
-                Shopping Cart<span className="text-secondary">.</span>
+              <h1 className="font-heading text-[clamp(32px,5vw,48px)] leading-[1.15] tracking-tight text-white">
+                Shopping Cart
+                <span className="text-accent-light">.</span>
               </h1>
 
-              <div className="from-secondary-dark via-accent-light to-secondary-dark my-4 h-[3px] w-20 rounded-full bg-linear-to-r" />
+              <div
+                aria-hidden="true"
+                className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
+              />
 
-              <p aria-live="polite" className="text-muted text-base">
+              <p
+                aria-live="polite"
+                className="font-sans text-base leading-[1.8] text-white/95 sm:text-[17px]"
+              >
                 {!hydrated
                   ? "Loading your cart..."
                   : itemCount === 0
@@ -111,16 +153,21 @@ export default function CartPageClient() {
 
             <Link
               href="/shop"
-              className="group border-primary/20 text-primary hover:border-secondary hover:bg-primary-soft inline-flex h-11 w-fit items-center justify-center gap-2 rounded-full border bg-white px-5 text-sm font-semibold transition-all duration-300"
+              className="group border-accent-light/50 hover:border-accent-light hover:bg-accent-light hover:text-primary-dark inline-flex h-11 w-fit shrink-0 items-center justify-center gap-2 rounded-full border bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300"
             >
               <ArrowLeft
                 size={17}
-                className="transition-transform group-hover:-translate-x-1"
+                className="text-accent-light group-hover:text-primary-dark transition-all duration-300 group-hover:-translate-x-1"
               />
               Continue Shopping
             </Link>
           </div>
         </div>
+
+        <div
+          aria-hidden="true"
+          className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
+        />
       </header>
 
       <section className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8">

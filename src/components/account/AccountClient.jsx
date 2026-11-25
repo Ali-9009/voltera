@@ -707,37 +707,29 @@ export default function AccountClient({ section = "dashboard" }) {
   const active = nav.find((n) => n.slug === section) || nav[0];
   return (
     <main className="bg-surface min-h-screen">
-      <header className="border-secondary/40 from-primary via-primary-light to-primary relative isolate overflow-hidden border-b bg-linear-to-r px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
+      <header className="relative isolate overflow-hidden border-b border-[var(--navy-soft)]/30 bg-[linear-gradient(115deg,var(--navy)_0%,var(--navy)_45%,var(--navy-soft)_100%)] px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
         >
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.22)_48px,rgba(214,166,79,0.22)_49px)]" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_85%_50%,rgba(61,117,216,0.35),transparent_55%)]" />
 
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
-
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(10,34,80,0.9),transparent_75%)]" />
-
-          <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
-
-          <div className="border-accent-light/25 absolute -right-12 -bottom-48 size-[380px] rounded-full border" />
-
-          <div className="border-secondary/20 absolute -right-44 -bottom-52 size-[550px] rounded-full border" />
+          <div className="absolute inset-0 bg-linear-to-b from-white/5 via-transparent to-[var(--navy-deep)]/20" />
 
           <UserRound
-            strokeWidth={0.6}
-            className="text-accent-light/10 absolute -right-10 -bottom-20 size-72 rotate-[-15deg] sm:right-12 sm:size-96"
+            strokeWidth={0.7}
+            className="absolute -right-10 -bottom-20 size-72 rotate-[-15deg] text-[var(--gold-light)]/15 sm:right-12 sm:size-96"
           />
         </div>
 
         <div className="relative mx-auto max-w-7xl">
           <nav
             aria-label="Breadcrumb"
-            className="mb-5 flex items-center gap-2 text-sm text-white/85"
+            className="mb-5 flex items-center gap-2 text-sm text-white/80"
           >
             <Link
               href="/"
-              className="hover:text-accent-light transition-colors duration-300"
+              className="transition-colors duration-300 hover:text-[var(--gold-light)]"
             >
               Home
             </Link>
@@ -745,47 +737,33 @@ export default function AccountClient({ section = "dashboard" }) {
             <ChevronRight
               size={15}
               aria-hidden="true"
-              className="text-accent-light/80"
+              className="text-[var(--gold-light)]/80"
             />
 
-            <span
-              aria-current="page"
-              className="text-accent-light font-semibold"
-            >
+            <span aria-current="page" className="font-semibold text-[var(--gold-light)]">
               My Account
             </span>
           </nav>
 
-          <p className="text-accent-light mb-3 flex items-center gap-3 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+          <p className="mb-3 flex items-center gap-3 font-sans text-xs font-bold tracking-[0.15em] text-[var(--gold-light)] uppercase">
             <span
               aria-hidden="true"
-              className="from-secondary-dark via-accent-light to-secondary h-[2px] w-8 rounded-full bg-linear-to-r"
+              className="size-2 rounded-full bg-[var(--gold-light)]"
             />
             Your Personal Dashboard
           </p>
 
-          <h1 className="font-heading text-[clamp(32px,5vw,48px)] leading-[1.15] tracking-tight text-white">
+          <h1 className="section-heading text-white!">
             {user && section !== "dashboard" ? active.label : "My Account"}
-
-            <span className="text-accent-light">.</span>
+            <span className="text-[var(--gold-light)]">.</span>
           </h1>
 
-          <div
-            aria-hidden="true"
-            className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
-          />
-
-          <p className="max-w-xl font-sans text-base leading-[1.8] text-white/95 sm:text-[17px]">
+          <p className="mt-5 max-w-xl font-sans text-base leading-[1.8] text-white/90 sm:text-[17px]">
             {user
               ? "Manage your profile, orders and documents."
               : "Sign in or create your account."}
           </p>
         </div>
-
-        <div
-          aria-hidden="true"
-          className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
-        />
       </header>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {!ready ? (

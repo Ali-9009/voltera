@@ -110,83 +110,86 @@ function TrackingPhone({ phase, order }) {
   return (
     <aside
       aria-label="Order tracking preview"
-      className="mx-auto w-full max-w-[400px]"
+      className="mx-auto w-full max-w-[380px]"
     >
-      <div className="border-secondary/50 from-primary-light via-primary to-primary-dark relative rounded-[42px] border bg-linear-to-br p-2 shadow-[0_20px_60px_rgba(1,17,59,0.2)]">
-        <div className="flex min-h-[600px] flex-col overflow-hidden rounded-[34px] border border-white/20 bg-white">
-          <header className="from-primary-light via-accent to-primary relative isolate overflow-hidden bg-linear-to-br px-5 pt-3 pb-6 text-center">
+      <div className="relative rounded-[44px] border-[1.5px] border-[var(--navy-soft)] bg-[var(--ivory)] p-2.5 shadow-[0_20px_45px_rgba(1,17,59,0.12)]">
+        <div className="border-primary/10 flex min-h-[540px] flex-col overflow-hidden rounded-[35px] border bg-white">
+          <header className="relative bg-linear-to-b from-white to-[var(--ivory)] px-5 pt-3 pb-5">
             <div
               aria-hidden="true"
-              className="absolute -top-20 -right-20 -z-10 size-56 rounded-full border border-white/15"
+              className="border-primary/10 bg-primary-soft/60 mx-auto h-4 w-[78px] rounded-full border"
             />
-
-            <div
-              aria-hidden="true"
-              className="border-accent-light/20 absolute -top-12 -right-12 -z-10 size-40 rounded-full border"
-            />
-
-            <div className="bg-primary-dark/70 mx-auto h-4 w-22 rounded-full border border-white/10" />
 
             <Link
               href="/"
               aria-label="Voltera Sciences homepage"
-              className="mx-auto mt-5 flex w-fit items-center justify-center rounded-xl bg-white px-4 py-2"
+              className="mt-4 flex w-fit items-center"
             >
               <Image
                 src="/assets-v/voltera-black.png"
                 alt="Voltera Sciences"
-                width={120}
-                height={65}
-                className="h-auto w-[100px] object-contain"
+                width={160}
+                height={80}
+                className="h-auto w-[115px] object-contain"
               />
             </Link>
 
-            <p className="mt-4 text-sm font-semibold text-white">
-              Your Order. Every Step.
-            </p>
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <p className="text-charcoal font-sans text-xs font-semibold">
+                Your Order. Every Step.
+              </p>
 
-            <p className="text-white mt-1 text-sm">
-              Voltera Sciences Shipment Tracking
-            </p>
+              <LockKeyhole
+                size={16}
+                strokeWidth={1.8}
+                className="text-primary"
+              />
+            </div>
           </header>
 
-          <div className="from-secondary-dark via-accent-light to-secondary-dark h-[3px] bg-linear-to-r" />
+          <div className="h-[2px] bg-[var(--navy-soft)]" />
 
           <div aria-live="polite" className="flex min-h-0 flex-1 flex-col">
             {phase !== "found" ? (
-              <div className="flex min-h-[380px] flex-1 flex-col items-center justify-center px-6 py-10 text-center">
-                <span className="border-secondary/30 from-primary-light via-accent to-primary text-accent-light shadow-primary/15 relative flex size-20 items-center justify-center rounded-[22px] border bg-linear-to-br shadow-lg">
+              <div className="flex min-h-[320px] flex-1 flex-col items-center justify-center px-5 py-7 text-center">
+                <span className="border-primary/10 flex size-14 items-center justify-center rounded-full border bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_100%)] text-white shadow-[0_8px_20px_rgba(1,17,59,0.18)]">
                   {phase === "loading" ? (
-                    <span className="border-t-accent-light size-8 animate-spin rounded-full border-[3px] border-white/25 motion-reduce:animate-none" />
+                    <span className="size-6 animate-spin rounded-full border-2 border-white/25 border-t-white motion-reduce:animate-none" />
                   ) : (
-                    <StateIcon size={34} strokeWidth={1.5} />
+                    <StateIcon size={25} strokeWidth={1.8} />
                   )}
                 </span>
 
-                <h3 className="font-heading text-primary mt-7 text-2xl">
+                <p className="mt-4 font-sans text-[10px] font-bold tracking-[0.16em] text-[var(--navy-soft)] uppercase">
+                  Order Tracking
+                </p>
+
+                <h3 className="font-heading text-charcoal mt-3 text-[24px] leading-tight font-semibold tracking-tight">
                   {state?.title}
                 </h3>
 
-                <p className="text-muted mt-3 max-w-[290px] text-sm leading-7">
+                <p className="text-muted mt-3 max-w-[300px] font-sans text-[14px] leading-6">
                   {state?.description}
                 </p>
 
                 {phase === "idle" && (
-                  <div className="border-border bg-primary-soft/60 mt-7 w-full rounded-xl border px-4">
-                    {["Order Number", "Billing Email"].map((label, index) => (
-                      <div
-                        key={label}
-                        className="border-primary/10 flex items-center gap-3 border-b py-3.5 last:border-b-0"
-                      >
-                        <span className="border-secondary/30 text-primary flex size-7 shrink-0 items-center justify-center rounded-full border bg-white text-sm font-bold">
-                          {index + 1}
-                        </span>
+                  <div className="divide-border border-border mt-5 w-full divide-y border-t">
+                    {["Order number needed", "Billing email needed"].map(
+                      (label, index) => (
+                        <div
+                          key={label}
+                          className="flex items-center gap-3 py-3 text-left"
+                        >
+                          <span className="border-primary/20 text-primary flex size-6 shrink-0 items-center justify-center rounded-full border bg-white font-sans text-[10px] font-semibold">
+                            {index + 1}
+                          </span>
 
-                        <span className="text-primary text-sm font-medium">
-                          {label}
-                        </span>
-                      </div>
-                    ))}
+                          <span className="text-charcoal/80 font-sans text-[12px] font-medium">
+                            {label}
+                          </span>
+                        </div>
+                      ),
+                    )}
                   </div>
                 )}
               </div>
@@ -336,10 +339,14 @@ function TrackingPhone({ phase, order }) {
             )}
           </div>
 
-          <footer className="border-border bg-primary-soft/50 mt-auto flex items-center justify-center gap-2 border-t px-4 py-4">
-            <LockKeyhole size={15} className="text-secondary-dark" />
+          <footer className="border-border mt-auto flex items-center justify-center gap-2 border-t bg-[var(--ivory)] px-4 py-4">
+            <LockKeyhole
+              size={14}
+              strokeWidth={1.8}
+              className="text-[var(--navy-soft)]"
+            />
 
-            <span className="text-primary text-xs font-semibold">
+            <span className="text-charcoal/75 font-sans text-[10px] font-semibold tracking-[0.08em] uppercase">
               Order Tracking Preview
             </span>
           </footer>
@@ -532,43 +539,6 @@ export default function OrderTracker() {
                   </p>
                 </div>
               </form>
-            </div>
-
-            <div className="border-secondary/30 from-primary-light via-accent to-primary relative isolate mt-6 overflow-hidden rounded-2xl border bg-linear-to-br p-5 sm:p-6">
-              <ShieldCheck
-                aria-hidden="true"
-                size={170}
-                strokeWidth={0.7}
-                className="pointer-events-none absolute -right-8 -bottom-14 -z-10 rotate-[-15deg] text-white/10"
-              />
-
-              <div className="flex items-start gap-4">
-                <span className="border-accent-light/30 text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border bg-white/10">
-                  <ShieldCheck size={25} strokeWidth={1.6} />
-                </span>
-
-                <div>
-                  <h3 className="font-heading text-lg text-white">
-                    Need Help With Your Order?
-                  </h3>
-
-                  <p className="mt-2 max-w-lg text-sm leading-7 text-white/85">
-                    Have questions about your shipment? Our support team is here
-                    to assist you throughout your order journey.
-                  </p>
-
-                  <Link
-                    href="/contact"
-                    className="group text-accent-light mt-4 inline-flex items-center gap-2 text-sm font-bold"
-                  >
-                    Contact Support
-                    <ArrowUpRight
-                      size={17}
-                      className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-                    />
-                  </Link>
-                </div>
-              </div>
             </div>
 
             <p className="text-muted mt-5 text-sm leading-6">

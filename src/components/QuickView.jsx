@@ -155,15 +155,30 @@ export default function QuickView({ product, onClose }) {
             <div className="pr-9">
               <h2
                 id={titleId}
-                className="font-heading text-primary text-[25px] leading-[1.15] tracking-[-0.025em] sm:text-[28px]"
+                className="font-heading text-primary text-[25px] leading-[1.15] font-semibold tracking-[-0.025em] sm:text-[28px]"
               >
                 {product.name}
               </h2>
 
-              <div className="mt-2 flex flex-wrap items-end gap-3">
-                <span className="font-heading text-primary text-[22px] leading-none sm:text-[25px]">
-                  {hasPrice ? formatMoney(unitPrice) : "—"}
+              <div
+                aria-live="polite"
+                className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-2"
+              >
+                <span className="font-heading text-primary text-[22px] leading-none font-semibold sm:text-[25px]">
+                  {hasPrice ? formatMoney(totalPrice) : "—"}
                 </span>
+
+                {hasPrice && bundleActive && discount > 0 && (
+                  <>
+                    <span className="text-muted font-sans text-sm font-medium line-through sm:text-base">
+                      {formatMoney(unitPrice * quantity)}
+                    </span>
+
+                    <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2.5 py-1 font-sans text-[10px] font-bold text-emerald-700 sm:text-[11px]">
+                      Save {formatMoney(unitPrice * quantity - totalPrice)}
+                    </span>
+                  </>
+                )}
               </div>
             </div>
 
@@ -206,7 +221,7 @@ export default function QuickView({ product, onClose }) {
                   </h3>
                 </div>
 
-                <span className="border-secondary/25 bg-secondary/10 text-secondary-dark shrink-0 rounded-full border px-3 py-1.5 font-sans text-[10px] font-bold">
+                <span className="border-secondary/25 bg-secondary/10 shrink-0 rounded-full border px-3 py-1.5 font-sans text-[10px] font-bold">
                   Up to{" "}
                   {Math.max(
                     ...PACK_OPTIONS.map((item) => item.discountPercent),
@@ -337,7 +352,7 @@ export default function QuickView({ product, onClose }) {
                       ? "Out of Stock"
                       : !hasPrice
                         ? "Unavailable"
-                        : "Add to Cart"}
+                        : `Add to Cart — ${formatMoney(totalPrice)}`}
                   </span>
 
                   <ArrowRight

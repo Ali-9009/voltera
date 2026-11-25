@@ -90,39 +90,6 @@ function FooterBackground() {
 
       <div className="absolute right-[10%] -bottom-48 size-[450px] rounded-full bg-[#1746A2]/15 blur-[110px]" />
 
-      {decorativeSquares.map((square, index) => (
-        <span
-          key={index}
-          className={`absolute rounded-[10px] border ${square.className}`}
-        />
-      ))}
-
-      <div className="absolute top-12 -right-12 grid grid-cols-5 gap-3 opacity-35">
-        {Array.from({ length: 25 }, (_, index) => (
-          <span
-            key={index}
-            className={`size-4 rounded-[3px] ${
-              index % 4 === 0
-                ? "bg-secondary/25"
-                : "border border-white/15 bg-white/[0.04]"
-            }`}
-          />
-        ))}
-      </div>
-
-      <div className="absolute bottom-16 -left-12 grid grid-cols-4 gap-3 opacity-25">
-        {Array.from({ length: 16 }, (_, index) => (
-          <span
-            key={index}
-            className={`size-5 rounded-[3px] ${
-              index % 3 === 0
-                ? "bg-secondary/20"
-                : "border border-white/15 bg-white/[0.04]"
-            }`}
-          />
-        ))}
-      </div>
-
       <div className="via-secondary absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-transparent to-transparent" />
     </div>
   );

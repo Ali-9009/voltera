@@ -77,7 +77,7 @@ export default function PageHero({
             </p>
           )}
 
-          <h1 className="font-heading text-primary text-[clamp(30px,7vw,42px)] leading-[1.12] font-normal tracking-[-0.025em] sm:text-[44px] lg:text-[clamp(44px,4vw,60px)]">
+          <h1 className="font-heading text-primary text-[clamp(30px,7vw,42px)] leading-[1.12] font-semibold tracking-[-0.025em] sm:text-[44px] lg:text-[clamp(44px,4vw,60px)]">
             {title}
 
             {highlight && (

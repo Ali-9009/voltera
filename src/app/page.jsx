@@ -114,10 +114,7 @@ export default function HomePage() {
                   />
                 </Link>
 
-                <Link
-                  href="/about"
-                  className="btn-hero-secondary border-accent-light/40! bg-primary-dark! h-10! min-w-0! gap-1.5! px-3! text-sm! whitespace-nowrap text-white! sm:h-12! sm:gap-3! sm:px-7! sm:text-base!"
-                >
+                <Link href="/about" className="btn-primary">
                   Learn More
                   <ArrowUpRight
                     strokeWidth={1.8}

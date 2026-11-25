@@ -1,6 +1,8 @@
+"use client";
+
+import { useState } from "react";
 import {
   ArrowUpRight,
-  ArrowRight,
   CheckCircle2,
   ShieldCheck,
   Handshake,
@@ -158,11 +160,7 @@ function SectionHeading({ eyebrow, title, highlight, description, dark }) {
         <span className="bg-secondary h-px w-8" />
       </p>
 
-      <h2
-        className={`font-heading text-[clamp(28px,4vw,42px)] leading-[1.2] tracking-tight ${
-          dark ? "text-white" : "text-primary"
-        }`}
-      >
+      <h2 className={`section-heading ${dark ? "text-white!" : ""}`}>
         {title}{" "}
         <span className={dark ? "text-accent-light" : "text-secondary-dark"}>
           {highlight}
@@ -209,27 +207,38 @@ function GoldenPattern({ icon: Icon }) {
 }
 
 function PartnerHero() {
+  const [referralSales, setReferralSales] = useState(0);
+
+  const commission = referralSales * 0.2;
+
+  const currency = (value) =>
+    new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 2,
+    }).format(value);
+
   return (
-    <header className="from-primary via-primary-light to-primary relative isolate overflow-hidden bg-linear-to-r px-4 pt-32 pb-12 sm:px-6 sm:pt-36 sm:pb-16 lg:px-8 lg:pt-44 lg:pb-20">
-      <GoldenPattern icon={Handshake} />
+    <header className="border-border relative isolate overflow-hidden border-b bg-white px-4 pt-32 pb-12 sm:px-6 sm:pt-36 sm:pb-16 lg:px-8 lg:pt-44 lg:pb-20">
+      <Handshake
+        aria-hidden="true"
+        strokeWidth={0.6}
+        className="text-primary/[0.035] pointer-events-none absolute -right-12 -bottom-24 -z-10 size-96 rotate-[-15deg]"
+      />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
         <div className="min-w-0">
-          <p className="text-accent-light mb-5 flex items-center gap-3 text-xs font-bold tracking-[0.15em] uppercase sm:text-sm">
-            <span className="bg-secondary h-[2px] w-8 shrink-0 rounded-full" />
+          <p className="text-primary mb-5 flex items-center gap-3 text-xs font-bold tracking-[0.15em] uppercase sm:text-sm">
+            <span className="bg-primary h-[2px] w-8 shrink-0 rounded-full" />
             Voltera Sciences Partner Network
           </p>
 
-          <h1 className="font-heading text-[clamp(36px,5vw,62px)] leading-[1.12] tracking-[-0.035em] text-white">
+          <h1 className="section-heading">
             Build influence.
-            <span className="via-accent-light to-secondary mt-2 block bg-linear-to-b from-[#fff0bb] bg-clip-text text-transparent">
-              Earn with Voltera.
-            </span>
+            <span className="mt-2 block">Earn with Voltera.</span>
           </h1>
 
-          <div className="from-secondary-dark via-accent-light to-secondary-dark my-6 h-[3px] w-24 rounded-full bg-linear-to-r" />
-
-          <p className="max-w-xl font-sans text-base leading-[1.85] text-white/90 sm:text-[18px]">
+          <p className="text-charcoal/80 mt-6 max-w-xl font-sans text-base leading-[1.85] sm:text-[18px]">
             Partner with a research-focused brand built around quality,
             precision, and trust. Share Voltera Sciences with your audience and
             earn commission from approved referral sales.
@@ -240,7 +249,7 @@ function PartnerHero() {
               href={links.register}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-hero-primary h-12 gap-2 px-6 text-sm"
+              className="btn-primary h-12 gap-2 px-6 text-sm"
             >
               Register
               <ArrowUpRight size={18} />
@@ -250,7 +259,7 @@ function PartnerHero() {
               href={links.login}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:border-accent-light inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 text-sm font-semibold text-white transition-colors hover:bg-white/20"
+              className="border-primary/20 text-primary hover:border-primary hover:bg-primary-soft inline-flex h-12 items-center justify-center gap-2 rounded-full border bg-white px-6 text-sm font-semibold transition-all duration-300"
             >
               Login
               <LogIn size={17} />
@@ -260,14 +269,17 @@ function PartnerHero() {
               href={links.dashboard}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-accent-light inline-flex h-12 items-center gap-2 px-2 text-sm font-semibold transition-colors hover:text-white"
+              className="group hover:text-primary-dark inline-flex h-12 items-center gap-2 px-2 text-sm font-semibold text-[#1746A2] transition-colors"
             >
               Affiliate Dashboard
-              <ArrowUpRight size={17} />
+              <ArrowUpRight
+                size={17}
+                className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+              />
             </a>
           </div>
 
-          <ul className="mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/15 pt-6">
+          <ul className="border-border mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t pt-6">
             {[
               "Simple application",
               "Private approval",
@@ -275,12 +287,9 @@ function PartnerHero() {
             ].map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-2 text-sm font-medium text-white/90"
+                className="text-charcoal/80 flex items-center gap-2 text-sm font-medium"
               >
-                <CheckCircle2
-                  size={17}
-                  className="text-accent-light shrink-0"
-                />
+                <CheckCircle2 size={17} className="shrink-0 text-[#1746A2]" />
                 {item}
               </li>
             ))}
@@ -289,72 +298,112 @@ function PartnerHero() {
 
         <aside
           aria-labelledby="program-overview"
-          className="border-secondary/40 to-primary-soft shadow-primary-dark/20 relative overflow-hidden rounded-[24px] border bg-linear-to-br from-white via-white shadow-2xl"
+          className="border-primary/15 relative overflow-hidden rounded-[24px] border bg-white p-5 shadow-[0_12px_50px_rgba(18,51,107,0.08)] sm:p-7"
         >
-          <div className="from-secondary-dark via-accent-light to-secondary-dark h-[4px] bg-linear-to-r" />
+          <div
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-[4px] bg-[#1746A2]"
+          />
 
-          <div className="p-6 sm:p-8">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2
-                id="program-overview"
-                className="font-heading text-primary text-xl"
-              >
-                Program Overview
-              </h2>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2
+              id="program-overview"
+              className="font-heading text-primary text-xl font-semibold"
+            >
+              Program Overview
+            </h2>
 
-              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700">
-                <span className="size-1.5 rounded-full bg-emerald-500" />
-                Open
-              </span>
-            </div>
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
+              <span className="size-1.5 rounded-full bg-emerald-500" />
+              Open
+            </span>
+          </div>
 
-            <div className="border-primary/10 from-primary-soft mt-7 rounded-2xl border bg-linear-to-br to-white p-5 sm:p-6">
-              <div className="text-primary flex items-center gap-2 text-sm font-semibold">
-                <Percent size={19} className="text-secondary-dark" />
-                Referral commission
-              </div>
+          <div className="mt-6 flex items-center gap-5">
+            <p className="font-heading text-[64px] leading-none font-semibold tracking-tight text-[#1746A2] sm:text-[76px]">
+              20<span className="text-[0.6em]">%</span>
+            </p>
 
-              <p className="font-heading text-primary mt-4 text-[72px] leading-none tracking-[-0.05em] sm:text-[86px]">
-                20<span className="text-secondary text-[0.6em]">%</span>
-              </p>
+            <div>
+              <p className="text-primary font-semibold">Referral commission</p>
 
-              <p className="text-charcoal/75 mt-4 text-base leading-7">
-                Earn commission from eligible, approved referral purchases.
-              </p>
-            </div>
-
-            <dl className="divide-border mt-6 grid grid-cols-2 divide-x">
-              <div className="pr-4">
-                <dt className="text-muted text-sm font-medium">
-                  Audience Offer
-                </dt>
-                <dd className="font-heading text-primary mt-2 text-xl sm:text-2xl">
-                  20% Off
-                </dd>
-              </div>
-
-              <div className="pl-5">
-                <dt className="text-muted text-sm font-medium">Commitment</dt>
-                <dd className="font-heading text-primary mt-2 text-xl sm:text-2xl">
-                  No Contract
-                </dd>
-              </div>
-            </dl>
-
-            <div className="border-border mt-6 flex items-center gap-3 border-t pt-5">
-              <ShieldCheck size={22} className="text-secondary-dark shrink-0" />
-              <p className="text-primary text-sm font-semibold">
-                Research-use-focused partnerships
+              <p className="text-muted mt-1 text-sm leading-6">
+                On eligible, approved referral purchases.
               </p>
             </div>
           </div>
+
+          <div className="border-primary/10 mt-6 rounded-2xl border bg-[#F2F6FD] p-4 sm:p-5">
+            <div className="text-primary flex items-center gap-2 text-sm font-semibold">
+              <span className="border-primary/10 flex size-9 items-center justify-center rounded-lg border bg-white text-[#1746A2]">
+                <Percent size={18} />
+              </span>
+              Earnings Calculator
+            </div>
+
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
+              <label
+                htmlFor="referral-sales"
+                className="text-charcoal/80 text-sm font-medium"
+              >
+                Qualifying referral sales
+              </label>
+
+              <span className="border-primary/10 text-primary rounded-lg border bg-white px-3 py-1.5 font-semibold tabular-nums">
+                {currency(referralSales)}
+              </span>
+            </div>
+
+            <input
+              id="referral-sales"
+              type="range"
+              min={0}
+              max={10000}
+              step={100}
+              value={referralSales}
+              onChange={(event) => setReferralSales(Number(event.target.value))}
+              className="mt-5 w-full cursor-pointer accent-[#1746A2]"
+            />
+
+            <div className="text-muted mt-2 flex justify-between text-xs font-medium">
+              <span>$0</span>
+              <span>$10,000</span>
+            </div>
+
+            <div className="border-primary/10 mt-5 flex flex-wrap items-center justify-between gap-3 border-t pt-5">
+              <span className="text-charcoal/80 text-sm font-medium">
+                Estimated commission
+              </span>
+
+              <output
+                htmlFor="referral-sales"
+                aria-live="polite"
+                className="font-heading text-3xl font-semibold text-[#1746A2] tabular-nums"
+              >
+                {currency(commission)}
+              </output>
+            </div>
+          </div>
+
+          <dl className="divide-border mt-6 grid grid-cols-2 divide-x">
+            <div className="pr-4">
+              <dt className="text-muted text-sm font-medium">Audience Offer</dt>
+
+              <dd className="font-heading text-primary mt-2 text-xl font-semibold">
+                20% Off
+              </dd>
+            </div>
+
+            <div className="pl-4">
+              <dt className="text-muted text-sm font-medium">Commitment</dt>
+
+              <dd className="font-heading text-primary mt-2 text-xl font-semibold">
+                No Contract
+              </dd>
+            </div>
+          </dl>
         </aside>
       </div>
-
-      <div
-        aria-hidden="true"
-        className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
-      />
     </header>
   );
 }
@@ -528,12 +577,7 @@ function GettingStarted() {
           description="Create your customer account first, submit your application, and begin promoting after your affiliate profile has been approved."
         />
 
-        <ol className="relative mx-auto mt-12 max-w-5xl space-y-5">
-          <div
-            aria-hidden="true"
-            className="from-secondary via-border to-secondary absolute top-8 bottom-8 left-7 hidden w-px bg-linear-to-b sm:block"
-          />
-
+        <ol className="sm:before:bg-secondary/40 relative mx-auto mt-12 max-w-5xl space-y-5 sm:before:absolute sm:before:top-8 sm:before:bottom-8 sm:before:left-7 sm:before:w-px">
           {steps.map(
             (
               { icon: Icon, label, title, description, action, href, badge },

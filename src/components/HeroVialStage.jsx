@@ -35,7 +35,7 @@ export default function HeroVialStage() {
   return (
     <div
       ref={stageRef}
-      className="hero-vial-stage"
+      className="hero-vial-stage mt-6"
       onPointerMove={moveStage}
       onPointerLeave={resetStage}
     >

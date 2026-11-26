@@ -14,11 +14,7 @@ import ShopByCategory from "@/components/ShopByCategory";
 import VialScroll from "@/components/VialScroll";
 import WhyChooseUs from "@/components/WhyChooseUs";
 
-import {
-  ArrowUpRight,
-  FlaskConical,
-  LockKeyhole,
-} from "lucide-react";
+import { ArrowUpRight, FlaskConical, LockKeyhole } from "lucide-react";
 import Image from "next/image";
 import { Amex, Mastercard, Visa } from "react-payment-logos/dist/flat";
 import Link from "next/link";
@@ -109,10 +105,10 @@ export default function HomePage() {
                 />
               </Link>
             </div>
-
+            
             <ul
               aria-label="Product and shipping standards"
-              className="hero-facts mt-8 grid max-w-[35rem] grid-cols-[0.8fr_1.2fr_1fr]"
+              className="hero-facts mt-8 hidden max-w-[35rem] grid-cols-[0.8fr_1.2fr_1fr] sm:grid"
             >
               {trustPoints.map(({ value, label, icon }) => (
                 <li

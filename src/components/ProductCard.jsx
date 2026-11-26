@@ -173,7 +173,11 @@ export default function ProductCard({ product, onQuickView }) {
                 )}
               </div>
             ) : (
-              <span className="border-primary/15 text-primary inline-flex h-[29px] items-center rounded-full border px-3 font-sans text-[10px] font-semibold sm:h-[32px] sm:text-[11px]">
+              <span
+                className={`border-primary inline-flex h-6 shrink-0 items-center justify-center rounded-full border bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_100%)] px-2 font-sans text-[8px] leading-none font-semibold whitespace-nowrap text-white shadow-[0_3px_10px_rgba(1,17,59,0.18)] sm:h-[32px] sm:px-3 sm:text-[11px] ${
+                  !inStock ? "opacity-40" : ""
+                }`}
+              >
                 {variant?.label ?? "Standard"}
               </span>
             )}

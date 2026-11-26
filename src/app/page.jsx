@@ -86,17 +86,27 @@ export default function HomePage() {
             >
               <Link
                 href="/shop"
-                className="hero-btn hero-btn-navy inline-flex h-14 items-center justify-center gap-1.5 rounded-full px-2 text-sm min-[360px]:text-[15px] font-bold whitespace-nowrap sm:gap-3 sm:px-8 sm:text-base"
+                className="hero-btn hero-btn-navy inline-flex h-14 items-center justify-center gap-1.5 rounded-full px-2 text-sm font-bold whitespace-nowrap min-[360px]:text-[15px] sm:gap-3 sm:px-8 sm:text-base"
               >
                 Shop Peptides
-                <ArrowUpRight size={18} strokeWidth={2.2} aria-hidden="true" className="shrink-0" />
+                <ArrowUpRight
+                  size={18}
+                  strokeWidth={2.2}
+                  aria-hidden="true"
+                  className="shrink-0"
+                />
               </Link>
               <Link
                 href="/coa"
-                className="hero-btn hero-btn-gold inline-flex h-14 items-center justify-center gap-1.5 rounded-full px-2 text-sm min-[360px]:text-[15px] font-bold whitespace-nowrap sm:gap-3 sm:px-8 sm:text-base"
+                className="hero-btn hero-btn-gold inline-flex h-14 items-center justify-center gap-1.5 rounded-full px-2 text-sm font-bold whitespace-nowrap min-[360px]:text-[15px] sm:gap-3 sm:px-8 sm:text-base"
               >
                 View COA
-                <ArrowUpRight size={18} strokeWidth={2.2} aria-hidden="true" className="shrink-0" />
+                <ArrowUpRight
+                  size={18}
+                  strokeWidth={2.2}
+                  aria-hidden="true"
+                  className="shrink-0"
+                />
               </Link>
             </div>
 
@@ -114,7 +124,7 @@ export default function HomePage() {
                     className="block size-9 shrink-0 xl:size-11"
                   />
                   <span className="min-w-0">
-                    <strong className="font-heading text-primary block text-[15px] leading-tight font-bold sm:text-[17px] tracking-[-0.02em] whitespace-nowrap xl:text-xl">
+                    <strong className="font-heading text-primary block text-[15px] leading-tight font-bold tracking-[-0.02em] whitespace-nowrap sm:text-[17px] xl:text-xl">
                       {value}
                     </strong>{" "}
                     <span className="text-primary-dark/80 block text-sm leading-snug">
@@ -125,7 +135,7 @@ export default function HomePage() {
               ))}
             </ul>
 
-            <div className="mt-6 flex max-w-[35rem] flex-col gap-2.5 sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-start xl:flex-row xl:items-center">
+            <div className="mt-6 hidden max-w-[35rem] flex-col gap-2.5 sm:flex sm:flex-row sm:items-center sm:justify-between lg:flex-col lg:items-start xl:flex-row xl:items-center">
               <p className="text-primary flex items-center gap-2 text-sm font-semibold whitespace-nowrap">
                 <LockKeyhole
                   size={16}
@@ -138,7 +148,7 @@ export default function HomePage() {
                 {paymentOptions.map(({ name, image, width, height, Logo }) => (
                   <li
                     key={name}
-                    className="hero-pay grid h-8 w-12 xl:h-9 xl:w-[54px] place-items-center overflow-hidden rounded-lg bg-white"
+                    className="hero-pay grid h-8 w-12 place-items-center overflow-hidden rounded-lg bg-white xl:h-9 xl:w-[54px]"
                   >
                     {image ? (
                       <Image
@@ -146,7 +156,7 @@ export default function HomePage() {
                         width={width}
                         height={height}
                         alt={name}
-                        className="max-h-6 max-w-[38px] xl:max-w-[43px] object-contain"
+                        className="max-h-6 max-w-[38px] object-contain xl:max-w-[43px]"
                       />
                     ) : (
                       <Logo
@@ -169,7 +179,7 @@ export default function HomePage() {
 
       <section
         aria-labelledby="collection-banner-heading"
-        className="bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
+        className="mt-10 bg-white px-4 py-12 sm:px-6 md:py-16 lg:px-8"
       >
         <div className="border-primary/10 bg-primary relative isolate mx-auto max-w-7xl overflow-hidden rounded-[24px] border sm:rounded-[32px]">
           <picture className="absolute inset-0 -z-20">
@@ -187,14 +197,14 @@ export default function HomePage() {
 
           <div className="relative flex min-h-[600px] flex-col items-center px-5 pt-12 pb-8 text-center sm:px-10 md:min-h-[480px] md:items-start md:justify-center md:px-10 md:py-14 md:text-left lg:min-h-[540px] lg:px-20">
             <div className="w-full max-w-[490px]">
-              <span className="mb-4 hidden text-[var(--gold-light)] items-center gap-3 font-sans text-xs font-bold tracking-[0.18em] uppercase md:flex">
+              <span className="mb-4 hidden items-center gap-3 font-sans text-xs font-bold tracking-[0.18em] text-[var(--gold-light)] uppercase md:flex">
                 <span className="h-[2px] w-8 bg-[var(--gold-light)]" />
                 Explore Our Collection
               </span>
 
               <h2
                 id="collection-banner-heading"
-                className="font-heading text-white text-[clamp(32px,8vw,46px)] leading-[1.15] font-normal tracking-[-0.035em] md:text-[clamp(38px,3.8vw,54px)]"
+                className="font-heading text-[clamp(32px,8vw,46px)] leading-[1.15] font-normal tracking-[-0.035em] text-white md:text-[clamp(38px,3.8vw,54px)]"
               >
                 Precision for
                 <br className="hidden md:block" /> Your Next
@@ -202,7 +212,7 @@ export default function HomePage() {
                 <span className="text-[var(--gold-light)]">Research.</span>
               </h2>
 
-              <p className="mx-auto mt-5 max-w-[420px] text-white/90 md:max-w-[230px] lg:max-w-[340px] xl:max-w-[420px] font-sans text-base leading-[1.6] sm:text-[17px] md:mx-0">
+              <p className="mx-auto mt-5 max-w-[420px] font-sans text-base leading-[1.6] text-white/90 sm:text-[17px] md:mx-0 md:max-w-[230px] lg:max-w-[340px] xl:max-w-[420px]">
                 Explore premium research compounds with verified purity,
                 multiple strengths, and batch-specific COAs.
               </p>

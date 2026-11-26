@@ -241,7 +241,7 @@ export default function CartDrawer() {
                   </Link>
 
                   <Link
-                    href="/checkout"
+                    href="/cart"
                     onClick={closeCart}
                     className="btn-primary h-12 min-w-0 gap-2 px-3 text-[12px] whitespace-nowrap"
                   >

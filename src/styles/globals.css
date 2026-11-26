@@ -1243,3 +1243,126 @@
 .section-flow > #categories + section {
   padding-top: 0;
 }
+
+
+
+/* shop page */
+.page-hero-vial {
+  position: absolute;
+  bottom: 0;
+  transform-origin: center bottom;
+
+  animation: hero-vial-entrance 1.2s
+    cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.page-hero-vial-1 {
+  left: 5%;
+  width: 36%;
+  height: 82%;
+  z-index: 1;
+
+  --vial-rotation: -13deg;
+  --vial-enter-x: -60px;
+  --vial-float-distance: -12px;
+
+  animation-delay: 0.15s;
+}
+
+.page-hero-vial-2 {
+  left: 29%;
+  width: 42%;
+  height: 100%;
+  z-index: 3;
+
+  --vial-rotation: 0deg;
+  --vial-enter-x: 0px;
+  --vial-float-distance: -18px;
+
+  animation-delay: 0.35s;
+}
+
+.page-hero-vial-3 {
+  right: 5%;
+  width: 36%;
+  height: 85%;
+  z-index: 2;
+
+  --vial-rotation: 13deg;
+  --vial-enter-x: 60px;
+  --vial-float-distance: -10px;
+
+  animation-delay: 0.55s;
+}
+
+.page-hero-vial-float {
+  animation: hero-vial-float 4s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.page-hero-vial-2 .page-hero-vial-float {
+  animation-duration: 4.8s;
+  animation-delay: 1.8s;
+}
+
+.page-hero-vial-3 .page-hero-vial-float {
+  animation-duration: 4.4s;
+  animation-delay: 2s;
+}
+
+@keyframes hero-vial-entrance {
+  from {
+    opacity: 0;
+    transform:
+      translate3d(var(--vial-enter-x), 90px, 0)
+      rotate(0deg)
+      scale(0.75);
+  }
+
+  to {
+    opacity: 1;
+    transform:
+      translate3d(0, 0, 0)
+      rotate(var(--vial-rotation))
+      scale(1);
+  }
+}
+
+@keyframes hero-vial-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(var(--vial-float-distance));
+  }
+}
+
+@media (max-width: 639px) {
+  .page-hero-vial-1 {
+    --vial-rotation: -10deg;
+    --vial-float-distance: -7px;
+  }
+
+  .page-hero-vial-2 {
+    --vial-float-distance: -10px;
+  }
+
+  .page-hero-vial-3 {
+    --vial-rotation: 10deg;
+    --vial-float-distance: -7px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-hero-vial {
+    animation: none;
+    opacity: 1;
+    transform: rotate(var(--vial-rotation));
+  }
+
+  .page-hero-vial-float {
+    animation: none;
+  }
+}

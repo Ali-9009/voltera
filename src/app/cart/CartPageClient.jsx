@@ -68,37 +68,27 @@ export default function CartPageClient() {
 
   return (
     <main className="bg-surface min-h-screen">
-      <header className="border-secondary/40 from-primary via-primary-light to-primary relative isolate overflow-hidden border-b bg-linear-to-r px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
+      <header className="relative isolate overflow-hidden border-b border-[#1746A2]/30 bg-[linear-gradient(115deg,#030D27_0%,#071A43_50%,#10265B_100%)] px-4 pt-28 pb-8 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-10">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
         >
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.22)_48px,rgba(214,166,79,0.22)_49px)]" />
-
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
-
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(10,34,80,0.9),transparent_75%)]" />
-
-          <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
-
-          <div className="border-accent-light/25 absolute -right-12 -bottom-48 size-[380px] rounded-full border" />
-
-          <div className="border-secondary/20 absolute -right-44 -bottom-52 size-[550px] rounded-full border" />
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_85%_50%,rgba(23,70,162,0.20),transparent_60%)]" />
 
           <ShoppingBag
-            strokeWidth={0.6}
-            className="text-accent-light/10 absolute -right-10 -bottom-20 size-72 rotate-[-15deg] sm:right-12 sm:size-96"
+            strokeWidth={0.7}
+            className="absolute -right-10 -bottom-20 size-72 rotate-[-15deg] text-[#A8CBFF]/10 sm:right-12 sm:size-96"
           />
         </div>
 
         <div className="relative mx-auto max-w-7xl">
           <nav
             aria-label="Breadcrumb"
-            className="mb-5 flex items-center gap-2 text-sm text-white/85"
+            className="mb-5 flex items-center gap-2 text-sm text-white/80"
           >
             <Link
               href="/"
-              className="hover:text-accent-light transition-colors duration-300"
+              className="transition-colors duration-300 hover:text-[#A8CBFF]"
             >
               Home
             </Link>
@@ -106,40 +96,32 @@ export default function CartPageClient() {
             <ChevronRight
               size={15}
               aria-hidden="true"
-              className="text-accent-light/80"
+              className="text-[#A8CBFF]/70"
             />
 
-            <span
-              aria-current="page"
-              className="text-accent-light font-semibold"
-            >
+            <span aria-current="page" className="font-semibold text-[#B7D4FF]">
               Shopping Cart
             </span>
           </nav>
 
           <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-end">
             <div>
-              <p className="text-accent-light mb-3 flex items-center gap-3 font-sans text-xs font-bold tracking-[0.15em] uppercase">
+              <p className="mb-3 flex items-center gap-2.5 font-sans text-xs font-bold tracking-[0.15em] text-[#A8CBFF] uppercase">
                 <span
                   aria-hidden="true"
-                  className="from-secondary-dark via-accent-light to-secondary h-[2px] w-8 rounded-full bg-linear-to-r"
+                  className="size-1.5 rounded-full bg-[#A8CBFF]"
                 />
                 Voltera Sciences
               </p>
 
-              <h1 className="font-heading text-[clamp(32px,5vw,48px)] leading-[1.15] tracking-tight text-white">
+              <h1 className="section-heading text-white!">
                 Shopping Cart
-                <span className="text-accent-light">.</span>
+                <span className="text-[#A8CBFF]">.</span>
               </h1>
-
-              <div
-                aria-hidden="true"
-                className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
-              />
 
               <p
                 aria-live="polite"
-                className="font-sans text-base leading-[1.8] text-white/95 sm:text-[17px]"
+                className="mt-4 font-sans text-base leading-[1.8] text-white/85 sm:text-[17px]"
               >
                 {!hydrated
                   ? "Loading your cart..."
@@ -153,21 +135,17 @@ export default function CartPageClient() {
 
             <Link
               href="/shop"
-              className="group border-accent-light/50 hover:border-accent-light hover:bg-accent-light hover:text-primary-dark inline-flex h-11 w-fit shrink-0 items-center justify-center gap-2 rounded-full border bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300"
+              className="group inline-flex h-11 w-fit shrink-0 items-center justify-center gap-2 rounded-full border border-[#A8CBFF]/30 bg-white/[0.07] px-5 text-sm font-semibold text-white transition-all duration-300 hover:border-[#A8CBFF]/70 hover:bg-white/15"
             >
               <ArrowLeft
                 size={17}
-                className="text-accent-light group-hover:text-primary-dark transition-all duration-300 group-hover:-translate-x-1"
+                strokeWidth={1.8}
+                className="text-[#A8CBFF] transition-transform duration-300 group-hover:-translate-x-1"
               />
               Continue Shopping
             </Link>
           </div>
         </div>
-
-        <div
-          aria-hidden="true"
-          className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
-        />
       </header>
 
       <section className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
@@ -290,7 +268,7 @@ export default function CartPageClient() {
                 </div>
 
                 <Link
-                  href={hasItems ? "/checkout" : "/shop"}
+                  href={hasItems ? "/cart" : "/shop"}
                   className="btn-primary h-13 w-full gap-3 px-5 text-base"
                 >
                   <LockKeyhole size={18} />

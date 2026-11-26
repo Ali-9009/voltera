@@ -79,6 +79,7 @@ export default function ShopClient({ initialSearch = "" }) {
         description="Explore our premium collection of research compounds, developed with a focus on quality, precision, and consistency."
         mobileImage="/assets-v/voltera-shop-mobile.png"
         desktopImage="/assets-v/voltera-shop.png"
+        vials={["/pngs/ghk.png", "/pngs/sm.png", "/pngs/tesa.png"]}
       />
 
       <section

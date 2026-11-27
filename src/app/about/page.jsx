@@ -246,22 +246,16 @@ export default function AboutUsPage() {
 
       <section
         aria-labelledby="quality-heading"
-        className="border-secondary/30 from-primary via-primary-light to-primary relative isolate overflow-hidden border-y bg-linear-to-br px-4 py-14 sm:px-6 md:py-20 lg:px-8"
+        className="relative isolate overflow-hidden border-y border-white/10 bg-[linear-gradient(120deg,#020611_0%,#07152f_30%,#14254b_55%,#0a1632_75%,#020611_100%)] px-4 py-14 sm:px-6 md:py-20 lg:px-8"
       >
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(30deg,transparent_49%,rgba(214,166,79,0.17)_50%,transparent_51%),linear-gradient(150deg,transparent_49%,rgba(214,166,79,0.17)_50%,transparent_51%)] bg-size-[72px_124px]"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle,rgba(239,210,141,0.35)_1px,transparent_2px)] bg-size-[36px_62px]"
-        />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+          {/* LEFT CONTENT */}
           <header>
             <p className="text-accent-light mb-4 flex items-center gap-3 text-xs font-bold tracking-widest uppercase">
               <span aria-hidden="true" className="bg-secondary h-px w-8" />
               Quality &amp; Transparency
             </p>
+
             <h2
               id="quality-heading"
               className="font-heading text-[clamp(28px,4vw,44px)] leading-tight text-white"
@@ -269,22 +263,28 @@ export default function AboutUsPage() {
               Confidence starts with{" "}
               <span className="text-accent-light">clarity.</span>
             </h2>
+
             <div
               aria-hidden="true"
               className="from-secondary-dark via-accent-light to-secondary-dark my-5 h-[3px] w-24 rounded-full bg-linear-to-r"
             />
-            <p className="max-w-xl text-base leading-[1.85] text-white/90 sm:text-[17px]">
+
+            <p className="max-w-xl text-base leading-[1.85] text-white/80 sm:text-[17px]">
               Research sourcing should be straightforward. Explore available
               documentation, review product information, and make informed
               decisions based on the requirements of your work.
             </p>
+
             <Link
               href="/coa"
-              className="btn-hero-primary mt-7 inline-flex h-12 gap-2 px-6 text-sm"
+              className="btn-hero-primary mt-7 inline-flex h-12 items-center gap-2 px-6 text-sm"
             >
-              Explore COA Library <ArrowUpRight size={18} />
+              Explore COA Library
+              <ArrowUpRight size={18} />
             </Link>
           </header>
+
+          {/* RIGHT FEATURE CARDS */}
           <div className="grid gap-4">
             {[
               {
@@ -308,20 +308,26 @@ export default function AboutUsPage() {
             ].map(({ icon: Icon, title, description }, index) => (
               <article
                 key={title}
-                className="group border-accent-light/30 bg-primary-dark/35 hover:border-accent-light/70 relative flex items-start gap-4 overflow-hidden rounded-2xl border p-5 backdrop-blur-sm transition-colors sm:p-6"
+                className="group relative flex items-start gap-4 overflow-hidden rounded-2xl border border-white/15 bg-white/[0.05] p-5 backdrop-blur-sm transition-all duration-300 hover:border-[#e8c77b]/40 hover:bg-white/[0.08] sm:p-6"
               >
-                <span className="border-secondary/40 text-accent-light flex size-12 shrink-0 items-center justify-center rounded-xl border bg-white/10">
+                {/* ICON */}
+                <span className="flex size-12 shrink-0 items-center justify-center rounded-xl border border-[#e8c77b]/25 bg-white/[0.07] text-[#e8c77b] transition-colors duration-300 group-hover:border-[#e8c77b]/50 group-hover:bg-white/10">
                   <Icon size={25} strokeWidth={1.7} />
                 </span>
+
+                {/* CONTENT */}
                 <div className="min-w-0 flex-1">
                   <h3 className="font-heading text-lg text-white">{title}</h3>
-                  <p className="mt-2 text-base leading-7 text-white/85">
+
+                  <p className="mt-2 text-base leading-7 text-white/75">
                     {description}
                   </p>
                 </div>
+
+                {/* CARD NUMBER */}
                 <span
                   aria-hidden="true"
-                  className="font-heading hidden text-4xl text-transparent [-webkit-text-stroke:1px_rgba(239,210,141,0.4)] sm:block"
+                  className="font-heading hidden text-4xl text-transparent [-webkit-text-stroke:1px_rgba(239,210,141,0.3)] sm:block"
                 >
                   0{index + 1}
                 </span>
@@ -329,10 +335,6 @@ export default function AboutUsPage() {
             ))}
           </div>
         </div>
-        <div
-          aria-hidden="true"
-          className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
-        />
       </section>
 
       <section
@@ -457,36 +459,15 @@ export default function AboutUsPage() {
           </div>
         </div>
       </section>
-
+      
       <section
         aria-labelledby="research-heading"
         className="px-4 py-12 sm:px-6 md:py-18 lg:px-8"
       >
-        <div className="border-secondary/30 from-primary via-primary-light to-primary shadow-primary/10 relative isolate mx-auto max-w-7xl overflow-hidden rounded-[28px] border bg-linear-to-br px-5 py-9 shadow-xl sm:px-10 sm:py-12 lg:px-14 lg:py-14">
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute -top-48 -right-48 -z-10 size-[550px] rounded-full border border-white/10"
-          />
-
-          <div
-            aria-hidden="true"
-            className="border-accent-light/15 pointer-events-none absolute -top-32 -right-32 -z-10 size-[400px] rounded-full border"
-          />
-
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-0 -z-10 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.20)_48px,rgba(214,166,79,0.20)_49px)]"
-          />
-
-          <ShieldCheck
-            aria-hidden="true"
-            size={420}
-            strokeWidth={0.6}
-            className="pointer-events-none absolute -right-20 -bottom-30 -z-10 rotate-[-15deg] text-white/5"
-          />
-
+        <div className="relative isolate mx-auto max-w-7xl overflow-hidden rounded-[28px] border border-white/10 bg-[linear-gradient(120deg,#020611_0%,#07152f_30%,#14254b_55%,#0a1632_75%,#020611_100%)] px-5 py-9 shadow-xl shadow-black/20 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
+          {/* HEADER */}
           <header className="mx-auto max-w-3xl text-center">
-            <span className="border-accent-light/30 bg-accent-light/10 text-accent-light mb-5 inline-flex items-center gap-2 rounded-full border px-4 py-2 text-xs font-bold tracking-widest uppercase">
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e8c77b]/30 bg-white/[0.06] px-4 py-2 text-xs font-bold tracking-widest text-[#e8c77b] uppercase">
               <ShieldCheck size={17} />
               Research Guidelines
             </span>
@@ -495,31 +476,33 @@ export default function AboutUsPage() {
               id="research-heading"
               className="font-heading text-[clamp(28px,4vw,44px)] leading-tight text-white"
             >
-              Research <span className="text-accent-light">Use Only.</span>
+              Research <span className="text-[#e8c77b]">Use Only.</span>
             </h2>
 
-            <div className="via-accent-light mx-auto my-5 h-[3px] w-24 rounded-full bg-linear-to-r from-transparent to-transparent" />
+            <div className="mx-auto my-5 h-[3px] w-24 rounded-full bg-linear-to-r from-transparent via-[#e8c77b] to-transparent" />
 
-            <p className="font-sans text-[17px] leading-relaxed font-semibold text-white sm:text-xl">
+            <p className="font-sans text-[17px] leading-relaxed font-semibold text-white/90 sm:text-xl">
               All products are supplied strictly for laboratory and research use
               only.
             </p>
           </header>
 
+          {/* GUIDELINE CARDS */}
           <div className="mt-9 grid gap-3 sm:grid-cols-2 sm:gap-5">
             {guidelines.map((guideline) => (
               <GuidelineCard key={guideline.title} guideline={guideline} />
             ))}
           </div>
 
-          <div className="border-accent-light/25 bg-primary-dark/30 mt-8 flex items-start gap-3 rounded-xl border p-4 sm:p-5">
+          {/* RESEARCH NOTICE */}
+          <div className="mt-8 flex items-start gap-3 rounded-xl border border-white/15 bg-white/[0.05] p-4 backdrop-blur-sm sm:p-5">
             <FlaskConical
               size={24}
               strokeWidth={1.6}
-              className="text-accent-light mt-0.5 shrink-0"
+              className="mt-0.5 shrink-0 text-[#e8c77b]"
             />
 
-            <p className="text-[15px] leading-[1.8] text-white/85">
+            <p className="text-[15px] leading-[1.8] text-white/80">
               Voltera Sciences presents all materials strictly in a research-use
               context and does not make consumer, wellness, or therapeutic
               claims.

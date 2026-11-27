@@ -372,7 +372,7 @@ export default function CardSlider({
     <section
       id="bestsellers"
       aria-labelledby="bestsellers-title"
-      className="bg-primary-soft relative overflow-hidden py-12 md:py-16"
+      className="bg-primary-soft relative overflow-hidden pb-6 md:pb-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="mx-auto my-8 max-w-[700px] text-center md:my-12">

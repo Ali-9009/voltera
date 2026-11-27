@@ -114,13 +114,6 @@ function Gallery({ product }) {
           ))}
         </div>
       )}
-
-      {/* RESEARCH DISCLAIMER */}
-
-      <p className="mt-4 flex items-center gap-2 text-[11px] text-[#6B7280]">
-        <FlaskConical size={15} className="text-primary" />
-        For laboratory research only
-      </p>
     </div>
   );
 }
@@ -146,7 +139,7 @@ function Strengths({ variants, index, setIndex }) {
               disabled={soldOut}
               aria-pressed={selected}
               onClick={() => setIndex(i)}
-              className={`inline-flex items-center justify-center rounded-full border px-3 py-1 text-[12px] font-semibold transition-all duration-300 ${
+              className={`inline-flex items-center justify-center rounded-full border px-3 py-2 text-[12px] font-semibold transition-all duration-300 ${
                 selected
                   ? "border-primary bg-primary text-white"
                   : "hover:border-primary hover:text-primary border-[#E8DCEA] bg-white text-[#514653]"
@@ -678,7 +671,7 @@ export default function ProductDetails({ product }) {
                 ))}
               </div>
 
-              <div className="border-primary/10 mt-6 border-t pt-5">
+              <div className="border-primary/10 pt-5">
                 <Strengths
                   variants={variants}
                   index={variantIndex}
@@ -754,7 +747,7 @@ export default function ProductDetails({ product }) {
             </div>
           </div>
 
-          <div className="border-primary/10 mt-12 border-t pt-10 lg:mt-16">
+          <div className="border-primary/10 pt-10 lg:mt-6">
             <ProductResearchSection
               product={product}
               specificationRows={specificationRows}

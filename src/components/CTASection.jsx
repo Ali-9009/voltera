@@ -22,7 +22,7 @@ export default function CTASection() {
       aria-labelledby="research-cta-heading"
       className="bg-white px-4 pt-12 pb-12 sm:px-6 md:pt-16 md:pb-16 lg:px-8"
     >
-      <div className="cta-band relative mx-auto max-w-7xl overflow-hidden rounded-[24px] px-6 pt-36 pb-28 sm:pt-16 sm:pb-32">
+      <div className="cta-band relative mx-auto max-w-7xl overflow-hidden rounded-[24px] px-6 pt-10 pb-28 sm:pt-16 sm:pb-32">
         <div className="cta-vial cta-vial--left" aria-hidden="true">
           <Image
             src={getCutout("vls-3rt")}

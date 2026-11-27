@@ -1182,21 +1182,71 @@
 @media (max-width: 900px) {
   .cta-vial {
     display: block;
-    top: 8px;
-    bottom: auto;
+    position: absolute;
     width: 85px;
     z-index: 1;
-    transform: none;
+    pointer-events: none;
   }
 
   .cta-vial--left {
-    left: 12px;
-    transform: rotate(-12deg);
+    top: -10px;
+    bottom: auto;
+    left: -18px;
+    right: auto;
+    transform: rotate(25deg);
   }
 
   .cta-vial--right {
-    right: 12px;
-    transform: rotate(12deg);
+    top: auto;
+    bottom: 0;
+    right: -15px;
+    left: auto;
+    transform: rotate(25deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-vial {
+    width: 70px;
+  }
+
+  .cta-vial--left {
+    top: -5px;
+    left: -18px;
+    transform: rotate(25deg);
+  }
+
+  .cta-vial--right {
+    top: auto;
+    bottom: 0;
+    right: -12px;
+    transform: rotate(25deg);
+  }
+}
+
+@media (max-width: 639px) {
+  .cta-band .cta-vial--left {
+    position: absolute;
+    top: -5px !important;
+    bottom: auto !important;
+    left: -18px !important;
+    right: auto !important;
+    width: 70px !important;
+    transform: rotate(20deg) !important;
+    z-index: 1;
+  }
+}
+
+@media (max-width: 639px) {
+  .cta-band .cta-vial--right {
+    position: absolute;
+    top: auto !important;
+    bottom: 20 !important;
+    left: auto !important;
+    right: 0px !important;
+    width: 75px;
+    transform: rotate(25deg) !important;
+    z-index: 1;
   }
 }
 

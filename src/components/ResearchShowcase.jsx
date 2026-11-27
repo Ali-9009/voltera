@@ -78,7 +78,7 @@ function ResearchFeature({ feature, position }) {
         "--node-x": `${position.x}%`,
         "--node-y": `${position.y}%`,
       }}
-      className="group relative flex min-w-0 flex-col items-center bg-white text-center lg:absolute lg:pb-2 lg:top-[var(--node-y)] lg:left-[var(--node-x)] lg:w-[210px] lg:-translate-x-1/2 lg:-translate-y-1/2"
+      className="group relative flex min-w-0 flex-col items-center bg-white text-center lg:absolute lg:top-[var(--node-y)] lg:left-[var(--node-x)] lg:w-[210px] lg:-translate-x-1/2 lg:-translate-y-1/2 lg:pb-2"
     >
       <div className="relative flex size-[64px] items-center justify-center sm:size-[76px]">
         <span
@@ -93,7 +93,6 @@ function ResearchFeature({ feature, position }) {
             className="size-6 transition-transform duration-300 group-hover:scale-110 sm:size-7"
           />
         </span>
-
       </div>
 
       <h3 className="text-primary group-hover:text-secondary-dark mt-2.5 font-sans text-[15px] leading-tight font-extrabold transition-colors duration-300 sm:text-[17px]">
@@ -134,10 +133,7 @@ function ResearchConnections() {
 function CenterPortal() {
   return (
     <div className="relative mx-auto flex size-[220px] items-center justify-center sm:size-[260px] lg:size-[290px]">
-      <span
-        aria-hidden="true"
-        className="hidden"
-      />
+      <span aria-hidden="true" className="hidden" />
 
       <span
         aria-hidden="true"

@@ -19,68 +19,58 @@ const features = [
     title: "Premium Quality Standards",
     description:
       "99%+ purity and uncompromising standards, with every batch 8x tested.",
-    icon: BadgeCheck,
+    icon: "/icons/content.json",
   },
   {
     title: "Verified USA Lab Reports",
     description:
       "Transparent COAs, independently tested by accredited US labs.",
-    icon: FileCheck2,
+    icon: "/icons/varified.json",
   },
   {
     title: "Consistent Results",
-    description:
-      "The same testing and documentation for every batch, every single time.",
-    icon: FlaskConical,
+    description: "The same testing and documentation for every batch.",
+    icon: "/icons/sterility.json",
   },
   {
     title: "Fast Same-Day Shipping",
-    description:
-      "Eligible orders ship the same day. Free ground shipping at $150+.",
-    icon: Truck,
+    description: "Eligible orders ship the same day.",
+    icon: "/icons/truck.json",
   },
   {
     title: "Real People, Here to Help",
-    description:
-      "Questions about a product, an order or a COA? Talk to our support team.",
-    icon: Headset,
+    description: "Questions? Talk to our support team.",
+    icon: "/icons/support.json",
   },
   {
     title: "Payment You Can Trust",
-    description:
-      "Secure payment options, including Zelle, Venmo and major cards.",
-    icon: LockKeyhole,
+    description: "Secure and reliable checkout.",
+    icon: "/icons/payment.json",
   },
 ];
 
-function FeatureCard({ feature, number }) {
-  const Icon = feature.icon;
-
+function FeatureCard({ feature }) {
   return (
     <article
       data-feature-card
       className="why-card group relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-[20px] p-5 sm:p-7"
     >
-      <Icon
-        aria-hidden="true"
-        strokeWidth={1.5}
-        className="pointer-events-none absolute -right-5 -bottom-7 -z-10 size-28 -rotate-12 text-primary opacity-15 transition-transform duration-500 group-hover:-rotate-6 sm:size-36"
-      />
-
-      <div className="flex items-start justify-between">
-        <span className="why-icon grid size-13 place-items-center rounded-[15px] text-[var(--navy)] sm:size-14">
-          <Icon aria-hidden="true" strokeWidth={1.8} className="size-6" />
-        </span>
-
-        <span
-          aria-hidden="true"
-          className="bg-primary rounded-full px-3 py-1.5 text-xs leading-none font-bold text-white tabular-nums"
-        >
-          {String(number).padStart(2, "0")}
+      <div className="flex items-start">
+        <span className="grid size-14 place-items-center rounded-[18px] border border-white/15 bg-[#071a43] sm:size-15">
+          <lord-icon
+            src={feature.icon}
+            trigger="loop"
+            delay="1000"
+            colors="primary:#ffffff,secondary:#ffffff"
+            style={{
+              width: "45px",
+              height: "45px",
+            }}
+          />
         </span>
       </div>
 
-      <h3 className="font-heading text-primary mt-6 text-lg leading-snug font-semibold tracking-[-0.02em] sm:text-xl">
+      <h3 className="font-heading text-primary mt-6 text-md leading-snug font-semibold tracking-[-0.02em] sm:text-xl">
         {feature.title}
       </h3>
 
@@ -160,7 +150,7 @@ export default function WhyChooseUs() {
           <h2 id="why-title" className="section-heading">
             Why Choose
             <br />
-            <span className="text-secondary">Voltera Sciences?</span>
+            <span className="text-primary">Voltera Sciences?</span>
           </h2>
 
           <p className="text-muted mx-auto mt-5 max-w-[580px] font-sans text-[13px] leading-[1.8] sm:text-[15px]">
@@ -171,14 +161,10 @@ export default function WhyChooseUs() {
 
         <div
           ref={gridRef}
-          className="grid items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+          className="grid items-stretch grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
         >
-          {features.map((feature, index) => (
-            <FeatureCard
-              key={feature.title}
-              feature={feature}
-              number={index + 1}
-            />
+          {features.map((feature) => (
+            <FeatureCard key={feature.title} feature={feature} />
           ))}
         </div>
       </div>

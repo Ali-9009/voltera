@@ -97,10 +97,9 @@ export default function FAQsPage() {
     <main className="bg-surface min-h-screen">
       <PageHero
         breadcrumb="FAQs"
-        subtitle="We're Here to Help"
-        title="Frequently Asked"
-        highlight="Questions."
-        description="Find answers to common questions about our research compounds, quality standards, shipping, and ordering process."
+        title="Your Questions."
+        highlight="Answered."
+        description="Find answers about our products, quality, shipping, and orders."
         mobileImage="/assets-v/voltera-faqs-mobile.png"
         desktopImage="/assets-v/voltera-faqs.png"
       />

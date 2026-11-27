@@ -466,7 +466,7 @@ export default function USShippingCoverage() {
                 <div className="mt-5 flex items-center gap-2.5 text-sm font-semibold lg:mt-8">
                   <span className="size-3 shrink-0 rounded-full bg-[var(--gold-light)]" />
                   <span>Dallas</span>
-                  <span aria-hidden="true" className="ship-line h-0.5 min-w-4 flex-1" />
+
                   <MapPin
                     size={18}
                     aria-hidden="true"

@@ -91,14 +91,6 @@ export default function ContactPage() {
             </span>
           </nav>
 
-          <p className="mb-3 flex items-center gap-3 font-sans text-xs font-bold tracking-[0.15em] text-[var(--gold-light)] uppercase">
-            <span
-              aria-hidden="true"
-              className="size-2 rounded-full bg-[var(--gold-light)]"
-            />
-            Customer Support
-          </p>
-
           <h1 className="section-heading text-white">
             We're Here to{" "}
             <span className="bg-linear-to-b from-[var(--ivory)] via-[var(--gold-light)] to-[var(--gold)] bg-clip-text text-transparent">

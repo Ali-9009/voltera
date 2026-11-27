@@ -124,15 +124,15 @@ export default function ShopByCategory() {
     >
       <div
         aria-hidden="true"
-        className="bg-secondary/10 pointer-events-none absolute -top-48 -right-40 size-[500px] rounded-full blur-[120px]"
+        className="bg-secondary/[0.03] pointer-events-none absolute -top-48 -right-40 size-[500px] rounded-full blur-[120px]"
       />
 
       <div
         aria-hidden="true"
-        className="bg-secondary/10 pointer-events-none absolute -bottom-48 -left-40 size-[500px] rounded-full blur-[120px]"
+        className="bg-secondary/[0.03] pointer-events-none absolute -bottom-48 -left-40 size-[500px] rounded-full blur-[120px]"
       />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl pt-4">
         <header className="mx-auto mb-9 max-w-[700px] text-center sm:mb-12">
           <h2 id="categories-heading" className="section-heading">
             Shop by <span className="text-secondary">Category.</span>

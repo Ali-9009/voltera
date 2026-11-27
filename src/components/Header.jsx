@@ -182,29 +182,6 @@ export default function Header() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-  const [hidden, setHidden] = useState(false);
-
-  // Scrolls away with the page; returns only when scrolling up.
-  useEffect(() => {
-    let lastY = window.scrollY;
-
-    const onScroll = () => {
-      const y = Math.max(0, window.scrollY);
-
-      if (y < 10) {
-        setHidden(false);
-        lastY = y;
-        return;
-      }
-
-      if (Math.abs(y - lastY) < 6) return;
-      setHidden(y > lastY);
-      lastY = y;
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   const { openCart, itemCount, hydrated } = useCart();
   const cartCount = hydrated ? itemCount : 0;
@@ -218,11 +195,7 @@ export default function Header() {
     <>
       <AnnouncementBar />
 
-      <header
-        className={`sticky top-0 z-50 h-0 w-full transition-transform duration-300 ease-out has-[:focus-visible]:translate-y-0 motion-reduce:transition-none ${
-          hidden && !searchOpen ? "-translate-y-32" : "translate-y-0"
-        }`}
-      >
+      <header className="sticky top-0 z-50 h-0 w-full">
         <div className="pt-2.5">
           <div className="site-header">
             <div className="relative grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 lg:h-[72px] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">
@@ -306,7 +279,7 @@ export default function Header() {
                   <ShoppingBag size={19} strokeWidth={1.8} />
 
                   {cartCount > 0 && (
-                    <span className="absolute bg-primary -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
+                    <span className="bg-primary absolute -top-1 -right-1 flex h-[18px] min-w-[18px] items-center justify-center rounded-full px-1 font-sans text-[10px] font-bold text-white">
                       {cartCount > 99 ? "99+" : cartCount}
                     </span>
                   )}

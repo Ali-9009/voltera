@@ -150,7 +150,7 @@ const steps = [
 function SectionHeading({ eyebrow, title, highlight, description, dark }) {
   return (
     <div className="mx-auto max-w-3xl text-center">
-      <p
+      {/* <p
         className={`mb-4 flex items-center justify-center gap-3 text-xs font-bold tracking-[0.15em] uppercase ${
           dark ? "text-accent-light" : "text-secondary-dark"
         }`}
@@ -158,7 +158,7 @@ function SectionHeading({ eyebrow, title, highlight, description, dark }) {
         <span className="bg-secondary h-px w-8" />
         {eyebrow}
         <span className="bg-secondary h-px w-8" />
-      </p>
+      </p> */}
 
       <h2 className={`section-heading ${dark ? "text-white!" : ""}`}>
         {title}{" "}
@@ -178,34 +178,6 @@ function SectionHeading({ eyebrow, title, highlight, description, dark }) {
   );
 }
 
-function GoldenPattern({ icon: Icon }) {
-  return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_48px,rgba(214,166,79,0.22)_48px,rgba(214,166,79,0.22)_49px)]" />
-
-      <div className="absolute inset-0 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_148px,rgba(239,210,141,0.30)_148px,rgba(239,210,141,0.30)_150px)]" />
-
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_center,rgba(10,34,80,0.9),transparent_75%)]" />
-
-      <div className="border-secondary/30 absolute -right-28 -bottom-48 size-[450px] rounded-full border" />
-
-      <div className="border-accent-light/25 absolute -right-12 -bottom-48 size-[380px] rounded-full border" />
-
-      <div className="border-secondary/20 absolute -right-44 -bottom-52 size-[550px] rounded-full border" />
-
-      {Icon && (
-        <Icon
-          strokeWidth={0.6}
-          className="text-accent-light/10 absolute -right-10 -bottom-20 size-80 rotate-[-15deg] sm:right-12 sm:size-[450px]"
-        />
-      )}
-    </div>
-  );
-}
-
 function PartnerHero() {
   const [referralSales, setReferralSales] = useState(0);
 
@@ -219,29 +191,45 @@ function PartnerHero() {
     }).format(value);
 
   return (
-    <header className="border-border relative isolate overflow-hidden border-b bg-white px-4 pt-32 pb-12 sm:px-6 sm:pt-36 sm:pb-16 lg:px-8 lg:pt-44 lg:pb-20">
-      <Handshake
+    <header className="relative isolate overflow-hidden border-b border-white/10 bg-[linear-gradient(120deg,#030D27_0%,#071A43_45%,#10265B_100%)] px-4 pt-32 pb-12 sm:px-6 sm:pt-36 sm:pb-16 lg:px-8 lg:pt-44 lg:pb-20">
+      <div
         aria-hidden="true"
-        strokeWidth={0.6}
-        className="text-primary/[0.035] pointer-events-none absolute -right-12 -bottom-24 -z-10 size-96 rotate-[-15deg]"
-      />
+        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_40%,rgba(23,70,162,0.30),transparent_60%)]" />
+
+        <div className="absolute -bottom-48 -left-48 size-[500px] rounded-full bg-[#1746A2]/15 blur-[120px]" />
+
+        <div className="partner-gold-particles absolute inset-0">
+          {Array.from({ length: 45 }, (_, index) => (
+            <span
+              key={index}
+              className="partner-gold-particle"
+              style={{
+                "--particle-left": `${(index * 37.7 + 5) % 100}%`,
+                "--particle-size": `${2 + (index % 4)}px`,
+                "--particle-duration": `${10 + (index % 9)}s`,
+                "--particle-delay": `${-(index * 1.7)}s`,
+                "--particle-drift": `${(index % 2 === 0 ? 1 : -1) * (20 + (index % 5) * 10)}px`,
+                "--particle-opacity": 0.2 + (index % 5) * 0.13,
+              }}
+            />
+          ))}
+        </div>
+      </div>
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
         <div className="min-w-0">
-          <p className="text-primary mb-5 flex items-center gap-3 text-xs font-bold tracking-[0.15em] uppercase sm:text-sm">
-            <span className="bg-primary h-[2px] w-8 shrink-0 rounded-full" />
-            Voltera Sciences Partner Network
-          </p>
-
-          <h1 className="section-heading">
-            Build influence.
-            <span className="mt-2 block">Earn with Voltera Sciences.</span>
+          <h1 className="section-heading text-white!">
+            Build Influence.
+            <span className="mt-2 block bg-linear-to-b from-[#FFF0BD] via-[#E8C77B] to-[#C9953D] bg-clip-text text-transparent">
+              Earn with Voltera.
+            </span>
           </h1>
 
-          <p className="text-charcoal/80 mt-6 max-w-xl font-sans text-base leading-[1.85] sm:text-[18px]">
-            Partner with a research-focused brand built around quality,
-            precision, and trust. Share Voltera Sciences with your audience and
-            earn commission from approved referral sales.
+          <p className="mt-6 max-w-xl font-sans text-base leading-[1.85] text-white/85 sm:text-[18px]">
+            Partner with Voltera Sciences, share quality research products, and
+            earn commissions on approved referrals.
           </p>
 
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -249,7 +237,7 @@ function PartnerHero() {
               href={links.register}
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-primary h-12 gap-2 px-6 text-sm"
+              className="btn-hero-primary h-12 gap-2 px-6 text-sm"
             >
               Register
               <ArrowUpRight size={18} />
@@ -259,7 +247,7 @@ function PartnerHero() {
               href={links.login}
               target="_blank"
               rel="noopener noreferrer"
-              className="border-primary/20 text-primary hover:border-primary hover:bg-primary-soft inline-flex h-12 items-center justify-center gap-2 rounded-full border bg-white px-6 text-sm font-semibold transition-all duration-300"
+              className="inline-flex h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/[0.08] px-6 text-sm font-semibold text-white backdrop-blur-sm transition-all duration-300 hover:border-[#E8C77B]/60 hover:bg-white/15"
             >
               Login
               <LogIn size={17} />
@@ -269,7 +257,7 @@ function PartnerHero() {
               href={links.dashboard}
               target="_blank"
               rel="noopener noreferrer"
-              className="group hover:text-primary-dark inline-flex h-12 items-center gap-2 px-2 text-sm font-semibold text-[var(--navy-soft)] transition-colors"
+              className="group inline-flex h-12 items-center gap-2 px-2 text-sm font-semibold text-[#E8C77B] transition-colors duration-300 hover:text-white"
             >
               Affiliate Dashboard
               <ArrowUpRight
@@ -279,18 +267,23 @@ function PartnerHero() {
             </a>
           </div>
 
-          <ul className="border-border mt-8 flex flex-wrap gap-x-5 gap-y-3 border-t pt-6">
+          <ul className="mt-4 flex flex-nowrap items-center justify-between gap-2 border-t border-white/15 pt-6 sm:flex-wrap sm:justify-start sm:gap-x-5 sm:gap-y-3">
             {[
-              "Simple application",
-              "Private approval",
-              "Transparent tracking",
-            ].map((item) => (
+              { mobile: "Easy Apply", desktop: "Simple application" },
+              { mobile: "Private Review", desktop: "Private approval" },
+              { mobile: "Clear Tracking", desktop: "Transparent tracking" },
+            ].map(({ mobile, desktop }) => (
               <li
-                key={item}
-                className="text-charcoal/80 flex items-center gap-2 text-sm font-medium"
+                key={desktop}
+                className="flex items-center gap-1 text-xs font-medium whitespace-nowrap text-white/85 sm:gap-2 sm:text-sm"
               >
-                <CheckCircle2 size={17} className="shrink-0 text-[var(--navy-soft)]" />
-                {item}
+                <CheckCircle2
+                  aria-hidden="true"
+                  className="size-3.5 shrink-0 text-[#E8C77B] sm:size-[17px]"
+                />
+
+                <span className="sm:hidden">{mobile}</span>
+                <span className="hidden sm:inline">{desktop}</span>
               </li>
             ))}
           </ul>
@@ -298,44 +291,44 @@ function PartnerHero() {
 
         <aside
           aria-labelledby="program-overview"
-          className="border-primary/15 relative overflow-hidden rounded-[24px] border bg-white p-5 shadow-[0_12px_50px_rgba(1,17,59,0.08)] sm:p-7"
+          className="relative overflow-hidden rounded-[26px] border border-[#E8C77B]/30 bg-[linear-gradient(145deg,rgba(23,46,95,0.95),rgba(3,13,39,0.96))] p-5 shadow-[0_20px_60px_rgba(0,0,0,0.25)] backdrop-blur-xl sm:p-7"
         >
           <div
             aria-hidden="true"
-            className="absolute inset-x-0 top-0 h-[4px] bg-[var(--navy-soft)]"
+            className="absolute inset-x-0 top-0 h-[3px] bg-linear-to-r from-[#A9792C] via-[#FFE9A8] to-[#A9792C]"
           />
 
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2
               id="program-overview"
-              className="font-heading text-primary text-xl font-semibold"
+              className="font-heading text-md font-semibold text-white"
             >
               Program Overview
             </h2>
 
-            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-700">
-              <span className="size-1.5 rounded-full bg-emerald-500" />
+            <span className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
+              <span className="size-1.5 rounded-full bg-emerald-400" />
               Open
             </span>
           </div>
 
           <div className="mt-6 flex items-center gap-5">
-            <p className="font-heading text-[64px] leading-none font-semibold tracking-tight text-[var(--navy-soft)] sm:text-[76px]">
+            <p className="font-heading bg-linear-to-b from-[#FFF0BD] via-[#E8C77B] to-[#C9953D] bg-clip-text text-[50px] leading-none font-semibold tracking-tight text-transparent">
               20<span className="text-[0.6em]">%</span>
             </p>
 
             <div>
-              <p className="text-primary font-semibold">Referral commission</p>
+              <p className="font-semibold text-white">Referral commission</p>
 
-              <p className="text-muted mt-1 text-sm leading-6">
+              <p className="mt-1 text-sm leading-6 text-white/65">
                 On eligible, approved referral purchases.
               </p>
             </div>
           </div>
 
-          <div className="border-primary/10 mt-6 rounded-2xl border bg-[var(--ivory)] p-4 sm:p-5">
-            <div className="text-primary flex items-center gap-2 text-sm font-semibold">
-              <span className="border-primary/10 flex size-9 items-center justify-center rounded-lg border bg-white text-[var(--navy-soft)]">
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/[0.045] p-4 sm:p-5">
+            <div className="flex items-center gap-2 text-sm font-semibold text-white">
+              <span className="flex size-9 items-center justify-center rounded-lg border border-[#E8C77B]/25 bg-[#E8C77B]/10 text-[#E8C77B]">
                 <Percent size={18} />
               </span>
               Earnings Calculator
@@ -344,12 +337,12 @@ function PartnerHero() {
             <div className="mt-5 flex flex-wrap items-center justify-between gap-2">
               <label
                 htmlFor="referral-sales"
-                className="text-charcoal/80 text-sm font-medium"
+                className="text-sm font-medium text-white/80"
               >
                 Qualifying referral sales
               </label>
 
-              <span className="border-primary/10 text-primary rounded-lg border bg-white px-3 py-1.5 font-semibold tabular-nums">
+              <span className="rounded-lg border border-white/15 bg-white/[0.07] px-3 py-1.5 font-semibold text-white tabular-nums">
                 {currency(referralSales)}
               </span>
             </div>
@@ -362,42 +355,39 @@ function PartnerHero() {
               step={100}
               value={referralSales}
               onChange={(event) => setReferralSales(Number(event.target.value))}
-              className="mt-5 w-full cursor-pointer accent-[var(--navy-soft)]"
+              className="mt-5 w-full cursor-pointer accent-[#E8C77B]"
             />
 
-            <div className="text-muted mt-2 flex justify-between text-xs font-medium">
-              <span>$0</span>
-              <span>$10,000</span>
-            </div>
-
-            <div className="border-primary/10 mt-5 flex flex-wrap items-center justify-between gap-3 border-t pt-5">
-              <span className="text-charcoal/80 text-sm font-medium">
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5">
+              <span className="text-sm font-medium text-white/80">
                 Estimated commission
               </span>
 
               <output
                 htmlFor="referral-sales"
                 aria-live="polite"
-                className="font-heading text-3xl font-semibold text-[var(--navy-soft)] tabular-nums"
+                className="font-heading text-3xl font-semibold text-[#E8C77B] tabular-nums"
               >
                 {currency(commission)}
               </output>
             </div>
           </div>
 
-          <dl className="divide-border mt-6 grid grid-cols-2 divide-x">
+          <dl className="mt-6 grid grid-cols-2 divide-x divide-white/15">
             <div className="pr-4">
-              <dt className="text-muted text-sm font-medium">Audience Offer</dt>
+              <dt className="text-sm font-medium text-white/60">
+                Audience Offer
+              </dt>
 
-              <dd className="font-heading text-primary mt-2 text-xl font-semibold">
+              <dd className="font-heading mt-2 text-xl font-semibold text-white">
                 20% Off
               </dd>
             </div>
 
             <div className="pl-4">
-              <dt className="text-muted text-sm font-medium">Commitment</dt>
+              <dt className="text-sm font-medium text-white/60">Commitment</dt>
 
-              <dd className="font-heading text-primary mt-2 text-xl font-semibold">
+              <dd className="font-heading mt-2 text-xl font-semibold text-white">
                 No Contract
               </dd>
             </div>
@@ -410,7 +400,7 @@ function PartnerHero() {
 
 function PartnershipSection() {
   return (
-    <section className="bg-white px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+    <section className="bg-white px-4 py-8 sm:px-6 md:py-14 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="The Partnership"
@@ -419,43 +409,67 @@ function PartnershipSection() {
           description="Everything you need to promote professionally, paired with clear standards that protect both our partners and the Voltera Sciences brand."
         />
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:gap-7">
           {partnership.map(({ icon: Icon, title, items }, index) => (
             <article
               key={title}
-              className="group border-border to-primary-soft/50 hover:shadow-primary/5 relative overflow-hidden rounded-[24px] border bg-linear-to-br from-white p-6 transition-shadow duration-300 hover:shadow-lg sm:p-8"
+              className="group relative isolate flex min-w-0 flex-col overflow-hidden rounded-[24px] border border-[#35466A] bg-[linear-gradient(145deg,#101D3D_0%,#07132D_55%,#030D27_100%)] p-6 shadow-[0_8px_30px_rgba(3,13,39,0.12)] transition-all duration-500 hover:-translate-y-1 hover:border-[#D6A64F]/50 hover:shadow-[0_15px_40px_rgba(3,13,39,0.22)] sm:p-8"
             >
-              <div className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 top-0 h-[3px] bg-linear-to-r" />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(61,117,216,0.18),transparent_65%)]"
+              />
 
-              <div className="flex items-center justify-between">
-                <div className="border-secondary/30 bg-primary-soft text-primary flex size-14 items-center justify-center rounded-2xl border">
-                  <Icon size={27} strokeWidth={1.7} />
-                </div>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_bottom_right,rgba(214,166,79,0.08),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
 
-                <span className="font-heading text-[58px] leading-none text-transparent [-webkit-text-stroke:1px_var(--color-border)]">
-                  0{index + 1}
+              <div className="flex items-center gap-4">
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-[#E8C77B]/25 bg-white/[0.06] text-[#E8C77B] shadow-[inset_0_1px_1px_rgba(255,255,255,0.1)] transition-colors duration-300 group-hover:border-[#E8C77B]/50 group-hover:bg-[#E8C77B]/10 sm:size-16">
+                  <Icon size={28} strokeWidth={1.6} />
                 </span>
+
+                <div className="min-w-0">
+                  <p className="mb-1.5 font-sans text-[10px] font-semibold tracking-[0.15em] text-[#E8C77B] uppercase">
+                    {index === 0 ? "Partner Rewards" : "Partner Guidelines"}
+                  </p>
+
+                  <h3 className="font-heading text-[21px] leading-tight font-semibold text-white sm:text-[26px]">
+                    {title}
+                  </h3>
+                </div>
               </div>
 
-              <h3 className="font-heading text-primary mt-6 text-2xl">
-                {title}
-              </h3>
+              <div
+                aria-hidden="true"
+                className="my-6 h-px w-full bg-linear-to-r from-[#E8C77B]/40 via-white/15 to-transparent"
+              />
 
-              <ul className="divide-border mt-6 divide-y">
+              <ul className="divide-y divide-white/10">
                 {items.map((item) => (
-                  <li key={item} className="flex items-start gap-3 py-4">
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 py-4 first:pt-0 last:pb-0"
+                  >
                     <CheckCircle2
                       size={20}
-                      strokeWidth={1.8}
-                      className="text-secondary-dark mt-0.5 shrink-0"
+                      strokeWidth={1.7}
+                      aria-hidden="true"
+                      className="mt-0.5 shrink-0 text-[#E8C77B]"
                     />
 
-                    <p className="text-charcoal/80 text-base leading-7">
+                    <p className="font-sans text-[14px] leading-[1.8] text-white/85 sm:text-[16px]">
                       {item}
                     </p>
                   </li>
                 ))}
               </ul>
+
+              <div
+                aria-hidden="true"
+                className="absolute inset-x-10 bottom-0 h-[2px] bg-linear-to-r from-transparent via-[#E8C77B]/80 to-transparent opacity-40 transition-opacity duration-500 group-hover:opacity-100"
+              />
             </article>
           ))}
         </div>
@@ -466,7 +480,7 @@ function PartnershipSection() {
 
 function PromotionSection() {
   return (
-    <section className="border-border bg-surface border-y px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+    <section className="border-border bg-surface border-y px-4 py-8 sm:px-6 md:py-14 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Promote With Purpose"
@@ -485,10 +499,6 @@ function PromotionSection() {
                 <div className="border-secondary/25 bg-primary-soft text-primary flex size-13 items-center justify-center rounded-xl border">
                   <Icon size={25} strokeWidth={1.7} />
                 </div>
-
-                <span className="font-heading text-[40px] leading-none text-transparent [-webkit-text-stroke:1px_var(--color-border)]">
-                  0{index + 1}
-                </span>
               </div>
 
               <div className="bg-secondary mt-6 h-[2px] w-10 rounded-full transition-all duration-300 group-hover:w-16" />
@@ -510,8 +520,11 @@ function PromotionSection() {
 
 function PayoutSection() {
   return (
-    <section className="from-primary via-primary-light to-primary relative isolate overflow-hidden bg-linear-to-r px-4 py-14 sm:px-6 md:py-20 lg:px-8">
-      <GoldenPattern icon={Wallet} />
+    <section className="payout-animated-bg relative isolate overflow-hidden px-4 py-8 sm:px-6 md:py-14 lg:px-8">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_right,rgba(61,117,216,0.15),transparent_65%)]"
+      />
 
       <div className="relative mx-auto max-w-7xl">
         <SectionHeading
@@ -522,53 +535,52 @@ function PayoutSection() {
           dark
         />
 
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          {payouts.map(({ icon: Icon, title, description, badge }, index) => (
+        <div className="mt-10 grid gap-5 md:grid-cols-3 lg:gap-6">
+          {payouts.map(({ icon: Icon, title, description, badge }) => (
             <article
               key={title}
-              className={`relative overflow-hidden rounded-[22px] border p-6 backdrop-blur-md sm:p-7 ${
-                badge
-                  ? "border-secondary/70 bg-white/15"
-                  : "border-white/20 bg-white/10"
-              }`}
+              className="group relative isolate flex min-w-0 flex-col overflow-hidden rounded-[24px] border border-white/20 bg-white/[0.07] p-6 shadow-[inset_0_1px_1px_rgba(255,255,255,0.08),0_10px_30px_rgba(0,0,0,0.12)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-1.5 hover:border-[#A8CBFF]/40 hover:bg-white/[0.12] hover:shadow-[0_20px_45px_rgba(0,0,0,0.2)] sm:p-7"
             >
-              <div className="flex items-center justify-between gap-3">
-                <div className="border-secondary/40 bg-primary-dark/20 text-accent-light flex size-14 items-center justify-center rounded-xl border">
-                  <Icon size={27} strokeWidth={1.7} />
-                </div>
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 bg-linear-to-br from-white/[0.08] via-transparent to-white/[0.02]"
+              />
 
-                <span className="font-heading text-[46px] leading-none text-transparent [-webkit-text-stroke:1px_rgba(239,210,141,0.45)]">
-                  0{index + 1}
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top_left,rgba(100,149,238,0.20),transparent_70%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+              />
+
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <span className="flex size-14 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-linear-to-br from-white/15 to-white/5 text-[#B7D4FF] shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] transition-all duration-500 group-hover:scale-105 group-hover:border-[#A8CBFF]/40 group-hover:text-white">
+                  <Icon size={27} strokeWidth={1.7} />
                 </span>
+
+                {badge && (
+                  <span className="inline-flex items-center rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3 py-1.5 text-xs font-semibold text-emerald-300">
+                    {badge}
+                  </span>
+                )}
               </div>
 
-              <h3 className="font-heading mt-6 text-2xl text-white">{title}</h3>
+              <h3 className="font-heading mt-6 text-2xl font-semibold text-white">
+                {title}
+              </h3>
 
-              {badge && (
-                <span className="border-secondary/50 bg-secondary/15 text-accent-light mt-3 inline-flex rounded-full border px-3 py-1.5 text-xs font-bold">
-                  {badge}
-                </span>
-              )}
-
-              <p className="mt-4 text-base leading-[1.85] text-white/90">
+              <p className="mt-4 font-sans text-[15px] leading-[1.85] text-white/85 sm:text-base">
                 {description}
               </p>
             </article>
           ))}
         </div>
       </div>
-
-      <div
-        aria-hidden="true"
-        className="from-secondary-dark via-accent-light to-secondary-dark absolute inset-x-0 bottom-0 h-[3px] bg-linear-to-r"
-      />
     </section>
   );
 }
 
 function GettingStarted() {
   return (
-    <section className="bg-white px-4 py-14 sm:px-6 md:py-20 lg:px-8">
+    <section className="bg-white px-4 py-8 sm:px-6 md:py-14 lg:px-8">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Getting Started"

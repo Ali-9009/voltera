@@ -1031,7 +1031,39 @@
 .cta-form:focus-within { border-color: var(--navy); outline: 2px solid rgb(1 17 59 / 15%); }
 
 @media (max-width: 900px) {
-  .cta-vial { display: none; }
+  .cta-vial {
+    display: block;
+    top: 8px;
+    bottom: auto;
+    width: 85px;
+    z-index: 1;
+    transform: none;
+  }
+
+  .cta-vial--left {
+    left: 12px;
+    transform: rotate(-12deg);
+  }
+
+  .cta-vial--right {
+    right: 12px;
+    transform: rotate(12deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-vial {
+    top: 12px;
+    width: 65px;
+  }
+
+  .cta-vial--left {
+    left: 8px;
+  }
+
+  .cta-vial--right {
+    right: 8px;
+  }
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -1365,4 +1397,351 @@
   .page-hero-vial-float {
     animation: none;
   }
+}
+
+
+/* partner */
+/* Partner hero golden particles */
+
+.partner-gold-particles {
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.partner-gold-particle {
+  position: absolute;
+  top: -15px;
+  left: var(--particle-left);
+
+  width: var(--particle-size);
+  height: var(--particle-size);
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    #fff1bd 0%,
+    #e8c77b 40%,
+    #c9953d 100%
+  );
+
+  box-shadow:
+    0 0 6px rgba(232, 199, 123, 0.5),
+    0 0 12px rgba(201, 149, 61, 0.2);
+
+  opacity: 0;
+
+  animation: partner-gold-fall
+    var(--particle-duration)
+    linear
+    var(--particle-delay)
+    infinite;
+}
+
+@keyframes partner-gold-fall {
+  0% {
+    opacity: 0;
+    top: -15px;
+    transform: translateX(0);
+  }
+
+  15% {
+    opacity: var(--particle-opacity);
+  }
+
+  50% {
+    transform: translateX(var(--particle-drift));
+  }
+
+  85% {
+    opacity: var(--particle-opacity);
+  }
+
+  100% {
+    top: 105%;
+    opacity: 0;
+    transform: translateX(0);
+  }
+}
+
+@media (max-width: 639px) {
+  .partner-gold-particle:nth-child(n + 26) {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .partner-gold-particle {
+    animation: none;
+    display: none;
+  }
+}
+
+/* partner sec */
+.payout-animated-bg {
+  background: linear-gradient(
+    125deg,
+    #030d27 0%,
+    #071a43 25%,
+    #1746a2 50%,
+    #10265b 75%,
+    #030d27 100%
+  );
+
+  background-size: 300% 300%;
+  animation: payout-gradient-flow 12s ease-in-out infinite;
+}
+
+@keyframes payout-gradient-flow {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .payout-animated-bg {
+    animation: none;
+  }
+
+  .payout-animated-bg article {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* top bar */
+/* =========================================
+   PREMIUM BLACK FRIDAY BACKGROUND
+========================================= */
+
+.sale-bar {
+  background:
+    radial-gradient(
+      ellipse 50% 120% at 0% 0%,
+      rgb(30 65 130 / 75%),
+      transparent 75%
+    ),
+    radial-gradient(
+      ellipse 50% 100% at 100% 100%,
+      rgb(36 44 95 / 70%),
+      transparent 75%
+    ),
+    linear-gradient(
+      115deg,
+      #020817 0%,
+      #071a43 45%,
+      #030b20 100%
+    );
+}
+
+.sale-gold-background {
+  overflow: hidden;
+}
+
+/* =========================================
+   SOFT GOLD GLOWS
+========================================= */
+
+.sale-gold-glow {
+  position: absolute;
+  width: 350px;
+  height: 220px;
+  border-radius: 50%;
+  filter: blur(75px);
+  opacity: 0.4;
+  animation: sale-glow-move 9s ease-in-out infinite alternate;
+}
+
+.sale-gold-glow--left {
+  top: -150px;
+  left: -80px;
+  background: rgb(214 159 65 / 35%);
+}
+
+.sale-gold-glow--right {
+  right: -100px;
+  bottom: -180px;
+  background: rgb(221 163 68 / 40%);
+  animation-delay: -4s;
+}
+
+/* =========================================
+   GOLD LIGHT STREAKS
+========================================= */
+
+.sale-gold-arc {
+  position: absolute;
+  width: 650px;
+  height: 260px;
+  border: 1px solid transparent;
+  border-top-color: rgb(244 197 106 / 65%);
+  border-radius: 50%;
+  opacity: 0.75;
+  filter: drop-shadow(0 0 8px rgb(240 176 71 / 65%));
+  animation: sale-arc-glow 6s ease-in-out infinite alternate;
+}
+
+.sale-gold-arc--one {
+  top: -210px;
+  left: 10%;
+  transform: rotate(-8deg);
+}
+
+.sale-gold-arc--two {
+  right: -120px;
+  bottom: -215px;
+  transform: rotate(14deg);
+  animation-delay: -3s;
+}
+
+/* =========================================
+   ANIMATED GOLD PARTICLES
+========================================= */
+
+.sale-gold-particle {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    #fff8d8 0%,
+    #f4ca76 45%,
+    #c9953d 100%
+  );
+
+  box-shadow:
+    0 0 5px rgb(255 215 140 / 90%),
+    0 0 12px rgb(220 159 58 / 50%);
+
+  opacity: 0;
+  will-change: transform, opacity;
+
+  animation-name: sale-gold-snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes sale-gold-snowfall {
+  0% {
+    transform: translate3d(0, -35px, 0);
+    opacity: 0;
+  }
+
+  15% {
+    opacity: 0.9;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+
+  100% {
+    transform: translate3d(
+      var(--particle-drift, 20px),
+      110px,
+      0
+    );
+    opacity: 0;
+  }
+}
+
+/* =========================================
+   ANIMATED GLOW EFFECTS
+========================================= */
+
+@keyframes sale-glow-move {
+  0% {
+    opacity: 0.25;
+    scale: 1;
+  }
+
+  100% {
+    opacity: 0.55;
+    scale: 1.2;
+  }
+}
+
+@keyframes sale-arc-glow {
+  0% {
+    opacity: 0.3;
+  }
+
+  100% {
+    opacity: 0.9;
+  }
+}
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 640px) {
+  .sale-gold-glow {
+    width: 220px;
+    height: 180px;
+    filter: blur(55px);
+  }
+
+  .sale-gold-arc {
+    width: 380px;
+    height: 180px;
+  }
+
+  .sale-gold-arc--one {
+    top: -145px;
+    left: -100px;
+  }
+
+  .sale-gold-arc--two {
+    right: -180px;
+    bottom: -130px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION ACCESSIBILITY
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .sale-gold-particle,
+  .sale-gold-glow,
+  .sale-gold-arc {
+    animation: none;
+  }
+
+  .sale-gold-particle {
+    opacity: 0.5;
+  }
+}
+/* PREMIUM DARK NAVY GRADIENT */
+
+.sale-bar {
+  background:
+    radial-gradient(
+      ellipse 85% 160% at 15% 0%,
+      #172b58 0%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 70% 150% at 90% 100%,
+      #1b2147 0%,
+      transparent 70%
+    ),
+    linear-gradient(
+      115deg,
+      #030713 0%,
+      #0a1534 35%,
+      #101c40 60%,
+      #020611 100%
+    );
+}
+
+.sale-gold-background {
+  overflow: hidden;
 }

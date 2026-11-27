@@ -286,7 +286,7 @@ export default function QuickView({ product, onClose }) {
                             }}
                           >
                             <Image
-                              src={getCutout(product.slug)}
+                              src="/pngs/pack.png"
                               alt=""
                               fill
                               sizes="40px"

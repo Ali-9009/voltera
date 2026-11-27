@@ -404,7 +404,7 @@ export default function ProductResearchSection({
         <div
           role="tablist"
           aria-label="Product information"
-          className="mb-5 flex flex-wrap gap-2"
+          className="mb-5 flex flex-nowrap items-center gap-1.5 overflow-x-auto sm:flex-wrap sm:gap-2"
         >
           {tabs.map((tab) => {
             const selected = activeTab === tab.id;
@@ -418,7 +418,7 @@ export default function ProductResearchSection({
                 aria-selected={selected}
                 aria-controls={`research-panel-${tab.id}`}
                 onClick={() => setActiveTab(tab.id)}
-                className={`rounded-full border px-4 py-3 font-sans text-[11px] font-bold whitespace-nowrap transition-all duration-300 sm:px-5 sm:text-[12px] ${
+                className={`shrink-0 rounded-full border px-2.5 py-2.5 font-sans text-[11px] font-bold whitespace-nowrap transition-all duration-300 sm:px-5 sm:py-3 sm:text-[12px] ${
                   selected
                     ? "border-primary bg-primary text-white shadow-[0_6px_18px_rgba(1,17,59,0.12)]"
                     : "border-primary/15 text-primary hover:border-secondary bg-white hover:bg-[#FFF9EF]"

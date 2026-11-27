@@ -189,10 +189,9 @@ export default function CoALibrary() {
     <main className="min-h-screen bg-white">
       <PageHero
         breadcrumb="COA"
-        subtitle="Quality & Transparency"
-        title="Verified Quality."
-        highlight="Proven Precision."
-        description="Explore our batch-specific Certificates of Analysis and independent laboratory testing documentation."
+        title="Tested Quality."
+        highlight="Verified Results."
+        description="Explore batch-specific COAs and independent lab reports."
         mobileImage="/assets-v/voltera-coa-mobile.png"
         desktopImage="/assets-v/voltera-coa.png"
       />

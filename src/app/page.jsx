@@ -42,7 +42,7 @@ export default function HomePage() {
       >
         <div className="mx-auto grid max-w-7xl items-center gap-5 px-4 pt-24 pb-5 sm:px-6 sm:pt-28 lg:min-h-[clamp(37rem,49vw,49rem)] lg:grid-cols-[minmax(0,1.06fr)_minmax(0,1fr)] lg:gap-8 lg:px-8 lg:pt-28 lg:pb-12">
           <div className="hero-copy w-full max-w-[640px] min-w-0">
-            <p className="hero-badge mb-5 inline-flex items-center gap-3 rounded-full py-2 pr-5 pl-2 text-white">
+            <p className="hero-badge mb-5 mt-6 inline-flex items-center gap-3 rounded-full py-2 pr-5 pl-2 text-white">
               <span className="hero-badge-mark grid size-10 shrink-0 place-items-center rounded-full text-[var(--navy)]">
                 <FlaskConical size={20} strokeWidth={2} aria-hidden="true" />
               </span>
@@ -105,7 +105,7 @@ export default function HomePage() {
                 />
               </Link>
             </div>
-            
+
             <ul
               aria-label="Product and shipping standards"
               className="hero-facts mt-8 hidden max-w-[35rem] grid-cols-[0.8fr_1.2fr_1fr] sm:grid"

@@ -46,8 +46,8 @@ export default function PageHero({
     <header
       className={`border-primary/10 bg-primary-dark relative isolate flex items-start overflow-hidden border-b px-4 pt-28 sm:px-6 sm:pt-32 lg:items-center lg:px-8 lg:pt-36 lg:pb-12 ${
         hasVials
-          ? "min-h-[580px] pb-4 sm:min-h-[620px] lg:min-h-[max(420px,28vw)]"
-          : "min-h-[580px] pb-60 sm:min-h-[380px] sm:pb-10 md:min-h-[400px] lg:min-h-[max(380px,28vw)]"
+          ? "min-h-100 pb-4 sm:min-h-[620px] lg:min-h-[max(420px,28vw)]"
+          : "min-h-120 pb-60 sm:min-h-[380px] sm:pb-10 md:min-h-[400px] lg:min-h-[max(380px,28vw)]"
       }`}
     >
       <div

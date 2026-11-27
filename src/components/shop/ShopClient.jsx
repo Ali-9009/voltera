@@ -21,6 +21,7 @@ const getProductPrice = (product) => {
 export default function ShopClient({ initialSearch = "" }) {
   const [search, setSearch] = useState(initialSearch);
   const [sort, setSort] = useState("featured");
+  const [category, setCategory] = useState("all");
   const [quickViewProduct, setQuickViewProduct] = useState(null);
 
   // ==========================================
@@ -31,6 +32,13 @@ export default function ShopClient({ initialSearch = "" }) {
     const term = search.trim().toLowerCase();
 
     const result = catalog.filter((product) => {
+      if (
+        category !== "all" &&
+        product.category?.trim().toLowerCase() !== category
+      ) {
+        return false;
+      }
+
       if (!term) return true;
 
       const searchableText = [
@@ -67,16 +75,15 @@ export default function ShopClient({ initialSearch = "" }) {
       default:
         return result;
     }
-  }, [search, sort]);
+  }, [search, sort, category]);
 
   return (
     <main className="min-h-screen">
       <PageHero
         breadcrumb="Shop"
-        subtitle="Shop Our Collection"
-        title="Find Your"
-        highlight="Favorites."
-        description="Explore our premium collection of research compounds, developed with a focus on quality, precision, and consistency."
+        title="Explore Our"
+        highlight="Collection."
+        description="Discover premium research compounds, backed by quality and precision."
         mobileImage="/assets-v/voltera-shop-mobile.png"
         desktopImage="/assets-v/voltera-shop.png"
         vials={["/pngs/ghk.png", "/pngs/sm.png", "/pngs/tesa.png"]}
@@ -88,10 +95,6 @@ export default function ShopClient({ initialSearch = "" }) {
         className="relative px-4 py-10 sm:px-6 lg:px-10"
       >
         <div className="mx-auto max-w-7xl">
-          {/* ==========================================
-              SEARCH & SORT
-          ========================================== */}
-
           <div className="flex min-w-0 flex-col gap-3 border-b border-[#E2EDF2] pb-6 sm:flex-row sm:items-center sm:gap-4">
             {/* SEARCH */}
 
@@ -127,27 +130,40 @@ export default function ShopClient({ initialSearch = "" }) {
                 </button>
               )}
             </div>
+            {/* FILTERS */}
+            <div className="flex w-full flex-col gap-3 sm:ml-auto sm:w-auto sm:flex-row sm:items-center sm:gap-3">
+              {/* CATEGORY FILTER */}
+              <CustomSelect
+                id="shop-category"
+                value={category}
+                onChange={(event) => setCategory(event.target.value)}
+                placeholder="All Categories"
+                className="w-full sm:w-[190px] sm:shrink-0"
+                options={[
+                  { value: "all", label: "All Categories" },
+                  { value: "bac water", label: "Bac Water" },
+                  { value: "complex / elixirs", label: "Complex / Elixirs" },
+                  { value: "lyophilized", label: "Lyophilized" },
+                  { value: "sprays", label: "Sprays" },
+                ]}
+              />
 
-            {/* SORT */}
-
-            <CustomSelect
-              id="shop-sort"
-              value={sort}
-              onChange={(event) => setSort(event.target.value)}
-              placeholder="Sort products"
-              className="w-full sm:w-[190px] sm:shrink-0 lg:ml-auto"
-              options={[
-                { value: "featured", label: "Featured" },
-                { value: "name", label: "Name A–Z" },
-                { value: "price-low", label: "Price: Low to High" },
-                { value: "price-high", label: "Price: High to Low" },
-              ]}
-            />
+              {/* SORT */}
+              <CustomSelect
+                id="shop-sort"
+                value={sort}
+                onChange={(event) => setSort(event.target.value)}
+                placeholder="Sort products"
+                className="w-full sm:w-[190px] sm:shrink-0"
+                options={[
+                  { value: "featured", label: "Featured" },
+                  { value: "name", label: "Name A–Z" },
+                  { value: "price-low", label: "Price: Low to High" },
+                  { value: "price-high", label: "Price: High to Low" },
+                ]}
+              />
+            </div>
           </div>
-
-          {/* ==========================================
-              PRODUCT GRID
-          ========================================== */}
 
           {filteredProducts.length > 0 ? (
             <div className="mt-8 grid grid-cols-2 gap-3 sm:gap-5 lg:grid-cols-3 xl:grid-cols-4">
@@ -160,10 +176,6 @@ export default function ShopClient({ initialSearch = "" }) {
               ))}
             </div>
           ) : (
-            /* ==========================================
-                NO PRODUCTS FOUND
-            ========================================== */
-
             <div className="flex min-h-72 flex-col items-center justify-center text-center">
               <Search size={30} className="text-primary/35" />
 
@@ -189,10 +201,6 @@ export default function ShopClient({ initialSearch = "" }) {
               </button>
             </div>
           )}
-
-          {/* ==========================================
-              RESEARCH DISCLAIMER
-          ========================================== */}
 
           <p className="text-muted mt-12 border-t border-[#E2EDF2] pt-5 text-xs leading-6">
             All products are intended for scientific and laboratory research

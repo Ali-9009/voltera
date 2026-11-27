@@ -229,25 +229,25 @@ function Packs({ product, price, selectedPack, setSelectedPack, stock }) {
                 {badges[index] ?? "SAVE MORE"}
               </span>
 
-              <span className="relative flex h-[70px] w-full items-center justify-center sm:h-[80px]">
+              <span className="relative flex h-[60px] w-full items-center justify-center sm:h-[70px]">
                 {Array.from({ length: bottleCount }).map((_, index) => (
                   <span
                     key={index}
-                    className="absolute bottom-0 h-full w-[32px] sm:w-[40px]"
+                    className="absolute bottom-0 h-full w-[26px] sm:w-[34px]"
                     style={{
                       left: `calc(50% + ${
-                        (index - (bottleCount - 1) / 2) * 15
+                        (index - (bottleCount - 1) / 2) * 13
                       }px)`,
                       transform: "translateX(-50%)",
                       zIndex: bottleCount - index,
                     }}
                   >
                     <Image
-                      src={getCutout(product.slug)}
+                      src="/pngs/pack.png"
                       alt=""
                       fill
-                      sizes="40px"
-                      className="object-contain drop-shadow-[0_3px_4px_rgba(1,17,59,0.15)] transition-transform duration-300 group-hover:-translate-y-0.5"
+                      sizes="34px"
+                      className="object-contain opacity-90 blur-[0.3px] drop-shadow-[0_3px_4px_rgba(1,17,59,0.12)] transition-transform duration-300 group-hover:-translate-y-0.5"
                     />
                   </span>
                 ))}
@@ -442,6 +442,18 @@ export default function ProductDetails({ product }) {
     return () => observer.disconnect();
   }, []);
 
+  // ✅ ADD THIS NEW useEffect
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      "--sticky-cart-offset",
+      showStickyCart ? "70px" : "0px",
+    );
+
+    return () => {
+      document.documentElement.style.removeProperty("--sticky-cart-offset");
+    };
+  }, [showStickyCart]);
+
   const { addItem } = useCart();
 
   useEffect(() => {
@@ -583,7 +595,7 @@ export default function ProductDetails({ product }) {
 
   return (
     <main className="min-h-screen bg-white">
-      <section className="px-4 pt-28 pb-12 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 lg:pb-16">
+      <section className="px-4 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36 ">
         <div className="mx-auto max-w-7xl">
           <div className="grid items-start gap-7 lg:grid-cols-[minmax(0,1.02fr)_minmax(0,0.98fr)] lg:gap-10">
             <div className="min-w-0 lg:sticky lg:top-[110px] lg:self-start">
@@ -616,55 +628,20 @@ export default function ProductDetails({ product }) {
                 </p>
               </header>
 
-              <div className="group relative isolate mt-5 flex items-center gap-3 overflow-hidden rounded-full border border-[var(--gold)]/40 bg-[linear-gradient(120deg,var(--navy-soft)_0%,var(--navy)_55%,var(--navy-deep)_100%)] px-3 py-3 shadow-[inset_0_1px_1px_rgba(255,255,255,0.15),0_5px_20px_rgba(1,17,59,0.15)] sm:gap-5 sm:px-5 sm:py-4">
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 -z-10 bg-[repeating-linear-gradient(135deg,transparent_0px,transparent_24px,rgba(168,203,255,0.10)_24px,rgba(168,203,255,0.10)_25px)]"
-                />
+              <p className="hero-badge my-5 inline-flex items-center gap-3 rounded-full py-2 pr-5 pl-2 text-white">
+                <span className="hero-badge-mark grid size-10 shrink-0 place-items-center rounded-full text-[var(--navy)]">
+                  <FlaskConical size={20} strokeWidth={2} aria-hidden="true" />
+                </span>
+                <span className="font-heading text-lg leading-none font-bold tracking-[-0.02em] sm:text-xl">
+                  8x Tested
+                </span>
+                <span aria-hidden="true" className="h-5 w-px bg-white/30" />
+                <span className="text-sm leading-none font-semibold text-[var(--gold-light)] sm:text-base">
+                  For all batches
+                </span>
+              </p>
 
-                <FlaskConical
-                  aria-hidden="true"
-                  size={120}
-                  strokeWidth={0.7}
-                  className="pointer-events-none absolute -right-3 -bottom-10 -z-10 rotate-[-15deg] text-white/10 transition-transform duration-500 group-hover:scale-110"
-                />
-
-                <div className="relative flex shrink-0 items-center gap-2 sm:gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-[var(--gold-light)] shadow-sm sm:size-12">
-                    <FlaskConical
-                      size={25}
-                      strokeWidth={1.7}
-                      className="size-5 sm:size-6"
-                      aria-hidden="true"
-                    />
-                  </span>
-
-                  <span className="font-heading flex items-baseline gap-1 leading-none font-extrabold tracking-tight whitespace-nowrap text-white italic sm:gap-1.5">
-                    <span className="text-[24px] sm:text-[32px]">8×</span>
-
-                    <span className="text-[14px] text-[var(--gold-light)] sm:text-[20px]">
-                      TESTED
-                    </span>
-                  </span>
-                </div>
-
-                <span
-                  aria-hidden="true"
-                  className="h-9 w-px shrink-0 bg-linear-to-b from-transparent via-white/40 to-transparent sm:h-12"
-                />
-
-                <div className="relative min-w-0 flex-1">
-                  <p className="font-sans text-[11px] leading-tight font-bold text-white sm:text-[13px]">
-                    Precision Without Compromise
-                  </p>
-
-                  <p className="mt-1 font-sans text-[9px] leading-relaxed font-medium text-[var(--gold-light)] sm:text-[11px]">
-                    Independent Laboratory Analysis
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-5 flex flex-wrap items-center gap-2">
+              <div className="mt-3 flex flex-nowrap items-center gap-1.5 sm:flex-wrap sm:gap-2">
                 {[
                   {
                     icon: FlaskConical,
@@ -687,13 +664,13 @@ export default function ProductDetails({ product }) {
                 ].map(({ icon: Icon, label, style }) => (
                   <span
                     key={label}
-                    className={`inline-flex shrink-0 items-center gap-2 rounded-full border px-3.5 py-2 font-sans text-[11px] font-semibold whitespace-nowrap shadow-sm transition-colors duration-300 sm:text-[12px] ${style}`}
+                    className={`inline-flex shrink-0 items-center justify-center gap-2 rounded-full border px-2 py-1.5 font-sans text-[11px] font-semibold whitespace-nowrap shadow-sm transition-colors duration-300 sm:px-3.5 sm:py-2 sm:text-[12px] ${style}`}
                   >
                     <Icon
                       size={15}
                       strokeWidth={1.8}
                       aria-hidden="true"
-                      className="shrink-0"
+                      className="hidden shrink-0 sm:block"
                     />
 
                     {label}
@@ -787,7 +764,12 @@ export default function ProductDetails({ product }) {
         </div>
       </section>
 
-      <CardSlider currentProduct={product} />
+      <CardSlider
+        currentProduct={product}
+        title="Research"
+        highlight="Compounds"
+        description="Explore more compounds for your research."
+      />
 
       <div
         className={`border-primary/10 fixed inset-x-0 bottom-0 z-40 border-t bg-white/95 px-4 pt-3 pb-[calc(env(safe-area-inset-bottom)+12px)] shadow-[0_-8px_30px_rgba(1,17,59,0.08)] backdrop-blur-xl transition-all duration-300 lg:hidden ${

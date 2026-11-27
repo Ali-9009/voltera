@@ -334,8 +334,12 @@ function ProductCard({ product }) {
     </article>
   );
 }
-
-export default function CardSlider({ currentProduct = null }) {
+export default function CardSlider({
+  currentProduct = null,
+  title = "New",
+  highlight = "Arrivals",
+  description = "Explore our most popular research compounds.",
+}) {
   const sortedProducts = useMemo(() => {
     const displayProducts = products.filter(
       (product) =>
@@ -373,13 +377,11 @@ export default function CardSlider({ currentProduct = null }) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <header className="mx-auto mb-8 max-w-[700px] text-center md:mb-12">
           <h2 id="bestsellers-title" className="section-heading">
-            Explore More{" "}
-            <span className="text-secondary">Research Compounds.</span>
+            {title} <span className="text-secondary">{highlight}</span>
           </h2>
 
-          <p className="text-muted mx-auto mt-4 max-w-[520px] font-sans text-[13px] leading-[1.8] sm:text-[15px]">
-            Discover additional research compounds, explore available strengths,
-            and find the right options for your laboratory requirements.
+          <p className="text-muted mx-auto mt-3 max-w-[520px] font-sans">
+            {description}
           </p>
         </header>
 

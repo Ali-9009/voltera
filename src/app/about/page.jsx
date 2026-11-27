@@ -164,10 +164,9 @@ export default function AboutUsPage() {
     <main className="min-h-screen bg-white">
       <PageHero
         breadcrumb="About Us"
-        subtitle="Discover Our Story"
-        title="About"
-        highlight="Voltera Sciences."
-        description="A research supply brand built on transparency, consistency, and respect for the work being done."
+        title="Driven by Science."
+        highlight="Built on Trust."
+        description="Committed to quality, transparency, and reliable research."
         mobileImage="/assets-v/voltera-about-mobile.png"
         desktopImage="/assets-v/voltera-about.png"
       />
@@ -352,7 +351,8 @@ export default function AboutUsPage() {
             </p>
 
             <h2 id="principles-heading" className="section-heading">
-              What Defines <span className="text-secondary">Voltera Sciences.</span>
+              What Defines{" "}
+              <span className="text-secondary">Voltera Sciences.</span>
             </h2>
 
             <div className="from-secondary-dark via-accent-light to-secondary-dark mx-auto my-5 h-[3px] w-20 rounded-full bg-linear-to-r" />

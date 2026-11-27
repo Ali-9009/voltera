@@ -14,7 +14,7 @@ export default function FloatingCart() {
       onClick={openCart}
       aria-label={`Open shopping cart, ${cartCount} items`}
       title="View Cart"
-      className="group border-secondary/50 from-primary-light via-accent to-primary-light shadow-primary/20 hover:border-accent-light hover:shadow-primary/30 fixed right-5 bottom-5 isolate z-40 flex size-15 items-center justify-center rounded-full border bg-linear-to-br text-white shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-xl active:scale-95 sm:right-7 sm:bottom-7"
+      className="group border-secondary/50 from-primary-light via-accent to-primary-light shadow-primary/20 hover:border-accent-light hover:shadow-primary/30 fixed right-5 bottom-[calc(1.25rem+var(--sticky-cart-offset,0px))] isolate z-40 flex size-15 items-center justify-center rounded-full border bg-linear-to-br text-white shadow-lg transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-105 hover:shadow-xl active:scale-95 sm:right-7 sm:bottom-[calc(1.75rem+var(--sticky-cart-offset,0px))] lg:bottom-7"
     >
       <span
         aria-hidden="true"

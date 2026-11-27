@@ -375,7 +375,7 @@ export default function CardSlider({
       className="bg-primary-soft relative overflow-hidden py-12 md:py-16"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <header className="mx-auto mb-8 max-w-[700px] text-center md:mb-12">
+        <header className="mx-auto my-8 max-w-[700px] text-center md:my-12">
           <h2 id="bestsellers-title" className="section-heading">
             {title} <span className="text-secondary">{highlight}</span>
           </h2>

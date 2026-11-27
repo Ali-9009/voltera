@@ -1,14 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import {
-  BadgeCheck,
-  FileCheck2,
-  FlaskConical,
-  Headset,
-  LockKeyhole,
-  Truck,
-} from "lucide-react";
+
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -16,35 +9,33 @@ gsap.registerPlugin(ScrollTrigger);
 
 const features = [
   {
-    title: "Premium Quality Standards",
-    description:
-      "99%+ purity and uncompromising standards, with every batch 8x tested.",
+    title: "Premium Quality",
+    description: "99%+ purity. Every batch 8x tested.",
     icon: "/icons/content.json",
   },
   {
-    title: "Verified USA Lab Reports",
-    description:
-      "Transparent COAs, independently tested by accredited US labs.",
+    title: "Verified Lab Reports",
+    description: "Independent testing with verified COAs.",
     icon: "/icons/varified.json",
   },
   {
-    title: "Consistent Results",
-    description: "The same testing and documentation for every batch.",
+    title: "Consistent Quality",
+    description: "Reliable testing for every batch.",
     icon: "/icons/sterility.json",
   },
   {
-    title: "Fast Same-Day Shipping",
-    description: "Eligible orders ship the same day.",
+    title: "Fast Shipping",
+    description: "Same-day shipping on eligible orders.",
     icon: "/icons/truck.json",
   },
   {
-    title: "Real People, Here to Help",
-    description: "Questions? Talk to our support team.",
+    title: "Dedicated Support",
+    description: "Real people, ready to help.",
     icon: "/icons/support.json",
   },
   {
-    title: "Payment You Can Trust",
-    description: "Secure and reliable checkout.",
+    title: "Secure Checkout",
+    description: "Safe, simple, and reliable payments.",
     icon: "/icons/payment.json",
   },
 ];
@@ -53,7 +44,7 @@ function FeatureCard({ feature }) {
   return (
     <article
       data-feature-card
-      className="why-card group relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-[20px] p-5 sm:p-7"
+      className="why-card group relative isolate flex h-full min-w-0 flex-col overflow-hidden rounded-[20px] bg-white p-3 sm:p-7"
     >
       <div className="flex items-start">
         <span className="grid size-14 place-items-center rounded-[18px] border border-white/15 bg-[#071a43] sm:size-15">
@@ -70,7 +61,7 @@ function FeatureCard({ feature }) {
         </span>
       </div>
 
-      <h3 className="font-heading text-primary mt-6 text-md leading-snug font-semibold tracking-[-0.02em] sm:text-xl">
+      <h3 className="font-heading text-primary text-md mt-6 leading-snug font-semibold tracking-[-0.02em] sm:text-xl">
         {feature.title}
       </h3>
 
@@ -133,7 +124,7 @@ export default function WhyChooseUs() {
       ref={sectionRef}
       id="why"
       aria-labelledby="why-title"
-      className="bg-primary-soft relative isolate overflow-hidden px-4 py-14 sm:px-6 md:py-20 lg:px-8"
+      className="relative isolate overflow-hidden bg-[#f9f5ff] px-4 py-14 sm:px-6 md:py-20 lg:px-8"
     >
       <div
         aria-hidden="true"
@@ -146,7 +137,7 @@ export default function WhyChooseUs() {
       />
 
       <div className="relative mx-auto w-full max-w-7xl">
-        <header className="mx-auto mb-10 max-w-[750px] text-center sm:mb-14">
+        <header className="mx-auto my-8 max-w-[750px] text-center sm:my-14">
           <h2 id="why-title" className="section-heading">
             Why Choose
             <br />
@@ -161,7 +152,7 @@ export default function WhyChooseUs() {
 
         <div
           ref={gridRef}
-          className="grid items-stretch grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
+          className="grid grid-cols-2 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6"
         >
           {features.map((feature) => (
             <FeatureCard key={feature.title} feature={feature} />

@@ -117,11 +117,11 @@ export default function ProductCard({ product, onQuickView }) {
       PRODUCT INFO
   ========================= */}
 
-        <div className="flex min-w-0 flex-1 flex-col px-1 pt-3 pb-1.5 sm:px-1.5 sm:pt-4">
+        <div className="flex min-w-0 flex-1 flex-col px-1 pt-2 pb-1.5 sm:px-1.5 sm:pt-4">
           {/* TITLE */}
 
           <Link href={`/products/${product.slug}`} className="block">
-            <h3 className="font-heading group-hover:text-primary text-md min-h-[42px] leading-[1.3] font-medium tracking-[-0.03em] text-[var(--navy)] transition-colors md:text-lg">
+            <h3 className="font-heading group-hover:text-primary pb-2 md:mb-3 text-md leading-[1.3] font-medium tracking-[-0.03em] text-[var(--navy)] transition-colors md:text-lg">
               {product.name}
             </h3>
           </Link>
@@ -150,7 +150,7 @@ export default function ProductCard({ product, onQuickView }) {
                       }}
                       aria-pressed={selected}
                       title={item.label}
-                      className={`inline-flex h-6 shrink-0 items-center justify-center rounded-full border px-2 font-sans text-[8px] leading-none font-semibold whitespace-nowrap transition-all duration-200 sm:h-[32px] sm:px-3 sm:text-[11px] ${
+                      className={`inline-flex h-6 shrink-0 items-center justify-center rounded-full border px-2 font-sans text-[10px] leading-none font-semibold whitespace-nowrap transition-all duration-200 sm:h-[32px] sm:px-3 sm:text-[11px] ${
                         selected
                           ? "border-primary bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_100%)] text-white shadow-[0_3px_10px_rgba(1,17,59,0.18)]"
                           : "border-primary/15 text-primary hover:border-primary-light/40 hover:bg-primary-light/10"
@@ -174,7 +174,7 @@ export default function ProductCard({ product, onQuickView }) {
               </div>
             ) : (
               <span
-                className={`border-primary inline-flex h-6 shrink-0 items-center justify-center rounded-full border bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_100%)] px-2 font-sans text-[8px] leading-none font-semibold whitespace-nowrap text-white shadow-[0_3px_10px_rgba(1,17,59,0.18)] sm:h-[32px] sm:px-3 sm:text-[11px] ${
+                className={`border-primary inline-flex h-6 shrink-0 items-center justify-center rounded-full border bg-[linear-gradient(135deg,var(--navy-soft)_0%,var(--navy)_100%)] px-2 font-sans text-[10px] leading-none font-semibold whitespace-nowrap text-white shadow-[0_3px_10px_rgba(1,17,59,0.18)] sm:h-[32px] sm:px-3 sm:text-[11px] ${
                   !inStock ? "opacity-40" : ""
                 }`}
               >
@@ -186,8 +186,8 @@ export default function ProductCard({ product, onQuickView }) {
         PRICE
     ========================= */}
 
-          <div className="mt-auto pt-3">
-            <div className="flex min-h-[42px] flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-[#EDF2F4] pt-3">
+          <div className="mt-auto md:pt-3 pt-2">
+            <div className="flex min-h-[42px] flex-wrap items-center gap-x-2 gap-y-0.5 border-t border-[#EDF2F4] pt-0">
               <span className="font-sans text-[16px] font-bold text-[var(--navy)] sm:text-[19px]">
                 {hasPrice ? formatPrice(variant.price) : "Price pending"}
               </span>
@@ -219,7 +219,7 @@ export default function ProductCard({ product, onQuickView }) {
               disabled={!canAdd || adding}
               aria-label={`Add ${product.name} to cart`}
               aria-busy={adding}
-              className="btn-primary mt-3 h-10 w-full px-3 text-[12px] sm:h-11 sm:text-[13px]"
+              className="btn-primary md:mt-3 h-10 w-full px-3 text-[12px] sm:h-11 sm:text-[13px]"
             >
               {adding ? (
                 <span className="flex items-center gap-2">

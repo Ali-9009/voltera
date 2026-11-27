@@ -10,10 +10,7 @@ import {
   FlaskConical,
   Mail,
   Sparkles,
-  Truck,
-  Wallet,
   X,
-  Zap,
 } from "lucide-react";
 
 import { SALE_ENDS } from "@/data/sale";
@@ -25,21 +22,17 @@ const benefits = [
   {
     title: "Extra 5%",
     description: "Venmo, Cash App or Zelle",
-    icon: Wallet,
   },
   {
     title: "$150+",
     description: "Free ground shipping",
-    icon: Truck,
   },
   {
     title: "$250+",
     description: "Free two-day shipping",
-    icon: Zap,
   },
 ];
 
-// Stable positions prevent hydration mismatches.
 const goldParticles = Array.from({ length: 38 }, (_, i) => ({
   left: `${(i * 37.7) % 100}%`,
   top: `${(i * 19.3) % 100}%`,
@@ -49,61 +42,48 @@ const goldParticles = Array.from({ length: 38 }, (_, i) => ({
   drift: `${(i % 2 === 0 ? 1 : -1) * (10 + (i % 4) * 8)}px`,
 }));
 
-// ==========================================
-// LEFT MARKETING PANEL - DESKTOP ONLY
-// ==========================================
+function GoldParticles() {
+  return (
+    <div
+      aria-hidden="true"
+      className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
+    >
+      {goldParticles.map((particle, index) => (
+        <span
+          key={index}
+          className="newsletter-gold-particle"
+          style={{
+            left: particle.left,
+            top: particle.top,
+            width: particle.size,
+            height: particle.size,
+            animationDuration: particle.duration,
+            animationDelay: particle.delay,
+            "--gold-drift": particle.drift,
+          }}
+        />
+      ))}
+    </div>
+  );
+}
 
+// DESKTOP MARKETING PANEL
 function MarketingPanel({ saleActive, onClose }) {
   return (
-    <div className="newsletter-marketing relative isolate hidden min-h-[510px] flex-col overflow-hidden px-7 py-7 text-white md:flex lg:px-8">
-      {/* DARK GRADIENT + GOLD SNOWFALL */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 z-0 overflow-hidden"
-      >
-        {goldParticles.map((particle, index) => (
-          <span
-            key={index}
-            className="newsletter-gold-particle"
-            style={{
-              left: particle.left,
-              top: particle.top,
-              width: particle.size,
-              height: particle.size,
-              animationDuration: particle.duration,
-              animationDelay: particle.delay,
-              "--gold-drift": particle.drift,
-            }}
-          />
-        ))}
-      </div>
+    <div className="newsletter-marketing relative isolate hidden min-h-[510px] flex-col overflow-hidden px-8 py-7 text-white md:flex">
+      <GoldParticles />
 
-      {/* LOGO + BADGE */}
-      {/* <div className="relative z-10 flex items-start justify-between gap-3">
-        <div className="flex h-[58px] w-[125px] items-center justify-center rounded-xl bg-white px-3 py-2 shadow-lg">
-          <Image
-            src="/assets-v/voltera-black.png"
-            alt="Voltera Sciences"
-            width={140}
-            height={65}
-            priority
-            className="h-full w-full object-contain"
-          />
-        </div>
-      </div> */}
-
-      {/* PROMOTIONAL CONTENT */}
-      <div className="relative z-10 mt-7">
+      <div className="relative z-10">
         {saleActive ? (
           <>
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#e8c77b]/30 bg-[#e8c77b]/10 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#e8c77b] uppercase">
               <Sparkles size={13} />
-              {saleActive ? "Black Friday" : "Research Updates"}
+              Black Friday
             </span>
 
-            {/* HEADLINE + VIALS */}
-            <div className="relative mt-3 min-h-[195px]">
-              <div className="relative z-10 max-w-[200px]">
+            {/* HEADLINE AND SINGLE VIAL */}
+            <div className="relative mt-5 min-h-[205px]">
+              <div className="relative z-10 w-fit">
                 <h2 className="font-heading text-[44px] leading-[1.03] font-black tracking-[-0.04em] text-white lg:text-[49px]">
                   BUY 1
                   <br />
@@ -115,47 +95,38 @@ function MarketingPanel({ saleActive, onClose }) {
                 </h2>
 
                 <p className="mt-3 text-xs font-semibold text-white/85">
-                  Mix & match across the site.
+                  Mix &amp; match across the site.
                 </p>
               </div>
 
-              {/* VIALS */}
+              {/* SINGLE VIAL ON RIGHT */}
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute top-1 right-0 z-0 h-[185px] w-[170px]"
+                className="pointer-events-none absolute -top-2 -right-2 z-0 flex h-[230px] w-[175px] items-center justify-center"
               >
-                <div className="absolute top-8 right-4 size-[120px] rounded-full bg-[#c9953d]/10 blur-2xl" />
+                {/* Soft gold glow */}
+                <div className="absolute inset-5 rounded-full bg-[#c9953d]/10 blur-2xl" />
 
-                <div className="newsletter-vial-left absolute top-5 left-1 h-[157px] w-[82px] drop-shadow-[0_12px_12px_rgba(0,0,0,0.35)]">
+                {/* Bigger floating vial */}
+                <div className="newsletter-vial-float relative h-[220px] w-[140px] drop-shadow-[0_16px_16px_rgba(0,0,0,0.35)]">
                   <Image
                     src="/pngs/vials/vls-3rt.png"
                     alt=""
                     fill
-                    sizes="82px"
-                    className="object-contain"
-                  />
-                </div>
-
-                <div className="newsletter-vial-right absolute top-0 right-0 h-[175px] w-[91px] drop-shadow-[0_12px_12px_rgba(0,0,0,0.35)]">
-                  <Image
-                    src="/pngs/vials/vls-2trz.png"
-                    alt=""
-                    fill
-                    sizes="91px"
+                    sizes="140px"
                     className="object-contain"
                   />
                 </div>
               </div>
             </div>
 
-            <p className="mt-2 max-w-[350px] text-[11px] leading-relaxed text-white/75">
+            <p className="mt-2 max-w-[340px] text-[11px] leading-relaxed text-white/75">
               The lowest-priced item in each pair is free. Bac Water is
               excluded.
             </p>
 
             <div className="mt-3 inline-flex items-center gap-2 rounded-full border border-[#e8c77b]/25 bg-[#e8c77b]/10 px-3 py-1.5">
               <span className="size-1.5 rounded-full bg-[#e8c77b]" />
-
               <span className="text-[10px] font-semibold text-[#e8c77b]">
                 Ends Nov 30 · 11:59 PM PST
               </span>
@@ -163,32 +134,34 @@ function MarketingPanel({ saleActive, onClose }) {
           </>
         ) : (
           <>
-            <p className="text-xs font-bold tracking-widest text-[#e8c77b] uppercase">
-              Voltera Sciences
-            </p>
+            <span className="inline-flex items-center gap-2 rounded-full border border-[#e8c77b]/30 bg-white/10 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#e8c77b] uppercase">
+              <Sparkles size={13} />
+              Research Updates
+            </span>
 
-            <h2 className="font-heading mt-4 text-[36px] leading-tight font-bold">
-              Stay Connected.
-              <br />
-              <span className="text-[#e8c77b]">Stay Informed.</span>
-            </h2>
+            <div className="relative mt-7 min-h-[225px]">
+              <h2 className="font-heading relative z-10 text-[37px] leading-[1.12] font-bold">
+                Stay Connected.
+                <br />
+                <span className="text-[#e8c77b]">Stay Informed.</span>
+              </h2>
 
-            <p className="mt-4 max-w-[330px] text-sm leading-relaxed text-white/75">
-              Discover new research compounds, documentation updates, and
-              product restocks.
-            </p>
+              <p className="relative z-10 mt-4 max-w-[200px] text-xs leading-relaxed text-white/75">
+                Discover new compounds, batch updates, and restocks.
+              </p>
 
-            <div
-              aria-hidden="true"
-              className="relative mx-auto mt-5 h-[150px] w-[220px]"
-            >
-              <Image
-                src="/pngs/vials/vls-3rt.png"
-                alt=""
-                fill
-                sizes="220px"
-                className="object-contain"
-              />
+              <div
+                aria-hidden="true"
+                className="newsletter-vial-float pointer-events-none absolute top-12 right-0 h-[180px] w-[115px]"
+              >
+                <Image
+                  src="/pngs/vials/vls-3rt.png"
+                  alt=""
+                  fill
+                  sizes="115px"
+                  className="object-contain"
+                />
+              </div>
             </div>
           </>
         )}
@@ -196,27 +169,22 @@ function MarketingPanel({ saleActive, onClose }) {
 
       {/* BENEFITS */}
       <div className="relative z-10 mt-auto grid grid-cols-3 gap-2 pt-5">
-        {benefits.map(({ title, description, icon: Icon }) => (
+        {benefits.map((benefit) => (
           <div
-            key={title}
-            className="flex min-w-0 flex-col items-center rounded-xl border border-white/15 bg-white/[0.06] px-1.5 py-3 text-center"
+            key={benefit.title}
+            className="flex min-w-0 flex-col items-center justify-center rounded-xl border border-white/15 bg-white/[0.06] px-1.5 py-4 text-center"
           >
-            {/* <span className="flex size-8 items-center justify-center rounded-full border border-[#e8c77b]/25 bg-[#e8c77b]/10 text-[#e8c77b]">
-              <Icon size={16} strokeWidth={1.8} />
-            </span> */}
-
-            <strong className="font-heading mt-2 text-sm leading-tight text-white">
-              {title}
+            <strong className="font-heading text-sm leading-tight text-white">
+              {benefit.title}
             </strong>
 
-            <span className="mt-1 text-xs leading-[1.4] text-white/70">
-              {description}
+            <span className="mt-1 text-[11px] leading-[1.4] text-white/70">
+              {benefit.description}
             </span>
           </div>
         ))}
       </div>
 
-      {/* SHOP CTA */}
       <Link
         href="/shop"
         onClick={onClose}
@@ -233,9 +201,95 @@ function MarketingPanel({ saleActive, onClose }) {
   );
 }
 
-// ==========================================
-// NEWSLETTER POPUP
-// ==========================================
+// MOBILE PROMOTIONAL HEADER
+function MobileMarketing({ saleActive }) {
+  return (
+    <div className="newsletter-marketing relative isolate overflow-hidden px-5 pt-5 pb-4 text-white md:hidden">
+      <GoldParticles />
+
+      <div className="relative z-10">
+        {saleActive ? (
+          <>
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-[#e8c77b]/30 bg-[#e8c77b]/10 px-2.5 py-1 text-[9px] font-bold tracking-wider text-[#e8c77b] uppercase">
+              <Sparkles size={11} />
+              Black Friday
+            </span>
+
+            <div className="relative mt-3 flex min-h-[145px] items-center">
+              <div className="relative z-10 min-w-0 flex-1">
+                <h2 className="font-heading text-[clamp(30px,9vw,43px)] leading-[1.04] font-black tracking-[-0.04em]">
+                  BUY 1
+                {" "}
+                  <span className="text-[#e8c77b]">
+                    GET 1
+                    <br />
+                    FREE.
+                  </span>
+                </h2>
+              </div>
+
+              <div
+                aria-hidden="true"
+                className="pointer-events-none relative h-[145px] w-[125px] shrink-0"
+              >
+                <div className="absolute inset-4 rounded-full bg-[#c9953d]/15 blur-2xl" />
+
+                <div className="newsletter-vial-float relative h-full w-full drop-shadow-[0_12px_12px_rgba(0,0,0,0.35)]">
+                  <Image
+                    src="/pngs/vials/vls-3rt.png"
+                    alt=""
+                    fill
+                    sizes="125px"
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-1 text-[10px] leading-relaxed text-white/75">
+              Mix &amp; match. Lowest-priced item free. Bac Water excluded.
+            </p>
+
+            <p className="mt-1.5 text-[10px] font-semibold text-[#e8c77b]">
+              Ends Nov 30 · 11:59 PM PST
+            </p>
+          </>
+        ) : (
+          <div className="flex min-h-[135px] items-center gap-4">
+            <div className="min-w-0 flex-1">
+              <span className="text-[9px] font-bold tracking-widest text-[#e8c77b] uppercase">
+                Voltera Sciences
+              </span>
+
+              <h2 className="font-heading mt-2 text-[25px] leading-tight font-bold">
+                Stay Connected.
+                <br />
+                <span className="text-[#e8c77b]">Stay Informed.</span>
+              </h2>
+
+              <p className="mt-2 text-[11px] leading-relaxed text-white/75">
+                Research updates and restock alerts.
+              </p>
+            </div>
+
+            <div
+              aria-hidden="true"
+              className="newsletter-vial-float relative h-[125px] w-[105px] shrink-0"
+            >
+              <Image
+                src="/pngs/vials/vls-3rt.png"
+                alt=""
+                fill
+                sizes="105px"
+                className="object-contain"
+              />
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export default function NewsletterPopup() {
   const [isOpen, setIsOpen] = useState(false);
@@ -292,7 +346,6 @@ export default function NewsletterPopup() {
     };
   }, []);
 
-  // CLOSE POPUP
   const closePopup = () => {
     setIsOpen(false);
 
@@ -301,7 +354,6 @@ export default function NewsletterPopup() {
     } catch {}
   };
 
-  // OPEN POPUP
   const openPopup = () => {
     setNotice("");
     setIsOpen(true);
@@ -320,7 +372,7 @@ export default function NewsletterPopup() {
     return () => window.removeEventListener("newsletter:open", handleOpen);
   }, []);
 
-  // BODY SCROLL LOCK + ESCAPE
+  // SCROLL LOCK AND ESCAPE KEY
   useEffect(() => {
     if (!isOpen) return;
 
@@ -369,10 +421,7 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
 
   return (
     <>
-      {/* ======================================
-          ORIGINAL FLOATING BUTTON - UNCHANGED
-      ====================================== */}
-
+      {/* ORIGINAL FLOATING BUTTON - UNCHANGED */}
       <button
         type="button"
         onClick={openPopup}
@@ -402,10 +451,7 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
         />
       </button>
 
-      {/* ======================================
-          POPUP
-      ====================================== */}
-
+      {/* POPUP */}
       {isOpen && (
         <div
           className="fixed inset-0 z-[9999] flex items-center justify-center overflow-y-auto bg-[#020817]/80 p-3 backdrop-blur-[6px] sm:p-5"
@@ -420,7 +466,7 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
             aria-modal="true"
             aria-labelledby="newsletter-heading"
             aria-describedby="newsletter-description"
-            className="relative my-auto grid max-h-[calc(100dvh-24px)] w-full max-w-[460px] overflow-y-auto rounded-[20px] bg-white shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:max-h-[calc(100dvh-40px)] sm:rounded-[24px] md:max-w-[880px] md:grid-cols-2"
+            className="relative my-auto grid max-h-[calc(100dvh-24px)] w-full max-w-[420px] overflow-y-auto rounded-[22px] bg-white shadow-[0_30px_90px_rgba(0,0,0,0.35)] sm:max-h-[calc(100dvh-40px)] md:max-w-[880px] md:grid-cols-2 md:rounded-[24px]"
           >
             {/* CLOSE BUTTON */}
             <button
@@ -428,50 +474,56 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
               type="button"
               onClick={closePopup}
               aria-label="Close newsletter popup"
-              className="absolute top-3 right-3 z-30 flex size-9 items-center justify-center rounded-full border border-[#071a43]/10 bg-white text-[#071a43] shadow-md transition-all duration-300 hover:bg-[#071a43] hover:text-white md:top-4 md:right-4"
+              className="absolute top-3 right-3 z-30 flex size-8 items-center justify-center rounded-full border border-[#071a43]/10 bg-white text-[#071a43] shadow-md transition-all duration-300 hover:bg-[#071a43] hover:text-white md:top-4 md:right-4 md:size-9"
             >
               <X size={18} />
             </button>
 
-            {/* LEFT - HIDDEN ON MOBILE */}
+            {/* DESKTOP MARKETING */}
             <MarketingPanel saleActive={saleActive} onClose={closePopup} />
 
-            {/* RIGHT - NEWSLETTER FORM */}
-            <div className="relative flex flex-col justify-center bg-white px-5 pt-14 pb-8 sm:px-8 sm:pt-12 sm:pb-10 md:px-8 lg:px-10">
-              {/* TOP BADGE */}
-              <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#c9953d]/25 bg-[#c9953d]/10 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#a9792c] uppercase">
-                <FlaskConical size={14} />
-                Research Updates
-              </span>
+            {/* MOBILE MARKETING HEADER */}
+            <MobileMarketing saleActive={saleActive} />
 
-              {/* HEADING */}
-              <h2
-                id="newsletter-heading"
-                className="font-heading text-[26px] leading-[1.2] font-semibold tracking-[-0.03em] text-[#071a43] sm:text-[32px]"
-              >
-                Join Our
-                <br />
-                <span className="text-[#c9953d]">Research Community.</span>
+            {/* NEWSLETTER FORM */}
+            <div className="relative flex flex-col justify-center bg-white px-5 pt-5 pb-6 sm:px-8 sm:pb-8 md:px-8 md:pt-14 md:pb-10 lg:px-10">
+              {/* DESKTOP-ONLY INTRO */}
+              <div className="hidden md:block">
+                <span className="mb-4 inline-flex w-fit items-center gap-2 rounded-full border border-[#c9953d]/25 bg-[#c9953d]/10 px-3 py-1.5 text-[10px] font-bold tracking-wider text-[#a9792c] uppercase">
+                  <FlaskConical size={14} />
+                  Research Updates
+                </span>
+
+                <h2
+                  id="newsletter-heading"
+                  className="font-heading text-[32px] leading-[1.2] font-semibold tracking-[-0.03em] text-[#071a43]"
+                >
+                  Join Our
+                  <br />
+                  <span className="text-[#c9953d]">Research Community.</span>
+                </h2>
+
+                <div className="mt-4 h-[3px] w-16 rounded-full bg-[linear-gradient(90deg,#a9792c,#e8c77b,#c9953d)]" />
+
+                <p
+                  id="newsletter-description"
+                  className="mt-4 max-w-[360px] text-[13px] leading-[1.75] text-[#596477]"
+                >
+                  Receive research updates, new compound announcements, restock
+                  alerts, and exclusive offers.
+                </p>
+              </div>
+
+              {/* MOBILE-ONLY ACCESSIBLE HEADING */}
+              <h2 id="newsletter-mobile-heading" className="sr-only md:hidden">
+                Subscribe to Voltera Sciences Research Updates
               </h2>
 
-              {/* GOLD UNDERLINE */}
-              <div className="mt-4 h-[3px] w-16 rounded-full bg-[linear-gradient(90deg,#a9792c,#e8c77b,#c9953d)]" />
-
-              {/* DESCRIPTION */}
-              <p
-                id="newsletter-description"
-                className="mt-4 max-w-[360px] text-[13px] leading-[1.75] text-[#596477]"
-              >
-                Receive research updates, new compound announcements, restock
-                alerts, and exclusive offers.
-              </p>
-
               {/* FORM */}
-              <form onSubmit={handleSubscribe} className="mt-6">
-                {/* EMAIL */}
+              <form onSubmit={handleSubscribe} className="md:mt-6">
                 <label
                   htmlFor="newsletter-email"
-                  className="mb-2 block text-xs font-bold text-[#071a43]"
+                  className="mb-2 block text-[11px] font-bold text-[#071a43] md:text-xs"
                 >
                   Email Address
                 </label>
@@ -490,12 +542,12 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
                     placeholder="Enter your email address"
-                    className="h-[50px] w-full rounded-xl border border-[#dce4f0] bg-[#f7f9fc] pr-4 pl-11 text-[13px] text-[#071a43] transition-all outline-none placeholder:text-[#596477]/60 focus:border-[#1746a2] focus:bg-white focus:ring-2 focus:ring-[#1746a2]/10"
+                    className="h-[47px] w-full rounded-xl border border-[#dce4f0] bg-[#f7f9fc] pr-4 pl-11 text-[13px] text-[#071a43] transition-all outline-none placeholder:text-[#596477]/60 focus:border-[#1746a2] focus:bg-white focus:ring-2 focus:ring-[#1746a2]/10 md:h-[50px]"
                   />
                 </div>
 
                 {/* CONSENT */}
-                <div className="mt-4 flex items-start gap-3">
+                <div className="mt-3 flex items-start gap-2.5 md:mt-4 md:gap-3">
                   <input
                     id="newsletter-consent"
                     type="checkbox"
@@ -506,7 +558,7 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
 
                   <label
                     htmlFor="newsletter-consent"
-                    className="cursor-pointer text-[11px] leading-[1.6] text-[#596477]"
+                    className="cursor-pointer text-[10px] leading-[1.6] text-[#596477] md:text-[11px]"
                   >
                     I agree to receive research updates, restock alerts, and
                     offers from Voltera Sciences. I can unsubscribe anytime. See
@@ -525,7 +577,7 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
                 <button
                   type="submit"
                   disabled={!agreed || !email.trim()}
-                  className="group mt-6 flex h-[50px] w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(110deg,#071a43,#1746a2)] px-5 text-[13px] font-bold text-white shadow-md transition-all duration-300 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50"
+                  className="group mt-4 flex h-[47px] w-full items-center justify-center gap-2 rounded-full bg-[linear-gradient(110deg,#071a43,#1746a2)] px-5 text-[13px] font-bold text-white shadow-md transition-all duration-300 hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-50 md:mt-6 md:h-[50px]"
                 >
                   Subscribe to Updates
                   <ArrowRight
@@ -534,7 +586,6 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
                   />
                 </button>
 
-                {/* NOTICE */}
                 {notice && (
                   <div
                     role="status"
@@ -545,37 +596,27 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
                   </div>
                 )}
 
-                {/* FOOTER */}
-                <div className="mt-5 flex items-center justify-center gap-3">
-                  <span className="h-px w-7 bg-[#071a43]/15" />
-
-                  <p className="text-center text-[10px] text-[#596477]">
-                    No spam. Research updates only.
-                  </p>
-
-                  <span className="h-px w-7 bg-[#071a43]/15" />
-                </div>
+                <p className="mt-4 text-center text-[10px] text-[#596477] md:mt-5">
+                  No spam. Research updates only.
+                </p>
               </form>
             </div>
           </section>
         </div>
       )}
 
-      {/* ======================================
-          ANIMATIONS
-      ====================================== */}
-
+      {/* ANIMATIONS */}
       <style jsx global>{`
         .newsletter-marketing {
           background:
             radial-gradient(
               ellipse 75% 65% at 0% 0%,
-              rgba(23, 70, 162, 0.35),
+              rgba(23, 70, 162, 0.32),
               transparent 75%
             ),
             radial-gradient(
               ellipse 80% 75% at 100% 100%,
-              rgba(22, 35, 76, 0.75),
+              rgba(22, 35, 76, 0.65),
               transparent 75%
             ),
             linear-gradient(
@@ -592,24 +633,19 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
           position: absolute;
           display: block;
           border-radius: 50%;
-
           background: radial-gradient(
             circle,
             #fff6d3 0%,
             #e8c77b 55%,
             #c9953d 100%
           );
-
           box-shadow:
             0 0 4px rgba(232, 199, 123, 0.65),
             0 0 9px rgba(201, 149, 61, 0.25);
-
           opacity: 0;
-
           animation-name: newsletter-gold-snowfall;
           animation-timing-function: linear;
           animation-iteration-count: infinite;
-
           will-change: transform, opacity;
         }
 
@@ -628,50 +664,34 @@ I agree to receive research updates, restock alerts, and offers from Voltera Sci
           }
 
           100% {
-            transform: translate3d(var(--gold-drift, 15px), 180px, 0);
+            transform: translate3d(var(--gold-drift, 15px), 250px, 0);
             opacity: 0;
           }
         }
 
-        .newsletter-vial-left {
-          animation: newsletter-vial-float-left 4.5s ease-in-out infinite;
+        .newsletter-vial-float {
+          animation: newsletter-vial-float 4.5s ease-in-out infinite;
         }
 
-        .newsletter-vial-right {
-          animation: newsletter-vial-float-right 5.2s ease-in-out infinite;
-        }
-
-        @keyframes newsletter-vial-float-left {
+        @keyframes newsletter-vial-float {
           0%,
           100% {
-            transform: translateY(0) rotate(-12deg);
+            transform: translateY(0) rotate(-11deg);
           }
 
           50% {
-            transform: translateY(-8px) rotate(-9deg);
-          }
-        }
-
-        @keyframes newsletter-vial-float-right {
-          0%,
-          100% {
-            transform: translateY(0) rotate(12deg);
-          }
-
-          50% {
-            transform: translateY(-10px) rotate(15deg);
+            transform: translateY(-7px) rotate(-8deg);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
           .newsletter-gold-particle,
-          .newsletter-vial-left,
-          .newsletter-vial-right {
+          .newsletter-vial-float {
             animation: none;
           }
 
           .newsletter-gold-particle {
-            opacity: 0.45;
+            opacity: 0.4;
           }
         }
       `}</style>

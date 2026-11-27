@@ -69,35 +69,35 @@ const researchFeatures = [
 
 const positions = [
   {
-    mobile: { x: 50, y: 12 },
+    mobile: { x: 50, y: 8 },
     desktop: { x: 50, y: 9 },
   },
   {
-    mobile: { x: 78, y: 22 },
+    mobile: { x: 82, y: 19 },
     desktop: { x: 79, y: 20 },
   },
   {
-    mobile: { x: 82, y: 50 },
+    mobile: { x: 86, y: 50 },
     desktop: { x: 88, y: 50 },
   },
   {
-    mobile: { x: 78, y: 78 },
+    mobile: { x: 82, y: 81 },
     desktop: { x: 79, y: 80 },
   },
   {
-    mobile: { x: 50, y: 88 },
+    mobile: { x: 50, y: 92 },
     desktop: { x: 50, y: 91 },
   },
   {
-    mobile: { x: 22, y: 78 },
+    mobile: { x: 18, y: 81 },
     desktop: { x: 21, y: 80 },
   },
   {
-    mobile: { x: 18, y: 50 },
+    mobile: { x: 14, y: 50 },
     desktop: { x: 12, y: 50 },
   },
   {
-    mobile: { x: 22, y: 22 },
+    mobile: { x: 18, y: 19 },
     desktop: { x: 21, y: 20 },
   },
 ];
@@ -142,7 +142,7 @@ function ResearchFeature({ feature, position, index }) {
           {feature.title}
         </h3>
 
-        <p className="text-primary-dark/75 mt-1 font-sans text-[9px] leading-[1.3] sm:text-[11px] lg:text-sm lg:leading-relaxed">
+        <p className="text-primary-dark/75 mt-1 hidden font-sans leading-[1.3] sm:block sm:text-[11px] lg:text-sm lg:leading-relaxed">
           {feature.description}
         </p>
       </div>

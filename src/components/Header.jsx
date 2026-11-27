@@ -182,7 +182,7 @@ export default function Header() {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-
+const [hidden, setHidden] = useState(false);
   const { openCart, itemCount, hydrated } = useCart();
   const cartCount = hydrated ? itemCount : 0;
 
@@ -191,11 +191,43 @@ export default function Header() {
     setSearchOpen(false);
   }, [pathname]);
 
+  useEffect(() => {
+    let lastScrollY = Math.max(0, window.scrollY);
+
+    const handleScroll = () => {
+      const currentScrollY = Math.max(0, window.scrollY);
+
+      if (currentScrollY <= 80) {
+        setHidden(false);
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (Math.abs(currentScrollY - lastScrollY) < 5) return;
+
+      setHidden(currentScrollY > lastScrollY);
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
     <>
       <AnnouncementBar />
 
-      <header className="sticky top-0 z-50 h-0 w-full">
+      <header
+        className={`z-50 h-0 w-full ${
+          hidden && !searchOpen && !menuOpen
+            ? "relative"
+            : "header-reveal sticky top-0"
+        }`}
+      >
         <div className="pt-2.5">
           <div className="site-header">
             <div className="relative grid h-16 grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 lg:h-[72px] lg:grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] lg:px-8">

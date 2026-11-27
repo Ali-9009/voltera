@@ -8,7 +8,7 @@ import HowItWork from "@/components/HowItWork";
 
 import ProductGrid from "@/components/ProductGrid";
 import ProductVerification from "@/components/ProductVerification";
-import ResearchShowcase from "@/components/ResearchShowcase";
+// import ResearchShowcase from "@/components/ResearchShowcase";
 import USShippingCoverage from "@/components/shipping/USShippingCoverage";
 import ShopByCategory from "@/components/ShopByCategory";
 import VialScroll from "@/components/VialScroll";
@@ -232,7 +232,7 @@ export default function HomePage() {
       <ProductVerification />
       <Research />
 
-      <ResearchShowcase />
+      {/* <ResearchShowcase /> */}
 
       <VialScroll />
 
